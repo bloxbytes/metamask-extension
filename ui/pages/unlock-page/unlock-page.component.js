@@ -327,22 +327,8 @@ class UnlockPage extends Component {
   }
 
   renderMascot = () => {
-    if (isFlask()) {
-      return (
-        <img src="./images/logo/metamask-fox.svg" width="115" height="115" />
-      );
-    }
-    if (isBeta()) {
-      return (
-        <img src="./images/logo/metamask-fox.svg" width="115" height="115" />
-      );
-    }
     return (
-      <Mascot
-        animationEventEmitter={this.animationEventEmitter}
-        width="170"
-        height="170"
-      />
+      <img src="./images/logo/metamask-fox.svg" width="115" height="115" />
     );
   };
 

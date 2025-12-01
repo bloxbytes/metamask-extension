@@ -9,29 +9,29 @@ import {
   GNOSIS_DISPLAY_NAME,
   infuraProjectId,
   LOCALHOST_DISPLAY_NAME,
+  OPN_DISPLAY_NAME,
   OPTIMISM_DISPLAY_NAME,
   POLYGON_DISPLAY_NAME,
   SEI_DISPLAY_NAME,
-  SEPOLIA_DISPLAY_NAME,
   ZK_SYNC_ERA_DISPLAY_NAME,
 } from '../../../shared/constants/network';
 
 export const FIXTURES_NETWORKS = {
   providerConfig: {
-    chainId: '0xaa36a7',
+    chainId: '0x3D8',
     rpcPrefs: {
-      blockExplorerUrl: 'https://sepolia.etherscan.io',
+      blockExplorerUrl: 'https://testnet.iopn.tech',
     },
-    ticker: 'SepoliaETH',
-    type: 'sepolia',
+    ticker: 'TestnetOPN',
+    type: 'opn-testnet',
   },
   networkConfigurations: {
     networkConfigurationId: {
-      chainId: '0xaa36a7',
-      nickname: SEPOLIA_DISPLAY_NAME,
+      chainId: '0x3D8',
+      nickname: OPN_DISPLAY_NAME,
       rpcPrefs: {},
-      rpcUrl: `https://sepolia.infura.io/v3/${infuraProjectId}`,
-      ticker: 'SepoliaETH',
+      rpcUrl: 'https://testnet-rpc.iopn.tech',
+      ticker: 'TestnetOPN',
       networkConfigurationId: 'networkConfigurationId',
     },
     optimism: {
@@ -161,6 +161,8 @@ export const FIXTURES_NETWORKS = {
 
 export const ALL_POPULAR_NETWORKS = {
   eip155: {
+    [CHAIN_IDS.OPN]: true,
+    [CHAIN_IDS.OPN_TESTNET]: true,
     [CHAIN_IDS.MAINNET]: true,
     [CHAIN_IDS.LINEA_MAINNET]: true,
     [CHAIN_IDS.OPTIMISM]: true,
@@ -170,6 +172,5 @@ export const ALL_POPULAR_NETWORKS = {
     [CHAIN_IDS.ARBITRUM]: true,
     [CHAIN_IDS.AVALANCHE]: true,
     [CHAIN_IDS.ZKSYNC_ERA]: true,
-    [CHAIN_IDS.SEI]: true,
   },
 };

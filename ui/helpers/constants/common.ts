@@ -2,11 +2,11 @@ export const PRIMARY = 'PRIMARY';
 export const SECONDARY = 'SECONDARY';
 
 const _contractAddressLink =
-  'https://support.metamask.io/managing-my-tokens/moving-your-tokens/why-am-i-being-warned-about-sending-tokens-to-a-contract/';
+  'https://support.iopn.io/managing-my-tokens/moving-your-tokens/why-am-i-being-warned-about-sending-tokens-to-a-contract/';
 
 // eslint-disable-next-line prefer-destructuring
 export const METAMETRICS_SETTINGS_LINK =
-  'https://support.metamask.io/privacy-and-security/how-to-manage-your-metametrics-settings';
+  'https://support.iopn.io/privacy-and-security/how-to-manage-your-metametrics-settings';
 // eslint-disable-next-line prefer-destructuring
 export const SUPPORT_REQUEST_LINK = process.env.SUPPORT_REQUEST_LINK;
 // eslint-disable-next-line prefer-destructuring

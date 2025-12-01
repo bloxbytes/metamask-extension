@@ -1,14 +1,14 @@
 import React, { useCallback, useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { toHex } from '@metamask/controller-utils';
 import {
   isCaipChainId,
   CaipChainId,
-  isCaipAssetType,
-  parseCaipAssetType,
+  // isCaipAssetType,
+  // parseCaipAssetType,
 } from '@metamask/utils';
-import { getNativeAssetForChainId } from '@metamask/bridge-controller';
+// import { getNativeAssetForChainId } from '@metamask/bridge-controller';
 
 ///: BEGIN:ONLY_INCLUDE_IF(multichain)
 import { isEvmAccountType } from '@metamask/keyring-api';
@@ -35,7 +35,7 @@ import Tooltip from '../../ui/tooltip';
 import {
   MetaMetricsEventCategory,
   MetaMetricsEventName,
-  MetaMetricsSwapsEventSource,
+  // MetaMetricsSwapsEventSource,
 } from '../../../../shared/constants/metametrics';
 import { AssetType } from '../../../../shared/constants/transaction';
 import { MetaMetricsContext } from '../../../contexts/metametrics';
@@ -49,7 +49,7 @@ import {
 import { Box, Icon, IconName, IconSize } from '../../component-library';
 import IconButton from '../../ui/icon-button';
 import useRamps from '../../../hooks/ramps/useRamps/useRamps';
-import useBridging from '../../../hooks/bridge/useBridging';
+// import useBridging from '../../../hooks/bridge/useBridging';
 import { ReceiveModal } from '../../multichain/receive-modal';
 import { setActiveNetworkWithError } from '../../../store/actions';
 import {
@@ -58,7 +58,7 @@ import {
 } from '../../../selectors/multichain';
 import { useMultichainSelector } from '../../../hooks/useMultichainSelector';
 import { getCurrentChainId } from '../../../../shared/modules/selectors/networks';
-import { ALL_ALLOWED_BRIDGE_CHAIN_IDS } from '../../../../shared/constants/bridge';
+// import { ALL_ALLOWED_BRIDGE_CHAIN_IDS } from '../../../../shared/constants/bridge';
 import { trace, TraceName } from '../../../../shared/lib/trace';
 import { navigateToSendRoute } from '../../../pages/confirmations/utils/send';
 import { useRedesignedSendFlow } from '../../../pages/confirmations/hooks/useRedesignedSendFlow';
@@ -123,7 +123,7 @@ const CoinButtons = ({
   const handleSendNonEvm = useHandleSendNonEvm();
   ///: END:ONLY_INCLUDE_IF
 
-  const location = useLocation();
+  // const location = useLocation();
 
   // Initially, those events were using a "ETH" as `token_symbol`, so we keep this behavior
   // for EVM, no matter the currently selected native token (e.g. SepoliaETH if you are on Sepolia
@@ -211,7 +211,7 @@ const CoinButtons = ({
 
   const { openBuyCryptoInPdapp } = useRamps();
 
-  const { openBridgeExperience } = useBridging();
+  // const { openBridgeExperience } = useBridging();
 
   const setCorrectChain = useCallback(async () => {
     if (
@@ -314,24 +314,29 @@ const CoinButtons = ({
     });
   }, [chainId, defaultSwapsToken]);
 
-  const handleSwapOnClick = useCallback(async () => {
-    // Determine the chainId to use in the Swap experience using the url
-    const urlSuffix = location.pathname.split('/').filter(Boolean).at(-1);
-    const hexChainOrAssetId = urlSuffix
-      ? decodeURIComponent(urlSuffix)
-      : undefined;
-    const chainIdToUse = isCaipAssetType(hexChainOrAssetId)
-      ? parseCaipAssetType(hexChainOrAssetId).chainId
-      : hexChainOrAssetId;
-
-    // Handle clicking from the wallet or native asset overview page
-    openBridgeExperience(
-      MetaMetricsSwapsEventSource.MainView,
-      chainIdToUse && ALL_ALLOWED_BRIDGE_CHAIN_IDS.includes(chainIdToUse)
-        ? getNativeAssetForChainId(chainIdToUse)
-        : undefined,
-    );
-  }, [location, openBridgeExperience]);
+  // const handleSwapOnClick = useCallback(async () => {
+  //   console.log('click on swap button', 'slmn-handle-swap-on-click');
+  //   return global.platform.openTab({
+  //     url: 'https://swap.iopn.io',
+  //   });
+  //
+  //   // Determine the chainId to use in the Swap experience using the url
+  //   // const urlSuffix = location.pathname.split('/').filter(Boolean).at(-1);
+  //   // const hexChainOrAssetId = urlSuffix
+  //   //   ? decodeURIComponent(urlSuffix)
+  //   //   : undefined;
+  //   // const chainIdToUse = isCaipAssetType(hexChainOrAssetId)
+  //   //   ? parseCaipAssetType(hexChainOrAssetId).chainId
+  //   //   : hexChainOrAssetId;
+  //   //
+  //   // // Handle clicking from the wallet or native asset overview page
+  //   // openBridgeExperience(
+  //   //   MetaMetricsSwapsEventSource.MainView,
+  //   //   chainIdToUse && ALL_ALLOWED_BRIDGE_CHAIN_IDS.includes(chainIdToUse)
+  //   //     ? getNativeAssetForChainId(chainIdToUse)
+  //   //     : undefined,
+  //   // );
+  // }, [location, openBridgeExperience]);
 
   const handleReceiveOnClick = useCallback(() => {
     trace({ name: TraceName.ReceiveModal });
@@ -418,7 +423,12 @@ const CoinButtons = ({
             />
           )
         }
-        onClick={handleSwapOnClick}
+        // onClick={handleSwapOnClick}
+        onClick={() =>
+          global.platform.openTab({
+            url: 'https://swap.iopn.io',
+          })
+        }
         label={t('swap')}
         data-testid={`${classPrefix}-overview-swap`}
         width={BlockSize.Full}

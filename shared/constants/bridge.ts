@@ -15,6 +15,7 @@ const ALLOWED_MULTICHAIN_BRIDGE_CHAIN_IDS = [
 ];
 
 const ALLOWED_EVM_BRIDGE_CHAIN_IDS = [
+  // CHAIN_IDS.OPN,
   CHAIN_IDS.MAINNET,
   CHAIN_IDS.BSC,
   CHAIN_IDS.POLYGON,
@@ -59,6 +60,8 @@ export const NETWORK_TO_SHORT_NETWORK_NAME_MAP: Record<
   AllowedBridgeChainIds,
   string
 > = {
+  [CHAIN_IDS.OPN]: 'OPN',
+  [toEvmCaipChainId(CHAIN_IDS.OPN)]: 'OPN',
   [CHAIN_IDS.MAINNET]: 'Ethereum',
   [toEvmCaipChainId(CHAIN_IDS.MAINNET)]: 'Ethereum',
   [CHAIN_IDS.LINEA_MAINNET]: 'Linea',
@@ -181,4 +184,11 @@ export const BRIDGE_CHAINID_COMMON_TOKEN_PAIR: Partial<
     decimals: 6,
     name: 'USD Coin',
   },
+  // [toEvmCaipChainId(CHAIN_IDS.OPN)]: {
+  //   // OPN -> mUSD on OPN
+  //   address: '0xaca92e438df0b2401ff60da7e4337b687a2435da',
+  //   symbol: 'mUSD',
+  //   decimals: 6,
+  //   name: 'MetaMask USD',
+  // },
 } as const;

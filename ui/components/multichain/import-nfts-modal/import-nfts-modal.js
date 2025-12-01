@@ -1,6 +1,6 @@
 import { isValidHexAddress } from '@metamask/controller-utils';
 import PropTypes from 'prop-types';
-import React, { useContext, useState, useCallback } from 'react';
+import React, { useContext, useState, useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getErrorMessage } from '../../../../shared/modules/error';
@@ -107,6 +107,34 @@ export const ImportNftsModal = ({ onClose }) => {
     useState(null);
 
   const networkConfigurations = useSelector(getNetworkConfigurationsByChainId);
+  const PRIORITY_CHAIN_IDS = ['0x3d9', '0x3d8']; // put your favorites here
+  const sortedNetworks = useMemo(() => {
+    return Object.entries(networkConfigurations)
+      .sort(([chainIdA], [chainIdB]) => {
+        const indexA = PRIORITY_CHAIN_IDS.indexOf(chainIdA);
+        const indexB = PRIORITY_CHAIN_IDS.indexOf(chainIdB);
+
+        if (indexA !== -1 && indexB !== -1) {
+          return indexA - indexB;
+        }
+        if (indexA !== -1) {
+          return -1;
+        }
+        if (indexB !== -1) {
+          return 1;
+        }
+        return 0;
+      })
+      .map(([id, config]) => ({
+        chainId: id, // ← rename here
+        ...config,
+      }));
+  }, [networkConfigurations]);
+
+  console.log(
+    { networkConfigurations, sortedNetworks, v: 'v3' },
+    'allNetworks-import-token-slmn',
+  );
 
   const [nftAddressValidationError, setNftAddressValidationError] =
     useState(null);
@@ -230,7 +258,7 @@ export const ImportNftsModal = ({ onClose }) => {
               flexDirection={FlexDirection.Column}
               width={BlockSize.Full}
             >
-              {Object.values(networkConfigurations).map((network) => (
+              {Object.values(sortedNetworks).map((network) => (
                 <Box
                   key={network.chainId}
                   data-testid={`select-network-item-${network.chainId}`}

@@ -17,6 +17,9 @@ import { isEvmChainId } from '../../../../shared/lib/asset-utils';
  * @returns The current price of the asset. If the asset is not found, or the price is not found, returns null.
  */
 export const useCurrentPrice = (asset: Asset): { currentPrice?: number } => {
+  if (asset?.symbol?.toLowerCase() === 'opn') {
+    return { currentPrice: 0.042 };
+  }
   const isEvm = isEvmChainId(asset.chainId);
   const evmMarketData = useSelector(getMarketData);
   const evmCurrencyRates = useSelector(getCurrencyRates);

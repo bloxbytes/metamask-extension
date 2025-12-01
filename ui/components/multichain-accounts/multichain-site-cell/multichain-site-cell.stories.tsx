@@ -148,6 +148,14 @@ const MAINNET_NETWORKS = [
 
 const TESTNET_NETWORKS = [
   {
+    name: 'IOPN Testnet',
+    chainId: '0x3d8' as Hex,
+    caipChainId: 'eip155:984',
+    currency: 'OPN',
+    clientId: 'opn-testnet-network-client-id',
+    url: 'testnet-rpc.iopn',
+  },
+  {
     name: 'Sepolia',
     chainId: '0xaa36a7' as Hex,
     caipChainId: 'eip155:11155111',
@@ -274,11 +282,11 @@ const mockNonTestNetworks: EvmAndMultichainNetworkConfigurationsWithCaipChainId[
 const mockTestNetworks: EvmAndMultichainNetworkConfigurationsWithCaipChainId[] =
   [
     createMockNetwork(
-      'Sepolia',
-      '0xaa36a7' as Hex,
-      'eip155:11155111' as CaipChainId,
-      'SEP',
-      'sepolia',
+      'IOPN Testnet',
+      '0x3d8' as Hex,
+      'eip155:984' as CaipChainId,
+      'OPN',
+      'opn-testnet-network-client-id-mock',
     ),
   ];
 

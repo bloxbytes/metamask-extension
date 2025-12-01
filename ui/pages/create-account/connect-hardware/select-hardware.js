@@ -53,7 +53,7 @@ const isUSBSupported = !process.env.IN_TEST && window.navigator.usb;
 const isFirefox = getBrowserName() === PLATFORM_FIREFOX;
 
 const LEDGER_FIREFOX_NOT_SUPPORTED_URL =
-  'https://support.metamask.io/more-web3/wallets/how-to-connect-a-trezor-or-ledger-hardware-wallet/';
+  'https://support.iopn.io/more-web3/wallets/how-to-connect-a-trezor-or-ledger-hardware-wallet/';
 
 export default class SelectHardware extends Component {
   static contextTypes = {

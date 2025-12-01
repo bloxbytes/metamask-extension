@@ -227,14 +227,14 @@ function generateNetworkControllerState() {
     ...defaultFixture().data.NetworkController,
     networkConfigurations: {},
     networksMetadata: {
-      sepolia: {
+      'opn-testnet': {
         EIPS: {
           1559: true,
         },
         status: 'available',
       },
     },
-    selectedNetworkClientId: 'sepolia',
+    selectedNetworkClientId: 'opn-testnet',
   };
 
   if (FIXTURES_CONFIG.withNetworks) {

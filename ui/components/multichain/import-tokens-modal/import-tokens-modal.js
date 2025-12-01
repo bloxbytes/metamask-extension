@@ -2,6 +2,7 @@ import React, {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -152,6 +153,30 @@ export const ImportTokensModal = ({ onClose }) => {
   );
 
   const allNetworks = useSelector(getNetworkConfigurationsByChainId);
+  const PRIORITY_CHAIN_IDS = ['0x3d9', '0x3d8']; // put your favorites here
+  const sortedNetworks = useMemo(() => {
+    return Object.entries(allNetworks)
+      .sort(([chainIdA], [chainIdB]) => {
+        const indexA = PRIORITY_CHAIN_IDS.indexOf(chainIdA);
+        const indexB = PRIORITY_CHAIN_IDS.indexOf(chainIdB);
+
+        // If both are priority → sort by their position
+        if (indexA !== -1 && indexB !== -1) {
+          return indexA - indexB;
+        }
+        // If only A is priority → A first
+        if (indexA !== -1) {
+          return -1;
+        }
+        // If only B is priority → B first
+        if (indexB !== -1) {
+          return 1;
+        }
+        // Neither → keep original order (or sort by name if you want)
+        return 0;
+      })
+      .map(([chainId, config]) => ({ chainId, ...config }));
+  }, [allNetworks]);
 
   // Tracks which page the user is on
   const [actionMode, setActionMode] = useState(ACTION_MODES.CUSTOM_IMPORT);
@@ -620,7 +645,7 @@ export const ImportTokensModal = ({ onClose }) => {
               flexDirection={FlexDirection.Column}
               width={BlockSize.Full}
             >
-              {Object.values(allNetworks).map((network) => (
+              {Object.values(sortedNetworks).map((network) => (
                 <Box
                   key={network.chainId}
                   data-testid={`select-network-item-${network.chainId}`}

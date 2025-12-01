@@ -55,8 +55,8 @@ export default class InfoTab extends PureComponent {
 
   renderInfoLinks() {
     const { t } = this.context;
-    const privacyUrl = 'https://metamask.io/privacy.html';
-    const siteUrl = 'https://metamask.io/';
+    const privacyUrl = 'https://iopn.io/privacy.html';
+    const siteUrl = 'https://iopn.io/';
 
     return (
       <div className="settings-page__content-item settings-page__content-item--without-height">
@@ -77,7 +77,7 @@ export default class InfoTab extends PureComponent {
         <div ref={this.settingsRefs[3]} className="info-tab__link-item">
           <Button
             type="link"
-            href="https://metamask.io/terms.html"
+            href="https://iopn.io/terms.html"
             target="_blank"
             rel="noopener noreferrer"
             className="info-tab__link-text"
@@ -89,7 +89,7 @@ export default class InfoTab extends PureComponent {
           <div ref={this.settingsRefs[8]} className="info-tab__link-item">
             <Button
               type="link"
-              href="https://metamask.io/beta-terms.html"
+              href="https://iopn.io/beta-terms.html"
               target="_blank"
               rel="noopener noreferrer"
               className="info-tab__link-text"
@@ -102,7 +102,7 @@ export default class InfoTab extends PureComponent {
         <div ref={this.settingsRefs[4]} className="info-tab__link-item">
           <Button
             type="link"
-            href={`https://raw.githubusercontent.com/MetaMask/metamask-extension/v${this.state.version}/attribution.txt`}
+            href={`https://raw.githubusercontent.com/iopn/iopn-extension/v${this.state.version}/attribution.txt`}
             target="_blank"
             rel="noopener noreferrer"
             className="info-tab__link-text"
@@ -192,7 +192,7 @@ export default class InfoTab extends PureComponent {
           <img
             src="./images/logo/metamask-fox.svg"
             className="info-tab__logo"
-            alt="MetaMask Logo"
+            alt="iopn Logo"
           />
         </div>
         {this.state.isVisitSupportDataConsentModalOpen && (

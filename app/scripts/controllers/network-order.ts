@@ -73,7 +73,14 @@ export type NetworkOrderControllerMessenger = RestrictedMessenger<
 
 // Default state for the controller
 const defaultState: NetworkOrderControllerState = {
-  orderedNetworkList: [],
+  orderedNetworkList: [
+    {
+      networkId: 'eip155:984', // OPN Mainnet (0x53b) prioritized as first
+    },
+    {
+      networkId: 'eip155:1', // Ethereum Mainnet
+    },
+  ],
 };
 
 // Metadata for the controller state

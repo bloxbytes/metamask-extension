@@ -14,7 +14,12 @@ import {
 } from '../lib/network-controller/messenger-action-handlers';
 import {
   CHAIN_IDS,
+  CURRENCY_SYMBOLS,
   getFailoverUrlsForInfuraNetwork,
+  OPN_TESTNET_DISPLAY_NAME,
+  OPN_DISPLAY_NAME,
+  OPN_TESTNET_RPC_URL,
+  OPN_MAINNET_RPC_URL,
 } from '../../../shared/constants/network';
 import { captureException } from '../../../shared/lib/sentry';
 import { ControllerInitFunction } from './types';
@@ -26,6 +31,8 @@ import {
 export const ADDITIONAL_DEFAULT_NETWORKS = [
   ChainId['megaeth-testnet'],
   ChainId['monad-testnet'],
+  ChainId.opn,
+  ChainId['opn-testnet'],
 ];
 
 function getInitialState(initialState?: Partial<NetworkController['state']>) {
@@ -38,6 +45,47 @@ function getInitialState(initialState?: Partial<NetworkController['state']>) {
 
     const networks =
       initialNetworkControllerState.networkConfigurationsByChainId ?? {};
+
+    // --- BEGIN CUSTOM OPN TESTNET INSERTION --- //
+
+    // Only add if it does not already exist
+    if (!networks[CHAIN_IDS.OPN_TESTNET]) {
+      networks[CHAIN_IDS.OPN_TESTNET] = {
+        chainId: CHAIN_IDS.OPN_TESTNET,
+        name: OPN_TESTNET_DISPLAY_NAME, // from your constants
+        nativeCurrency: CURRENCY_SYMBOLS.OPN,
+        blockExplorerUrls: ['https://testnet.iopn.tech'],
+        defaultRpcEndpointIndex: 0,
+        rpcEndpoints: [
+          {
+            networkClientId: `opn-testnet-network-client-id`,
+            url: OPN_TESTNET_RPC_URL,
+            type: RpcEndpointType.Custom,
+            failoverUrls: [],
+          },
+        ],
+      };
+    }
+
+    // OPN MAINNET
+    if (!networks[CHAIN_IDS.OPN]) {
+      networks[CHAIN_IDS.OPN] = {
+        chainId: CHAIN_IDS.OPN,
+        name: OPN_DISPLAY_NAME, // from your constants
+        nativeCurrency: CURRENCY_SYMBOLS.OPN,
+        blockExplorerUrls: ['https://testnet.iopn.tech'],
+        defaultRpcEndpointIndex: 0,
+        rpcEndpoints: [
+          {
+            networkClientId: `opn-network-client-id`,
+            url: OPN_MAINNET_RPC_URL,
+            type: RpcEndpointType.Custom,
+            failoverUrls: [],
+          },
+        ],
+      };
+    }
+    // --- END CUSTOM OPN TESTNET INSERTION --- //
 
     // TODO: Consider changing `getDefaultNetworkControllerState` on the
     // controller side to include some of these tweaks.
@@ -87,9 +135,9 @@ function getInitialState(initialState?: Partial<NetworkController['state']>) {
       process.env.METAMASK_DEBUG ||
       process.env.METAMASK_ENVIRONMENT === 'test'
     ) {
-      network = networks[CHAIN_IDS.SEPOLIA];
+      network = networks[CHAIN_IDS.OPN_TESTNET];
     } else {
-      network = networks[CHAIN_IDS.MAINNET];
+      network = networks[CHAIN_IDS.OPN];
     }
 
     initialNetworkControllerState.selectedNetworkClientId =
@@ -143,7 +191,6 @@ export const NetworkControllerInit: ControllerInitFunction<
   persistedState,
 }) => {
   const initialState = getInitialState(persistedState.NetworkController);
-
   const getBlockTrackerOptions = () => {
     return process.env.IN_TEST
       ? {}

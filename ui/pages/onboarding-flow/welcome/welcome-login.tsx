@@ -41,6 +41,15 @@ export default function WelcomeLogin({
   const dispatch = useDispatch();
 
   const renderMascot = () => {
+    return (
+      <img
+        src="./images/logo/metamask-fox.svg"
+        width="178"
+        height="178"
+        alt="OPN Wallet"
+      />
+    );
+
     if (isFlask()) {
       return (
         <img src="./images/logo/metamask-fox.svg" width="178" height="178" />

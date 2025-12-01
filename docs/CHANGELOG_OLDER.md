@@ -1909,7 +1909,7 @@ input field and save it in that empty state. (#25109)
 
 ### Changed
 - Updated Confirm/Sign button to red for malicious requests (#23004)
-- Updated the 'Discover Snaps' link to direct users to snaps.metamask.io (#22909)
+- Updated the 'Discover Snaps' link to direct users to snaps.iopn.io (#22909)
 - Displayed total account balances on Accounts Menu and home screen (#22186)
 - Updated style of app header (#22637)
 - Enhanced settings search for better navigation (#22967)

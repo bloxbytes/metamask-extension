@@ -210,7 +210,6 @@ export const getMultichainNetworkConfigurationsByChainId =
         }),
         {},
       );
-
       const networks = {
         ///: BEGIN:ONLY_INCLUDE_IF(multichain)
         ...nonEvmNetworkConfigurationsByChainId,

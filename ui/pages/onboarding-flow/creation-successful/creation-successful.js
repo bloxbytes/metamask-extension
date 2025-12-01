@@ -66,7 +66,7 @@ export default function CreationSuccessful() {
   const firstTimeFlowType = useSelector(getFirstTimeFlowType);
 
   const learnMoreLink =
-    'https://support.metamask.io/stay-safe/safety-in-web3/basic-safety-and-security-tips-for-metamask/';
+    'https://support.iopn.io/stay-safe/safety-in-web3/basic-safety-and-security-tips-for-metamask/';
 
   const searchParams = new URLSearchParams(search);
   const isFromReminder = searchParams.get('isFromReminder');

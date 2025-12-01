@@ -7890,5 +7890,8 @@
   },
   "yourWalletIsReadyRemind": {
     "message": "Cuirfimid meabhrúchán i gcuimhne duit níos déanaí"
+  },
+  "noAssetNetworkAvailable": {
+    "message": "No networks available — you don't have any assets on any network."
   }
 }

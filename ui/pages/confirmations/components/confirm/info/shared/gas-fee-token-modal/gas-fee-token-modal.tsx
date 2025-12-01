@@ -216,7 +216,7 @@ function NativeToggle({
         onClick={() => {
           onChange(true);
         }}
-        tooltip={t('confirmGasFeeTokenModalNativeToggleMetaMask')}
+        tooltip={t('confirmGasFeeTokenModalNativeToggleOpnWallet')}
       >
         <img
           src="./images/logo/metamask-fox.svg"

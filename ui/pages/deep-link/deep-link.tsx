@@ -134,7 +134,7 @@ async function updateStateFromUrl(
             <ButtonLink
               key="update-metamask-link"
               as="a"
-              href="https://support.metamask.io/configure/wallet/how-to-update-the-version-of-metamask/"
+              href="https://support.iopn.io/configure/wallet/how-to-update-the-version-of-metamask/"
             >
               {t('deepLink_Error404_CTA_LinkText')}
             </ButtonLink>,
@@ -215,7 +215,7 @@ export const DeepLink = () => {
                     <ButtonLink
                       key="update-metamask-link"
                       as="a"
-                      href="https://support.metamask.io/configure/wallet/how-to-update-the-version-of-metamask/"
+                      href="https://support.iopn.io/configure/wallet/how-to-update-the-version-of-metamask/"
                     >
                       {t('deepLink_Error404_CTA_LinkText')}
                     </ButtonLink>,

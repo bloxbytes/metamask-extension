@@ -25,6 +25,7 @@ import {
   Display,
   AlignItems,
   BorderColor,
+  TextAlign,
 } from '../../../../../helpers/constants/design-system';
 import { NetworkListItem } from '../../../../../components/multichain';
 import { useI18nContext } from '../../../../../hooks/useI18nContext';
@@ -188,13 +189,30 @@ export const NetworkFilter = ({
             {t('selectNetworkToFilter')}
           </ModalHeader>
           <ModalBody paddingLeft={0} paddingRight={0}>
-            <NetworkListItem
-              name={t('allNetworks')}
-              iconSrc={IconName.Global}
-              iconSize={IconSize.Xl}
-              selected={selectedChainId === null}
-              onClick={() => handleNetworkSelection(null)}
-            />
+            {uniqueChainIds.length === 0 ? (
+              <Box
+                display={Display.Flex}
+                alignItems={AlignItems.center}
+                gap={2}
+              >
+                <Text
+                  color={TextColor.textMuted}
+                  className={'m-1'}
+                  textAlign={TextAlign.Center}
+                >
+                  {t('noAssetNetworkAvailable')}
+                </Text>
+              </Box>
+            ) : (
+              <NetworkListItem
+                name={t('allNetworks')}
+                iconSrc={IconName.Global}
+                iconSize={IconSize.Xl}
+                selected={selectedChainId === null}
+                onClick={() => handleNetworkSelection(null)}
+              />
+            )}
+
             {uniqueChainIds.map((chainId) => {
               const networkName = chainNetworkNAmeAndImageMap.get(
                 chainId as string,

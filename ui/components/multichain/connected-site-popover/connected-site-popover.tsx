@@ -103,6 +103,7 @@ export const ConnectedSitePopover: React.FC<ConnectedSitePopoverProps> = ({
                 }
               />
               <ButtonLink
+                ellipsis={true}
                 size={ButtonLinkSize.Sm}
                 textProps={{
                   variant: TextVariant.bodySm,
@@ -139,7 +140,7 @@ export const ConnectedSitePopover: React.FC<ConnectedSitePopoverProps> = ({
               {t('connectionPopoverDescription')}
             </Text>
             <ButtonLink
-              href="https://support.metamask.io/more-web3/dapps/connecting-to-a-dapp/"
+              href="https://support.iopn.io/more-web3/dapps/connecting-to-a-dapp/"
               externalLink
               size={ButtonLinkSize.Sm}
             >
@@ -155,7 +156,7 @@ export const ConnectedSitePopover: React.FC<ConnectedSitePopoverProps> = ({
                 onClick();
               } else {
                 global.platform.openTab({
-                  url: 'https://app.metamask.io/explore/dapps',
+                  url: 'https://app.iopn.io/explore/dapps',
                 });
               }
             }}

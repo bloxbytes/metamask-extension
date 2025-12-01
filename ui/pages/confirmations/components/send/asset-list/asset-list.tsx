@@ -14,6 +14,7 @@ import {
   FlexDirection,
   AlignItems,
   JustifyContent,
+  TextAlign,
 } from '../../../../../helpers/constants/design-system';
 import { useI18nContext } from '../../../../../hooks/useI18nContext';
 import { type Asset } from '../../../types/send';
@@ -86,6 +87,20 @@ export const AssetList = ({
 
   return (
     <>
+      {tokens.length === 0 && nfts.length === 0 ? (
+        <Box display={Display.Flex} alignItems={AlignItems.center} gap={2}>
+          <Text
+            color={TextColor.textMuted}
+            textAlign={TextAlign.Center}
+            className={'m-5'}
+          >
+            {t('noAssetNetworkAvailable')}
+          </Text>
+        </Box>
+      ) : (
+        <></>
+      )}
+
       {tokens.map((token) => (
         <AssetComponent
           key={`${token.address ?? token.assetId}-${token.chainId}`}
