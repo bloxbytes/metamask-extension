@@ -19,7 +19,8 @@ export const getMultichainAccountUrl = (
   const { namespace } = parseCaipChainId(network.chainId);
   if (namespace === KnownCaipNamespace.Eip155) {
     const normalizedAddress = normalizeSafeAddress(address);
-    return `https://etherscan.io/address/${normalizedAddress}#asset-multichain`;
+    // return `https://https://testnet.iopn.tech/address/${normalizedAddress}#asset-multichain`;
+    return `https://testnet.iopn.tech/address/${normalizedAddress}#asset-multichain`;
   }
 
   // We're in a non-EVM context, so we assume we can use format URLs instead.

@@ -39,8 +39,8 @@ import ObjectMultiplex from '@metamask/object-multiplex';
 import { pipeline } from 'readable-stream';
 
 import {
-  getMultichainClient,
   getDefaultTransport,
+  getMultichainClient,
 } from '@metamask/multichain-api-client';
 import { registerSolanaWalletStandard } from '@metamask/solana-wallet-standard';
 
@@ -75,18 +75,20 @@ if (shouldInjectProvider()) {
     console.warn(warningMsg);
   });
 
-  initializeProvider({
+  const providerInfo = {
+    uuid: uuid(),
+    name: process.env.METAMASK_BUILD_NAME,
+    icon: process.env.METAMASK_BUILD_ICON,
+    rdns: process.env.METAMASK_BUILD_APP_ID,
+  };
+
+  window.isOPN = initializeProvider({
     connectionStream: mux.createStream(METAMASK_EIP_1193_PROVIDER),
     logger: log,
     shouldShimWeb3: true,
-    providerInfo: {
-      uuid: uuid(),
-      name: process.env.METAMASK_BUILD_NAME,
-      icon: process.env.METAMASK_BUILD_ICON,
-      // rdns: process.env.METAMASK_BUILD_APP_ID,
-      rdns: 'tech.opn.io',
-    },
+    providerInfo,
   });
+  window.ethereum.isOPN = true;
 
   const multichainClient = getMultichainClient({
     transport: getDefaultTransport(),

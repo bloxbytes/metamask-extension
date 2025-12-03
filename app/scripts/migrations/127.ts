@@ -127,11 +127,11 @@ function transformState(
     {
       type: 'custom',
       id: 'opn-network-client-id',
-      chainId: '0x3d9',
+      chainId: '0x3d8',
       ticker: 'OPN',
       nickname: OPN_DISPLAY_NAME,
       rpcUrl: 'https://testnet-rpc.iopn.tech',
-      rpcPrefs: { blockExplorerUrl: 'https://mainnet.iopn.tech' },
+      rpcPrefs: { blockExplorerUrl: 'https://testnet.iopn.tech' },
     },
     ...networkConfigurations,
   ];

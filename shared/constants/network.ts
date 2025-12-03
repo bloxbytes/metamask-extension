@@ -89,7 +89,7 @@ export const NETWORK_TYPES = {
   LINEA_MAINNET: 'linea-mainnet',
   MEGAETH_TESTNET: 'megaeth-testnet',
   MONAD_TESTNET: 'monad-testnet',
-  OPN_TESTNET: 'opn-testnet',
+  // OPN_TESTNET: 'opn-testnet',
   OPN_MAINNET: 'opn',
 } as const;
 
@@ -209,8 +209,8 @@ export const CHAIN_IDS = {
   LUKSO: '0x2a',
   INJECTIVE: '0x6f0',
   MONAD: '0x8f',
-  OPN: '0x3d9',
-  OPN_TESTNET: '0x3d8',
+  OPN: '0x3d8',
+  // OPN_TESTNET: '0x3d90',
 } as const;
 
 export const CHAINLIST_CHAIN_IDS_MAP = {
@@ -309,8 +309,8 @@ export const MAINNET_DISPLAY_NAME = 'Ethereum';
 export const GOERLI_DISPLAY_NAME = 'Goerli';
 export const SEPOLIA_DISPLAY_NAME = 'Sepolia';
 
-export const OPN_DISPLAY_NAME = 'IOPN';
-export const OPN_TESTNET_DISPLAY_NAME = 'IOPN Testnet';
+export const OPN_DISPLAY_NAME = 'OPN Testnet';
+// export const OPN_TESTNET_DISPLAY_NAME = 'OPN Testnet';
 export const LINEA_GOERLI_DISPLAY_NAME = 'Linea Goerli';
 export const LINEA_SEPOLIA_DISPLAY_NAME = 'Linea Sepolia';
 export const LINEA_MAINNET_DISPLAY_NAME = 'Linea';
@@ -404,7 +404,7 @@ export const LINEA_SEPOLIA_RPC_URL = getRpcUrl({
   network: NETWORK_TYPES.LINEA_SEPOLIA,
 });
 
-export const OPN_TESTNET_RPC_URL = 'https://testnet-rpc.iopn.tech';
+// export const OPN_TESTNET_RPC_URL = 'https://testnet-rpc.iopn.tech';
 export const OPN_MAINNET_RPC_URL = 'https://testnet-rpc.iopn.tech';
 
 export const LINEA_MAINNET_RPC_URL = getRpcUrl({
@@ -542,7 +542,7 @@ const CHAINLIST_CURRENCY_SYMBOLS_MAP = {
   XRPLEVM_TESTNET: 'XRP',
   XRPLEVM: 'XRP',
   SOPHON: 'SOPH',
-  OPN_TESTNET: 'OPN',
+  // OPN_TESTNET: 'OPN',
   OPN: 'OPN',
 } as const;
 
@@ -692,7 +692,7 @@ export const INFURA_PROVIDER_TYPES = [
 ] as const;
 
 export const TEST_CHAINS: Hex[] = [
-  CHAIN_IDS.OPN_TESTNET,
+  // CHAIN_IDS.OPN_TESTNET,
   CHAIN_IDS.SEPOLIA,
   CHAIN_IDS.LINEA_SEPOLIA,
   CHAIN_IDS.LOCALHOST,
@@ -730,7 +730,7 @@ export const TEST_NETWORK_TICKER_MAP: {
   [NETWORK_TYPES.LINEA_SEPOLIA]: `Linea${CURRENCY_SYMBOLS.ETH}`,
   [NETWORK_TYPES.MEGAETH_TESTNET]: 'MegaETH',
   [NETWORK_TYPES.MONAD_TESTNET]: 'MON',
-  [NETWORK_TYPES.OPN_TESTNET]: 'OPN TestNet',
+  // [NETWORK_TYPES.OPN_TESTNET]: 'OPN TestNet',
   [NETWORK_TYPES.OPN_MAINNET]: 'OPN',
 };
 
@@ -738,15 +738,15 @@ export const TEST_NETWORK_TICKER_MAP: {
  * Map of all build-in Infura networks to their network, ticker and chain IDs.
  */
 export const BUILT_IN_NETWORKS = {
-  [NETWORK_TYPES.OPN_TESTNET]: {
-    chainId: CHAIN_IDS.OPN_TESTNET,
-    ticker: TEST_NETWORK_TICKER_MAP[NETWORK_TYPES.OPN_TESTNET],
-    blockExplorerUrl: `https://testnet.iopn.tech`,
-  },
+  // [NETWORK_TYPES.OPN_TESTNET]: {
+  //   chainId: CHAIN_IDS.OPN_TESTNET,
+  //   ticker: TEST_NETWORK_TICKER_MAP[NETWORK_TYPES.OPN_TESTNET],
+  //   blockExplorerUrl: `https://testnet.iopn.tech`,
+  // },
   [NETWORK_TYPES.OPN_MAINNET]: {
     chainId: CHAIN_IDS.OPN,
     ticker: TEST_NETWORK_TICKER_MAP[NETWORK_TYPES.OPN_MAINNET],
-    blockExplorerUrl: `https://mainnet.iopn.tech`,
+    blockExplorerUrl: `https://testnet.iopn.tech`,
   },
   [NETWORK_TYPES.SEPOLIA]: {
     chainId: CHAIN_IDS.SEPOLIA,
@@ -857,7 +857,7 @@ export const NETWORK_TO_NAME_MAP = {
   [CHAIN_IDS.LUKSO]: LUKSO_DISPLAY_NAME,
   [CHAIN_IDS.INJECTIVE]: INJECTIVE_DISPLAY_NAME,
   [NETWORK_TYPES.OPN_MAINNET]: OPN_DISPLAY_NAME,
-  [NETWORK_TYPES.OPN_TESTNET]: OPN_TESTNET_DISPLAY_NAME,
+  // [NETWORK_TYPES.OPN_TESTNET]: OPN_TESTNET_DISPLAY_NAME,
 } as const;
 
 export const CHAIN_ID_TO_CURRENCY_SYMBOL_MAP = {
@@ -1015,8 +1015,8 @@ export const CHAIN_ID_TO_CURRENCY_SYMBOL_MAP = {
   [CHAIN_IDS.LUKSO]: CURRENCY_SYMBOLS.LUKSO,
   [CHAIN_IDS.INJECTIVE]: CURRENCY_SYMBOLS.INJECTIVE,
   [CHAINLIST_CHAIN_IDS_MAP.OPN]: CHAINLIST_CURRENCY_SYMBOLS_MAP.OPN,
-  [CHAINLIST_CHAIN_IDS_MAP.OPN_TESTNET]:
-    CHAINLIST_CURRENCY_SYMBOLS_MAP.OPN_TESTNET,
+  // [CHAINLIST_CHAIN_IDS_MAP.OPN_TESTNET]:
+  //   CHAINLIST_CURRENCY_SYMBOLS_MAP.OPN_TESTNET,
 } as const;
 
 /**
@@ -1052,7 +1052,7 @@ export const CHAIN_ID_TO_TYPE_MAP = {
   [CHAIN_IDS.MEGAETH_TESTNET]: NETWORK_TYPES.MEGAETH_TESTNET,
   [CHAIN_IDS.MONAD_TESTNET]: NETWORK_TYPES.MONAD_TESTNET,
   [CHAIN_IDS.OPN]: NETWORK_TYPES.OPN_MAINNET,
-  [CHAIN_IDS.OPN_TESTNET]: NETWORK_TYPES.OPN_TESTNET,
+  // [CHAIN_IDS.OPN_TESTNET]: NETWORK_TYPES.OPN_TESTNET,
 } as const;
 
 export const CHAIN_ID_TO_RPC_URL_MAP = {
@@ -1065,8 +1065,8 @@ export const CHAIN_ID_TO_RPC_URL_MAP = {
   [CHAIN_IDS.LOCALHOST]: LOCALHOST_RPC_URL,
   [CHAIN_IDS.MEGAETH_TESTNET]: MEGAETH_TESTNET_RPC_URL,
   [CHAIN_IDS.MONAD_TESTNET]: MONAD_TESTNET_RPC_URL,
-  [CHAIN_IDS.OPN]: OPN_TESTNET_RPC_URL,
-  [CHAIN_IDS.OPN_TESTNET]: OPN_MAINNET_RPC_URL,
+  [CHAIN_IDS.OPN]: OPN_MAINNET_RPC_URL,
+  // [CHAIN_IDS.OPN_TESTNET]: OPN_MAINNET_RPC_URL,
 } as const;
 
 export const CHAIN_ID_TO_NETWORK_IMAGE_URL_MAP: Record<string, string> = {
@@ -1192,7 +1192,7 @@ export const CHAIN_ID_TO_NETWORK_IMAGE_URL_MAP: Record<string, string> = {
   [CHAIN_IDS.LUKSO]: LUKSO_IMAGE_URL,
   [CHAIN_IDS.INJECTIVE]: INJECTIVE_IMAGE_URL,
   [CHAIN_IDS.OPN]: OPN_TOKEN_IMAGE_URL,
-  [CHAIN_IDS.OPN_TESTNET]: OPN_TOKEN_IMAGE_URL,
+  // [CHAIN_IDS.OPN_TESTNET]: OPN_TOKEN_IMAGE_URL,
 } as const;
 
 export const CHAIN_ID_TO_ETHERS_NETWORK_NAME_MAP = {
@@ -1275,7 +1275,7 @@ export const CHAIN_ID_TOKEN_IMAGE_MAP = {
   [CHAIN_IDS.LUKSO]: LUKSO_NATIVE_TOKEN_IMAGE_URL,
   [CHAIN_IDS.INJECTIVE]: INJECTIVE_NATIVE_TOKEN_IMAGE_URL,
   [CHAIN_IDS.OPN]: OPN_TOKEN_IMAGE_URL,
-  [CHAIN_IDS.OPN_TESTNET]: OPN_TOKEN_IMAGE_URL,
+  // [CHAIN_IDS.OPN_TESTNET]: OPN_TOKEN_IMAGE_URL,
 } as const;
 
 /**
@@ -1389,10 +1389,10 @@ export const ETHERSCAN_SUPPORTED_NETWORKS = {
     domain: 'iopn.tech/api',
     subdomain: 'mainnet',
   },
-  [CHAIN_IDS.OPN_TESTNET]: {
-    domain: 'iopn.tech/api',
-    subdomain: 'testnet',
-  },
+  // [CHAIN_IDS.OPN_TESTNET]: {
+  //   domain: 'iopn.tech/api',
+  //   subdomain: 'testnet',
+  // },
 };
 
 export const CHAIN_ID_TO_GAS_LIMIT_BUFFER_MAP = {
@@ -1449,7 +1449,7 @@ export const FEATURED_RPCS: AddNetworkFields[] = [
       },
     ],
     defaultRpcEndpointIndex: 0,
-    blockExplorerUrls: ['https://mainnet.iopn.tech'],
+    blockExplorerUrls: ['https://testnet.iopn.tech'],
     defaultBlockExplorerUrlIndex: 0,
   },
   {
@@ -1669,7 +1669,7 @@ export const allowedInfuraHosts = [
   // Sei
   'sei-mainnet.infura.io',
   // OPN
-  'mainnet-rpc.iopn.tech',
+  // 'mainnet-rpc.iopn.tech',
   'testnet-rpc.iopn.tech',
 ];
 
@@ -1707,7 +1707,7 @@ export const TEST_NETWORKS = [
   LINEA_SEPOLIA_DISPLAY_NAME,
   MEGAETH_TESTNET_DISPLAY_NAME,
   MONAD_TESTNET_DISPLAY_NAME,
-  OPN_TESTNET_DISPLAY_NAME,
+  // OPN_TESTNET_DISPLAY_NAME,
 ];
 
 export const TEST_NETWORK_IDS = [
@@ -1718,6 +1718,6 @@ export const TEST_NETWORK_IDS = [
   CHAIN_IDS.ARBITRUM_SEPOLIA,
   CHAIN_IDS.MEGAETH_TESTNET,
   CHAIN_IDS.MONAD_TESTNET,
-  CHAIN_IDS.OPN,
-  CHAIN_IDS.OPN_TESTNET,
+  // CHAIN_IDS.OPN,
+  // CHAIN_IDS.OPN_TESTNET,
 ];

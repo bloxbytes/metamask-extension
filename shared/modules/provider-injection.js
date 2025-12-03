@@ -4,10 +4,11 @@
  * @returns {boolean} {@code true} Whether the provider should be injected
  */
 export default function shouldInjectProvider() {
-  return (
-    checkURLForProviderInjection(new URL(window.location)) &&
-    checkDocumentForProviderInjection()
-  );
+  return true;
+  // return (
+  //   checkURLForProviderInjection(new URL(window.location)) &&
+  //   checkDocumentForProviderInjection()
+  // );
 }
 
 /**

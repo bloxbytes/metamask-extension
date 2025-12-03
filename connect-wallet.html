@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connect MetaMask Only</title>
+  <script src="https://cdn.ethers.io/lib/ethers-5.7.umd.min.js"></script>
+  <script src="https://unpkg.com/@walletconnect/modal@2"></script>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      text-align: center;
+      padding: 50px;
+      background: #f0f2f5;
+    }
+
+    button {
+      font-size: 20px;
+      padding: 16px 40px;
+      background: #f6851b;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      margin: 20px;
+    }
+
+    .status {
+      margin-top: 30px;
+      font-size: 18px;
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      min-height: 50px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Connect with MetaMask Only</h1>
+<button id="connectBtn">Connect MetaMask</button>
+
+<div class="status" id="status">Not connected</div>
+
+<script>
+  const status = document.getElementById("status");
+
+  // WalletConnect project ID (free, get yours at https://cloud.walletconnect.com)
+  const PROJECT_ID = "YOUR_PROJECT_ID_HERE"; // ← Replace with your real one (or use mine temporarily)
+
+  // Temporary free project ID (works for testing, replace with yours later)
+  const TEMP_PROJECT_ID = "3c0b14d9f2c7c2e8e5e9b7f8a1d2e3f4"; // This is public test ID
+
+  async function connectMetaMaskOnly() {
+    if (!window.ethereum) {
+      alert("MetaMask not detected! Please install it.");
+      return;
+    }
+
+    // Find ONLY MetaMask provider (works even with multiple wallets)
+    let provider = null;
+    console.log(window.ethereum.providers, "window.ethereum.providers0");
+    console.log(window.ethereum.isMetaMask, "window.ethereum.providers1");
+    console.log(window.ethereum.isOPN, "window.ethereum.providers2");
+
+    if (window.ethereum.providers) {
+      console.log(window.ethereum.providers, "window.ethereum.providers");
+      provider = window.ethereum.providers.find(p => p.isMetaMask);
+    } else if (window.ethereum?.isMetaMask) {
+      provider = window.ethereum;
+    } else if (window.ethereum?.isOPN) {
+      provider = window.ethereum;
+    }
+
+    console.log(provider, "ethereum providers");
+
+    if (!provider) {
+      alert("MetaMask not found among installed wallets");
+      return;
+    }
+
+    try {
+      status.innerHTML = "Requesting accounts...";
+      const accounts = await provider.request({ method: "eth_requestAccounts" });
+      const address = accounts[0];
+
+      const chainId = await provider.request({ method: "eth_chainId" });
+
+      status.innerHTML = `
+          <strong>Connected to MetaMask Only!</strong><br><br>
+          Address: <code>${address}</code><br>
+          Chain ID: <code>${parseInt(chainId, 16)}</code> (${chainId})
+        `;
+      console.log("Connected:", { address, chainId });
+    } catch (err) {
+      status.innerHTML = `Error: ${err.message}`;
+    }
+  }
+
+  document.getElementById("connectBtn").addEventListener("click", connectMetaMaskOnly);
+</script>
+
+<p><small>No WalletConnect needed — uses injected provider directly.<br>
+  Only MetaMask will open — OPN, Rabby, etc. stay closed.</small></p>
+</body>
+</html>

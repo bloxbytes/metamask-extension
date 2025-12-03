@@ -326,8 +326,8 @@ export const NetworkListMenu = ({ onClose }: NetworkListMenuProps) => {
   // and the rest of the test networks in alphabetical order.
   const sortedTestNetworks = useMemo(() => {
     return sortNetworksByPrioity(searchedTestNetworks, [
-      toEvmCaipChainId(ChainId.sepolia),
-      toEvmCaipChainId(ChainId['linea-sepolia']),
+      // toEvmCaipChainId(ChainId.sepolia),
+      toEvmCaipChainId(ChainId['opn-testnet']),
     ]);
   }, [searchedTestNetworks]);
 

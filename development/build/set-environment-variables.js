@@ -125,7 +125,7 @@ function getBuildIcon({ buildType }) {
  * @returns {string} The build app ID.
  */
 function getBuildAppId({ buildType }) {
-  const baseDomain = 'io.metamask';
+  const baseDomain = 'io.iopn';
   return buildType === 'main' ? baseDomain : `${baseDomain}.${buildType}`;
 }
 

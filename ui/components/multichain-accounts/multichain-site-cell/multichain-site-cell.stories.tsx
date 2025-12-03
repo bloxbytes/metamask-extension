@@ -148,7 +148,7 @@ const MAINNET_NETWORKS = [
 
 const TESTNET_NETWORKS = [
   {
-    name: 'IOPN Testnet',
+    name: 'OPN Testnet',
     chainId: '0x3d8' as Hex,
     caipChainId: 'eip155:984',
     currency: 'OPN',
@@ -282,7 +282,7 @@ const mockNonTestNetworks: EvmAndMultichainNetworkConfigurationsWithCaipChainId[
 const mockTestNetworks: EvmAndMultichainNetworkConfigurationsWithCaipChainId[] =
   [
     createMockNetwork(
-      'IOPN Testnet',
+      'OPN Testnet',
       '0x3d8' as Hex,
       'eip155:984' as CaipChainId,
       'OPN',

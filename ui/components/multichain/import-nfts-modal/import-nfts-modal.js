@@ -131,11 +131,6 @@ export const ImportNftsModal = ({ onClose }) => {
       }));
   }, [networkConfigurations]);
 
-  console.log(
-    { networkConfigurations, sortedNetworks, v: 'v3' },
-    'allNetworks-import-token-slmn',
-  );
-
   const [nftAddressValidationError, setNftAddressValidationError] =
     useState(null);
   const [duplicateTokenIdError, setDuplicateTokenIdError] = useState(null);
