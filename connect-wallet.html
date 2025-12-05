@@ -57,20 +57,27 @@
       return;
     }
 
-    // Find ONLY MetaMask provider (works even with multiple wallets)
     let provider = null;
-    console.log(window.ethereum.providers, "window.ethereum.providers0");
-    console.log(window.ethereum.isMetaMask, "window.ethereum.providers1");
-    console.log(window.ethereum.isOPN, "window.ethereum.providers2");
 
-    if (window.ethereum.providers) {
-      console.log(window.ethereum.providers, "window.ethereum.providers");
-      provider = window.ethereum.providers.find(p => p.isMetaMask);
-    } else if (window.ethereum?.isMetaMask) {
-      provider = window.ethereum;
-    } else if (window.ethereum?.isOPN) {
-      provider = window.ethereum;
+    if (window.ethereum?.providers?.length) {
+      // 1. Prefer OPN wallet first
+      provider = window.ethereum.providers.find(p => p.isOPN);
+      // 2. Otherwise, fallback to MetaMask
+      if (!provider) {
+        provider = window.ethereum.providers.find(p => p.isMetaMask);
+      }
+
+      console.log(provider, 'selected provider');
+    } else {
+      // Single provider scenario
+      if (window.ethereum?.isOPN) {
+        provider = window.ethereum;
+      } else if (window.ethereum?.isMetaMask) {
+        provider = window.ethereum;
+      }
     }
+
+    console.log("Selected provider:", provider);
 
     console.log(provider, "ethereum providers");
 

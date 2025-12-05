@@ -48,8 +48,8 @@ import shouldInjectProvider from '../../shared/modules/provider-injection';
 import { METAMASK_EIP_1193_PROVIDER } from './constants/stream';
 
 // contexts
-const CONTENT_SCRIPT = 'metamask-contentscript';
-const INPAGE = 'metamask-inpage';
+const CONTENT_SCRIPT = 'opn-contentscript';
+const INPAGE = 'opn-inpage';
 
 restoreContextAfterImports();
 
@@ -82,13 +82,40 @@ if (shouldInjectProvider()) {
     rdns: process.env.METAMASK_BUILD_APP_ID,
   };
 
-  window.isOPN = initializeProvider({
+  const opnProvider = initializeProvider({
     connectionStream: mux.createStream(METAMASK_EIP_1193_PROVIDER),
     logger: log,
     shouldShimWeb3: true,
     providerInfo,
   });
-  window.ethereum.isOPN = true;
+
+  opnProvider.isOPN = true;
+  window.__OPN_PROVIDER__ = opnProvider;
+  window.__OPN_PROVIDERS__ = [opnProvider];
+
+  // Override ethereum
+  Object.defineProperty(window, 'ethereum', {
+    configurable: false,
+    enumerable: true,
+
+    get() {
+      // The main provider: ALWAYS your wallet
+      const eth = window.__OPN_PROVIDER__;
+      eth.isMetaMask = false;
+
+      // Attach provider list dynamically
+      eth.providers = window.__OPN_PROVIDERS__;
+      return eth;
+    },
+
+    set(newProvider) {
+      // // MetaMask tries to set its provider here
+      // window.__METAMASK_PROVIDER__ = newProvider;
+
+      // Store it in list (but do NOT replace the default provider)
+      window.__OPN_PROVIDERS__.push(newProvider);
+    },
+  });
 
   const multichainClient = getMultichainClient({
     transport: getDefaultTransport(),
