@@ -12,12 +12,10 @@ const ALLOWED_MULTICHAIN_BRIDGE_CHAIN_IDS = [
   ///: BEGIN:ONLY_INCLUDE_IF(bitcoin-swaps)
   MultichainNetworks.BITCOIN,
   ///: END:ONLY_INCLUDE_IF
-  ///: BEGIN:ONLY_INCLUDE_IF(tron)
-  MultichainNetworks.TRON,
-  ///: END:ONLY_INCLUDE_IF
 ];
 
 const ALLOWED_EVM_BRIDGE_CHAIN_IDS = [
+  // CHAIN_IDS.OPN,
   CHAIN_IDS.MAINNET,
   CHAIN_IDS.BSC,
   CHAIN_IDS.POLYGON,
@@ -28,7 +26,6 @@ const ALLOWED_EVM_BRIDGE_CHAIN_IDS = [
   CHAIN_IDS.LINEA_MAINNET,
   CHAIN_IDS.BASE,
   CHAIN_IDS.SEI,
-  CHAIN_IDS.MONAD,
 ];
 
 export const ALLOWED_BRIDGE_CHAIN_IDS = [
@@ -37,10 +34,6 @@ export const ALLOWED_BRIDGE_CHAIN_IDS = [
   CHAIN_IDS.LINEA_MAINNET,
   CHAIN_IDS.BASE,
   MultichainNetworks.SOLANA,
-  MultichainNetworks.BITCOIN,
-  ///: BEGIN:ONLY_INCLUDE_IF(tron)
-  MultichainNetworks.TRON,
-  ///: END:ONLY_INCLUDE_IF
 ];
 
 export const ALLOWED_BRIDGE_CHAIN_IDS_IN_CAIP =
@@ -67,6 +60,8 @@ export const NETWORK_TO_SHORT_NETWORK_NAME_MAP: Record<
   AllowedBridgeChainIds,
   string
 > = {
+  [CHAIN_IDS.OPN]: 'OPN',
+  [toEvmCaipChainId(CHAIN_IDS.OPN)]: 'OPN',
   [CHAIN_IDS.MAINNET]: 'Ethereum',
   [toEvmCaipChainId(CHAIN_IDS.MAINNET)]: 'Ethereum',
   [CHAIN_IDS.LINEA_MAINNET]: 'Linea',
@@ -89,8 +84,6 @@ export const NETWORK_TO_SHORT_NETWORK_NAME_MAP: Record<
   [toEvmCaipChainId(CHAIN_IDS.BASE)]: 'Base',
   [CHAIN_IDS.SEI]: 'Sei',
   [toEvmCaipChainId(CHAIN_IDS.SEI)]: 'Sei',
-  [CHAIN_IDS.MONAD]: 'Monad',
-  [toEvmCaipChainId(CHAIN_IDS.MONAD)]: 'Monad',
   [MultichainNetworks.SOLANA]: 'Solana',
   [MultichainNetworks.SOLANA_TESTNET]: 'Solana Testnet',
   [MultichainNetworks.SOLANA_DEVNET]: 'Solana Devnet',
@@ -98,9 +91,6 @@ export const NETWORK_TO_SHORT_NETWORK_NAME_MAP: Record<
   [MultichainNetworks.BITCOIN]: 'Bitcoin',
   [MultichainNetworks.BITCOIN_TESTNET]: 'Bitcoin Testnet',
   [MultichainNetworks.BITCOIN_SIGNET]: 'Bitcoin Mutinynet',
-  ///: END:ONLY_INCLUDE_IF
-  ///: BEGIN:ONLY_INCLUDE_IF(tron)
-  [MultichainNetworks.TRON]: 'Tron',
   ///: END:ONLY_INCLUDE_IF
 };
 
@@ -187,13 +177,6 @@ export const BRIDGE_CHAINID_COMMON_TOKEN_PAIR: Partial<
     decimals: 6,
     name: 'USD Coin',
   },
-  [toEvmCaipChainId(CHAIN_IDS.MONAD)]: {
-    // MON -> USDC on Monad
-    address: '0x754704Bc059F8C67012fEd69BC8A327a5aafb603',
-    symbol: 'USDC',
-    decimals: 6,
-    name: 'USD Coin',
-  },
   [MultichainNetworks.SOLANA]: {
     // SOL -> USDC on Solana
     address: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
@@ -201,13 +184,11 @@ export const BRIDGE_CHAINID_COMMON_TOKEN_PAIR: Partial<
     decimals: 6,
     name: 'USD Coin',
   },
-  ///: BEGIN:ONLY_INCLUDE_IF(tron)
-  [MultichainNetworks.TRON]: {
-    // TRX -> USDT on Tron
-    address: 'tron:728126428/trc20:TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t',
-    symbol: 'USDT',
-    decimals: 6,
-    name: 'Tether USD',
-  },
-  ///: END:ONLY_INCLUDE_IF
+  // [toEvmCaipChainId(CHAIN_IDS.OPN)]: {
+  //   // OPN -> mUSD on OPN
+  //   address: '0xaca92e438df0b2401ff60da7e4337b687a2435da',
+  //   symbol: 'mUSD',
+  //   decimals: 6,
+  //   name: 'MetaMask USD',
+  // },
 } as const;

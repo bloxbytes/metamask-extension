@@ -9,7 +9,10 @@
           "entropy:01JKAF3DSGM3AB87EM9N0K41AJ/0": {
             "id": "entropy:01JKAF3DSGM3AB87EM9N0K41AJ/0",
             "type": "multichain-account",
-            "accounts": ["51737ecb-beb4-4a2b-bcab-c99d0f587a33"],
+            "accounts": [
+              "cf8dace4-9439-4bd4-b3a8-88c821c8fcb3",
+              "07c2cfec-36c9-46c4-8115-3836d3ac9047"
+            ],
             "metadata": {
               "name": "Account 1",
               "entropy": {
@@ -29,7 +32,9 @@
       }
     }
   },
-  "accountsAssets": {},
+  "accounts": {
+    "0x03cf1158b58ccdfc04dd518f11f85c3ee7fa0189": {}
+  },
   "accountsByChainId": {},
   "addSnapAccountEnabled": false,
   "addressBook": {
@@ -45,20 +50,46 @@
   },
   "addressSecurityAlertResponses": {},
   "advancedGasFee": {},
-  "alertEnabledness": { "unconnectedAccount": true, "web3ShimUsage": true },
+  "alertEnabledness": {
+    "unconnectedAccount": true,
+    "web3ShimUsage": true
+  },
   "allDetectedTokens": {},
-  "allIgnoredAssets": {},
   "allIgnoredTokens": {},
   "allNftContracts": {},
   "allNfts": {},
   "allTokens": {},
   "announcements": {
-    "8": { "id": 8, "date": "2021-11-01", "isShown": false },
-    "20": { "id": 20, "date": null, "isShown": false },
-    "24": { "id": 24, "date": null, "isShown": false },
-    "25": { "id": 25, "date": null, "isShown": false },
-    "28": { "id": 28, "date": null, "isShown": false },
-    "29": { "id": 29, "date": null, "isShown": false },
+    "8": {
+      "id": 8,
+      "date": "2021-11-01",
+      "isShown": false
+    },
+    "20": {
+      "id": 20,
+      "date": null,
+      "isShown": false
+    },
+    "24": {
+      "id": 24,
+      "date": null,
+      "isShown": false
+    },
+    "25": {
+      "id": 25,
+      "date": null,
+      "isShown": false
+    },
+    "28": {
+      "id": 28,
+      "date": null,
+      "isShown": false
+    },
+    "29": {
+      "id": 29,
+      "date": null,
+      "isShown": false
+    },
     "30": {
       "id": 30,
       "date": null,
@@ -86,11 +117,17 @@
       },
       "isShown": false
     },
-    "33": { "id": 33, "date": "2024-04-09", "isShown": false }
+    "33": {
+      "id": 33,
+      "date": "2024-04-09",
+      "isShown": false
+    }
   },
   "approvalFlows": [],
-  "assetsMetadata": {},
-  "browserEnvironment": { "os": "mac", "browser": "firefox" },
+  "browserEnvironment": {
+    "os": "mac",
+    "browser": "firefox"
+  },
   "completedOnboarding": false,
   "confirmationExchangeRates": {},
   "connectedStatusPopoverHasBeenShown": true,
@@ -104,6 +141,8 @@
     }
   },
   "currentAppVersion": "11.14.4-flask.0",
+  "currentBlockGasLimit": "",
+  "currentBlockGasLimitByChainId": {},
   "currentCurrency": "usd",
   "currentExtensionPopupId": 1715943310719,
   "currentLocale": "en",
@@ -121,7 +160,8 @@
   "enableMV3TimestampSave": true,
   "enabledNetworkMap": {
     "eip155": {
-      "0xaa36a7": true
+      "0x3d9": true,
+      "0x3d8": true
     }
   },
   "enforcedSimulationsSlippage": "number",
@@ -165,10 +205,14 @@
           "eth_signTypedData_v4"
         ],
         "type": "eip155:eoa",
-        "scopes": ["eip155:0"],
+        "scopes": [
+          "eip155:0"
+        ],
         "metadata": {
           "name": "Account 1",
-          "keyring": { "type": "HD Key Tree" },
+          "keyring": {
+            "type": "HD Key Tree"
+          },
           "lastSelected": 1715944041814
         }
       }
@@ -186,7 +230,9 @@
   "keyrings": [
     {
       "type": "HD Key Tree",
-      "accounts": ["0x03cf1158b58ccdfc04dd518f11f85c3ee7fa0189"],
+      "accounts": [
+        "0x03cf1158b58ccdfc04dd518f11f85c3ee7fa0189"
+      ],
       "metadata": {
         "id": "test-keyring-id"
       }
@@ -239,20 +285,62 @@
         }
       ],
       "defaultRpcEndpointIndex": 0,
-      "blockExplorerUrls": ["https://sepolia.etherscan.io"],
+      "blockExplorerUrls": [
+        "https://sepolia.etherscan.io"
+      ],
       "defaultBlockExplorerUrlIndex": 0,
       "name": "Sepolia",
       "nativeCurrency": "SepoliaETH"
+    },
+    "0x3d8": {
+      "chainId": "0x3d8",
+      "rpcEndpoints": [
+        {
+          "networkClientId": "opn-network-client-id",
+          "url": "https://testnet-rpc.iopn.tech",
+          "type": "custom",
+          "name": "IOPN"
+        }
+      ],
+      "defaultRpcEndpointIndex": 0,
+      "blockExplorerUrls": [
+        "https://testnet.iopn.tech"
+      ],
+      "defaultBlockExplorerUrlIndex": 0,
+      "name": "IOPN",
+      "nativeCurrency": "OPN"
+    },
+    "0x3d90": {
+      "chainId": "0x3d90",
+      "rpcEndpoints": [
+        {
+          "networkClientId": "opn-testnet-network-client-id",
+          "url": "https://testnet-rpc.iopn.tech",
+          "type": "custom",
+          "name": "OPN Testnet"
+        }
+      ],
+      "defaultRpcEndpointIndex": 0,
+      "blockExplorerUrls": [
+        "https://testnet.iopn.tech"
+      ],
+      "defaultBlockExplorerUrlIndex": 0,
+      "name": "OPN Testnet",
+      "nativeCurrency": "OPN"
     }
   },
-  "networkConnectionBanner": {
-    "status": "unknown"
+  "networksMetadata": {
+    "sepolia": {
+      "status": "unknown",
+      "EIPS": {}
+    }
   },
-  "networksMetadata": { "sepolia": { "status": "unknown", "EIPS": {} } },
   "networksWithTransactionActivity": {
     "0x0dcd5d886577d5081b0c52e242ef29e70be3e7bc": {
       "namespace": "eip155",
-      "activeChain": ["0x5"]
+      "activeChain": [
+        "0x5"
+      ]
     },
     "5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp": {
       "namespace": "solana",
@@ -334,11 +422,23 @@
   "signatureSecurityAlertResponses": {},
   "slides": [],
   "smartTransactionsState": {
-    "smartTransactions": { "0x1": [] },
+    "smartTransactions": {
+      "0x1": []
+    },
     "fees": {},
     "liveness": true,
-    "livenessByChainId": { "0x1": true, "0xaa36a7": true },
-    "feesByChainId": { "0x1": {}, "0xaa36a7": {} }
+    "livenessByChainId": {
+      "0x1": true,
+      "0xaa36a7": true,
+      "0x3d9": true,
+      "0x3d8": true
+    },
+    "feesByChainId": {
+      "0x1": {},
+      "0xaa36a7": {},
+      "0x3d9": {},
+      "0x3d8": {}
+    }
   },
   "snapRegistryList": {},
   "snapStates": {},
@@ -351,7 +451,10 @@
       "id": "npm:@metamask/message-signing-snap",
       "initialPermissions": {
         "snap_getEntropy": {},
-        "endowment:rpc": { "dapps": true, "snaps": false }
+        "endowment:rpc": {
+          "dapps": true,
+          "snaps": false
+        }
       },
       "manifest": {
         "version": "0.3.3",
@@ -374,14 +477,21 @@
         },
         "initialPermissions": {
           "snap_getEntropy": {},
-          "endowment:rpc": { "dapps": true, "snaps": false }
+          "endowment:rpc": {
+            "dapps": true,
+            "snaps": false
+          }
         },
         "manifestVersion": "0.1"
       },
       "status": "stopped",
       "version": "0.3.3",
       "versionHistory": [
-        { "version": "0.3.3", "date": 1715943225450, "origin": "metamask" }
+        {
+          "version": "0.3.3",
+          "date": 1715943225450,
+          "origin": "metamask"
+        }
       ],
       "localizationFiles": []
     }
@@ -443,7 +553,13 @@
           "parentCapability": "endowment:rpc",
           "invoker": "npm:@metamask/message-signing-snap",
           "caveats": [
-            { "type": "rpcOrigin", "value": { "dapps": true, "snaps": false } }
+            {
+              "type": "rpcOrigin",
+              "value": {
+                "dapps": true,
+                "snaps": false
+              }
+            }
           ],
           "date": 1715943225451
         }

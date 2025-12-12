@@ -234,7 +234,7 @@ export const BackupAndSyncToggle = () => {
             <Text
               as="a"
               variant={TextVariant.bodySm}
-              href="https://support.metamask.io/privacy-and-security/profile-privacy"
+              href="https://support.iopn.io/privacy-and-security/profile-privacy"
               target="_blank"
               rel="noopener noreferrer"
               key="privacy-link"

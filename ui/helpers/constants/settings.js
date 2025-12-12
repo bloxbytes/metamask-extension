@@ -240,13 +240,13 @@ const SETTINGS_CONSTANTS = [
     icon: 'fa fa-lock',
   },
   // securityAndPrivacy settingsRefs[6]
-  {
-    tabMessage: (t) => t('securityAndPrivacy'),
-    sectionMessage: (t) => t('participateInMetaMetrics'),
-    descriptionMessage: (t) => t('participateInMetaMetricsDescription'),
-    route: `${SECURITY_ROUTE}#metametrics`,
-    icon: 'fa fa-lock',
-  },
+  // {
+  //   tabMessage: (t) => t('securityAndPrivacy'),
+  //   sectionMessage: (t) => t('participateInMetaMetrics'),
+  //   descriptionMessage: (t) => t('participateInMetaMetricsDescription'),
+  //   route: `${SECURITY_ROUTE}#metametrics`,
+  //   icon: 'fa fa-lock',
+  // },
   // securityAndPrivacy settingsRefs[7]
   {
     tabMessage: (t) => t('securityAndPrivacy'),
@@ -354,21 +354,21 @@ const SETTINGS_CONSTANTS = [
     icon: 'fa fa-lock',
   },
   // securityAndPrivacy settingsRefs[20]
-  {
-    tabMessage: (t) => t('securityAndPrivacy'),
-    sectionMessage: (t) => t('dataCollectionForMarketing'),
-    descriptionMessage: (t) => t('dataCollectionForMarketingDescription'),
-    route: `${SECURITY_ROUTE}#dataCollectionForMarketing`,
-    icon: 'fa fa-lock',
-  },
+  // {
+  //   tabMessage: (t) => t('securityAndPrivacy'),
+  //   sectionMessage: (t) => t('dataCollectionForMarketing'),
+  //   descriptionMessage: (t) => t('dataCollectionForMarketingDescription'),
+  //   route: `${SECURITY_ROUTE}#dataCollectionForMarketing`,
+  //   icon: 'fa fa-lock',
+  // },
   // securityAndPrivacy settingsRefs[21]
-  {
-    tabMessage: (t) => t('securityAndPrivacy'),
-    sectionMessage: (t) => t('deleteMetaMetricsData'),
-    descriptionMessage: (t) => t('deleteMetaMetricsDataDescription'),
-    route: `${SECURITY_ROUTE}#delete-metametrics-data`,
-    icon: 'fa fa-lock',
-  },
+  // {
+  //   tabMessage: (t) => t('securityAndPrivacy'),
+  //   sectionMessage: (t) => t('deleteMetaMetricsData'),
+  //   descriptionMessage: (t) => t('deleteMetaMetricsDataDescription'),
+  //   route: `${SECURITY_ROUTE}#delete-metametrics-data`,
+  //   icon: 'fa fa-lock',
+  // },
   {
     tabMessage: (t) => t('networks'),
     sectionMessage: (t) => t('mainnet'),

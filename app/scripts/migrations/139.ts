@@ -58,6 +58,7 @@ const BUILT_IN_NETWORKS: ReadonlyMap<string, Hex> = new Map([
   ['mainnet', '0x1'],
   ['linea-sepolia', '0xe705'],
   ['linea-mainnet', '0xe708'],
+  ['opn-mainnet', '0x3d8'],
 ]);
 
 const snapsPrefixes = ['npm:', 'local:'] as const;

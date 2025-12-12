@@ -15,18 +15,18 @@ export const AUTO_DETECT_TOKEN_LEARN_MORE_LINK =
 export const CONSENSYS_TERMS_OF_USE = 'https://consensys.io/terms-of-use';
 
 export const SECURITY_ALERTS_LEARN_MORE_LINK =
-  'https://support.metamask.io/privacy-and-security/how-to-turn-on-security-alerts/';
+  'https://support.iopn.io/privacy-and-security/how-to-turn-on-security-alerts/';
 
 export const TRANSACTION_SIMULATIONS_LEARN_MORE_LINK =
-  'https://support.metamask.io/transactions-and-gas/transactions/simulations/';
+  'https://support.iopn.io/transactions-and-gas/transactions/simulations/';
 
 export const GAS_FEES_LEARN_MORE_URL =
-  'https://community.metamask.io/t/what-is-gas-why-do-transactions-take-so-long/3172';
+  'https://community.iopn.io/t/what-is-gas-why-do-transactions-take-so-long/3172';
 
 export const SMART_ACCOUNT_INFO_LINK =
-  'https://support.metamask.io/configure/accounts/what-is-a-smart-account';
+  'https://support.iopn.io/configure/accounts/what-is-a-smart-account';
 
-export const VAULT_RECOVERY_LINK = `https://support.metamask.io/configure/wallet/how-to-recover-your-secret-recovery-phrase/#step-two-locate-your-vault`;
+export const VAULT_RECOVERY_LINK = `https://support.iopn.io/configure/wallet/how-to-recover-your-secret-recovery-phrase/#step-two-locate-your-vault`;
 
 export const HYPERLIQUID_REFERRAL_LEARN_MORE_URL =
   'https://hyperliquid.gitbook.io/hyperliquid-docs/referrals';

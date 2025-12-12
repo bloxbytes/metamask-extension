@@ -1,5 +1,4 @@
 import { useCallback } from 'react';
-import { EthScope } from '@metamask/keyring-api';
 import { type MultichainNetworkConfiguration } from '@metamask/multichain-network-controller';
 import { type Hex } from '@metamask/utils';
 import { useDispatch, useSelector } from 'react-redux';
@@ -90,7 +89,8 @@ export const useNetworkItemCallbacks = () => {
       const isDeletable =
         isUnlocked &&
         network.chainId !== currentChainId &&
-        network.chainId !== EthScope.Mainnet;
+        network.chainId !== 'eip155:984' &&
+        network.chainId !== 'eip155:985';
 
       const modalProps = {
         onConfirm: () => undefined,

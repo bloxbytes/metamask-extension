@@ -127,7 +127,8 @@ export default class Mascot extends Component {
     // this is a bit hacky
     // the event emitter is on `this.props`
     // and we dont get that until render
-    this.handleAnimationEvents();
-    return <div ref={this.mascotContainer} style={{ zIndex: 0 }} />;
+    // this.handleAnimationEvents();
+    // return <div ref={this.mascotContainer} style={{ zIndex: 0 }} />;
+    return <img src="./images/logo/metamask-fox.svg" alt="OPN Wallet" />;
   }
 }

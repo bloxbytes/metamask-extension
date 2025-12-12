@@ -8,7 +8,7 @@ import {
   LINEA_MAINNET_DISPLAY_NAME,
   LINEA_SEPOLIA_DISPLAY_NAME,
   MAINNET_DISPLAY_NAME,
-  NETWORK_TO_NAME_MAP,
+  NETWORK_TO_NAME_MAP, OPN_DISPLAY_NAME,
   SEPOLIA_DISPLAY_NAME,
 } from '../../../shared/constants/network';
 
@@ -123,6 +123,15 @@ function transformState(
       nickname: LINEA_MAINNET_DISPLAY_NAME,
       rpcUrl: 'https://linea-mainnet.infura.io/v3/{infuraProjectId}',
       rpcPrefs: { blockExplorerUrl: 'https://lineascan.build' },
+    },
+    {
+      type: 'custom',
+      id: 'opn-network-client-id',
+      chainId: '0x3d8',
+      ticker: 'OPN',
+      nickname: OPN_DISPLAY_NAME,
+      rpcUrl: 'https://testnet-rpc.iopn.tech',
+      rpcPrefs: { blockExplorerUrl: 'https://testnet.iopn.tech' },
     },
     ...networkConfigurations,
   ];

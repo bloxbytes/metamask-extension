@@ -119,7 +119,12 @@ class SelectNetwork {
    * @param chainId - The chain ID of the network to delete.
    */
   async deleteNetwork(chainId: string): Promise<void> {
-    console.log(`Delete network ${chainId} from network list`);
+    console.log(`Delete
+    network
+    ${chainId}
+    from
+    network
+    list`);
     await this.openNetworkListOptions(chainId);
     await this.driver.clickElementAndWaitToDisappear(this.deleteNetworkButton);
     await this.driver.waitForSelector(this.confirmDeleteNetworkModal);

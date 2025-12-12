@@ -195,7 +195,7 @@ export default function TermsOfUsePopup({ onClose, onAccept }) {
             <Text variant={TextVariant.bodySm} marginBottom={4}>
               1.2 Offerings and Access. ConsenSys offers a number of products
               and services, each an “Offering”, under the ConsenSys brand or
-              brands owned by us. These include Codefi, Quorum, Infura, MetaMask
+              brands owned by us. These include Codefi, Quorum, Infura, OPN
               and others. Offerings are generally accessed through the Site or
               through a third party provider of which we approved, such as the
               Google Play or Apple App Store, unless otherwise agreed in
@@ -301,10 +301,10 @@ export default function TermsOfUsePopup({ onClose, onAccept }) {
               and subcontractors performing work on your behalf.
             </Text>
             <Text variant={TextVariant.bodySm} marginBottom={4}>
-              3.5 Applicability to MetaMask Offerings. For the avoidance of
+              3.5 Applicability to OPN Offerings. For the avoidance of
               doubt, the terms of this Section 3 are applicable to all
-              Offerings, including MetaMask and any accounts you create through
-              MetaMask with Third Party Offerings, such as decentralized
+              Offerings, including OPN and any accounts you create through
+              OPN with Third Party Offerings, such as decentralized
               applications, or blockchain-based accounts themselves.
             </Text>
             <Text variant={TextVariant.bodyLgMedium} marginBottom={4}>
@@ -1151,8 +1151,8 @@ export default function TermsOfUsePopup({ onClose, onAccept }) {
             </Text>
             <Text variant={TextVariant.bodySm} marginBottom={4}>
               “Offerings” means each of the products and services, including but
-              not limited to Codefi, Infura, MetaMask, Quorum and any other
-              features, tools, materials, or services offered from time to time,
+              not limited to Codefi, Infura, OPN, Quorum and any other
+              materials, or services offered from time to time, by us or by us
               by us or our affiliates.&nbsp;
             </Text>
             <Text variant={TextVariant.bodySm} marginBottom={4}>

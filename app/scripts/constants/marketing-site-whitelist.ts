@@ -1,9 +1,9 @@
 export const COOKIE_ID_MARKETING_WHITELIST = [
-  'https://metamask.io',
-  'https://learn.metamask.io',
-  'https://mmi-support.zendesk.com',
-  'https://community.metamask.io',
-  'https://support.metamask.io',
+  'https://iopn.io',
+  'https://learn.iopn.io',
+  'https://iopn.zendesk.com',
+  'https://community.iopn.io',
+  'https://support.iopn.io',
 ];
 
 if (process.env.IN_TEST) {

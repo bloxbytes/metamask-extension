@@ -6,7 +6,7 @@ import {
   ONBOARDING_CREATE_PASSWORD_ROUTE,
   ONBOARDING_DOWNLOAD_APP_ROUTE,
   ONBOARDING_IMPORT_WITH_SRP_ROUTE,
-  ONBOARDING_METAMETRICS,
+  // ONBOARDING_METAMETRICS,
   ONBOARDING_REVIEW_SRP_ROUTE,
 } from '../helpers/constants/routes';
 
@@ -43,7 +43,8 @@ export function getFirstTimeFlowTypeRouteAfterUnlock(state) {
   } else if (firstTimeFlowType === FirstTimeFlowType.import) {
     return ONBOARDING_IMPORT_WITH_SRP_ROUTE;
   } else if (firstTimeFlowType === FirstTimeFlowType.restore) {
-    return ONBOARDING_METAMETRICS;
+    // return ONBOARDING_METAMETRICS;
+    return ONBOARDING_COMPLETION_ROUTE;
   } else if (firstTimeFlowType === FirstTimeFlowType.socialCreate) {
     return ONBOARDING_DOWNLOAD_APP_ROUTE;
   }

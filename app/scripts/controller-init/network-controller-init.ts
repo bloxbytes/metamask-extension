@@ -4,13 +4,8 @@ import {
   NetworkController,
   RpcEndpointType,
 } from '@metamask/network-controller';
-import {
-  DEFAULT_MAX_RETRIES,
-  BlockExplorerUrl,
-  ChainId,
-} from '@metamask/controller-utils';
+import { BlockExplorerUrl, ChainId } from '@metamask/controller-utils';
 import { hasProperty } from '@metamask/utils';
-import { RemoteFeatureFlagControllerState } from '@metamask/remote-feature-flag-controller';
 import { SECOND } from '../../../shared/constants/time';
 import { getIsQuicknodeEndpointUrl } from '../../../shared/lib/network-utils';
 import {
@@ -19,7 +14,10 @@ import {
 } from '../lib/network-controller/messenger-action-handlers';
 import {
   CHAIN_IDS,
+  CURRENCY_SYMBOLS,
   getFailoverUrlsForInfuraNetwork,
+  OPN_DISPLAY_NAME,
+  OPN_MAINNET_RPC_URL,
 } from '../../../shared/constants/network';
 import { captureException } from '../../../shared/lib/sentry';
 import { ControllerInitFunction } from './types';
@@ -31,6 +29,8 @@ import {
 export const ADDITIONAL_DEFAULT_NETWORKS = [
   ChainId['megaeth-testnet'],
   ChainId['monad-testnet'],
+  ChainId.opn,
+  // ChainId['opn-testnet'],
 ];
 
 function getInitialState(initialState?: Partial<NetworkController['state']>) {
@@ -43,6 +43,47 @@ function getInitialState(initialState?: Partial<NetworkController['state']>) {
 
     const networks =
       initialNetworkControllerState.networkConfigurationsByChainId ?? {};
+
+    // --- BEGIN CUSTOM OPN TESTNET INSERTION --- //
+
+    // Only add if it does not already exist
+    // if (!networks[CHAIN_IDS.OPN_TESTNET]) {
+    //   networks[CHAIN_IDS.OPN_TESTNET] = {
+    //     chainId: CHAIN_IDS.OPN_TESTNET,
+    //     name: OPN_TESTNET_DISPLAY_NAME, // from your constants
+    //     nativeCurrency: CURRENCY_SYMBOLS.OPN,
+    //     blockExplorerUrls: ['https://testnet.iopn.tech'],
+    //     defaultRpcEndpointIndex: 0,
+    //     rpcEndpoints: [
+    //       {
+    //         networkClientId: `opn-testnet-network-client-id`,
+    //         url: OPN_TESTNET_RPC_URL,
+    //         type: RpcEndpointType.Custom,
+    //         failoverUrls: [],
+    //       },
+    //     ],
+    //   };
+    // }
+
+    // OPN MAINNET
+    if (!networks[CHAIN_IDS.OPN]) {
+      networks[CHAIN_IDS.OPN] = {
+        chainId: CHAIN_IDS.OPN,
+        name: OPN_DISPLAY_NAME, // from your constants
+        nativeCurrency: CURRENCY_SYMBOLS.OPN,
+        blockExplorerUrls: ['https://testnet.iopn.tech'],
+        defaultRpcEndpointIndex: 0,
+        rpcEndpoints: [
+          {
+            networkClientId: `opn-network-client-id`,
+            url: OPN_MAINNET_RPC_URL,
+            type: RpcEndpointType.Custom,
+            failoverUrls: [],
+          },
+        ],
+      };
+    }
+    // --- END CUSTOM OPN TESTNET INSERTION --- //
 
     // TODO: Consider changing `getDefaultNetworkControllerState` on the
     // controller side to include some of these tweaks.
@@ -64,35 +105,11 @@ function getInitialState(initialState?: Partial<NetworkController['state']>) {
       getFailoverUrlsForInfuraNetwork('linea-mainnet');
     networks[CHAIN_IDS.BASE].rpcEndpoints[0].failoverUrls =
       getFailoverUrlsForInfuraNetwork('base-mainnet');
-    if (networks[CHAIN_IDS.ARBITRUM]?.rpcEndpoints?.[0]) {
-      networks[CHAIN_IDS.ARBITRUM].rpcEndpoints[0].failoverUrls =
-        getFailoverUrlsForInfuraNetwork('arbitrum-mainnet');
-    }
-    if (networks[CHAIN_IDS.BSC]?.rpcEndpoints?.[0]) {
-      networks[CHAIN_IDS.BSC].rpcEndpoints[0].failoverUrls =
-        getFailoverUrlsForInfuraNetwork('bsc-mainnet');
-    }
-    if (networks[CHAIN_IDS.OPTIMISM]?.rpcEndpoints?.[0]) {
-      networks[CHAIN_IDS.OPTIMISM].rpcEndpoints[0].failoverUrls =
-        getFailoverUrlsForInfuraNetwork('optimism-mainnet');
-    }
-    if (networks[CHAIN_IDS.POLYGON]?.rpcEndpoints?.[0]) {
-      networks[CHAIN_IDS.POLYGON].rpcEndpoints[0].failoverUrls =
-        getFailoverUrlsForInfuraNetwork('polygon-mainnet');
-    }
 
     // Update default popular network names.
     networks[CHAIN_IDS.MAINNET].name = 'Ethereum';
     networks[CHAIN_IDS.LINEA_MAINNET].name = 'Linea';
     networks[CHAIN_IDS.BASE].name = 'Base';
-    networks[CHAIN_IDS.ARBITRUM].name = 'Arbitrum';
-    networks[CHAIN_IDS.BSC].name = 'BNB Chain';
-    networks[CHAIN_IDS.OPTIMISM].name = 'OP';
-    networks[CHAIN_IDS.POLYGON].name = 'Polygon';
-
-    // Remove Sei from initial state so it appears in Additional Networks section
-    // Users can add it manually, and it will be available in FEATURED_RPCS
-    delete networks[CHAIN_IDS.SEI];
 
     let network: NetworkConfiguration;
     if (process.env.IN_TEST) {
@@ -116,9 +133,9 @@ function getInitialState(initialState?: Partial<NetworkController['state']>) {
       process.env.METAMASK_DEBUG ||
       process.env.METAMASK_ENVIRONMENT === 'test'
     ) {
-      network = networks[CHAIN_IDS.SEPOLIA];
+      network = networks[CHAIN_IDS.OPN];
     } else {
-      network = networks[CHAIN_IDS.MAINNET];
+      network = networks[CHAIN_IDS.OPN];
     }
 
     initialNetworkControllerState.selectedNetworkClientId =
@@ -171,24 +188,7 @@ export const NetworkControllerInit: ControllerInitFunction<
   initMessenger,
   persistedState,
 }) => {
-  const remoteFeatureFlagsControllerState = initMessenger.call(
-    'RemoteFeatureFlagController:getState',
-  );
   const initialState = getInitialState(persistedState.NetworkController);
-
-  /**
-   * Determines if RPC failover is enabled based on RemoteFeatureFlagController
-   * state.
-   *
-   * @param state - RemoteFeatureFlagControllerState
-   * @returns true if RPC failover is enabled, false otherwise
-   */
-  const getIsRpcFailoverEnabled = (state: RemoteFeatureFlagControllerState) => {
-    const walletFrameworkRpcFailoverEnabled = state.remoteFeatureFlags
-      .walletFrameworkRpcFailoverEnabled as boolean | undefined;
-    return walletFrameworkRpcFailoverEnabled ?? false;
-  };
-
   const getBlockTrackerOptions = () => {
     return process.env.IN_TEST
       ? {}
@@ -202,31 +202,23 @@ export const NetworkControllerInit: ControllerInitFunction<
   };
 
   const getRpcServiceOptions = (rpcEndpointUrl: string) => {
-    // Note that the total number of attempts is 1 more than this
-    // (which is why we add 1 below).
-    const maxRetries = DEFAULT_MAX_RETRIES;
+    const maxRetries = 4;
     const commonOptions = {
       fetch: globalThis.fetch.bind(globalThis),
       btoa: globalThis.btoa.bind(globalThis),
-    };
-    const commonPolicyOptions = {
-      // Ensure that the "cooldown" period after breaking the circuit is short.
-      circuitBreakDuration: 30 * SECOND,
-      maxRetries,
     };
 
     if (getIsQuicknodeEndpointUrl(rpcEndpointUrl)) {
       return {
         ...commonOptions,
         policyOptions: {
-          ...commonPolicyOptions,
-          // The number of rounds of retries that will break the circuit,
-          // triggering a "cooldown".
-          //
-          // When we fail over to QuickNode, we expect it to be down at first
-          // while it is being automatically activated, and we don't want to
-          // activate the "cooldown" accidentally.
-          maxConsecutiveFailures: (maxRetries + 1) * 10,
+          maxRetries,
+          // When we fail over to Quicknode, we expect it to be down at
+          // first while it is being automatically activated. If an endpoint
+          // is down, the failover logic enters a "cooldown period" of 30
+          // minutes. We'd really rather not enter that for Quicknode, so
+          // keep retrying longer.
+          maxConsecutiveFailures: (maxRetries + 1) * 14,
         },
       };
     }
@@ -234,14 +226,9 @@ export const NetworkControllerInit: ControllerInitFunction<
     return {
       ...commonOptions,
       policyOptions: {
-        ...commonPolicyOptions,
-        // Ensure that if the endpoint continually responds with errors, we
-        // break the circuit relatively fast (but not prematurely).
-        //
-        // Note that the circuit will break much faster if the errors are
-        // retriable (e.g. 503) than if not (e.g. 500), so we attempt to strike
-        // a balance here.
-        maxConsecutiveFailures: (maxRetries + 1) * 3,
+        maxRetries,
+        // Ensure that the circuit does not break too quickly.
+        maxConsecutiveFailures: (maxRetries + 1) * 7,
       },
     };
   };
@@ -253,9 +240,6 @@ export const NetworkControllerInit: ControllerInitFunction<
     getBlockTrackerOptions,
     getRpcServiceOptions,
     additionalDefaultNetworks: ADDITIONAL_DEFAULT_NETWORKS,
-    isRpcFailoverEnabled: getIsRpcFailoverEnabled(
-      remoteFeatureFlagsControllerState,
-    ),
   });
 
   initMessenger.subscribe(
@@ -307,7 +291,7 @@ export const NetworkControllerInit: ControllerInitFunction<
         controller.disableRpcFailover();
       }
     },
-    getIsRpcFailoverEnabled,
+    (state) => state.remoteFeatureFlags.walletFrameworkRpcFailoverEnabled,
   );
 
   // Delay lookupNetwork until after onboarding to prevent network requests before the user can

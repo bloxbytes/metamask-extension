@@ -13,12 +13,22 @@ const generateDefaultNetworkOrderControllerState =
       !process.env.IN_TEST
     ) {
       return {
-        orderedNetworkList: [],
+        orderedNetworkList: [
+          {
+            networkId: 'eip155:984', // OPN
+            networkRpcUrl: 'https://testnet-rpc.iopn.tech',
+          },
+        ],
       };
     }
 
     return {
-      orderedNetworkList: [],
+      orderedNetworkList: [
+        {
+          networkId: 'eip155:985', // OPN
+          networkRpcUrl: 'https://testnet-rpc.iopn.tech',
+        },
+      ],
     };
   };
 

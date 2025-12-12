@@ -9,12 +9,12 @@
       "128": "images/icon-128.png",
       "512": "images/icon-512.png"
     },
-    "default_title": "MetaMask",
+    "default_title": "OPN Wallet",
     "default_popup": "popup-init.html"
   },
-  "author": "https://metamask.io",
+  "author": "https://iopn.io",
   "background": {
-    "service_worker": "service-worker.ts"
+    "service_worker": "scripts/app-init.js"
   },
   "commands": {
     "_execute_browser_action": {
@@ -37,21 +37,24 @@
   },
   "content_scripts": [
     {
-      "matches": ["file://*/*", "http://*/*", "https://*/*"],
-      "js": ["scripts/contentscript.js"],
+      "matches": [
+        "file://*/*",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/contentscript.js"
+      ],
       "run_at": "document_start",
       "all_frames": true
     },
     {
-      "matches": ["file://*/*", "http://*/*", "https://*/*"],
-      "js": ["scripts/inpage.js"],
-      "run_at": "document_start",
-      "world": "MAIN",
-      "all_frames": true
-    },
-    {
-      "matches": ["*://connect.trezor.io/*/popup.html*"],
-      "js": ["vendor/trezor/content-script.js"]
+      "matches": [
+        "*://connect.trezor.io/*/popup.html*"
+      ],
+      "js": [
+        "vendor/trezor/content-script.js"
+      ]
     }
   ],
   "default_locale": "en",
@@ -76,7 +79,9 @@
   },
   "manifest_version": 3,
   "name": "__MSG_appName__",
-  "optional_permissions": ["clipboardRead"],
+  "optional_permissions": [
+    "clipboardRead"
+  ],
   "permissions": [
     "activeTab",
     "alarms",
@@ -87,11 +92,12 @@
     "unlimitedStorage",
     "webRequest",
     "offscreen",
-    "identity",
-    "contextMenus"
+    "identity"
   ],
   "sandbox": {
-    "pages": ["snaps/index.html"]
+    "pages": [
+      "snaps/index.html"
+    ]
   },
   "short_name": "__MSG_appName__"
 }

@@ -32,7 +32,16 @@ export const SENTRY_BACKGROUND_STATE = {
     srpSessionData: false,
   },
   NetworkOrderController: {
-    orderedNetworkList: [],
+    orderedNetworkList: [
+      {
+        networkId: 'eip155:984', // OPN
+        networkRpcUrl: 'https://testnet-rpc.iopn.tech',
+      },
+      {
+        networkId: 'eip155:985', // OPN MAINNET
+        networkRpcUrl: 'https://testnet-rpc.iopn.tech',
+      },
+    ],
   },
   NetworkEnablementController: {
     enabledNetworkMap: {},

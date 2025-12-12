@@ -268,7 +268,7 @@ export default function PrivacySettings() {
                 {t('defaultSettingsSubTitle')}
               </Text>
               <a
-                href="https://support.metamask.io/privacy-and-security/privacy-best-practices"
+                href="https://support.iopn.io/privacy-and-security/privacy-best-practices"
                 target="_blank"
                 rel="noreferrer"
                 key="learnMoreAboutPrivacy"

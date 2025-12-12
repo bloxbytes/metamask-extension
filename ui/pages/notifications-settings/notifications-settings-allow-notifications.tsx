@@ -144,7 +144,7 @@ export function NotificationsSettingsAllowNotifications({
     () => (
       <Text
         as="a"
-        href="https://support.metamask.io/privacy-and-security/profile-privacy"
+        href="https://iopn.io/privacy-and-security/profile-privacy"
         target="_blank"
         rel="noopener noreferrer"
         key="privacy-link"

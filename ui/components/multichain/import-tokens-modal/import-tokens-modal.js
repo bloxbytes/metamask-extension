@@ -2,42 +2,41 @@ import React, {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useRef,
   useState,
-  useMemo,
 } from 'react';
-import {
-  formatChainIdToHex,
-  formatChainIdToCaip,
-  isNonEvmChainId,
-} from '@metamask/bridge-controller';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom-v5-compat';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getTokenTrackerLink } from '@metamask/etherscan-link/dist/token-tracker-link';
 import { CHAIN_IDS } from '@metamask/transaction-controller';
-import { NON_EVM_TESTNET_IDS } from '@metamask/multichain-network-controller';
 import { Tab, Tabs } from '../../ui/tabs';
 import { useI18nContext } from '../../../hooks/useI18nContext';
 import {
-  getAllNetworkConfigurationsByCaipChainId,
   getCurrentChainId,
+  getIsAllNetworksFilterEnabled,
   getNetworkConfigurationsByChainId,
 } from '../../../../shared/modules/selectors/networks';
 import {
   getInternalAccounts,
+  getIsDynamicTokenListAvailable,
+  getIsTokenDetectionInactiveOnMainnet,
+  getIsTokenDetectionSupported,
+  getIstokenDetectionInactiveOnNonMainnetSupportedNetwork,
   getSelectedInternalAccount,
   getTokenDetectionSupportNetworkByChainId,
+  getCurrentNetwork,
   getTestNetworkBackgroundColor,
   getTokenExchangeRates,
   getPendingTokens,
+  selectERC20TokensByChain,
   getTokenNetworkFilter,
   getAllTokens,
   getEnabledNetworksByNamespace,
 } from '../../../selectors';
 import {
   addImportedTokens,
-  multichainAddAssets,
   clearPendingTokens,
   setPendingTokens,
   showImportNftsModal,
@@ -61,15 +60,18 @@ import {
   IconName,
   ModalBody,
   AvatarNetworkSize,
+  AvatarNetwork,
 } from '../../component-library';
 import { FormTextField } from '../../component-library/form-text-field/deprecated';
 import TokenSearch from '../../app/import-token/token-search';
 import TokenList from '../../app/import-token/token-list';
 
 import {
+  AlignItems,
   BlockSize,
   Display,
   FlexDirection,
+  JustifyContent,
   Severity,
   Size,
   TextAlign,
@@ -107,16 +109,14 @@ import {
   MetaMetricsEventName,
   MetaMetricsTokenEventSource,
 } from '../../../../shared/constants/metametrics';
-import { isEvmChainId, toAssetId } from '../../../../shared/lib/asset-utils';
+import { NetworkFilterImportToken } from '../../app/import-token/network-filter-import-token';
+import { FEATURED_NETWORK_CHAIN_IDS } from '../../../../shared/constants/network';
 import { NetworkSelectorCustomImport } from '../../app/import-token/network-selector-custom-import';
 import { getImageForChainId } from '../../../selectors/multichain';
-import { getSelectedMultichainNetworkChainId } from '../../../selectors/multichain/networks';
-import { getInternalAccountBySelectedAccountGroupAndCaip } from '../../../selectors/multichain-accounts/account-tree';
 import { NetworkListItem } from '../network-list-item';
 import TokenListPlaceholder from '../../app/import-token/token-list/token-list-placeholder';
 import { endTrace, trace, TraceName } from '../../../../shared/lib/trace';
 import { isGlobalNetworkSelectorRemoved } from '../../../selectors/selectors';
-import { useTokensWithFiltering } from '../../../hooks/bridge/useTokensWithFiltering';
 import { ImportTokensModalConfirm } from './import-tokens-modal-confirm';
 
 const ACTION_MODES = {
@@ -124,6 +124,8 @@ const ACTION_MODES = {
   IMPORT_TOKEN: 'IMPORT_TOKEN',
   // Displays the page for selecting a network from custom import
   NETWORK_SELECTOR: 'NETWORK_SELECTOR',
+  // Displays the page for selecting a network from a search
+  SEARCH_NETWORK_SELECTOR: 'SEARCH_NETWORK_SELECTOR',
 };
 
 const TAB_NAMES = {
@@ -133,7 +135,7 @@ const TAB_NAMES = {
 
 export const ImportTokensModal = ({ onClose }) => {
   const t = useI18nContext();
-  const navigate = useNavigate();
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const [mode, setMode] = useState('');
@@ -141,117 +143,85 @@ export const ImportTokensModal = ({ onClose }) => {
   const [tokenSelectorError, setTokenSelectorError] = useState(null);
   const [selectedTokens, setSelectedTokens] = useState({});
   const [searchResults, setSearchResults] = useState([]);
+  // const networkClientId = useSelector(getSelectedNetworkClientId);
+  const currentNetwork = useSelector(getCurrentNetwork);
+  const [selectedNetworkForCustomImport, setSelectedNetworkForCustomImport] =
+    useState(null);
 
-  const chainId = useSelector(getCurrentChainId);
-  const currentMultichainChainId = useSelector(
-    getSelectedMultichainNetworkChainId,
+  const [defaultActiveTabKey, setDefaultActiveTabKey] = useState(
+    TAB_NAMES.SEARCH,
   );
 
-  const [selectedNetwork, setSelectedNetwork] = useState(chainId);
+  const allNetworks = useSelector(getNetworkConfigurationsByChainId);
+  const PRIORITY_CHAIN_IDS = ['0x3d9', '0x3d8']; // put your favorites here
+  const sortedNetworks = useMemo(() => {
+    return Object.entries(allNetworks)
+      .sort(([chainIdA], [chainIdB]) => {
+        const indexA = PRIORITY_CHAIN_IDS.indexOf(chainIdA);
+        const indexB = PRIORITY_CHAIN_IDS.indexOf(chainIdB);
 
-  const allNetworkConfigurations = useSelector(
-    getAllNetworkConfigurationsByCaipChainId,
-  );
-
-  const allNetworks = useMemo(() => {
-    return Object.fromEntries(
-      Object.entries(allNetworkConfigurations).filter(
-        ([key]) => !NON_EVM_TESTNET_IDS.includes(key),
-      ),
-    );
-  }, [allNetworkConfigurations]);
+        // If both are priority → sort by their position
+        if (indexA !== -1 && indexB !== -1) {
+          return indexA - indexB;
+        }
+        // If only A is priority → A first
+        if (indexA !== -1) {
+          return -1;
+        }
+        // If only B is priority → B first
+        if (indexB !== -1) {
+          return 1;
+        }
+        // Neither → keep original order (or sort by name if you want)
+        return 0;
+      })
+      .map(([chainId, config]) => ({ chainId, ...config }));
+  }, [allNetworks]);
 
   // Tracks which page the user is on
-  const [actionMode, setActionMode] = useState(ACTION_MODES.IMPORT_TOKEN);
+  const [actionMode, setActionMode] = useState(ACTION_MODES.CUSTOM_IMPORT);
 
   const tokenNetworkFilter = useSelector(getTokenNetworkFilter);
   const enabledNetworksByNamespace = useSelector(getEnabledNetworksByNamespace);
-  const networkConfigurations = useSelector(getNetworkConfigurationsByChainId);
-
   const [networkFilter, setNetworkFilter] = useState(
     isGlobalNetworkSelectorRemoved
       ? enabledNetworksByNamespace
       : tokenNetworkFilter,
   );
 
-  // Initialize selected network with current multichain network, handling both EVM and non-EVM
-  useEffect(() => {
-    if (!selectedNetwork || selectedNetwork === chainId) {
-      // Initialize or update with the current multichain network
-      if (currentMultichainChainId) {
-        if (isEvmChainId(currentMultichainChainId)) {
-          // For EVM networks, convert from CAIP format to hex
-          const hexChainId = formatChainIdToHex(currentMultichainChainId);
-          setSelectedNetwork(hexChainId);
-        } else {
-          // For non-EVM networks, use the chain ID directly
-          setSelectedNetwork(currentMultichainChainId);
-        }
-      } else if (!selectedNetwork) {
-        // Fallback to default EVM chain if no multichain network selected
-        setSelectedNetwork(chainId);
-      }
-    }
-  }, [currentMultichainChainId, chainId]); // This should not be executed when selectedNetwork changes
+  // Determine if we should show the search tab
+  const isTokenDetectionSupported = useSelector(getIsTokenDetectionSupported);
+  const isTokenDetectionInactiveOnMainnet = useSelector(
+    getIsTokenDetectionInactiveOnMainnet,
+  );
+  const showSearchTab =
+    isTokenDetectionSupported ||
+    isTokenDetectionInactiveOnMainnet ||
+    Boolean(process.env.IN_TEST);
+
+  const tokenListByChain = useSelector(selectERC20TokensByChain);
 
   const useTokenDetection = useSelector(
     ({ metamask }) => metamask.useTokenDetection,
   );
-
   const networkName = useSelector(getTokenDetectionSupportNetworkByChainId);
   const nativeCurrency = useSelector(getNativeCurrency);
 
+  // Custom token stuff
+  const tokenDetectionInactiveOnNonMainnetSupportedNetwork = useSelector(
+    getIstokenDetectionInactiveOnNonMainnetSupportedNetwork,
+  );
+  const isDynamicTokenListAvailable = useSelector(
+    getIsDynamicTokenListAvailable,
+  );
   const selectedAccount = useSelector(getSelectedInternalAccount);
   const accounts = useSelector(getInternalAccounts);
+  const chainId = useSelector(getCurrentChainId);
   const allTokens = useSelector(getAllTokens);
   const tokens = allTokens?.[chainId]?.[selectedAccount.address] || [];
   const contractExchangeRates = useSelector(getTokenExchangeRates);
-
-  // Use the new useTokensWithFiltering hook for getting token data
-  const { filteredTokenListGenerator, isLoading } = useTokensWithFiltering(
-    selectedNetwork,
-    null,
-    selectedAccount?.address,
-  );
-
-  const shouldAddToken = useCallback(
-    (_symbol, _address, tokenChainId) => {
-      if (!tokenChainId || !selectedNetwork) {
-        return false;
-      }
-
-      return tokenChainId === selectedNetwork;
-    },
-    [selectedNetwork],
-  );
-
-  // Convert generator to token list for compatibility with existing components
-  const tokenListByChain = useMemo(() => {
-    if (!filteredTokenListGenerator) {
-      return {};
-    }
-
-    const tokenData = {};
-    for (const token of filteredTokenListGenerator(shouldAddToken)) {
-      if (token.address) {
-        tokenData[token.address.toLowerCase()] = {
-          address: token.address,
-          symbol: token.symbol,
-          name: token.name,
-          decimals: token.decimals,
-          iconUrl: token.image,
-          aggregators: token.aggregators,
-          occurrences: token.occurrences,
-        };
-      }
-    }
-
-    return {
-      [selectedNetwork]: {
-        data: tokenData,
-      },
-    };
-  }, [filteredTokenListGenerator, selectedNetwork, shouldAddToken]);
+  const networkConfigurations = useSelector(getNetworkConfigurationsByChainId);
+  const allOpts = useSelector(getIsAllNetworksFilterEnabled);
 
   const [customAddress, setCustomAddress] = useState('');
   const [customAddressError, setCustomAddressError] = useState(null);
@@ -268,13 +238,14 @@ export const ImportTokensModal = ({ onClose }) => {
   const [showSymbolAndDecimals, setShowSymbolAndDecimals] = useState(false);
 
   const blockExplorerUrl =
-    networkConfigurations[selectedNetwork]?.blockExplorerUrls?.[
-      networkConfigurations[selectedNetwork]?.defaultBlockExplorerUrlIndex
+    networkConfigurations[selectedNetworkForCustomImport]?.blockExplorerUrls?.[
+      networkConfigurations[selectedNetworkForCustomImport]
+        ?.defaultBlockExplorerUrlIndex
     ] ?? null;
 
   const blockExplorerTokenLink = getTokenTrackerLink(
     customAddress,
-    selectedNetwork,
+    selectedNetworkForCustomImport,
     null,
     null,
     { blockExplorerUrl },
@@ -295,73 +266,30 @@ export const ImportTokensModal = ({ onClose }) => {
   const trackEvent = useContext(MetaMetricsContext);
   const pendingTokens = useSelector(getPendingTokens);
 
-  // Get accounts for non-EVM chains using the account tree selector
-  const getAccountForChain = useSelector((state) => {
-    return (caipChainId) =>
-      getInternalAccountBySelectedAccountGroupAndCaip(state, caipChainId);
-  });
-
   const handleAddTokens = useCallback(async () => {
     try {
       const addedTokenValues = Object.values(pendingTokens);
 
-      if (addedTokenValues.length === 0) {
-        return;
-      }
-
-      // All tokens should be from the same chain since UI clears selection on network change
-      const { chainId: tokenChainId } = addedTokenValues[0];
-      const isNonEvm = isNonEvmChainId(tokenChainId);
-
-      if (isNonEvm) {
-        // Handle non-EVM tokens
-        const accountForChain = getAccountForChain(tokenChainId);
-
-        if (!accountForChain) {
-          console.warn(`No account found for chain ${tokenChainId}`);
-          return;
+      const addedTokensByChain = addedTokenValues.reduce((groups, token) => {
+        if (!groups[token.chainId]) {
+          groups[token.chainId] = [];
         }
+        groups[token.chainId].push(token);
+        return groups;
+      }, {});
 
-        // Convert all tokens to CAIP asset format
-        const assetIds = addedTokenValues
-          .map((token) => {
-            // Convert address to CAIP asset format
-            const assetId =
-              token.assetId || toAssetId(token.address, tokenChainId);
-
-            if (!assetId) {
-              console.warn(
-                `Failed to create assetId for token ${token.address} on chain ${tokenChainId}`,
-              );
-              return null;
-            }
-
-            return assetId;
-          })
-          .filter((assetId) => assetId !== null); // Remove any failed conversions
-
-        if (assetIds.length > 0) {
-          await dispatch(multichainAddAssets(assetIds, accountForChain.id));
-        }
-      } else {
-        // Handle EVM tokens - use existing batch import
-        const networkConfig = networkConfigurations[tokenChainId];
-        if (!networkConfig) {
-          console.warn(`No network config found for chain ${tokenChainId}`);
-          return;
-        }
-
-        const clientId =
-          networkConfig.rpcEndpoints[networkConfig.defaultRpcEndpointIndex]
-            ?.networkClientId;
-
-        if (!clientId) {
-          console.warn(`No network client ID found for chain ${tokenChainId}`);
-          return;
-        }
-
-        await dispatch(addImportedTokens(addedTokenValues, clientId));
-      }
+      const promiseAllImport = Object.keys(addedTokensByChain).map(
+        (networkId) => {
+          const clientId =
+            networkConfigurations[networkId]?.rpcEndpoints[
+              networkConfigurations[networkId]?.defaultRpcEndpointIndex
+            ]?.networkClientId;
+          return dispatch(
+            addImportedTokens(addedTokensByChain[networkId], clientId),
+          );
+        },
+      );
+      await Promise.all(promiseAllImport);
 
       addedTokenValues.forEach((pendingToken) => {
         trackEvent({
@@ -375,7 +303,7 @@ export const ImportTokensModal = ({ onClose }) => {
             source_connection_method: pendingToken.isCustom
               ? MetaMetricsTokenEventSource.Custom
               : MetaMetricsTokenEventSource.List,
-            token_standard: isNonEvm ? TokenStandard.none : TokenStandard.ERC20,
+            token_standard: TokenStandard.ERC20,
             asset_type: AssetType.token,
           },
         });
@@ -390,20 +318,13 @@ export const ImportTokensModal = ({ onClose }) => {
       dispatch(setNewTokensImported(tokenSymbols.join(', ')));
       dispatch(clearPendingTokens());
       dispatch(hideImportTokensModal());
-      navigate(DEFAULT_ROUTE);
+      history.push(DEFAULT_ROUTE);
     } catch (err) {
       dispatch(setNewTokensImportedError('error'));
       dispatch(clearPendingTokens());
-      navigate(DEFAULT_ROUTE);
+      history.push(DEFAULT_ROUTE);
     }
-  }, [
-    dispatch,
-    navigate,
-    pendingTokens,
-    trackEvent,
-    networkConfigurations,
-    getAccountForChain,
-  ]);
+  }, [dispatch, history, pendingTokens, trackEvent]);
 
   useEffect(() => {
     const pendingTokenKeys = Object.keys(pendingTokens);
@@ -423,7 +344,7 @@ export const ImportTokensModal = ({ onClose }) => {
         initialCustomToken = { ...token };
       } else {
         initialSelectedTokens = {
-          ...initialSelectedTokens,
+          ...selectedTokens,
           [tokenAddress]: { ...token },
         };
       }
@@ -436,71 +357,51 @@ export const ImportTokensModal = ({ onClose }) => {
   }, [pendingTokens]);
 
   useEffect(() => {
-    if (selectedNetwork) {
-      // For non-EVM networks, check allNetworks first (they use CAIP chain IDs)
-      // For EVM networks, check networkConfigurations (they use hex chain IDs)
-      const networkConfig =
-        allNetworks[selectedNetwork] || networkConfigurations[selectedNetwork];
-      if (networkConfig) {
-        setNetworkFilter({
-          [selectedNetwork]: networkConfig,
-        });
-      }
-    }
-  }, [selectedNetwork, networkConfigurations, allNetworks]);
-
-  useEffect(() => {
     setSelectedTokens({});
   }, [networkFilter]);
 
-  const handleCustomSymbolChange = useCallback(
-    (value) => {
-      const symbol = value.trim();
-      const symbolLength = symbol.length;
-      let symbolError = null;
+  const handleCustomSymbolChange = (value) => {
+    const symbol = value.trim();
+    const symbolLength = symbol.length;
+    let symbolError = null;
 
-      if (symbolLength <= 0 || symbolLength >= 12) {
-        symbolError = t('symbolBetweenZeroTwelve');
-      }
+    if (symbolLength <= 0 || symbolLength >= 12) {
+      symbolError = t('symbolBetweenZeroTwelve');
+    }
 
-      setCustomSymbol(symbol);
-      setCustomSymbolError(symbolError);
-    },
-    [t],
-  );
+    setCustomSymbol(symbol);
+    setCustomSymbolError(symbolError);
+  };
 
-  const handleCustomDecimalsChange = useCallback(
-    (value) => {
-      let decimals;
-      let decimalsError = null;
+  const handleCustomDecimalsChange = (value) => {
+    let decimals;
+    let decimalsError = null;
 
-      if (value) {
-        decimals = Number(value.trim());
-        decimalsError =
-          value < MIN_DECIMAL_VALUE || value > MAX_DECIMAL_VALUE
-            ? t('decimalsMustZerotoTen')
-            : null;
-      } else {
-        decimals = '';
-        decimalsError = t('tokenDecimalFetchFailed', [
-          <ButtonLink
-            className="import-tokens-modal__button-link"
-            key="import-token-verify-token-decimal"
-            rel="noopener noreferrer"
-            target="_blank"
-            href={blockExplorerTokenLink}
-            endIconName={IconName.Export}
-          >
-            {blockExplorerLabel}
-          </ButtonLink>,
-        ]);
-      }
+    if (value) {
+      decimals = Number(value.trim());
+      decimalsError =
+        value < MIN_DECIMAL_VALUE || value > MAX_DECIMAL_VALUE
+          ? t('decimalsMustZerotoTen')
+          : null;
+    } else {
+      decimals = '';
+      decimalsError = t('tokenDecimalFetchFailed', [
+        <ButtonLink
+          className="import-tokens-modal__button-link"
+          key="import-token-verify-token-decimal"
+          rel="noopener noreferrer"
+          target="_blank"
+          href={blockExplorerTokenLink}
+          endIconName={IconName.Export}
+        >
+          {blockExplorerLabel}
+        </ButtonLink>,
+      ]);
+    }
 
-      setCustomDecimals(decimals);
-      setCustomDecimalsError(decimalsError);
-    },
-    [t, blockExplorerTokenLink, blockExplorerLabel],
-  );
+    setCustomDecimals(decimals);
+    setCustomDecimalsError(decimalsError);
+  };
 
   const attemptToAutoFillTokenParams = useCallback(
     async (address) => {
@@ -510,7 +411,7 @@ export const ImportTokensModal = ({ onClose }) => {
         name = '',
       } = await infoGetter.current(
         address,
-        tokenListByChain?.[selectedNetwork]?.data,
+        tokenListByChain?.[selectedNetworkForCustomImport]?.data,
       );
 
       setDecimalAutoFilled(Boolean(decimals));
@@ -520,12 +421,7 @@ export const ImportTokensModal = ({ onClose }) => {
       setCustomName(name);
       setShowSymbolAndDecimals(true);
     },
-    [
-      selectedNetwork,
-      tokenListByChain,
-      handleCustomDecimalsChange,
-      handleCustomSymbolChange,
-    ],
+    [selectedNetworkForCustomImport, tokenListByChain],
   );
 
   useEffect(() => {
@@ -545,28 +441,6 @@ export const ImportTokensModal = ({ onClose }) => {
     mainnetTokenWarning,
     attemptToAutoFillTokenParams,
   ]);
-
-  const clearAllFormData = () => {
-    // Clear custom token fields
-    setCustomAddress('');
-    setCustomSymbol('');
-    setCustomDecimals(0);
-    setCustomName('');
-    setShowSymbolAndDecimals(false);
-
-    // Clear selected tokens and search results
-    setSelectedTokens({});
-    setSearchResults([]);
-
-    // Clear all error states
-    setTokenSelectorError(null);
-    setCustomAddressError(null);
-    setCustomSymbolError(null);
-    setCustomDecimalsError(null);
-    setNftAddressError(null);
-    setMainnetTokenWarning(null);
-    setDecimalAutoFilled(false);
-  };
 
   const handleToggleToken = (token) => {
     const { address } = token;
@@ -606,7 +480,8 @@ export const ImportTokensModal = ({ onClose }) => {
       return;
     }
 
-    const tokenList = tokenListByChain?.[selectedNetwork]?.data ?? {};
+    const tokenList =
+      tokenListByChain?.[selectedNetworkForCustomImport]?.data ?? {};
 
     const tokenAddressList = Object.keys(tokenList);
     const customToken = customAddress
@@ -616,7 +491,7 @@ export const ImportTokensModal = ({ onClose }) => {
           decimals: customDecimals,
           standard: tokenStandard,
           name: customName,
-          chainId: selectedNetwork,
+          chainId: selectedNetworkForCustomImport,
         }
       : null;
     dispatch(
@@ -644,7 +519,7 @@ export const ImportTokensModal = ({ onClose }) => {
       const result = await fetchTokenExchangeRates(
         nativeCurrency,
         tokenAddresses,
-        selectedNetwork,
+        chainId,
       );
       // dispatch action
       dispatch(setConfirmationExchangeRates(result));
@@ -678,7 +553,7 @@ export const ImportTokensModal = ({ onClose }) => {
           standardAddress,
           selectedAccount.address,
           null,
-          selectedNetwork,
+          selectedNetworkForCustomImport,
         ));
       } catch (error) {
         // ignore
@@ -716,7 +591,8 @@ export const ImportTokensModal = ({ onClose }) => {
         setShowSymbolAndDecimals(false);
         break;
 
-      case isMainnetToken && selectedNetwork !== CHAIN_IDS.MAINNET:
+      case isMainnetToken &&
+        selectedNetworkForCustomImport !== CHAIN_IDS.MAINNET:
         setMainnetTokenWarning(t('mainnetToken'));
         setCustomSymbol('');
         setCustomDecimals(0);
@@ -747,26 +623,8 @@ export const ImportTokensModal = ({ onClose }) => {
     }
   };
 
-  const accountAddress = useMemo(
-    () =>
-      isEvmChainId(selectedNetwork)
-        ? getAccountForChain(formatChainIdToCaip(selectedNetwork))?.address
-        : getAccountForChain(selectedNetwork)?.id,
-    [selectedNetwork, getAccountForChain],
-  );
-
   // Determines whether to show the Search/Import or Confirm action
   const isConfirming = mode === 'confirm';
-
-  const hasSearchTokens = useMemo(() => {
-    const tokenData = tokenListByChain?.[selectedNetwork]?.data;
-    return tokenData && Object.keys(tokenData).length > 0;
-  }, [tokenListByChain, selectedNetwork]);
-
-  const shouldShowSearchTab = hasSearchTokens;
-  const shouldShowCustomTab = isEvmChainId(selectedNetwork);
-  const shouldShowNoSupportPlaceholder =
-    !shouldShowSearchTab && !shouldShowCustomTab;
 
   if (actionMode === ACTION_MODES.NETWORK_SELECTOR) {
     return (
@@ -787,7 +645,7 @@ export const ImportTokensModal = ({ onClose }) => {
               flexDirection={FlexDirection.Column}
               width={BlockSize.Full}
             >
-              {Object.values(allNetworks).map((network) => (
+              {Object.values(sortedNetworks).map((network) => (
                 <Box
                   key={network.chainId}
                   data-testid={`select-network-item-${network.chainId}`}
@@ -800,18 +658,16 @@ export const ImportTokensModal = ({ onClose }) => {
                     iconSize={AvatarNetworkSize.Sm}
                     focus={false}
                     onClick={() => {
-                      const networkChainId = isEvmChainId(network.chainId)
-                        ? formatChainIdToHex(network.chainId)
-                        : network.chainId;
-                      setSelectedNetwork(networkChainId);
-                      clearAllFormData();
+                      setSelectedNetworkForCustomImport(network.chainId);
+                      setCustomAddress('');
+                      setCustomSymbol('');
+                      setCustomDecimals(0);
+                      setShowSymbolAndDecimals(false);
+
                       setActionMode(ACTION_MODES.IMPORT_TOKEN);
                     }}
                     selected={
-                      isEvmChainId(network.chainId)
-                        ? formatChainIdToHex(network.chainId) ===
-                          selectedNetwork
-                        : network.chainId === selectedNetwork
+                      network?.chainId === selectedNetworkForCustomImport
                     }
                   />
                 </Box>
@@ -822,7 +678,59 @@ export const ImportTokensModal = ({ onClose }) => {
       </Modal>
     );
   }
-
+  if (actionMode === ACTION_MODES.SEARCH_NETWORK_SELECTOR) {
+    return (
+      <Modal isOpen>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader
+            onBack={() => setActionMode(ACTION_MODES.IMPORT_TOKEN)}
+            onClose={onClose}
+          >
+            <Text variant={TextVariant.headingSm} align={TextAlign.Center}>
+              {t('networks')}
+            </Text>
+          </ModalHeader>
+          <ModalBody>
+            <Box
+              display={Display.Flex}
+              flexDirection={FlexDirection.Column}
+              width={BlockSize.Full}
+            >
+              {FEATURED_NETWORK_CHAIN_IDS.filter((chain) => allOpts[chain]).map(
+                (chain) => (
+                  <Box
+                    key={chain}
+                    padding={4}
+                    gap={4}
+                    display={Display.Flex}
+                    alignItems={AlignItems.center}
+                    justifyContent={JustifyContent.spaceBetween}
+                    width={BlockSize.Full}
+                  >
+                    <AvatarNetwork
+                      name={getImageForChainId(chain)}
+                      src={getImageForChainId(chain)}
+                      size={AvatarNetworkSize.Sm}
+                    />
+                    <Box
+                      width={BlockSize.Full}
+                      display={Display.Flex}
+                      alignItems={AlignItems.center}
+                    >
+                      <Text variant={TextVariant.bodyMdMedium}>
+                        {networkConfigurations[chain]?.name}
+                      </Text>
+                    </Box>
+                  </Box>
+                ),
+              )}
+            </Box>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+    );
+  }
   return (
     <Modal
       isOpen
@@ -854,269 +762,281 @@ export const ImportTokensModal = ({ onClose }) => {
           {isConfirming ? (
             <ImportTokensModalConfirm networkFilter={networkFilter} />
           ) : (
-            <>
-              <NetworkSelectorCustomImport
-                title={
-                  allNetworks[selectedNetwork]?.name ||
-                  networkConfigurations[selectedNetwork]?.name
-                }
-                buttonDataTestId="test-import-tokens-drop-down-custom-import"
-                chainId={selectedNetwork}
-                onSelectNetwork={() =>
-                  setActionMode(ACTION_MODES.NETWORK_SELECTOR)
-                }
-              />
+            <Tabs
+              t={t}
+              onTabClick={(tabKey) => setDefaultActiveTabKey(tabKey)}
+              defaultActiveTabKey={defaultActiveTabKey}
+              tabListProps={{ className: 'px-4' }}
+            >
+              {showSearchTab ? (
+                <Tab
+                  tabKey={TAB_NAMES.SEARCH}
+                  name={t('search')}
+                  onClick={() => setDefaultActiveTabKey(TAB_NAMES.SEARCH)}
+                >
+                  <Box paddingTop={4}>
+                    {useTokenDetection ? null : (
+                      <Box paddingLeft={4} paddingRight={4}>
+                        <BannerAlert
+                          severity={Severity.Info}
+                          marginBottom={4}
+                          paddingLeft={4}
+                          paddingRight={4}
+                        >
+                          <Text variant={TextVariant.bodyMd} fontSize="16">
+                            {t('enhancedTokenDetectionAlertMessage', [
+                              networkName,
+                              <ButtonLink
+                                key="token-detection-announcement"
+                                className="import-tokens-modal__autodetect"
+                                onClick={() => {
+                                  onClose();
+                                  history.push(
+                                    `${SECURITY_ROUTE}#auto-detect-tokens`,
+                                  );
+                                }}
+                              >
+                                {t('enableFromSettings')}
+                              </ButtonLink>,
+                            ])}
+                          </Text>
+                        </BannerAlert>
+                      </Box>
+                    )}
 
-              {/* Content based on network support */}
-              {isLoading && (
-                /* Loading indicator */
-                <Box
-                  display={Display.Flex}
-                  flexDirection={FlexDirection.Column}
-                  alignItems="center"
-                  justifyContent="center"
-                  paddingTop={8}
-                  paddingBottom={8}
-                  data-testid="import-tokens-loading"
-                >
-                  <Text
-                    variant={TextVariant.bodyMd}
-                    color={TextColor.textMuted}
-                  >
-                    {t('loading')}...
-                  </Text>
-                </Box>
-              )}
-              {!isLoading && shouldShowNoSupportPlaceholder && (
-                /* No support placeholder */
-                <Box
-                  display={Display.Flex}
-                  flexDirection={FlexDirection.Column}
-                  alignItems="center"
-                  justifyContent="center"
-                  paddingTop={8}
-                  paddingBottom={8}
-                  paddingLeft={4}
-                  paddingRight={4}
-                  data-testid="import-tokens-no-support"
-                >
-                  <Text
-                    variant={TextVariant.bodyMd}
-                    color={TextColor.textMuted}
-                    textAlign={TextAlign.Center}
-                  >
-                    {t('currentlyUnavailable')}
-                  </Text>
-                </Box>
-              )}
-              {!isLoading && !shouldShowNoSupportPlaceholder && (
-                <Tabs
-                  tabListProps={{ className: 'px-4' }}
-                  onTabClick={() => clearAllFormData()}
-                >
-                  {shouldShowSearchTab && (
-                    <Tab
-                      tabKey={TAB_NAMES.SEARCH}
-                      name={t('search')}
-                      className="flex-1"
-                    >
-                      <Box paddingTop={4}>
-                        {!useTokenDetection && (
-                          <Box paddingLeft={4} paddingRight={4}>
-                            <BannerAlert
-                              severity={Severity.Info}
-                              marginBottom={4}
-                              paddingLeft={4}
-                              paddingRight={4}
-                            >
-                              <Text variant={TextVariant.bodyMd} fontSize="16">
-                                {t('enhancedTokenDetectionAlertMessage', [
-                                  networkName,
+                    {FEATURED_NETWORK_CHAIN_IDS.some(
+                      (networkId) => networkId === currentNetwork.chainId,
+                    ) && (
+                      <Box paddingLeft={4} paddingRight={4} paddingBottom={4}>
+                        <NetworkFilterImportToken
+                          buttonDataTestId="test-import-tokens-drop-down"
+                          openListNetwork={() =>
+                            setActionMode(ACTION_MODES.SEARCH_NETWORK_SELECTOR)
+                          }
+                          networkFilter={networkFilter}
+                          setNetworkFilter={setNetworkFilter}
+                        />
+                      </Box>
+                    )}
+
+                    <Box paddingLeft={4} paddingRight={4} paddingBottom={4}>
+                      <TokenSearch
+                        searchClassName="import-tokens-modal__button-search"
+                        onSearch={({ results = [] }) =>
+                          setSearchResults(results)
+                        }
+                        error={tokenSelectorError}
+                        tokenList={tokenListByChain}
+                        networkFilter={networkFilter}
+                        setSearchResults={setSearchResults}
+                      />
+                    </Box>
+
+                    {searchResults.length === 0 ? (
+                      <Box
+                        paddingLeft={4}
+                        paddingRight={4}
+                        className="token-list__empty-list"
+                      >
+                        <TokenListPlaceholder />
+                      </Box>
+                    ) : (
+                      <TokenList
+                        currentNetwork={currentNetwork}
+                        testNetworkBackgroundColor={testNetworkBackgroundColor}
+                        results={searchResults}
+                        selectedTokens={selectedTokens}
+                        onToggleToken={(token) => handleToggleToken(token)}
+                        isTokenNetworkFilterEqualCurrentNetwork={
+                          Object.keys(networkFilter).length === 1 &&
+                          networkFilter[chainId]
+                        }
+                      />
+                    )}
+                  </Box>
+                </Tab>
+              ) : null}
+              <Tab
+                tabKey={TAB_NAMES.CUSTOM_TOKEN}
+                name={t('customToken')}
+                onClick={() => setDefaultActiveTabKey(TAB_NAMES.CUSTOM_TOKEN)}
+                data-testid="import-tokens-modal-custom-token-tab"
+              >
+                {isConfirming ? (
+                  <ImportTokensModalConfirm networkFilter={networkFilter} />
+                ) : (
+                  <Box paddingTop={4}>
+                    <Box className="import-tokens-modal__custom-token-form__container">
+                      {tokenDetectionInactiveOnNonMainnetSupportedNetwork ? (
+                        <Box paddingLeft={4} paddingRight={4}>
+                          <BannerAlert severity={Severity.Warning}>
+                            <Text variant={TextVariant.bodyMd}>
+                              {t(
+                                'customTokenWarningInTokenDetectionNetworkWithTDOFF',
+                                [
                                   <ButtonLink
-                                    key="token-detection-announcement"
-                                    className="import-tokens-modal__autodetect"
+                                    key="import-token-security-risk"
+                                    rel="noopener noreferrer"
+                                    target="_blank"
+                                    href={ZENDESK_URLS.TOKEN_SAFETY_PRACTICES}
+                                  >
+                                    {t('tokenScamSecurityRisk')}
+                                  </ButtonLink>,
+                                  <ButtonLink
+                                    type="link"
+                                    key="import-token-token-detection-announcement"
                                     onClick={() => {
                                       onClose();
-                                      navigate(
+                                      history.push(
                                         `${SECURITY_ROUTE}#auto-detect-tokens`,
                                       );
                                     }}
                                   >
-                                    {t('enableFromSettings')}
+                                    {t('inYourSettings')}
                                   </ButtonLink>,
-                                ])}
-                              </Text>
-                            </BannerAlert>
-                          </Box>
-                        )}
-
-                        <Box paddingLeft={4} paddingRight={4} paddingBottom={4}>
-                          <TokenSearch
-                            searchClassName="import-tokens-modal__button-search"
-                            onSearch={({ results = [] }) =>
-                              setSearchResults(results)
-                            }
-                            error={tokenSelectorError}
-                            tokenList={tokenListByChain}
-                            networkFilter={networkFilter}
-                            setSearchResults={setSearchResults}
-                            chainId={selectedNetwork}
-                          />
+                                ],
+                              )}
+                            </Text>
+                          </BannerAlert>
                         </Box>
-
-                        {searchResults.length === 0 ? (
-                          <Box
-                            paddingLeft={4}
-                            paddingRight={4}
-                            className="token-list__empty-list"
-                          >
-                            <TokenListPlaceholder />
-                          </Box>
-                        ) : (
-                          <TokenList
-                            currentNetwork={networkFilter[selectedNetwork]}
-                            testNetworkBackgroundColor={
-                              testNetworkBackgroundColor
+                      ) : (
+                        <Box paddingLeft={4} paddingRight={4}>
+                          <BannerAlert
+                            severity={
+                              isDynamicTokenListAvailable
+                                ? Severity.Warning
+                                : Severity.Info
                             }
-                            results={searchResults}
-                            selectedTokens={selectedTokens}
-                            onToggleToken={(token) => handleToggleToken(token)}
-                            accountAddress={accountAddress}
-                          />
-                        )}
-                      </Box>
-                    </Tab>
-                  )}
-
-                  {shouldShowCustomTab && (
-                    <Tab
-                      tabKey={TAB_NAMES.CUSTOM_TOKEN}
-                      name={t('customToken')}
-                      data-testid="import-tokens-modal-custom-token-tab"
-                      className="flex-1"
-                    >
-                      <Box paddingTop={4}>
-                        <Box className="import-tokens-modal__custom-token-form__container">
-                          <Box paddingLeft={4} paddingRight={4}>
-                            <BannerAlert
-                              severity={Severity.Warning}
-                              data-testid="custom-token-warning"
-                            >
-                              <Text variant={TextVariant.bodyMd}>
-                                {t(
-                                  'customTokenWarningInTokenDetectionNetwork',
-                                  [
-                                    <ButtonLink
-                                      key="import-token-fake-token-warning"
-                                      rel="noopener noreferrer"
-                                      target="_blank"
-                                      href={ZENDESK_URLS.TOKEN_SAFETY_PRACTICES}
-                                    >
-                                      {t('learnScamRisk')}
-                                    </ButtonLink>,
-                                  ],
-                                )}
-                              </Text>
-                            </BannerAlert>
-                          </Box>
+                            data-testid="custom-token-warning"
+                          >
+                            <Text variant={TextVariant.bodyMd}>
+                              {t(
+                                isDynamicTokenListAvailable
+                                  ? 'customTokenWarningInTokenDetectionNetwork'
+                                  : 'customTokenWarningInNonTokenDetectionNetwork',
+                                [
+                                  <ButtonLink
+                                    key="import-token-fake-token-warning"
+                                    rel="noopener noreferrer"
+                                    target="_blank"
+                                    href={ZENDESK_URLS.TOKEN_SAFETY_PRACTICES}
+                                  >
+                                    {t('learnScamRisk')}
+                                  </ButtonLink>,
+                                ],
+                              )}
+                            </Text>
+                          </BannerAlert>
+                        </Box>
+                      )}
+                      <NetworkSelectorCustomImport
+                        title={
+                          selectedNetworkForCustomImport
+                            ? networkConfigurations[
+                                selectedNetworkForCustomImport
+                              ]?.name
+                            : t('networkMenuHeading')
+                        }
+                        buttonDataTestId="test-import-tokens-drop-down-custom-import"
+                        chainId={selectedNetworkForCustomImport}
+                        onSelectNetwork={() =>
+                          setActionMode(ACTION_MODES.NETWORK_SELECTOR)
+                        }
+                      />
+                      <Box>
+                        <FormTextField
+                          paddingLeft={4}
+                          paddingRight={4}
+                          size={Size.LG}
+                          label={t('tokenContractAddress')}
+                          value={customAddress}
+                          onChange={(e) => {
+                            if (selectedNetworkForCustomImport) {
+                              handleCustomAddressChange(e.target.value);
+                            } else {
+                              setCustomAddress(e.target.value);
+                            }
+                          }}
+                          helpText={
+                            customAddressError ||
+                            mainnetTokenWarning ||
+                            nftAddressError
+                          }
+                          error={
+                            customAddressError ||
+                            mainnetTokenWarning ||
+                            nftAddressError
+                          }
+                          textFieldProps={{
+                            className:
+                              customAddressError ||
+                              mainnetTokenWarning ||
+                              nftAddressError
+                                ? 'import-tokens-modal__custom-token-form__text-outline-error'
+                                : 'import-tokens-modal__custom-token-form__text-outline-success',
+                          }}
+                          inputProps={{
+                            'data-testid': 'import-tokens-modal-custom-address',
+                          }}
+                        />
+                        {showSymbolAndDecimals && (
                           <Box>
                             <FormTextField
                               paddingLeft={4}
                               paddingRight={4}
                               paddingTop={4}
                               size={Size.LG}
-                              label={t('tokenContractAddress')}
-                              value={customAddress}
-                              onChange={(e) => {
-                                if (selectedNetwork) {
-                                  handleCustomAddressChange(e.target.value);
-                                } else {
-                                  setCustomAddress(e.target.value);
-                                }
-                              }}
-                              helpText={
-                                customAddressError ||
-                                mainnetTokenWarning ||
-                                nftAddressError
+                              label={<>{t('tokenSymbol')}</>}
+                              value={customSymbol}
+                              onChange={(e) =>
+                                handleCustomSymbolChange(e.target.value)
                               }
-                              error={
-                                customAddressError ||
-                                mainnetTokenWarning ||
-                                nftAddressError
-                              }
+                              helpText={customSymbolError}
+                              error={customSymbolError}
                               textFieldProps={{
-                                className:
-                                  customAddressError ||
-                                  mainnetTokenWarning ||
-                                  nftAddressError
-                                    ? 'import-tokens-modal__custom-token-form__text-outline-error'
-                                    : 'import-tokens-modal__custom-token-form__text-outline-success',
+                                className: customSymbolError
+                                  ? 'import-tokens-modal__custom-token-form__text-outline-error'
+                                  : 'import-tokens-modal__custom-token-form__text-outline-success',
                               }}
                               inputProps={{
                                 'data-testid':
-                                  'import-tokens-modal-custom-address',
+                                  'import-tokens-modal-custom-symbol',
                               }}
                             />
-                            {showSymbolAndDecimals && (
-                              <Box>
-                                <FormTextField
-                                  paddingLeft={4}
-                                  paddingRight={4}
-                                  paddingTop={4}
-                                  size={Size.LG}
-                                  label={<>{t('tokenSymbol')}</>}
-                                  value={customSymbol}
-                                  onChange={(e) =>
-                                    handleCustomSymbolChange(e.target.value)
-                                  }
-                                  helpText={customSymbolError}
-                                  error={customSymbolError}
-                                  textFieldProps={{
-                                    className: customSymbolError
-                                      ? 'import-tokens-modal__custom-token-form__text-outline-error'
-                                      : 'import-tokens-modal__custom-token-form__text-outline-success',
-                                  }}
-                                  inputProps={{
-                                    'data-testid':
-                                      'import-tokens-modal-custom-symbol',
-                                  }}
-                                />
-                                <FormTextField
-                                  paddingLeft={4}
-                                  paddingRight={4}
-                                  paddingTop={4}
-                                  size={Size.LG}
-                                  label={t('decimal')}
-                                  type="number"
-                                  value={customDecimals}
-                                  onChange={(e) =>
-                                    handleCustomDecimalsChange(e.target.value)
-                                  }
-                                  helpText={customDecimalsError}
-                                  error={customDecimalsError}
-                                  disabled={decimalAutoFilled}
-                                  min={MIN_DECIMAL_VALUE}
-                                  max={MAX_DECIMAL_VALUE}
-                                  textFieldProps={{
-                                    className: customDecimalsError
-                                      ? 'import-tokens-modal__custom-token-form__text-outline-error'
-                                      : 'import-tokens-modal__custom-token-form__text-outline-success',
-                                  }}
-                                  inputProps={{
-                                    'data-testid':
-                                      'import-tokens-modal-custom-decimals',
-                                  }}
-                                />
-                              </Box>
-                            )}
+                            <FormTextField
+                              paddingLeft={4}
+                              paddingRight={4}
+                              paddingTop={4}
+                              size={Size.LG}
+                              label={t('decimal')}
+                              type="number"
+                              value={customDecimals}
+                              onChange={(e) =>
+                                handleCustomDecimalsChange(e.target.value)
+                              }
+                              helpText={customDecimalsError}
+                              error={customDecimalsError}
+                              disabled={decimalAutoFilled}
+                              min={MIN_DECIMAL_VALUE}
+                              max={MAX_DECIMAL_VALUE}
+                              textFieldProps={{
+                                className: customDecimalsError
+                                  ? 'import-tokens-modal__custom-token-form__text-outline-error'
+                                  : 'import-tokens-modal__custom-token-form__text-outline-success',
+                              }}
+                              inputProps={{
+                                'data-testid':
+                                  'import-tokens-modal-custom-decimals',
+                              }}
+                            />
                           </Box>
-                        </Box>
+                        )}
                       </Box>
-                    </Tab>
-                  )}
-                </Tabs>
-              )}
-            </>
+                    </Box>
+                  </Box>
+                )}
+              </Tab>
+            </Tabs>
           )}
         </Box>
         {isConfirming ? (
@@ -1143,7 +1063,7 @@ export const ImportTokensModal = ({ onClose }) => {
                 trace({ name: TraceName.ImportTokens });
                 await handleAddTokens();
                 endTrace({ name: TraceName.ImportTokens });
-                navigate(DEFAULT_ROUTE);
+                history.push(DEFAULT_ROUTE);
               }}
               block
               data-testid="import-tokens-modal-import-button"
@@ -1159,9 +1079,8 @@ export const ImportTokensModal = ({ onClose }) => {
               disabled={
                 Boolean(hasError()) ||
                 !hasSelected() ||
-                !selectedNetwork ||
-                shouldShowNoSupportPlaceholder ||
-                isLoading
+                (defaultActiveTabKey === TAB_NAMES.CUSTOM_TOKEN &&
+                  !selectedNetworkForCustomImport)
               }
               block
               data-testid="import-tokens-button-next"

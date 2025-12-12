@@ -126,14 +126,16 @@ export default function RecoveryPhrase({ secretRecoveryPhrase }) {
     bufferedEndTrace?.({ name: TraceName.OnboardingNewSrpCreateWallet });
     bufferedEndTrace?.({ name: TraceName.OnboardingJourneyOverall });
 
-    if (
-      getBrowserName() === PLATFORM_FIREFOX ||
-      firstTimeFlowType === FirstTimeFlowType.restore
-    ) {
-      navigate(ONBOARDING_COMPLETION_ROUTE, { replace: true });
-    } else {
-      navigate(ONBOARDING_METAMETRICS, { replace: true });
-    }
+    navigate(ONBOARDING_COMPLETION_ROUTE, { replace: true });
+
+    // if (
+    //   getBrowserName() === PLATFORM_FIREFOX ||
+    //   firstTimeFlowType === FirstTimeFlowType.restore
+    // ) {
+    //   navigate(ONBOARDING_COMPLETION_ROUTE, { replace: true });
+    // } else {
+    //   navigate(ONBOARDING_METAMETRICS, { replace: true });
+    // }
   }, [
     bufferedEndTrace,
     dispatch,

@@ -34,7 +34,7 @@ export const MultichainAccountIntroModalContainer: React.FC<ContainerProps> = ({
 
   const MINIMUM_LOADING_TIME_MS = 2000;
   const SUPPORT_URL =
-    'https://support.metamask.io/configure/accounts/multichain-accounts/';
+    'https://support.iopn.io/configure/accounts/multichain-accounts/';
 
   // Create alignment promise - always defined, no conditionals needed
   const alignmentPromise = useMemo(

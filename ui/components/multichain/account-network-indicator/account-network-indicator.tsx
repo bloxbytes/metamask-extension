@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import {
@@ -30,6 +30,24 @@ export const AccountNetworkIndicator = ({ scopes }: { scopes: string[] }) => {
   const TOOLTIP_LIMIT = 12;
 
   const networks = useSelector((state) => getNetworksByScopes(state, scopes));
+  const PRIORITY_CHAIN_IDS = ['0x3d9', '0x3d8']; // put your favorites here
+  const sortedNetworks = useMemo(() => {
+    return [...networks].sort((a, b) => {
+      const indexA = PRIORITY_CHAIN_IDS.indexOf(a.chainId);
+      const indexB = PRIORITY_CHAIN_IDS.indexOf(b.chainId);
+
+      if (indexA !== -1 && indexB !== -1) {
+        return indexA - indexB;
+      }
+      if (indexA !== -1) {
+        return -1;
+      }
+      if (indexB !== -1) {
+        return 1;
+      }
+      return 0;
+    });
+  }, [networks]);
 
   const avatarNetworksData = networks?.map(
     (network: { chainId: string | number; name: string }) => ({
@@ -45,7 +63,7 @@ export const AccountNetworkIndicator = ({ scopes }: { scopes: string[] }) => {
         html={
           <Box display={Display.Flex} flexDirection={FlexDirection.Column}>
             <Box display={Display.Flex} flexDirection={FlexDirection.Column}>
-              {networks?.slice(0, TOOLTIP_LIMIT).map((network) => {
+              {sortedNetworks?.slice(0, TOOLTIP_LIMIT).map((network) => {
                 return (
                   <Box
                     display={Display.Flex}

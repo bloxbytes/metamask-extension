@@ -13,8 +13,8 @@ export type LottieAnimationProps = {
   path?: string;
   loop?: boolean;
   autoplay?: boolean;
-  style?: React.CSSProperties;
-  className?: string;
+  // style?: React.CSSProperties;
+  // className?: string;
   onComplete?: () => void;
 };
 
@@ -23,8 +23,8 @@ export const LottieAnimation: React.FC<LottieAnimationProps> = ({
   path,
   loop = true,
   autoplay = true,
-  style = {},
-  className = '',
+  // style = {},
+  // className = '',
   onComplete = () => null,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -71,5 +71,6 @@ export const LottieAnimation: React.FC<LottieAnimationProps> = ({
     };
   }, [data, path, loop, autoplay, onComplete]);
 
-  return <div ref={containerRef} style={style} className={className}></div>;
+  // return <div ref={containerRef} style={style} className={className}></div>;
+  return <img src="./images/logo/metamask-fox.svg" alt={'OPN Walelt'} />;
 };

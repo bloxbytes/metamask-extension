@@ -246,7 +246,7 @@ export default function SmartTransactionStatusPage() {
       <a
         className="smart-transaction-status__support-link"
         key="smart-transaction-status-support-link"
-        href="https://support.metamask.io"
+        href="https://support.iopn.io"
         target="_blank"
         rel="noopener noreferrer"
       >

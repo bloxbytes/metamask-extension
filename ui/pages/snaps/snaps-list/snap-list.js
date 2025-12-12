@@ -158,7 +158,7 @@ const SnapList = ({ navigate: navigateProp }) => {
                   >
                     <ButtonLink
                       size={Size.auto}
-                      href="https://snaps.metamask.io/"
+                      href="https://snaps.iopn.io/"
                       target="_blank"
                       endIconName={IconName.Export}
                     >

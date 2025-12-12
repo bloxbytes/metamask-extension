@@ -131,7 +131,7 @@ export const ViewExplorerMenuItem = ({
       }
     } else {
       // For popular networks, show etherscan.io
-      blockExplorerUrlSubTitle = 'etherscan.io';
+      blockExplorerUrlSubTitle = 'iopn.tech';
     }
   } else {
     // For non-EIP155 networks, always show actual block explorer URL

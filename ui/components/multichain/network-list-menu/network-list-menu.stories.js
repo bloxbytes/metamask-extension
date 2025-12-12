@@ -19,7 +19,16 @@ const customNetworkStore = configureStore({
       showTestNetworks: true,
     },
     domains: {},
-    orderedNetworkList: [],
+    orderedNetworkList: [
+      {
+        networkId: 'eip155:984', // OPN
+        networkRpcUrl: 'https://testnet-rpc.iopn.tech',
+      },
+      {
+        networkId: 'eip155:985', // OPN MAINNET
+        networkRpcUrl: 'https://testnet-rpc.iopn.tech',
+      },
+    ],
     networkConfigurations: {
       ...testData.metamask.networkConfigurations,
       ...{

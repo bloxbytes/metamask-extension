@@ -28,7 +28,7 @@ import {
 import { ControllerInitFunction } from '../types';
 import {
   CHAIN_IDS,
-  FEATURED_NETWORK_CHAIN_IDS,
+  // FEATURED_NETWORK_CHAIN_IDS,
 } from '../../../../shared/constants/network';
 
 /**
@@ -106,7 +106,7 @@ const generateDefaultNetworkEnablementControllerState = (
     return {
       enabledNetworkMap: {
         ...generateEVMNetworkMap(networkConfigurationsByChainId, [
-          CHAIN_IDS.SEPOLIA,
+          CHAIN_IDS.OPN,
         ]),
         ...generateMultichainNetworkMaps(
           multichainNetworkConfigurationsByChainId,
@@ -128,10 +128,7 @@ const generateDefaultNetworkEnablementControllerState = (
 
   return {
     enabledNetworkMap: {
-      ...generateEVMNetworkMap(
-        networkConfigurationsByChainId,
-        FEATURED_NETWORK_CHAIN_IDS,
-      ),
+      ...generateEVMNetworkMap(networkConfigurationsByChainId, [CHAIN_IDS.OPN]),
       ...generateMultichainNetworkMaps(
         multichainNetworkConfigurationsByChainId,
         enabledMultichainNetworks,
@@ -230,7 +227,7 @@ export const NetworkEnablementControllerInit: ControllerInitFunction<
         ///: END:ONLY_INCLUDE_IF
 
         if (shouldEnableMainnetNetworks) {
-          controller.enableNetwork('0x1');
+          controller.enableNetwork('0x3d8');
         }
       }
     },

@@ -14,7 +14,6 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import Fuse from 'fuse.js';
 import * as URI from 'uri-js';
-import { EthScope } from '@metamask/keyring-api';
 import {
   RpcEndpointType,
   type UpdateNetworkFields,
@@ -31,6 +30,7 @@ import {
   KnownCaipNamespace,
 } from '@metamask/utils';
 import { ChainId } from '@metamask/controller-utils';
+import log from 'loglevel';
 import { useI18nContext } from '../../../hooks/useI18nContext';
 import { useAccountCreationOnNetworkChange } from '../../../hooks/accounts/useAccountCreationOnNetworkChange';
 import { NetworkListItem } from '../network-list-item';
@@ -329,8 +329,8 @@ export const NetworkListMenu = ({ onClose }: NetworkListMenuProps) => {
   // and the rest of the test networks in alphabetical order.
   const sortedTestNetworks = useMemo(() => {
     return sortNetworksByPrioity(searchedTestNetworks, [
-      toEvmCaipChainId(ChainId.sepolia),
-      toEvmCaipChainId(ChainId['linea-sepolia']),
+      // toEvmCaipChainId(ChainId.sepolia),
+      toEvmCaipChainId(ChainId['opn-testnet']),
     ]);
   }, [searchedTestNetworks]);
 
@@ -478,6 +478,7 @@ export const NetworkListMenu = ({ onClose }: NetworkListMenuProps) => {
     (
       network: MultichainNetworkConfiguration,
     ): Record<string, (() => void) | undefined> => {
+      console.log(network, 'network-list-slmn');
       const { chainId, isEvm } = network;
 
       if (!isEvm) {
@@ -499,7 +500,8 @@ export const NetworkListMenu = ({ onClose }: NetworkListMenuProps) => {
       const isDeletable =
         isUnlocked &&
         network.chainId !== currentChainId &&
-        network.chainId !== EthScope.Mainnet;
+        network.chainId !== 'eip155:984' &&
+        network.chainId !== 'eip155:985';
 
       return {
         onDelete: isDeletable
@@ -564,6 +566,7 @@ export const NetworkListMenu = ({ onClose }: NetworkListMenuProps) => {
   const generateMultichainNetworkListItem = (
     network: MultichainNetworkConfiguration,
   ) => {
+    // eslint-disable-next-line no-alert
     const isCurrentNetwork = network.chainId === currentChainId;
     const { onDelete, onEdit, onDiscoverClick, onRpcSelect } =
       getItemCallbacks(network);

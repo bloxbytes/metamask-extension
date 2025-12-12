@@ -22,7 +22,7 @@ describe('InfoTab', () => {
       const privacyPolicyLink = getByText('Privacy policy');
       expect(privacyPolicyLink).toHaveAttribute(
         'href',
-        'https://metamask.io/privacy.html',
+        'https://iopn.io/privacy.html',
       );
     });
 
@@ -30,7 +30,7 @@ describe('InfoTab', () => {
       const termsOfUseLink = getByText('Terms of use');
       expect(termsOfUseLink).toHaveAttribute(
         'href',
-        'https://metamask.io/terms.html',
+        'https://iopn.io/terms.html',
       );
     });
 
@@ -59,7 +59,7 @@ describe('InfoTab', () => {
       const contactUsLink = getByText('Contact us');
       expect(contactUsLink).toHaveAttribute(
         'href',
-        'https://support.metamask.io',
+        'https://support.iopn.io',
       );
     });
   });

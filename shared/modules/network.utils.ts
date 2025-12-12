@@ -143,21 +143,64 @@ export function convertCaipToHexChainId(id: CaipChainId): Hex {
 export const sortNetworks = (
   networks: Record<string, MultichainNetworkConfiguration>,
   sortedChainIds: { networkId: string }[],
-): MultichainNetworkConfiguration[] =>
-  Object.values(networks).sort((a, b) => {
-    const indexA = sortedChainIds.findIndex(
-      ({ networkId }) => networkId === a.chainId,
-    );
-    const indexB = sortedChainIds.findIndex(
-      ({ networkId }) => networkId === b.chainId,
-    );
+): MultichainNetworkConfiguration[] => {
+  const list = Object.values(networks);
 
-    // If the chainId is not found, assign Infinity to place it at the bottom
-    const adjustedIndexA = indexA === -1 ? Infinity : indexA;
-    const adjustedIndexB = indexB === -1 ? Infinity : indexB;
+  // YOUR CHAINS ALWAYS ON TOP — IN THIS EXACT ORDER
+  const topChains = list
+    .filter((n) => ['eip155:985', 'eip155:984'].includes(n.chainId))
+    .sort((a, b) => {
+      if (a.chainId === 'eip155:985') {
+        return -1;
+      }
+      if (b.chainId === 'eip155:985') {
+        return 1;
+      }
+      return 0;
+    });
 
-    return adjustedIndexA - adjustedIndexB;
-  });
+  // Everything else sorted by MetaMask's default order
+  const rest = list
+    .filter((n) => !['eip155:985', 'eip155:984'].includes(n.chainId))
+    .sort((a, b) => {
+      const indexA = sortedChainIds.findIndex(
+        ({ networkId }) => networkId === a.chainId,
+      );
+      const indexB = sortedChainIds.findIndex(
+        ({ networkId }) => networkId === b.chainId,
+      );
+      const adjustedIndexA = indexA === -1 ? Infinity : indexA;
+      const adjustedIndexB = indexB === -1 ? Infinity : indexB;
+      return adjustedIndexA - adjustedIndexB;
+    });
+
+  return [...topChains, ...rest];
+
+  // const sortedAr = Object.values(networks).sort((a, b) => {
+  //   const indexA = sortedChainIds.findIndex(
+  //     ({ networkId }) => networkId === a.chainId,
+  //   );
+  //   const indexB = sortedChainIds.findIndex(
+  //     ({ networkId }) => networkId === b.chainId,
+  //   );
+  //
+  //   // If the chainId is not found, assign Infinity to place it at the bottom
+  //   const adjustedIndexA = indexA === -1 ? Infinity : indexA;
+  //   const adjustedIndexB = indexB === -1 ? Infinity : indexB;
+  //
+  //   return adjustedIndexA - adjustedIndexB;
+  // });
+  //
+  // console.log(
+  //   {
+  //     networks,
+  //     sortedAr,
+  //   },
+  //   'sortNetworks-slmn',
+  // );
+  //
+  // return sortedAr;
+};
 
 /**
  * Get the network icon for the given chain ID.
