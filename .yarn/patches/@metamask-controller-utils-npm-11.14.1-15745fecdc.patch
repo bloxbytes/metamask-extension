@@ -1,0 +1,763 @@
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+new file mode 100644
+index 0000000000000000000000000000000000000000..13566b81b018ad684f3a35fee301741b2734c8f4
+--- /dev/null
++++ b/.idea/.gitignore
+@@ -0,0 +1,8 @@
++# Default ignored files
++/shelf/
++/workspace.xml
++# Editor-based HTTP Client requests
++/httpRequests/
++# Datasource local storage ignored files
++/dataSources/
++/dataSources.local.xml
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+new file mode 100644
+index 0000000000000000000000000000000000000000..d9fb14e4d06a030cba3cd105982c4f196e0718a0
+--- /dev/null
++++ b/.idea/modules.xml
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/.idea/user.iml" filepath="$PROJECT_DIR$/.idea/user.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
+diff --git a/.idea/php.xml b/.idea/php.xml
+new file mode 100644
+index 0000000000000000000000000000000000000000..f324872a8ba94b4ec07a8aad82965487b3b15d57
+--- /dev/null
++++ b/.idea/php.xml
+@@ -0,0 +1,19 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="MessDetectorOptionsConfiguration">
++    <option name="transferred" value="true" />
++  </component>
++  <component name="PHPCSFixerOptionsConfiguration">
++    <option name="transferred" value="true" />
++  </component>
++  <component name="PHPCodeSnifferOptionsConfiguration">
++    <option name="highlightLevel" value="WARNING" />
++    <option name="transferred" value="true" />
++  </component>
++  <component name="PhpStanOptionsConfiguration">
++    <option name="transferred" value="true" />
++  </component>
++  <component name="PsalmOptionsConfiguration">
++    <option name="transferred" value="true" />
++  </component>
++</project>
+\ No newline at end of file
+diff --git a/.idea/user.iml b/.idea/user.iml
+new file mode 100644
+index 0000000000000000000000000000000000000000..c956989b29ad0767edc6cf3a202545927c3d1e76
+--- /dev/null
++++ b/.idea/user.iml
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="WEB_MODULE" version="4">
++  <component name="NewModuleRootManager">
++    <content url="file://$MODULE_DIR$" />
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
+\ No newline at end of file
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+new file mode 100644
+index 0000000000000000000000000000000000000000..649c62f0537457a3f159ee98950f791dd39b4921
+--- /dev/null
++++ b/.idea/workspace.xml
+@@ -0,0 +1,61 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="AutoImportSettings">
++    <option name="autoReloadType" value="SELECTIVE" />
++  </component>
++  <component name="ChangeListManager">
++    <list default="true" id="69a277e6-f7a8-42c3-8d76-4b28b7bc3aa3" name="Changes" comment="" />
++    <option name="SHOW_DIALOG" value="false" />
++    <option name="HIGHLIGHT_CONFLICTS" value="true" />
++    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
++    <option name="LAST_RESOLUTION" value="IGNORE" />
++  </component>
++  <component name="ComposerSettings">
++    <execution />
++  </component>
++  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="php" />
++  <component name="ProjectColorInfo">{
++  &quot;associatedIndex&quot;: 7
++}</component>
++  <component name="ProjectId" id="368vRjIxEaqqe46XlSadPbb14CI" />
++  <component name="ProjectViewState">
++    <option name="hideEmptyMiddlePackages" value="true" />
++    <option name="showLibraryContents" value="true" />
++  </component>
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
++    &quot;ts.external.directory.path&quot;: &quot;/Applications/PhpStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;,
++    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
++  }
++}</component>
++  <component name="SharedIndexes">
++    <attachedChunks>
++      <set>
++        <option value="bundled-js-predefined-d6986cc7102b-f27c65a3e318-JavaScript-PS-251.23774.466" />
++        <option value="bundled-php-predefined-a98d8de5180a-aaeaa8632555-com.jetbrains.php.sharedIndexes-PS-251.23774.466" />
++      </set>
++    </attachedChunks>
++  </component>
++  <component name="TaskManager">
++    <task active="true" id="Default" summary="Default task">
++      <changelist id="69a277e6-f7a8-42c3-8d76-4b28b7bc3aa3" name="Changes" comment="" />
++      <created>1764401006604</created>
++      <option name="number" value="Default" />
++      <option name="presentableId" value="Default" />
++      <updated>1764401006604</updated>
++      <workItem from="1764401008065" duration="2718000" />
++      <workItem from="1764404142196" duration="1441000" />
++    </task>
++    <servers />
++  </component>
++  <component name="TypeScriptGeneratedFilesManager">
++    <option name="version" value="3" />
++  </component>
++</project>
+\ No newline at end of file
+diff --git a/dist/constants.cjs b/dist/constants.cjs
+index f9b783490614be568d3630680fc1c1b5468646a2..ed8abc9f3100bd81816eff78547505c65a8f7525 100644
+--- a/dist/constants.cjs
++++ b/dist/constants.cjs
+@@ -1,5 +1,5 @@
+ "use strict";
+-Object.defineProperty(exports, "__esModule", { value: true });
++Object.defineProperty(exports, "__esModule", {value: true});
+ exports.DAYS = exports.DAY = exports.HOURS = exports.HOUR = exports.MINUTES = exports.MINUTE = exports.SECONDS = exports.SECOND = exports.CHAIN_ID_TO_ETHERS_NETWORK_NAME_MAP = exports.ApprovalType = exports.ORIGIN_METAMASK = exports.NFT_API_TIMEOUT = exports.NFT_API_VERSION = exports.NFT_API_BASE_URL = exports.OPENSEA_PROXY_URL = exports.NETWORKS_BYPASSING_VALIDATION = exports.BUILT_IN_NETWORKS = exports.BUILT_IN_CUSTOM_NETWORKS_RPC = exports.TESTNET_TICKER_SYMBOLS = exports.ASSET_TYPES = exports.GWEI = exports.ERC1155_TOKEN_RECEIVER_INTERFACE_ID = exports.ERC1155_METADATA_URI_INTERFACE_ID = exports.ERC1155_INTERFACE_ID = exports.ERC721_ENUMERABLE_INTERFACE_ID = exports.ERC721_METADATA_INTERFACE_ID = exports.ERC721_INTERFACE_ID = exports.ERC20 = exports.ERC1155 = exports.ERC721 = exports.MAX_SAFE_CHAIN_ID = exports.GANACHE_CHAIN_ID = exports.IPFS_DEFAULT_GATEWAY_URL = exports.FALL_BACK_VS_CURRENCY = exports.RPC = void 0;
+ const types_1 = require("./types.cjs");
+ exports.RPC = 'rpc';
+@@ -40,6 +40,7 @@ exports.TESTNET_TICKER_SYMBOLS = {
+     LINEA_GOERLI: 'LineaETH',
+     LINEA_SEPOLIA: 'LineaETH',
+     MEGAETH_TESTNET: 'MegaETH',
++    OPN_TESTNET: 'OPN',
+ };
+ /**
+  * Map of all built-in custom networks to their RPC endpoints.
+@@ -51,11 +52,27 @@ exports.BUILT_IN_CUSTOM_NETWORKS_RPC = {
+     MEGAETH_TESTNET: 'https://carrot.megaeth.com/rpc',
+     'megaeth-testnet': 'https://carrot.megaeth.com/rpc',
+     'monad-testnet': 'https://testnet-rpc.monad.xyz',
++    'opn': 'https://testnet-rpc.iopn.tech',
++    'opn-testnet': 'https://testnet-rpc.iopn.tech',
+ };
+ /**
+  * Map of all build-in Infura networks to their network, ticker and chain IDs.
+  */
+ exports.BUILT_IN_NETWORKS = {
++    [types_1.NetworkType['opn']]: {
++        chainId: types_1.ChainId['opn'],
++        ticker: types_1.NetworksTicker['opn'],
++        rpcPrefs: {
++            blockExplorerUrl: types_1.BlockExplorerUrl['opn'],
++        },
++    },
++    [types_1.NetworkType['opn-testnet']]: {
++        chainId: types_1.ChainId['opn-testnet'],
++        ticker: types_1.NetworksTicker['opn-testnet'],
++        rpcPrefs: {
++            blockExplorerUrl: types_1.BlockExplorerUrl['opn-testnet'],
++        },
++    },
+     [types_1.NetworkType.goerli]: {
+         chainId: types_1.ChainId.goerli,
+         ticker: types_1.NetworksTicker.goerli,
+@@ -180,6 +197,8 @@ var ApprovalType;
+  * Note: MegaETH-testnet is intentionally excluded from this mapping as it doesn't support ENS.
+  */
+ exports.CHAIN_ID_TO_ETHERS_NETWORK_NAME_MAP = {
++    [types_1.ChainId['opn']]: types_1.BuiltInNetworkName.OPN,
++    [types_1.ChainId['opn-testnet']]: types_1.BuiltInNetworkName.OPN_TESTNET,
+     [types_1.ChainId.goerli]: types_1.BuiltInNetworkName.Goerli,
+     [types_1.ChainId.sepolia]: types_1.BuiltInNetworkName.Sepolia,
+     [types_1.ChainId.mainnet]: types_1.BuiltInNetworkName.Mainnet,
+diff --git a/dist/constants.d.cts b/dist/constants.d.cts
+index 5fdb9a70f53ed8e9a6482e73ada4b2a85f094565..562852120ebc960cf47a402d6a716939ab86f079 100644
+--- a/dist/constants.d.cts
++++ b/dist/constants.d.cts
+@@ -1,4 +1,5 @@
+-import { NetworksTicker, BuiltInNetworkName } from "./types.cjs";
++import {NetworksTicker, BuiltInNetworkName} from "./types.cjs";
++
+ export declare const RPC = "rpc";
+ export declare const FALL_BACK_VS_CURRENCY = "ETH";
+ export declare const IPFS_DEFAULT_GATEWAY_URL = "https://cloudflare-ipfs.com/ipfs/";
+@@ -30,6 +31,7 @@ export declare const TESTNET_TICKER_SYMBOLS: {
+     LINEA_GOERLI: string;
+     LINEA_SEPOLIA: string;
+     MEGAETH_TESTNET: string;
++    OPN_TESTNET: string;
+ };
+ /**
+  * Map of all built-in custom networks to their RPC endpoints.
+@@ -41,11 +43,27 @@ export declare const BUILT_IN_CUSTOM_NETWORKS_RPC: {
+     MEGAETH_TESTNET: string;
+     'megaeth-testnet': string;
+     'monad-testnet': string;
++    'opn': string;
++    'opn-testnet': string;
+ };
+ /**
+  * Map of all build-in Infura networks to their network, ticker and chain IDs.
+  */
+ export declare const BUILT_IN_NETWORKS: {
++    readonly "opn": {
++        readonly chainId: "0x3d8";
++        readonly ticker: (typeof NetworksTicker)["opn"];
++        readonly rpcPrefs: {
++            readonly blockExplorerUrl: "https://testnet.iopn.tech";
++        };
++    };
++    readonly "opn-testnet": {
++        readonly chainId: "0x3d8";
++        readonly ticker: (typeof NetworksTicker)["opn-testnet"];
++        readonly rpcPrefs: {
++            readonly blockExplorerUrl: "https://testnet.iopn.tech";
++        };
++    };
+     readonly goerli: {
+         readonly chainId: "0x5";
+         readonly ticker: NetworksTicker.goerli;
+@@ -135,6 +153,7 @@ export declare const NFT_API_BASE_URL = "https://nft.api.cx.metamask.io";
+ export declare const NFT_API_VERSION = "1";
+ export declare const NFT_API_TIMEOUT = 15000;
+ export declare const ORIGIN_METAMASK = "metamask";
++
+ /**
+  * Approval request types for various operations.
+  * These types are used by different controllers to create and manage
+@@ -161,6 +180,7 @@ export declare enum ApprovalType {
+     WalletRequestPermissions = "wallet_requestPermissions",
+     WatchAsset = "wallet_watchAsset"
+ }
++
+ /**
+  * Mapping of chain IDs to their network names for ENS functionality.
+  * Note: MegaETH-testnet is intentionally excluded from this mapping as it doesn't support ENS.
+diff --git a/dist/constants.d.mts b/dist/constants.d.mts
+index e70cb5bdb9369abc3e89f27c42f7c8e0b77bae35..f3fbfd1ad4f77fcdd3426171ddc8038536c5382d 100644
+--- a/dist/constants.d.mts
++++ b/dist/constants.d.mts
+@@ -1,4 +1,5 @@
+-import { NetworksTicker, BuiltInNetworkName } from "./types.mjs";
++import {NetworksTicker, BuiltInNetworkName} from "./types.mjs";
++
+ export declare const RPC = "rpc";
+ export declare const FALL_BACK_VS_CURRENCY = "ETH";
+ export declare const IPFS_DEFAULT_GATEWAY_URL = "https://cloudflare-ipfs.com/ipfs/";
+@@ -30,6 +31,7 @@ export declare const TESTNET_TICKER_SYMBOLS: {
+     LINEA_GOERLI: string;
+     LINEA_SEPOLIA: string;
+     MEGAETH_TESTNET: string;
++    OPN_TESTNET: string;
+ };
+ /**
+  * Map of all built-in custom networks to their RPC endpoints.
+@@ -41,11 +43,27 @@ export declare const BUILT_IN_CUSTOM_NETWORKS_RPC: {
+     MEGAETH_TESTNET: string;
+     'megaeth-testnet': string;
+     'monad-testnet': string;
++    'opn': string;
++    'opn-testnet': string;
+ };
+ /**
+  * Map of all build-in Infura networks to their network, ticker and chain IDs.
+  */
+ export declare const BUILT_IN_NETWORKS: {
++    readonly "opn": {
++        readonly chainId: "0x3d8";
++        readonly ticker: (typeof NetworksTicker)["opn"];
++        readonly rpcPrefs: {
++            readonly blockExplorerUrl: "https://testnet.iopn.tech";
++        };
++    };
++    readonly "opn-testnet": {
++        readonly chainId: "0x3d8";
++        readonly ticker: (typeof NetworksTicker)["opn-testnet"];
++        readonly rpcPrefs: {
++            readonly blockExplorerUrl: "https://testnet.iopn.tech";
++        };
++    };
+     readonly goerli: {
+         readonly chainId: "0x5";
+         readonly ticker: NetworksTicker.goerli;
+@@ -135,6 +153,7 @@ export declare const NFT_API_BASE_URL = "https://nft.api.cx.metamask.io";
+ export declare const NFT_API_VERSION = "1";
+ export declare const NFT_API_TIMEOUT = 15000;
+ export declare const ORIGIN_METAMASK = "metamask";
++
+ /**
+  * Approval request types for various operations.
+  * These types are used by different controllers to create and manage
+@@ -161,6 +180,7 @@ export declare enum ApprovalType {
+     WalletRequestPermissions = "wallet_requestPermissions",
+     WatchAsset = "wallet_watchAsset"
+ }
++
+ /**
+  * Mapping of chain IDs to their network names for ENS functionality.
+  * Note: MegaETH-testnet is intentionally excluded from this mapping as it doesn't support ENS.
+diff --git a/dist/constants.mjs b/dist/constants.mjs
+index 0a53d602cc17fc9ba2fad475ae2f41ce9cee980d..4c41505f79a5125d86d1ef19a473e70b805c59e2 100644
+--- a/dist/constants.mjs
++++ b/dist/constants.mjs
+@@ -37,6 +37,7 @@ export const TESTNET_TICKER_SYMBOLS = {
+     LINEA_GOERLI: 'LineaETH',
+     LINEA_SEPOLIA: 'LineaETH',
+     MEGAETH_TESTNET: 'MegaETH',
++    OPN_TESTNET: 'OPN',
+ };
+ /**
+  * Map of all built-in custom networks to their RPC endpoints.
+@@ -48,11 +49,28 @@ export const BUILT_IN_CUSTOM_NETWORKS_RPC = {
+     MEGAETH_TESTNET: 'https://carrot.megaeth.com/rpc',
+     'megaeth-testnet': 'https://carrot.megaeth.com/rpc',
+     'monad-testnet': 'https://testnet-rpc.monad.xyz',
++    'opn': 'https://testnet-rpc.iopn.tech',
++    'opn-testnet': 'https://testnet-rpc.iopn.tech',
+ };
+ /**
+  * Map of all build-in Infura networks to their network, ticker and chain IDs.
+  */
+ export const BUILT_IN_NETWORKS = {
++    [NetworkType['opn']]: {
++        chainId: ChainId['opn'],
++        ticker: NetworksTicker['opn'],
++        rpcPrefs: {
++            blockExplorerUrl: BlockExplorerUrl['opn'],
++        },
++    },
++    [NetworkType['opn-testnet']]: {
++        chainId: ChainId['opn-testnet'],
++        ticker: NetworksTicker['opn-testnet'],
++        rpcPrefs: {
++            blockExplorerUrl: BlockExplorerUrl['opn-testnet'],
++        },
++    },
++
+     [NetworkType.goerli]: {
+         chainId: ChainId.goerli,
+         ticker: NetworksTicker.goerli,
+@@ -177,6 +195,8 @@ export var ApprovalType;
+  * Note: MegaETH-testnet is intentionally excluded from this mapping as it doesn't support ENS.
+  */
+ export const CHAIN_ID_TO_ETHERS_NETWORK_NAME_MAP = {
++    [ChainId['opn']]: BuiltInNetworkName.OPN,
++    [ChainId['opn-testnet']]: BuiltInNetworkName.OPN_TESTNET,
+     [ChainId.goerli]: BuiltInNetworkName.Goerli,
+     [ChainId.sepolia]: BuiltInNetworkName.Sepolia,
+     [ChainId.mainnet]: BuiltInNetworkName.Mainnet,
+diff --git a/dist/types.cjs b/dist/types.cjs
+index 5b3d25bb9b601ee3f9dfada813dd7bb590b02bd1..fd2b67722a4c7a87781b111ee1744c87198f815d 100644
+--- a/dist/types.cjs
++++ b/dist/types.cjs
+@@ -1,5 +1,5 @@
+ "use strict";
+-Object.defineProperty(exports, "__esModule", { value: true });
++Object.defineProperty(exports, "__esModule", {value: true});
+ exports.NetworkNickname = exports.BlockExplorerUrl = exports.NetworksTicker = exports.ChainId = exports.BuiltInNetworkName = exports.isInfuraNetworkType = exports.isNetworkType = exports.NetworkType = exports.CustomNetworkType = exports.InfuraNetworkType = void 0;
+ /**
+  * The names of built-in Infura networks
+@@ -19,6 +19,8 @@ exports.InfuraNetworkType = {
+ exports.CustomNetworkType = {
+     'megaeth-testnet': 'megaeth-testnet',
+     'monad-testnet': 'monad-testnet',
++    'opn': 'opn',
++    'opn-testnet': 'opn-testnet',
+ };
+ /**
+  * The "network type"; either the name of a built-in network, or "rpc" for custom networks.
+@@ -28,6 +30,7 @@ exports.NetworkType = {
+     ...exports.CustomNetworkType,
+     rpc: 'rpc',
+ };
++
+ /**
+  * A helper to determine whether a given input is NetworkType.
+  *
+@@ -37,7 +40,9 @@ exports.NetworkType = {
+ function isNetworkType(val) {
+     return Object.values(exports.NetworkType).includes(val);
+ }
++
+ exports.isNetworkType = isNetworkType;
++
+ /**
+  * A type guard to determine whether the input is an InfuraNetworkType.
+  *
+@@ -49,6 +54,7 @@ function isInfuraNetworkType(value) {
+     const infuraNetworkTypes = Object.keys(exports.InfuraNetworkType);
+     return infuraNetworkTypes.includes(value);
+ }
++
+ exports.isInfuraNetworkType = isInfuraNetworkType;
+ /**
+  * Names of networks built into the wallet.
+@@ -67,6 +73,8 @@ var BuiltInNetworkName;
+     BuiltInNetworkName["MegaETHTestnet"] = "megaeth-testnet";
+     BuiltInNetworkName["MonadTestnet"] = "monad-testnet";
+     BuiltInNetworkName["BaseMainnet"] = "base-mainnet";
++    BuiltInNetworkName["OPN"] = "opn";
++    BuiltInNetworkName["OPNTestnet"] = "opn-testnet";
+ })(BuiltInNetworkName || (exports.BuiltInNetworkName = BuiltInNetworkName = {}));
+ /**
+  * Decimal string chain IDs of built-in networks, by name.
+@@ -76,6 +84,8 @@ var BuiltInNetworkName;
+ exports.ChainId = {
+     [BuiltInNetworkName.Mainnet]: '0x1',
+     [BuiltInNetworkName.Goerli]: '0x5',
++    [BuiltInNetworkName.OPN]: '0x3d8',
++    [BuiltInNetworkName.OPNTestnet]: '0x3d90',
+     [BuiltInNetworkName.Sepolia]: '0xaa36a7',
+     [BuiltInNetworkName.Aurora]: '0x4e454152',
+     [BuiltInNetworkName.LineaGoerli]: '0xe704',
+@@ -87,6 +97,9 @@ exports.ChainId = {
+ };
+ var NetworksTicker;
+ (function (NetworksTicker) {
++    NetworksTicker["opn"] = "OPN";
++    // eslint-disable-next-line @typescript-eslint/no-duplicate-enum-values
++    NetworksTicker["opn-testnet"] = "OPN";
+     NetworksTicker["mainnet"] = "ETH";
+     NetworksTicker["goerli"] = "GoerliETH";
+     NetworksTicker["sepolia"] = "SepoliaETH";
+@@ -103,6 +116,8 @@ var NetworksTicker;
+ })(NetworksTicker || (exports.NetworksTicker = NetworksTicker = {}));
+ exports.BlockExplorerUrl = {
+     [BuiltInNetworkName.Mainnet]: 'https://etherscan.io',
++    [BuiltInNetworkName.OPN]: 'https://testnet.iopn.tech',
++    [BuiltInNetworkName.OPNTestnet]: 'https://testnet.iopn.tech',
+     [BuiltInNetworkName.Goerli]: 'https://goerli.etherscan.io',
+     [BuiltInNetworkName.Sepolia]: 'https://sepolia.etherscan.io',
+     [BuiltInNetworkName.LineaGoerli]: 'https://goerli.lineascan.build',
+@@ -122,5 +137,7 @@ exports.NetworkNickname = {
+     [BuiltInNetworkName.MegaETHTestnet]: 'Mega Testnet',
+     [BuiltInNetworkName.MonadTestnet]: 'Monad Testnet',
+     [BuiltInNetworkName.BaseMainnet]: 'Base Mainnet',
++    [BuiltInNetworkName.OPN]: 'OPN',
++    [BuiltInNetworkName.OPNTestnet]: 'OPN Testnet',
+ };
+ //# sourceMappingURL=types.cjs.map
+\ No newline at end of file
+diff --git a/dist/types.d.cts b/dist/types.d.cts
+index 61a640582b3fc93d6eece49d04b63fa417ad61c0..40d982f69564fb84fb833451e9e5e66cc65fd082 100644
+--- a/dist/types.d.cts
++++ b/dist/types.d.cts
+@@ -17,6 +17,8 @@ export type InfuraNetworkType = (typeof InfuraNetworkType)[keyof typeof InfuraNe
+ export declare const CustomNetworkType: {
+     readonly 'megaeth-testnet': "megaeth-testnet";
+     readonly 'monad-testnet': "monad-testnet";
++    readonly 'opn': 'opn',
++    readonly 'opn-testnet': 'opn-testnet',
+ };
+ export type CustomNetworkType = (typeof CustomNetworkType)[keyof typeof CustomNetworkType];
+ /**
+@@ -27,6 +29,8 @@ export type BuiltInNetworkType = InfuraNetworkType | CustomNetworkType;
+  * The "network type"; either the name of a built-in network, or "rpc" for custom networks.
+  */
+ export declare const NetworkType: {
++    readonly 'opn': "opn";
++    readonly 'opn-testnet': "opn-testnet";
+     readonly rpc: "rpc";
+     readonly 'megaeth-testnet': "megaeth-testnet";
+     readonly 'monad-testnet': "monad-testnet";
+@@ -39,6 +43,7 @@ export declare const NetworkType: {
+     readonly 'base-mainnet': "base-mainnet";
+ };
+ export type NetworkType = (typeof NetworkType)[keyof typeof NetworkType];
++
+ /**
+  * A helper to determine whether a given input is NetworkType.
+  *
+@@ -46,6 +51,7 @@ export type NetworkType = (typeof NetworkType)[keyof typeof NetworkType];
+  * @returns boolean indicating whether or not the argument is NetworkType.
+  */
+ export declare function isNetworkType(val: string): val is NetworkType;
++
+ /**
+  * A type guard to determine whether the input is an InfuraNetworkType.
+  *
+@@ -54,6 +60,7 @@ export declare function isNetworkType(val: string): val is NetworkType;
+  * false otherwise.
+  */
+ export declare function isInfuraNetworkType(value: unknown): value is InfuraNetworkType;
++
+ /**
+  * Names of networks built into the wallet.
+  *
+@@ -69,8 +76,11 @@ export declare enum BuiltInNetworkName {
+     Aurora = "aurora",
+     MegaETHTestnet = "megaeth-testnet",
+     MonadTestnet = "monad-testnet",
+-    BaseMainnet = "base-mainnet"
++    BaseMainnet = "base-mainnet",
++    OPN = "opn",
++    OPNTestnet = "opn-testnet"
+ }
++
+ /**
+  * Decimal string chain IDs of built-in networks, by name.
+  *
+@@ -78,6 +88,8 @@ export declare enum BuiltInNetworkName {
+  */
+ export declare const ChainId: {
+     readonly mainnet: "0x1";
++    readonly opn: "0x3d8";
++    readonly "opn-testnet": "0x3d90";
+     readonly goerli: "0x5";
+     readonly sepolia: "0xaa36a7";
+     readonly aurora: "0x4e454152";
+@@ -89,7 +101,10 @@ export declare const ChainId: {
+     readonly "base-mainnet": "0x2105";
+ };
+ export type ChainId = (typeof ChainId)[keyof typeof ChainId];
++
+ export declare enum NetworksTicker {
++    'opn' = "OPN",
++    'opn-testnet' = "OPN",
+     mainnet = "ETH",
+     goerli = "GoerliETH",
+     sepolia = "SepoliaETH",
+@@ -101,7 +116,10 @@ export declare enum NetworksTicker {
+     'base-mainnet' = "ETH",
+     rpc = ""
+ }
++
+ export declare const BlockExplorerUrl: {
++    readonly "opn": "https://testnet.iopn.tech";
++    readonly "opn-testnet": "https://testnet.iopn.tech";
+     readonly mainnet: "https://etherscan.io";
+     readonly goerli: "https://goerli.etherscan.io";
+     readonly sepolia: "https://sepolia.etherscan.io";
+@@ -123,6 +141,8 @@ export declare const NetworkNickname: {
+     readonly "megaeth-testnet": "Mega Testnet";
+     readonly "monad-testnet": "Monad Testnet";
+     readonly "base-mainnet": "Base Mainnet";
++    readonly "opn": "OPN";
++    readonly "opn-testnet": "OPN Testnet";
+ };
+ export type NetworkNickname = (typeof NetworkNickname)[keyof typeof NetworkNickname];
+ /**
+@@ -152,12 +172,12 @@ export type TraceRequest = {
+ };
+ /** Callback that traces the performance of an operation. */
+ export type TraceCallback = <ReturnType>(
+-/** Request to trace the performance of an operation. */
+-request: TraceRequest,
+-/**
+- * Callback to trace.
+- * Thrown errors will not be caught, but the trace will still be recorded.
+- * @param context - The context in which the operation is running.
+- */
+-fn?: (context?: TraceContext) => ReturnType) => Promise<ReturnType>;
++    /** Request to trace the performance of an operation. */
++    request: TraceRequest,
++    /**
++     * Callback to trace.
++     * Thrown errors will not be caught, but the trace will still be recorded.
++     * @param context - The context in which the operation is running.
++     */
++    fn?: (context?: TraceContext) => ReturnType) => Promise<ReturnType>;
+ //# sourceMappingURL=types.d.cts.map
+\ No newline at end of file
+diff --git a/dist/types.d.mts b/dist/types.d.mts
+index 807177968cebcfb08fba8809714af86db4ca6619..b89038d2215d30addb286ffd1be0cec9ac315370 100644
+--- a/dist/types.d.mts
++++ b/dist/types.d.mts
+@@ -17,6 +17,8 @@ export type InfuraNetworkType = (typeof InfuraNetworkType)[keyof typeof InfuraNe
+ export declare const CustomNetworkType: {
+     readonly 'megaeth-testnet': "megaeth-testnet";
+     readonly 'monad-testnet': "monad-testnet";
++    readonly 'opn': 'opn',
++    readonly 'opn-testnet': 'opn-testnet',
+ };
+ export type CustomNetworkType = (typeof CustomNetworkType)[keyof typeof CustomNetworkType];
+ /**
+@@ -27,6 +29,8 @@ export type BuiltInNetworkType = InfuraNetworkType | CustomNetworkType;
+  * The "network type"; either the name of a built-in network, or "rpc" for custom networks.
+  */
+ export declare const NetworkType: {
++    readonly 'opn': "opn";
++    readonly 'opn-testnet': "opn-testnet";
+     readonly rpc: "rpc";
+     readonly 'megaeth-testnet': "megaeth-testnet";
+     readonly 'monad-testnet': "monad-testnet";
+@@ -39,6 +43,7 @@ export declare const NetworkType: {
+     readonly 'base-mainnet': "base-mainnet";
+ };
+ export type NetworkType = (typeof NetworkType)[keyof typeof NetworkType];
++
+ /**
+  * A helper to determine whether a given input is NetworkType.
+  *
+@@ -46,6 +51,7 @@ export type NetworkType = (typeof NetworkType)[keyof typeof NetworkType];
+  * @returns boolean indicating whether or not the argument is NetworkType.
+  */
+ export declare function isNetworkType(val: string): val is NetworkType;
++
+ /**
+  * A type guard to determine whether the input is an InfuraNetworkType.
+  *
+@@ -54,6 +60,7 @@ export declare function isNetworkType(val: string): val is NetworkType;
+  * false otherwise.
+  */
+ export declare function isInfuraNetworkType(value: unknown): value is InfuraNetworkType;
++
+ /**
+  * Names of networks built into the wallet.
+  *
+@@ -69,8 +76,11 @@ export declare enum BuiltInNetworkName {
+     Aurora = "aurora",
+     MegaETHTestnet = "megaeth-testnet",
+     MonadTestnet = "monad-testnet",
+-    BaseMainnet = "base-mainnet"
++    BaseMainnet = "base-mainnet",
++    OPN = "opn",
++    OPNTestnet = "opn-testnet"
+ }
++
+ /**
+  * Decimal string chain IDs of built-in networks, by name.
+  *
+@@ -78,6 +88,8 @@ export declare enum BuiltInNetworkName {
+  */
+ export declare const ChainId: {
+     readonly mainnet: "0x1";
++    readonly opn: "0x3d8";
++    readonly "opn-testnet": "0x3d90";
+     readonly goerli: "0x5";
+     readonly sepolia: "0xaa36a7";
+     readonly aurora: "0x4e454152";
+@@ -89,7 +101,10 @@ export declare const ChainId: {
+     readonly "base-mainnet": "0x2105";
+ };
+ export type ChainId = (typeof ChainId)[keyof typeof ChainId];
++
+ export declare enum NetworksTicker {
++    'opn' = "OPN",
++    'opn-testnet' = "OPN",
+     mainnet = "ETH",
+     goerli = "GoerliETH",
+     sepolia = "SepoliaETH",
+@@ -101,7 +116,10 @@ export declare enum NetworksTicker {
+     'base-mainnet' = "ETH",
+     rpc = ""
+ }
++
+ export declare const BlockExplorerUrl: {
++    readonly "opn": "https://testnet.iopn.tech";
++    readonly "opn-testnet": "https://testnet.iopn.tech";
+     readonly mainnet: "https://etherscan.io";
+     readonly goerli: "https://goerli.etherscan.io";
+     readonly sepolia: "https://sepolia.etherscan.io";
+@@ -123,6 +141,8 @@ export declare const NetworkNickname: {
+     readonly "megaeth-testnet": "Mega Testnet";
+     readonly "monad-testnet": "Monad Testnet";
+     readonly "base-mainnet": "Base Mainnet";
++    readonly "opn": "OPN";
++    readonly "opn-testnet": "OPN Testnet";
+ };
+ export type NetworkNickname = (typeof NetworkNickname)[keyof typeof NetworkNickname];
+ /**
+@@ -152,12 +172,12 @@ export type TraceRequest = {
+ };
+ /** Callback that traces the performance of an operation. */
+ export type TraceCallback = <ReturnType>(
+-/** Request to trace the performance of an operation. */
+-request: TraceRequest,
+-/**
+- * Callback to trace.
+- * Thrown errors will not be caught, but the trace will still be recorded.
+- * @param context - The context in which the operation is running.
+- */
+-fn?: (context?: TraceContext) => ReturnType) => Promise<ReturnType>;
++    /** Request to trace the performance of an operation. */
++    request: TraceRequest,
++    /**
++     * Callback to trace.
++     * Thrown errors will not be caught, but the trace will still be recorded.
++     * @param context - The context in which the operation is running.
++     */
++    fn?: (context?: TraceContext) => ReturnType) => Promise<ReturnType>;
+ //# sourceMappingURL=types.d.mts.map
+\ No newline at end of file
+diff --git a/dist/types.mjs b/dist/types.mjs
+index 0ddef86289bc7ee417fe8675fc5f985ba895f063..62a1cfd4602d17f2f6105f17900d9cf828fe06de 100644
+--- a/dist/types.mjs
++++ b/dist/types.mjs
+@@ -16,6 +16,8 @@ export const InfuraNetworkType = {
+ export const CustomNetworkType = {
+     'megaeth-testnet': 'megaeth-testnet',
+     'monad-testnet': 'monad-testnet',
++    'opn': 'opn',
++    'opn-testnet': 'opn-testnet',
+ };
+ /**
+  * The "network type"; either the name of a built-in network, or "rpc" for custom networks.
+@@ -62,6 +64,8 @@ export var BuiltInNetworkName;
+     BuiltInNetworkName["MegaETHTestnet"] = "megaeth-testnet";
+     BuiltInNetworkName["MonadTestnet"] = "monad-testnet";
+     BuiltInNetworkName["BaseMainnet"] = "base-mainnet";
++    BuiltInNetworkName["OPN"] = "opn";
++    BuiltInNetworkName["OPNTestnet`"] = "opn-testnet";
+ })(BuiltInNetworkName || (BuiltInNetworkName = {}));
+ /**
+  * Decimal string chain IDs of built-in networks, by name.
+@@ -71,6 +75,8 @@ export var BuiltInNetworkName;
+ export const ChainId = {
+     [BuiltInNetworkName.Mainnet]: '0x1',
+     [BuiltInNetworkName.Goerli]: '0x5',
++    [BuiltInNetworkName.OPN]: '0x3d8',
++    [BuiltInNetworkName.OPNTestnet]: '0x3d90',
+     [BuiltInNetworkName.Sepolia]: '0xaa36a7',
+     [BuiltInNetworkName.Aurora]: '0x4e454152',
+     [BuiltInNetworkName.LineaGoerli]: '0xe704',
+@@ -83,6 +89,9 @@ export const ChainId = {
+ export var NetworksTicker;
+ (function (NetworksTicker) {
+     NetworksTicker["mainnet"] = "ETH";
++    NetworksTicker["opn"] = "OPN";
++    // eslint-disable-next-line @typescript-eslint/no-duplicate-enum-values
++    NetworksTicker["opn-testnet"] = "OPN";
+     NetworksTicker["goerli"] = "GoerliETH";
+     NetworksTicker["sepolia"] = "SepoliaETH";
+     NetworksTicker["linea-goerli"] = "LineaETH";
+@@ -98,6 +107,8 @@ export var NetworksTicker;
+ })(NetworksTicker || (NetworksTicker = {}));
+ export const BlockExplorerUrl = {
+     [BuiltInNetworkName.Mainnet]: 'https://etherscan.io',
++    [BuiltInNetworkName.OPN]: 'https://testnet.iopn.tech',
++    [BuiltInNetworkName.OPNTestnet]: 'https://testnet.iopn.tech',
+     [BuiltInNetworkName.Goerli]: 'https://goerli.etherscan.io',
+     [BuiltInNetworkName.Sepolia]: 'https://sepolia.etherscan.io',
+     [BuiltInNetworkName.LineaGoerli]: 'https://goerli.lineascan.build',
+@@ -117,5 +128,7 @@ export const NetworkNickname = {
+     [BuiltInNetworkName.MegaETHTestnet]: 'Mega Testnet',
+     [BuiltInNetworkName.MonadTestnet]: 'Monad Testnet',
+     [BuiltInNetworkName.BaseMainnet]: 'Base Mainnet',
++    [BuiltInNetworkName.OPN]: 'OPN',
++    [BuiltInNetworkName.OPNTestnet]: 'OPN Testnet',
+ };
+ //# sourceMappingURL=types.mjs.map
+\ No newline at end of file
