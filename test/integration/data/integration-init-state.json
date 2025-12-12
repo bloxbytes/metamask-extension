@@ -760,8 +760,8 @@
       "name": "Chain 5",
       "nativeCurrency": "ETH"
     },
-    "0x3d9": {
-      "chainId": "0x3d9",
+    "0x3d8": {
+      "chainId": "0x3d8",
       "rpcEndpoints": [
         {
           "networkClientId": "opn-network-client-id",
@@ -772,20 +772,20 @@
       ],
       "defaultRpcEndpointIndex": 0,
       "blockExplorerUrls": [
-        "https://mainnet.iopn.tech"
+        "https://testnet.iopn.tech"
       ],
       "defaultBlockExplorerUrlIndex": 0,
-      "name": "IOPN",
+      "name": "OPN Testnet",
       "nativeCurrency": "OPN"
     },
-    "0x3d8": {
-      "chainId": "0x3d8",
+    "0x3d90": {
+      "chainId": "0x3d90",
       "rpcEndpoints": [
         {
           "networkClientId": "opn-testnet-network-client-id",
           "url": "https://testnet-rpc.iopn.tech",
           "type": "custom",
-          "name": "IOPN Testnet"
+          "name": "OPN Testnet"
         }
       ],
       "defaultRpcEndpointIndex": 0,
@@ -793,7 +793,7 @@
         "https://testnet.iopn.tech"
       ],
       "defaultBlockExplorerUrlIndex": 0,
-      "name": "IOPN Testnet",
+      "name": "OPN Testnet",
       "nativeCurrency": "OPN"
     }
   },

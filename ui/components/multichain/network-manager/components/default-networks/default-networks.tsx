@@ -24,9 +24,9 @@ import {
   TextVariant,
 } from '../../../../../helpers/constants/design-system';
 import {
-  setEnabledAllPopularNetworks,
+  // setEnabledAllPopularNetworks,
   hideModal,
-  setActiveNetwork,
+  // setActiveNetwork,
 } from '../../../../../store/actions';
 import {
   AvatarNetwork,
@@ -35,7 +35,7 @@ import {
   ButtonIcon,
   ButtonIconSize,
   IconName,
-  IconSize,
+  // IconSize,
   Text,
 } from '../../../../component-library';
 import { NetworkListItem } from '../../../network-list-item';
@@ -45,13 +45,13 @@ import { useNetworkItemCallbacks } from '../../hooks/useNetworkItemCallbacks';
 import { useNetworkManagerState } from '../../hooks/useNetworkManagerState';
 import { AdditionalNetworksInfo } from '../additional-networks-info';
 import { getMultichainIsEvm } from '../../../../../selectors/multichain';
-import { getAllEnabledNetworksForAllNamespaces } from '../../../../../selectors';
 import { useI18nContext } from '../../../../../hooks/useI18nContext';
 import {
   getOrderedNetworksList,
   getMultichainNetworkConfigurationsByChainId,
   getIsMultichainAccountsState2Enabled,
   getSelectedInternalAccount,
+  getAllEnabledNetworksForAllNamespaces,
 } from '../../../../../selectors';
 import { getInternalAccountBySelectedAccountGroupAndCaip } from '../../../../../selectors/multichain-accounts/account-tree';
 
@@ -138,28 +138,28 @@ const DefaultNetworks = memo(() => {
   );
 
   // Use useCallback for stable function references
-  const selectAllDefaultNetworks = useCallback(() => {
-    const evmNetworksList = orderedNetworks.filter((network) => network.isEvm);
-
-    if (evmNetworksList.length === 0) {
-      return;
-    }
-
-    // Use the first EVM network's chain ID for getting RPC data
-    const firstEvmChainId = evmNetworksList[0].chainId;
-    const { defaultRpcEndpoint } = getRpcDataByChainId(
-      firstEvmChainId,
-      evmNetworks,
-    );
-    const finalNetworkClientId = defaultRpcEndpoint.networkClientId;
-
-    dispatch(setEnabledAllPopularNetworks());
-    dispatch(hideModal());
-    // deferring execution to keep select all unblocked
-    setTimeout(() => {
-      dispatch(setActiveNetwork(finalNetworkClientId));
-    }, 0);
-  }, [dispatch, evmNetworks, orderedNetworks]);
+  // const selectAllDefaultNetworks = useCallback(() => {
+  //   const evmNetworksList = orderedNetworks.filter((network) => network.isEvm);
+  //
+  //   if (evmNetworksList.length === 0) {
+  //     return;
+  //   }
+  //
+  //   // Use the first EVM network's chain ID for getting RPC data
+  //   const firstEvmChainId = evmNetworksList[0].chainId;
+  //   const { defaultRpcEndpoint } = getRpcDataByChainId(
+  //     firstEvmChainId,
+  //     evmNetworks,
+  //   );
+  //   const finalNetworkClientId = defaultRpcEndpoint.networkClientId;
+  //
+  //   dispatch(setEnabledAllPopularNetworks());
+  //   dispatch(hideModal());
+  //   // deferring execution to keep select all unblocked
+  //   setTimeout(() => {
+  //     dispatch(setActiveNetwork(finalNetworkClientId));
+  //   }, 0);
+  // }, [dispatch, evmNetworks, orderedNetworks]);
 
   // Memoize the network change handler to avoid recreation
   const handleNetworkChangeCallback = useCallback(
@@ -330,14 +330,32 @@ const DefaultNetworks = memo(() => {
           <Box
             className="network-manager__all-popular-networks"
             data-testid="network-manager-select-all"
+            paddingTop={2}
+            paddingRight={4}
+            paddingLeft={4}
           >
-            <NetworkListItem
-              name={t('allPopularNetworks')}
-              onClick={selectAllDefaultNetworks}
-              iconSrc={IconName.Global}
-              iconSize={IconSize.Xl}
-              selected={isAllPopularNetworksSelected}
-            />
+            {/* <NetworkListItem*/}
+            {/*  name={t('allPopularNetworks')}*/}
+            {/*  onClick={selectAllDefaultNetworks}*/}
+            {/*  iconSrc={IconName.Global}*/}
+            {/*  iconSize={IconSize.Xl}*/}
+            {/*  selected={isAllPopularNetworksSelected}*/}
+            {/* />*/}
+            <Box
+              display={Display.Flex}
+              justifyContent={JustifyContent.spaceBetween}
+            >
+              {/* Container for the "Additional Networks" text and info icon */}
+              <Box display={Display.InlineFlex}>
+                {/* Label text - uses translation key "additionalNetworks" */}
+                <Text
+                  color={TextColor.textAlternative}
+                  variant={TextVariant.bodyMdMedium}
+                >
+                  {t('popularNetworks')}
+                </Text>
+              </Box>
+            </Box>
           </Box>
         ) : null}
         {networkListItems}

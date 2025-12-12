@@ -16,9 +16,7 @@ import {
   CHAIN_IDS,
   CURRENCY_SYMBOLS,
   getFailoverUrlsForInfuraNetwork,
-  OPN_TESTNET_DISPLAY_NAME,
   OPN_DISPLAY_NAME,
-  OPN_TESTNET_RPC_URL,
   OPN_MAINNET_RPC_URL,
 } from '../../../shared/constants/network';
 import { captureException } from '../../../shared/lib/sentry';
@@ -32,7 +30,7 @@ export const ADDITIONAL_DEFAULT_NETWORKS = [
   ChainId['megaeth-testnet'],
   ChainId['monad-testnet'],
   ChainId.opn,
-  ChainId['opn-testnet'],
+  // ChainId['opn-testnet'],
 ];
 
 function getInitialState(initialState?: Partial<NetworkController['state']>) {
@@ -49,23 +47,23 @@ function getInitialState(initialState?: Partial<NetworkController['state']>) {
     // --- BEGIN CUSTOM OPN TESTNET INSERTION --- //
 
     // Only add if it does not already exist
-    if (!networks[CHAIN_IDS.OPN_TESTNET]) {
-      networks[CHAIN_IDS.OPN_TESTNET] = {
-        chainId: CHAIN_IDS.OPN_TESTNET,
-        name: OPN_TESTNET_DISPLAY_NAME, // from your constants
-        nativeCurrency: CURRENCY_SYMBOLS.OPN,
-        blockExplorerUrls: ['https://testnet.iopn.tech'],
-        defaultRpcEndpointIndex: 0,
-        rpcEndpoints: [
-          {
-            networkClientId: `opn-testnet-network-client-id`,
-            url: OPN_TESTNET_RPC_URL,
-            type: RpcEndpointType.Custom,
-            failoverUrls: [],
-          },
-        ],
-      };
-    }
+    // if (!networks[CHAIN_IDS.OPN_TESTNET]) {
+    //   networks[CHAIN_IDS.OPN_TESTNET] = {
+    //     chainId: CHAIN_IDS.OPN_TESTNET,
+    //     name: OPN_TESTNET_DISPLAY_NAME, // from your constants
+    //     nativeCurrency: CURRENCY_SYMBOLS.OPN,
+    //     blockExplorerUrls: ['https://testnet.iopn.tech'],
+    //     defaultRpcEndpointIndex: 0,
+    //     rpcEndpoints: [
+    //       {
+    //         networkClientId: `opn-testnet-network-client-id`,
+    //         url: OPN_TESTNET_RPC_URL,
+    //         type: RpcEndpointType.Custom,
+    //         failoverUrls: [],
+    //       },
+    //     ],
+    //   };
+    // }
 
     // OPN MAINNET
     if (!networks[CHAIN_IDS.OPN]) {
@@ -135,7 +133,7 @@ function getInitialState(initialState?: Partial<NetworkController['state']>) {
       process.env.METAMASK_DEBUG ||
       process.env.METAMASK_ENVIRONMENT === 'test'
     ) {
-      network = networks[CHAIN_IDS.OPN_TESTNET];
+      network = networks[CHAIN_IDS.OPN];
     } else {
       network = networks[CHAIN_IDS.OPN];
     }

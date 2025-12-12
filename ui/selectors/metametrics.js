@@ -11,8 +11,12 @@ export const getParticipateInMetaMetrics = (state) =>
   Boolean(state.metamask.participateInMetaMetrics);
 
 // return true if user has set their participation preference in MetaMetrics or if they are a social login user
-export const getIsParticipateInMetaMetricsSet = (state) =>
-  state.metamask.participateInMetaMetrics !== null;
+// export const getIsParticipateInMetaMetricsSet = (state) =>
+//   state.metamask.participateInMetaMetrics !== null
+//
+//   ;
+
+export const getIsParticipateInMetaMetricsSet = () => true;
 
 export const getLatestMetricsEventTimestamp = (state) =>
   state.metamask.latestNonAnonymousEventTimestamp;

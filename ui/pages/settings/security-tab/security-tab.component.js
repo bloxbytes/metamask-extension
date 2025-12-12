@@ -62,8 +62,8 @@ import {
 import { updateDataDeletionTaskStatus } from '../../../store/actions';
 import ZENDESK_URLS from '../../../helpers/constants/zendesk-url';
 import { getIsSeedlessOnboardingFeatureEnabled } from '../../../../shared/modules/environment';
-import MetametricsToggle from './metametrics-toggle';
-import DeleteMetametricsDataButton from './delete-metametrics-data-button';
+// import MetametricsToggle from './metametrics-toggle';
+// import DeleteMetametricsDataButton from './delete-metametrics-data-button';
 
 export default class SecurityTab extends PureComponent {
   static contextTypes = {
@@ -1339,7 +1339,7 @@ export default class SecurityTab extends PureComponent {
   };
 
   render() {
-    const { petnamesEnabled, dataCollectionForMarketing } = this.props;
+    const { petnamesEnabled } = this.props;
     const { showDataCollectionDisclaimer } = this.state;
 
     return (
@@ -1420,19 +1420,19 @@ export default class SecurityTab extends PureComponent {
           </>
         )}
 
-        <span className="settings-page__security-tab-sub-header">
-          {this.context.t('metrics')}
-        </span>
-        <div className="settings-page__content-padded">
-          <MetametricsToggle
-            dataCollectionForMarketing={dataCollectionForMarketing}
-            setDataCollectionForMarketing={this.toggleDataCollectionForMarketing.bind(
-              this,
-            )}
-          />
-          {this.renderDataCollectionForMarketing()}
-          <DeleteMetametricsDataButton ref={this.settingsRefs[20]} />
-        </div>
+        {/* <span className="settings-page__security-tab-sub-header"> */}
+        {/*   {this.context.t('metrics')} */}
+        {/* </span> */}
+        {/* <div className="settings-page__content-padded"> */}
+        {/*   <MetametricsToggle */}
+        {/*     dataCollectionForMarketing={dataCollectionForMarketing} */}
+        {/*     setDataCollectionForMarketing={this.toggleDataCollectionForMarketing.bind( */}
+        {/*       this, */}
+        {/*     )} */}
+        {/*   /> */}
+        {/*   {this.renderDataCollectionForMarketing()} */}
+        {/*   <DeleteMetametricsDataButton ref={this.settingsRefs[20]} /> */}
+        {/* </div> */}
       </div>
     );
   }

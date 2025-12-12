@@ -346,6 +346,9 @@
   "additionalNetworks": {
     "message": "Additional networks"
   },
+  "popularNetworks": {
+    "message": "Popular networks"
+  },
   "address": {
     "message": "Address"
   },
