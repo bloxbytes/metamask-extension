@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useMemo } from 'react';
 import {
   Box,
   ButtonIcon,
@@ -6,10 +6,20 @@ import {
   FormTextFieldSize,
   IconName,
   InputType,
+  Text,
+  Icon,
+  IconSize,
 } from '../../component-library';
 import { useI18nContext } from '../../../hooks/useI18nContext';
 import { PASSWORD_MIN_LENGTH } from '../../../helpers/constants/common';
-import { TextColor } from '../../../helpers/constants/design-system';
+import {
+  TextColor,
+  Display,
+  FlexDirection,
+  AlignItems,
+  TextVariant,
+  IconColor,
+} from '../../../helpers/constants/design-system';
 
 type PasswordFormProps = {
   onChange: (password: string) => void;
@@ -31,7 +41,9 @@ export default function PasswordForm({
 
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [confirmPasswordError, setConfirmPasswordError] = useState('');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [passwordLengthError, setPasswordLengthError] = useState(false);
 
   const handlePasswordChange = useCallback(
@@ -82,10 +94,29 @@ export default function PasswordForm({
     }
   }, [password.length]);
 
+  // Password requirements validation
+  const passwordRequirements = useMemo(() => {
+    const hasMinLength = password.length >= 8;
+    const hasUppercase = /[A-Z]/u.test(password);
+    const hasLowercase = /[a-z]/u.test(password);
+    const hasNumber = /[0-9]/u.test(password);
+    const hasSpecialChar = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/u.test(
+      password,
+    );
+
+    return {
+      hasMinLength,
+      hasUppercase,
+      hasLowercase,
+      hasNumber,
+      hasSpecialChar,
+    };
+  }, [password]);
+
   return (
-    <Box>
+    <Box className="password-form">
       <FormTextField
-        label={t('newPasswordCreate')}
+        label="Password"
         id="create-password-new"
         autoFocus
         autoComplete
@@ -94,6 +125,7 @@ export default function PasswordForm({
         inputProps={{
           'data-testid': pwdInputTestId || 'create-password-new-input',
           type: showPassword ? InputType.Text : InputType.Password,
+          placeholder: 'Enter your password',
         }}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           handlePasswordChange(e.target.value);
@@ -102,9 +134,9 @@ export default function PasswordForm({
           color: TextColor.textAlternative,
           'data-testid': 'short-password-error',
         }}
-        helpText={t('passwordNotLongEnough')}
+        helpText="" // Hide error message - requirements list shows validation
         onBlur={handlePasswordBlur}
-        error={passwordLengthError}
+        error={false} // Don't show red border - requirements list handles validation
         endAccessory={
           <ButtonIcon
             iconName={showPassword ? IconName.EyeSlash : IconName.Eye}
@@ -122,21 +154,22 @@ export default function PasswordForm({
       />
 
       <FormTextField
-        label={t('confirmPassword')}
+        label="Confirm Password"
         id="create-password-confirm"
         autoComplete
         marginTop={4}
         size={FormTextFieldSize.Lg}
-        error={Boolean(confirmPasswordError)}
+        error={false} // Don't show red border - requirements list handles validation
         helpTextProps={{
           'data-testid': 'confirm-password-error',
         }}
-        helpText={confirmPasswordError}
+        helpText="" // Hide error message - requirements list shows validation
         value={confirmPassword}
         inputProps={{
           'data-testid':
             confirmPwdInputTestId || 'create-password-confirm-input',
           type: showConfirmPassword ? InputType.Text : InputType.Password,
+          placeholder: 'Confirm your password',
         }}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           handleConfirmPasswordChange(e.target.value);
@@ -158,6 +191,224 @@ export default function PasswordForm({
           />
         }
       />
+
+      {/* Password Requirements List */}
+      <Box marginTop={4} className="password-form__requirements">
+        <Text
+          variant={TextVariant.bodySm}
+          color={TextColor.textAlternative}
+          marginBottom={3}
+          className="password-form__requirements-title"
+        >
+          Password must contain:
+        </Text>
+        <Box
+          display={Display.Flex}
+          flexDirection={FlexDirection.Column}
+          gap={2}
+        >
+          <Box
+            display={Display.Flex}
+            flexDirection={FlexDirection.Row}
+            alignItems={AlignItems.center}
+            gap={2}
+          >
+            <Icon
+              name={
+                passwordRequirements.hasMinLength
+                  ? IconName.CheckBold
+                  : IconName.FullCircle
+              }
+              size={IconSize.Sm}
+              color={
+                passwordRequirements.hasMinLength
+                  ? IconColor.primaryDefault
+                  : IconColor.iconMuted
+              }
+              className={
+                passwordRequirements.hasMinLength
+                  ? 'password-form__icon-checked'
+                  : 'password-form__icon-unchecked'
+              }
+            />
+            <Text
+              variant={TextVariant.bodySm}
+              color={
+                passwordRequirements.hasMinLength
+                  ? TextColor.primaryDefault
+                  : TextColor.textAlternative
+              }
+              className={
+                passwordRequirements.hasMinLength
+                  ? 'password-form__text-checked'
+                  : 'password-form__text-unchecked'
+              }
+            >
+              At least 8 characters
+            </Text>
+          </Box>
+          <Box
+            display={Display.Flex}
+            flexDirection={FlexDirection.Row}
+            alignItems={AlignItems.center}
+            gap={2}
+          >
+            <Icon
+              name={
+                passwordRequirements.hasUppercase
+                  ? IconName.CheckBold
+                  : IconName.FullCircle
+              }
+              size={IconSize.Sm}
+              color={
+                passwordRequirements.hasUppercase
+                  ? IconColor.primaryDefault
+                  : IconColor.iconMuted
+              }
+              className={
+                passwordRequirements.hasUppercase
+                  ? 'password-form__icon-checked'
+                  : 'password-form__icon-unchecked'
+              }
+            />
+            <Text
+              variant={TextVariant.bodySm}
+              color={
+                passwordRequirements.hasUppercase
+                  ? TextColor.primaryDefault
+                  : TextColor.textAlternative
+              }
+              className={
+                passwordRequirements.hasUppercase
+                  ? 'password-form__text-checked'
+                  : 'password-form__text-unchecked'
+              }
+            >
+              Contains uppercase letter
+            </Text>
+          </Box>
+          <Box
+            display={Display.Flex}
+            flexDirection={FlexDirection.Row}
+            alignItems={AlignItems.center}
+            gap={2}
+          >
+            <Icon
+              name={
+                passwordRequirements.hasLowercase
+                  ? IconName.CheckBold
+                  : IconName.FullCircle
+              }
+              size={IconSize.Sm}
+              color={
+                passwordRequirements.hasLowercase
+                  ? IconColor.primaryDefault
+                  : IconColor.iconMuted
+              }
+              className={
+                passwordRequirements.hasLowercase
+                  ? 'password-form__icon-checked'
+                  : 'password-form__icon-unchecked'
+              }
+            />
+            <Text
+              variant={TextVariant.bodySm}
+              color={
+                passwordRequirements.hasLowercase
+                  ? TextColor.primaryDefault
+                  : TextColor.textAlternative
+              }
+              className={
+                passwordRequirements.hasLowercase
+                  ? 'password-form__text-checked'
+                  : 'password-form__text-unchecked'
+              }
+            >
+              Contains lowercase letter
+            </Text>
+          </Box>
+          <Box
+            display={Display.Flex}
+            flexDirection={FlexDirection.Row}
+            alignItems={AlignItems.center}
+            gap={2}
+          >
+            <Icon
+              name={
+                passwordRequirements.hasNumber
+                  ? IconName.CheckBold
+                  : IconName.FullCircle
+              }
+              size={IconSize.Sm}
+              color={
+                passwordRequirements.hasNumber
+                  ? IconColor.primaryDefault
+                  : IconColor.iconMuted
+              }
+              className={
+                passwordRequirements.hasNumber
+                  ? 'password-form__icon-checked'
+                  : 'password-form__icon-unchecked'
+              }
+            />
+            <Text
+              variant={TextVariant.bodySm}
+              color={
+                passwordRequirements.hasNumber
+                  ? TextColor.primaryDefault
+                  : TextColor.textAlternative
+              }
+              className={
+                passwordRequirements.hasNumber
+                  ? 'password-form__text-checked'
+                  : 'password-form__text-unchecked'
+              }
+            >
+              Contains number
+            </Text>
+          </Box>
+          <Box
+            display={Display.Flex}
+            flexDirection={FlexDirection.Row}
+            alignItems={AlignItems.center}
+            gap={2}
+          >
+            <Icon
+              name={
+                passwordRequirements.hasSpecialChar
+                  ? IconName.CheckBold
+                  : IconName.FullCircle
+              }
+              size={IconSize.Sm}
+              color={
+                passwordRequirements.hasSpecialChar
+                  ? IconColor.primaryDefault
+                  : IconColor.iconMuted
+              }
+              className={
+                passwordRequirements.hasSpecialChar
+                  ? 'password-form__icon-checked'
+                  : 'password-form__icon-unchecked'
+              }
+            />
+            <Text
+              variant={TextVariant.bodySm}
+              color={
+                passwordRequirements.hasSpecialChar
+                  ? TextColor.primaryDefault
+                  : TextColor.textAlternative
+              }
+              className={
+                passwordRequirements.hasSpecialChar
+                  ? 'password-form__text-checked'
+                  : 'password-form__text-unchecked'
+              }
+            >
+              Contains special character
+            </Text>
+          </Box>
+        </Box>
+      </Box>
     </Box>
   );
 }

@@ -1,0 +1,22 @@
+/*
+  Color Overrides
+
+  This file allows you to override design token colors.
+  Import this file AFTER @metamask/design-tokens/dist/styles to override values.
+
+  Usage:
+  Define your color overrides here using CSS custom properties.
+*/
+
+:root {
+  /* Override accent02-dark color */
+  --color-accent02-dark: #000;
+  --color-accent02-light: #fff;
+
+  /* Add more color overrides below as needed */
+  /* Example:
+  --color-accent02-light: #your-light-color-value;
+  --color-accent03-dark: #your-color-value;
+  */
+}
+

@@ -32,25 +32,141 @@
 .welcome-login {
   height: calc(100% - 16px);
   max-height: 728px;
-  width: 446px;
-  background-color: var(--color-accent02-light);
+  width: 553px;
+  // background-color: var(--color-accent02-light);
   border-radius: 24px;
   box-shadow: var(--shadow-size-md) var(--color-shadow-default);
+  background-color: transparent;
+  position: relative;
+  z-index: 1;
+
+  // Background blur effects overlay
+  &__background-effects {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  // Blur circle base styles
+  &__blur-circle {
+    position: absolute;
+    width: 384px;
+    height: 384px;
+    border-radius: 50%;
+    filter: blur(64px);
+    opacity: 0.2;
+
+    &--top-left {
+      top: 25%; // top-1/4
+      left: -128px; // -left-32 (-8rem = -128px)
+      background: linear-gradient(135deg, #4105b6 0%, #6305b6 100%);
+    }
+
+    &--bottom-right {
+      bottom: 25%;
+      right: -128px;
+      background: linear-gradient(45deg, #2280cd 0%, #b0efff 100%);
+    }
+
+    &--center {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(99, 5, 182, 0.6) 0%, rgba(99, 5, 182, 0.3) 50%, transparent 100%);
+      opacity: 0.6;
+    }
+  }
 
   &__content {
     flex: 1;
+    position: relative;
+    z-index: 1;
+    overflow: visible; // Prevent text clipping
+    min-height: 0; // Allow flex shrinking
+  }
+
+  &__mascotImg {
+    border-radius: 9999px; // rounded-full
+    position: relative; // relative
+    z-index: 10; // z-10
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); // shadow-2xl
+    // ring-4 ring-[#b0efff]/30
+    box-shadow: 0 0 0 4px rgba(176, 239, 255, 0.3), 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    outline-color: color-mix( var(.708 0 0, #b0efff) 50%, transparent);
+    margin-top: 20px;
   }
 
   &__title {
     font-family: var(--font-family-accent);
-    font-size: 40px;
-    color: var(--color-accent02-dark);
-    line-height: 1em;
+    font-size: 2.25rem;
+    margin-block: 2rem;
+    background: linear-gradient(90deg, #f8fdf1 0%, #b0efff 50%, #f8fdf1 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    line-height: 1.2;
+    overflow: visible;
+
   }
 
-  &__mascot {
-    &--image {
-      margin-bottom: 60px;
+  // Primary button with purple gradient
+  &__button-primary {
+    width: 100%;
+    border-radius: calc(.625rem + 4px);
+    background: linear-gradient(90deg, #4305B2 0%, #6304B2 100%);
+    border: none;
+    color: #f8fdf1;
+    padding-inline: 32px;
+    padding-block: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 25px 50px -12px rgba(65, 5, 182, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    height: auto;
+
+    &:hover {
+      background: linear-gradient(90deg, #6305b6 0%, #4105b6 100%);
+      box-shadow: 0 25px 50px -12px rgba(65, 5, 182, 0.7);
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(1.02);
+    }
+
+    // Icon color
+    .mm-icon {
+      color: #f8fdf1;
+    }
+  }
+
+  // Secondary button with black background and purple border
+  &__button-secondary {
+    width: 100%;
+    background-color: transparent;
+    color: #b0efff;
+    padding-inline: 32px;
+    padding-block: 16px;
+    border-radius: calc(.625rem + 4px);
+    font-size: 18px;
+    border-width: 2px;
+    border-color: #4105b6;
+    border-style: solid;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    font-weight: 400;
+    height: auto;
+
+    &:hover {
+      background: linear-gradient(0deg, rgba(65, 5, 182, 0.14) 0%, rgba(65, 5, 182, 0.33) 100%), #000;
+    }
+
+    &:active {
+      background-color: rgba(65, 5, 182, 0.3);
     }
   }
 }

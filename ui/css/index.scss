@@ -33,3 +33,15 @@
 @import 'react-tippy/dist/tippy';
 @import '@metamask/design-tokens/dist/styles';
 
+/*
+  Color Overrides
+  Import after design tokens to override color values
+*/
+@import './utilities/color-overrides.scss';
+
+/*
+  Font Overrides
+  Import after design tokens to override font-family and font-size globally
+*/
+@import './utilities/font-overrides.scss';
+

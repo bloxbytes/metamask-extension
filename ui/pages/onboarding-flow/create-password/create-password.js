@@ -9,11 +9,9 @@ import {
   TextVariant,
   TextColor,
   BlockSize,
-  IconColor,
   Display,
   FlexDirection,
-  BackgroundColor,
-  BorderRadius,
+  TextAlign,
 } from '../../../helpers/constants/design-system';
 import {
   ONBOARDING_COMPLETION_ROUTE,
@@ -23,7 +21,8 @@ import {
   ONBOARDING_REVIEW_SRP_ROUTE,
   ONBOARDING_WELCOME_ROUTE,
 } from '../../../helpers/constants/routes';
-import ZENDESK_URLS from '../../../helpers/constants/zendesk-url';
+// Commented out - not used since terms container is commented
+// import ZENDESK_URLS from '../../../helpers/constants/zendesk-url';
 import {
   getFirstTimeFlowType,
   getCurrentKeyring,
@@ -42,11 +41,8 @@ import {
 import {
   Box,
   Button,
-  ButtonIcon,
-  ButtonIconSize,
   ButtonSize,
   ButtonVariant,
-  Checkbox,
   IconName,
   Text,
 } from '../../../components/component-library';
@@ -71,7 +67,7 @@ export default function CreatePassword({
 }) {
   const t = useI18nContext();
   const [password, setPassword] = useState('');
-  const [termsChecked, setTermsChecked] = useState(false);
+  const [termsChecked] = useState(false);
   const [newAccountCreationInProgress, setNewAccountCreationInProgress] =
     useState(false);
   const navigate = useNavigate();
@@ -143,18 +139,19 @@ export default function CreatePassword({
     isParticipateInMetaMetricsSet,
   ]);
 
-  const handleLearnMoreClick = (event) => {
-    event.stopPropagation();
-    trackEvent({
-      category: MetaMetricsEventCategory.Onboarding,
-      event: MetaMetricsEventName.ExternalLinkClicked,
-      properties: {
-        text: 'Learn More',
-        location: 'create_password',
-        url: ZENDESK_URLS.PASSWORD_ARTICLE,
-      },
-    });
-  };
+  // Commented out - not used since terms container is commented
+  // const handleLearnMoreClick = (event) => {
+  //   event.stopPropagation();
+  //   trackEvent({
+  //     category: MetaMetricsEventCategory.Onboarding,
+  //     event: MetaMetricsEventName.ExternalLinkClicked,
+  //     properties: {
+  //       text: 'Learn More',
+  //       location: 'create_password',
+  //       url: ZENDESK_URLS.PASSWORD_ARTICLE,
+  //     },
+  //   });
+  // };
 
   // Helper function to determine account type for analytics
   const getAccountType = (baseType, includesSocialLogin = false) => {
@@ -329,137 +326,159 @@ export default function CreatePassword({
     }
   };
 
-  const createPasswordLink = (
-    <a
-      onClick={handleLearnMoreClick}
-      key="create-password__link-text"
-      href={ZENDESK_URLS.PASSWORD_ARTICLE}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <span className="create-password__link-text">
-        {t('learnMoreUpperCaseWithDot')}
-      </span>
-    </a>
-  );
+  // Commented out - not used since terms container is commented
+  // const createPasswordLink = (
+  //   <a
+  //     onClick={handleLearnMoreClick}
+  //     key="create-password__link-text"
+  //     href={ZENDESK_URLS.PASSWORD_ARTICLE}
+  //     target="_blank"
+  //     rel="noopener noreferrer"
+  //   >
+  //     <span className="create-password__link-text">
+  //       {t('learnMoreUpperCaseWithDot')}
+  //     </span>
+  //   </a>
+  // );
 
-  const checkboxLabel = isSocialLoginFlow
-    ? t('createPasswordMarketing')
-    : t('passwordTermsWarning');
+  // const checkboxLabel = isSocialLoginFlow
+  //   ? t('createPasswordMarketing')
+  //   : t('passwordTermsWarning');
 
   return (
-    <Box
-      display={Display.Flex}
-      flexDirection={FlexDirection.Column}
-      justifyContent={JustifyContent.spaceBetween}
-      height={BlockSize.Full}
-      width={BlockSize.Full}
-      gap={4}
-      as="form"
-      className="create-password"
-      data-testid="create-password"
-      onSubmit={handleCreatePassword}
-    >
-      <Box>
+    <>
+      {/* Background blur effects */}
+      <Box className="create-password__background-effects">
+        <Box className="create-password__blur-circle create-password__blur-circle--top-left" />
+        <Box className="create-password__blur-circle create-password__blur-circle--bottom-right" />
+      </Box>
+      <Box
+        display={Display.Flex}
+        flexDirection={FlexDirection.Column}
+        justifyContent={JustifyContent.spaceBetween}
+        height={BlockSize.Full}
+        width={BlockSize.Full}
+        gap={4}
+        as="form"
+        className="create-password"
+        data-testid="create-password"
+        onSubmit={handleCreatePassword}
+      >
+        <Box>
+          {/* Logo */}
+          <Box
+            display={Display.Flex}
+            justifyContent={JustifyContent.center}
+            alignItems={AlignItems.center}
+            marginBottom={4}
+            width={BlockSize.Full}
+          >
+            <img
+              src="./images/logo/metamask-fox.svg"
+              width="80"
+              height="80"
+              alt="OPN Wallet"
+              className="create-password__logo"
+            />
+          </Box>
+
+          {/* Title and Subtitle - Centered */}
+          <Box
+            display={Display.Flex}
+            flexDirection={FlexDirection.Column}
+            alignItems={AlignItems.center}
+            justifyContent={JustifyContent.center}
+            marginBottom={4}
+            width={BlockSize.Full}
+          >
+            <Text
+              variant={TextVariant.headingLg}
+              as="h2"
+              marginBottom={2}
+              textAlign={TextAlign.Center}
+              className="create-password__title"
+            >
+              {t('createPassword')}
+            </Text>
+            <Text
+              variant={TextVariant.bodyMd}
+              color={TextColor.textAlternative}
+              as="p"
+              className="create-password__subtitle"
+              textAlign={TextAlign.Center}
+            >
+              Secure your wallet with a strong password
+            </Text>
+          </Box>
+          <PasswordForm onChange={(newPassword) => setPassword(newPassword)} />
+          {/* <Box
+            className="create-password__terms-container"
+            alignItems={AlignItems.center}
+            justifyContent={JustifyContent.spaceBetween}
+            marginTop={6}
+            backgroundColor={BackgroundColor.backgroundMuted}
+            padding={3}
+            borderRadius={BorderRadius.LG}
+          >
+            <Checkbox
+              inputProps={{ 'data-testid': 'create-password-terms' }}
+              alignItems={AlignItems.flexStart}
+              isChecked={termsChecked}
+              onChange={() => {
+                setTermsChecked(!termsChecked);
+              }}
+              label={
+                <Text variant={TextVariant.bodySm} color={TextColor.textDefault}>
+                  {checkboxLabel}
+                  {!isSocialLoginFlow && (
+                    <>
+                      <br />
+                      {createPasswordLink}
+                    </>
+                  )}
+                </Text>
+              }
+            />
+          </Box> */}
+        </Box>
         <Box
-          justifyContent={JustifyContent.flexStart}
-          marginBottom={4}
+          display={Display.Flex}
+          flexDirection={FlexDirection.Row}
+          gap={4}
           width={BlockSize.Full}
         >
-          <ButtonIcon
-            iconName={IconName.ArrowLeft}
-            color={IconColor.iconDefault}
-            size={ButtonIconSize.Md}
+          <Button
             data-testid="create-password-back-button"
+            variant={ButtonVariant.Secondary}
+            width={BlockSize.Full}
+            size={ButtonSize.Lg}
+            className="create-password__back-button"
             type="button"
             onClick={handleBackClick}
-            ariaLabel={t('back')}
+          >
+            {t('back')}
+          </Button>
+          <Button
+            data-testid="create-password-submit"
+            variant={ButtonVariant.Primary}
+            width={BlockSize.Full}
+            size={ButtonSize.Lg}
+            className="create-password__form--submit-button"
+            disabled={!password}
+            endIconName={IconName.Arrow2Right}
+          >
+            {t('createPasswordCreate')}
+          </Button>
+        </Box>
+        {shouldInjectMetametricsIframe ? (
+          <iframe
+            src={analyticsIframeUrl}
+            className="create-password__analytics-iframe"
+            data-testid="create-password-iframe"
           />
-        </Box>
-        <Box
-          justifyContent={JustifyContent.flexStart}
-          marginBottom={4}
-          width={BlockSize.Full}
-        >
-          <Text variant={TextVariant.headingLg} as="h2">
-            {t('createPassword')}
-          </Text>
-          {isSocialLoginFlow ? (
-            <Text
-              variant={TextVariant.bodyMd}
-              color={TextColor.textAlternative}
-              as="h2"
-            >
-              {t('createPasswordDetailsSocial')}
-              <Text
-                variant={TextVariant.bodyMd}
-                color={TextColor.warningDefault}
-                as="span"
-              >
-                {t('createPasswordDetailsSocialReset')}
-              </Text>
-            </Text>
-          ) : (
-            <Text
-              variant={TextVariant.bodyMd}
-              color={TextColor.textAlternative}
-              as="h2"
-            >
-              {t('createPasswordDetails')}
-            </Text>
-          )}
-        </Box>
-        <PasswordForm onChange={(newPassword) => setPassword(newPassword)} />
-        <Box
-          className="create-password__terms-container"
-          alignItems={AlignItems.center}
-          justifyContent={JustifyContent.spaceBetween}
-          marginTop={6}
-          backgroundColor={BackgroundColor.backgroundMuted}
-          padding={3}
-          borderRadius={BorderRadius.LG}
-        >
-          <Checkbox
-            inputProps={{ 'data-testid': 'create-password-terms' }}
-            alignItems={AlignItems.flexStart}
-            isChecked={termsChecked}
-            onChange={() => {
-              setTermsChecked(!termsChecked);
-            }}
-            label={
-              <Text variant={TextVariant.bodySm} color={TextColor.textDefault}>
-                {checkboxLabel}
-                {!isSocialLoginFlow && (
-                  <>
-                    <br />
-                    {createPasswordLink}
-                  </>
-                )}
-              </Text>
-            }
-          />
-        </Box>
+        ) : null}
       </Box>
-      <Box>
-        <Button
-          data-testid="create-password-submit"
-          variant={ButtonVariant.Primary}
-          width={BlockSize.Full}
-          size={ButtonSize.Lg}
-          className="create-password__form--submit-button"
-          disabled={!password || (!isSocialLoginFlow && !termsChecked)}
-        >
-          {t('createPasswordCreate')}
-        </Button>
-      </Box>
-      {shouldInjectMetametricsIframe ? (
-        <iframe
-          src={analyticsIframeUrl}
-          className="create-password__analytics-iframe"
-          data-testid="create-password-iframe"
-        />
-      ) : null}
-    </Box>
+    </>
   );
 }
 

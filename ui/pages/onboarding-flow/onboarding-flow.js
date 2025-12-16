@@ -254,6 +254,7 @@ export default function OnboardingFlow() {
         className={classnames('onboarding-flow__container', {
           'onboarding-flow__container--full': isFullPage,
           'onboarding-flow__container--popup': isPopup,
+          'onboarding-flow__container--glass': !isWelcomePage, // Glass effect for all screens except welcome
         })}
         width={BlockSize.Full}
         borderStyle={

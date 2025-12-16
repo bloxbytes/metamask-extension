@@ -1,6 +1,40 @@
 @use "design-system";
 
 .create-password {
+  position: relative;
+  z-index: 1;
+
+  // Background blur effects overlay
+  &__background-effects {
+    position: fixed;
+    inset: 0;
+    opacity: 0.2; // opacity-20
+    pointer-events: none; // pointer-events-none
+    z-index: 0;
+  }
+
+  // Blur circle base styles
+  &__blur-circle {
+    position: absolute;
+    width: 384px; // w-96 (24rem = 384px)
+    height: 384px; // h-96
+    border-radius: 50%; // rounded-full
+    filter: blur(64px); // blur-3xl
+
+    &--top-left {
+      top: 25%; // top-1/4
+      left: -57%; // left-1/4
+      background: linear-gradient(135deg, #4105b6 0%, #6305b6 100%);
+      opacity: 0.6;
+    }
+
+    &--bottom-right {
+      bottom: 25%; // bottom-1/4
+      right: -57%; // right-1/4
+      background: linear-gradient(45deg, #2280cd 0%, #b0efff 100%);
+      opacity: 0.6;
+    }
+  }
   &__weak {
     color: var(--color-error-default);
   }
@@ -24,4 +58,46 @@
     top: -9999px;
     left: -9999px;
   }
+
+  &__logo {
+    width: 4rem;
+    height: 4rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1rem; // 16px
+    border-radius: 9999px;
+    overflow: hidden;
+    box-shadow: 0 0 0 4px rgba(65, 5, 182, 0.3), 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    object-fit: contain;
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    color: #f8fdf1;
+    margin-bottom: 0.4rem;
+    text-align: center;
+    font-weight: 400;
+  }
+
+  &__subtitle {
+    color: rgba(176, 239, 255, 0.7);
+    font-size: 0.875rem;
+    text-align: center;
+    font-weight: 400;
+  }
+
+  &__back-button {
+    background-color: rgba(26, 29, 58, 0.6) !important; // bg-[#1a1d3a]/60
+    color: #b0efff !important; // text-[#b0efff]
+    padding-top: 0.75rem !important; // py-3 (12px)
+    padding-bottom: 0.75rem !important; // py-3
+    border-radius: 0.75rem !important; // rounded-xl (12px)
+    border: 1px solid rgba(65, 5, 182, 0.2) !important; // border border-[#4105b6]/20
+    transition: all 0.3s ease !important; // transition-all
+
+    &:hover {
+      background-color: rgba(26, 29, 58, 0.8) !important; // hover:bg-[#1a1d3a]/80
+    }
+  }
+
 }

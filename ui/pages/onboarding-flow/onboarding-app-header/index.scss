@@ -91,12 +91,14 @@
   }
 
   &__contents {
-    flex-flow: row nowrap;
-    max-width: 1280px;
+    // Hide contents - commented out
+    display: none !important;
+    // flex-flow: row nowrap;
+    // max-width: 1280px;
 
-    @include design-system.screen-sm-max {
-      height: 100%;
-    }
+    // @include design-system.screen-sm-max {
+    //   height: 100%;
+    // }
   }
 
   &__logo-container {
