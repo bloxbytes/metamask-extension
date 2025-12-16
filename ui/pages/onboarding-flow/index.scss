@@ -43,6 +43,7 @@ body{
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     }
 
+
     &--full {
       padding-inline: 0;
       padding-top: 0;
@@ -59,8 +60,51 @@ body{
       min-height: auto;
       height: 100%;
     }
+
+    // Wider width for recovery phrase screens
+    &--recovery-phrase {
+      max-width: 42rem !important; // max-w-2xl (672px)
+      width: 100% !important;
+      position: relative !important;
+      z-index: 1 !important;
+
+      // Override Box component inline styles
+      &.mm-box {
+        max-width: 42rem !important;
+        width: 100% !important;
+      }
+    }
   }
 
+  // Background blur effects for recovery phrase screens
+  &--recovery-phrase-background {
+    position: fixed;
+    inset: 0;
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: 0;
+
+    &__blur-circle {
+      position: absolute;
+      width: 384px; // w-96
+      height: 384px; // h-96
+      border-radius: 50%;
+      filter: blur(64px); // blur-3xl
+      opacity: 0.5;
+
+      &--top-left {
+        top: 25%; // top-1/4
+        left: 25%; // left-1/4
+        background: linear-gradient(135deg, #4105b6 0%, #6305b6 100%);
+      }
+
+      &--bottom-right {
+        bottom: 25%; // bottom-1/4
+        right: 25%; // right-1/4
+        background: linear-gradient(45deg, #2280cd 0%, #b0efff 100%);
+      }
+    }
+  }
   &__x-button__icon {
     margin-bottom: -6px;
   }

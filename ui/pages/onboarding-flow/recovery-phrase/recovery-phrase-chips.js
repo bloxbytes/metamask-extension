@@ -12,7 +12,6 @@ import {
   Text,
   TextField,
 } from '../../../components/component-library';
-import { useI18nContext } from '../../../hooks/useI18nContext';
 import {
   TextVariant,
   Display,
@@ -52,7 +51,6 @@ export default function RecoveryPhraseChips({
   quizWords = [],
   setInputValue,
 }) {
-  const t = useI18nContext();
   const indicesToCheck = useMemo(
     () => quizWords.map((word) => word.index),
     [quizWords],
@@ -265,17 +263,14 @@ export default function RecoveryPhraseChips({
               <Icon
                 name={IconName.EyeSlash}
                 color={IconColor.iconDefault}
-                size={IconSize.Md}
+                size={IconSize.Xl}
               />
               <Text
                 variant={TextVariant.bodyMd}
                 color={TextColor.textDefault}
                 fontWeight={FontWeight.Medium}
               >
-                {t('tapToReveal')}
-              </Text>
-              <Text variant={TextVariant.bodySm} color={TextColor.textDefault}>
-                {t('tapToRevealNote')}
+                Click to reveal your recovery phrase
               </Text>
             </Box>
           </Box>

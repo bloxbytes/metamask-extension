@@ -1,25 +1,163 @@
 @use "design-system";
 
 .recovery-phrase {
+  &__logo {
+    width: 4rem;
+    height: 4rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1rem;
+    border-radius: 9999px;
+    overflow: hidden;
+    box-shadow: 0 0 0 4px rgba(65, 5, 182, 0.3), 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    object-fit: contain;
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    color: #f8fdf1;
+    margin-bottom: 0.2rem;
+    text-align: center;
+    font-weight: 400;
+  }
+
+  &__subtitle {
+    color: rgba(176, 239, 255, 0.7);
+    font-size: 0.875rem;
+    text-align: center;
+    font-weight: 400;
+  }
+
+  &__security-alert {
+    background-color: rgba(239, 68, 68, 0.1) !important;
+    border: 1px solid rgba(248, 113, 113, 0.3) !important;
+    border-radius: 0.75rem !important; // rounded-xl
+    padding: 1rem !important;
+    margin-bottom: 1.5rem !important;
+
+    .mm-banner-base {
+      background-color: transparent !important;
+    }
+
+    &__security-alert-title {
+      color: #ff6467 !important;
+      font-size: 12px !important;
+      font-weight: 400 !important;
+    }
+
+    // Title color override
+    .recovery-phrase__security-alert-title {
+      color: #ff6467 !important;
+    }
+  }
+
+  &__back-button {
+    flex: 1 1 0% !important;
+    background-color: rgba(26, 29, 58, 0.6) !important;
+    color: #b0efff !important;
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+    border-radius: 0.75rem !important;
+    border: 1px solid rgba(65, 5, 182, 0.2) !important;
+    transition: all 0.3s ease !important;
+
+    &:hover {
+      background-color: rgba(26, 29, 58, 0.8) !important;
+    }
+  }
+
+  &__continue-button {
+    flex: 1 1 0% !important;
+    // background: linear-gradient(to right, #4105b6, #6305b6) !important;
+    color: #f8fdf1 !important;
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+    border-radius: 0.75rem !important;
+    font-size: 1.125rem !important;
+    font-weight: 400;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 25px 50px -12px rgba(65, 5, 182, 0.5) !important;
+
+    &:hover {
+      background: linear-gradient(to right, #6305b6, #4105b6) !important;
+      box-shadow: 0 25px 50px -12px rgba(65, 5, 182, 0.7) !important;
+      transform: scale(1.05) !important;
+    }
+
+    &:disabled {
+      padding-top: 0.75rem !important;
+      padding-bottom: 0.75rem !important;
+      border-radius: 0.75rem !important;
+      transition: all 0.3s ease !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 0.5rem !important;
+      background-color: rgba(26, 29, 58, 0.4) !important;
+      color: #4f5262 !important;
+      cursor: not-allowed !important;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+  }
+
   &__header {
     grid-template-columns: 0.25fr 3.5fr 0.25fr;
   }
 
   &__chips {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr !important; // 2 columns instead of 3
+    gap: 0.5rem !important; // gap-2 (8px)
 
     &--hidden {
       filter: blur(8px);
+      visibility: hidden;
     }
 
-    // SRP_OVERRIDE: START: custom text field style
+    // Chip styling - rounded boxes with white text
+    .recovery-phrase__text {
+      background-color: rgba(26, 29, 58, 0.6) !important; // bg-[#1a1d3a]/60
+      border-radius: 0.5rem !important; // rounded-lg
+      padding: 0.625rem !important; // p-2.5 (10px)
+      border: 1px solid rgba(65, 5, 182, 0.2) !important; // border border-[#4105b6]/20
+      color: #ffffff !important; // White text
+      min-height: 40px !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 0.5rem !important;
+
+      // Active/selected quiz word input field - make transparent
+      &[style*="background-color"] {
+        background-color: transparent !important;
+      }
+
+      .mm-text {
+        color: #ffffff !important; // White text
+        font-size: 0.875rem !important; // text-sm
+      }
+    }
+
+    // Word index styling
+    .recovery-phrase__word-index {
+      color: rgba(255, 255, 255, 0.7) !important; // Lighter white for numbers
+      font-size: 0.875rem !important;
+      min-width: 24px !important;
+    }
+
     .mm-text-field {
       padding-left: 8px;
       border-radius: 8px;
+      background-color: rgba(26, 29, 58, 0.6) !important;
+      border: 1px solid rgba(176, 239, 255, 0.2) !important;
+      color: #ffffff !important;
+
+      .mm-input {
+        color: #ffffff !important;
+      }
     }
 
     .mm-text-field:not(.mm-text-field--quiz-word) {
-      border-color: var(--color-border-muted);
+      border-color: rgba(176, 239, 255, 0.2) !important;
     }
 
     .mm-text-field.mm-text-field--quiz-word {
@@ -27,6 +165,7 @@
 
       .mm-input {
         cursor: pointer;
+        color: #ffffff !important;
       }
     }
 
@@ -41,8 +180,8 @@
     .mm-input {
       padding-right: 8px;
       padding-left: 4px;
+      color: #ffffff !important;
     }
-    // SRP_OVERRIDE: END
   }
 
   &__text {
@@ -77,5 +216,126 @@
     top: 0;
     bottom: 0;
     cursor: pointer;
+
+    .mm-icon {
+      color: #b0efff !important;
+
+      &.mm-icon--size-md {
+        --size: 40px !important;
+        width: 40px !important;
+        height: 40px !important;
+      }
+    }
+
+    .mm-text {
+      color: #b0efff !important;
+      font-size: 0.875rem !important;
+      white-space: nowrap !important;
+    }
+  }
+
+  // .mm-text{
+  //   font-weight: 400;
+  //   color: #ff6467;
+  // }
+  .mm-icon {
+    color: #ff6467;
+  }
+
+  .mm-box--color-text-alternative {
+    color: rgba(176, 239, 255, 0.7) !important;
+    font-size: 0.75rem !important;
+
+
+    >*+* {
+      margin-top: 0.25rem !important;
+    }
+  }
+
+
+  .mm-box.mm-box--display-flex.mm-box--flex-direction-column {
+    gap: 0 !important;
+  }
+
+  .custom-security-alert {
+    color: #ff6467;
+    font-size: 12px;
+  }
+
+  .mm-box--background-color-background-section {
+    background: linear-gradient(to bottom right, rgba(15, 17, 42, 0.7), rgba(15, 17, 42, 0.5)) !important; // bg-gradient-to-br from-[#0f112a]/70 to-[#0f112a]/50
+    border-radius: 0.75rem !important; // rounded-xl
+    padding: 1.5rem !important; // p-6 (24px)
+    border: 1px solid rgba(65, 5, 182, 0.3) !important; // border border-[#4105b6]/30
+  }
+
+  .recovery-phrase__secret-blocker-text {
+    .mm-icon {
+      color: #b0efff;
+    }
+  }
+}
+
+.mm-text--heading-lg {
+  font-size: 1.5rem;
+  color: #f8fdf1;
+  margin-bottom: 0.2rem;
+  text-align: center;
+  font-weight: 400;
+}
+
+.mm-text--body-md {
+  color: rgba(176, 239, 255, 0.7) !important;
+  font-size: 14px !important;
+  text-align: center;
+  font-weight: 400;
+}
+
+.mm-button-base--size-lg {
+  .mm-icon {
+    color: #4f5262;
+  }
+}
+
+// Quiz word buttons - make active/selected transparent
+.recovery-phrase__chips {
+  // Quiz word selection buttons at bottom (ButtonBase and Button)
+  .mm-button-base,
+  .mm-button-secondary {
+    background-color: transparent !important;
+    border: 1px solid rgba(65, 5, 182, 0.4) !important; // border-[#4105b6]/40
+    color: #b0efff !important; // text-[#b0efff]
+
+    &:hover {
+      background-color: rgba(65, 5, 182, 0.2) !important; // hover:bg-[#4105b6]/20
+      border-color: rgba(65, 5, 182, 0.6) !important;
+    }
+  }
+
+  // Active/selected quiz word button (white background -> transparent)
+  .mm-button-base[data-testid*="recovery-phrase-quiz-answered"],
+  .mm-button-secondary[data-testid*="recovery-phrase-quiz-answered"],
+  .mm-button-base[data-testid*="recovery-phrase-quiz-unanswered"],
+  .mm-button-secondary[data-testid*="recovery-phrase-quiz-unanswered"] {
+    background-color: transparent !important;
+    border: 1px solid rgba(65, 5, 182, 0.4) !important;
+    color: #b0efff !important; // text-[#b0efff]
+
+    &:hover {
+      background-color: rgba(65, 5, 182, 0.2) !important;
+      border-color: rgba(65, 5, 182, 0.6) !important;
+    }
+  }
+}
+
+// Make active quiz word input field transparent
+.recovery-phrase__text {
+  &[style*="background-color"] {
+    background-color: transparent !important;
+  }
+
+  // Override backgroundDefault for quiz word inputs
+  &.mm-box--background-color-background-default {
+    background-color: transparent !important;
   }
 }

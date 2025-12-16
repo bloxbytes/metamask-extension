@@ -118,6 +118,13 @@ export default function OnboardingFlow() {
     [pathname],
   );
 
+  const isRecoveryPhrasePage = useMemo(
+    () =>
+      pathname === ONBOARDING_REVIEW_SRP_ROUTE ||
+      pathname === ONBOARDING_CONFIRM_SRP_ROUTE,
+    [pathname],
+  );
+
   useEffect(() => {
     setOnboardingDate();
   }, []);
@@ -250,13 +257,25 @@ export default function OnboardingFlow() {
       })}
     >
       {!isPopup && <OnboardingAppHeader isWelcomePage={isWelcomePage} />}
+      {isRecoveryPhrasePage && (
+        <Box className="onboarding-flow--recovery-phrase-background">
+          <Box className="onboarding-flow--recovery-phrase-background__blur-circle onboarding-flow--recovery-phrase-background__blur-circle--top-left" />
+          <Box className="onboarding-flow--recovery-phrase-background__blur-circle onboarding-flow--recovery-phrase-background__blur-circle--bottom-right" />
+        </Box>
+      )}
       <Box
         className={classnames('onboarding-flow__container', {
           'onboarding-flow__container--full': isFullPage,
           'onboarding-flow__container--popup': isPopup,
           'onboarding-flow__container--glass': !isWelcomePage, // Glass effect for all screens except welcome
+          'onboarding-flow__container--recovery-phrase': isRecoveryPhrasePage, // Wider width for recovery phrase screens
         })}
-        width={BlockSize.Full}
+        width={
+          pathname === ONBOARDING_REVIEW_SRP_ROUTE ||
+          pathname === ONBOARDING_CONFIRM_SRP_ROUTE
+            ? BlockSize.Full
+            : BlockSize.Full
+        }
         borderStyle={
           isFullPage || isPopup ? BorderStyle.none : BorderStyle.solid
         }

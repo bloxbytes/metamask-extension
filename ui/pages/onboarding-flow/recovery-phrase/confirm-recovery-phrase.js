@@ -41,6 +41,7 @@ import {
   ONBOARDING_COMPLETION_ROUTE,
   ONBOARDING_METAMETRICS,
   ONBOARDING_REVEAL_SRP_ROUTE,
+  ONBOARDING_REVIEW_SRP_ROUTE,
   REVEAL_SRP_LIST_ROUTE,
 } from '../../../helpers/constants/routes';
 import { PLATFORM_FIREFOX } from '../../../../shared/constants/app';
@@ -177,6 +178,15 @@ export default function ConfirmRecoveryPhrase({ secretRecoveryPhrase = '' }) {
     bufferedEndTrace,
   ]);
 
+  const handleBack = useCallback(() => {
+    navigate(
+      `${ONBOARDING_REVIEW_SRP_ROUTE}${
+        nextRouteQueryString ? `?${nextRouteQueryString}` : ''
+      }`,
+      { replace: true },
+    );
+  }, [navigate, nextRouteQueryString]);
+
   const onClose = useCallback(() => {
     navigate(REVEAL_SRP_LIST_ROUTE, { replace: true });
   }, [navigate]);
@@ -233,36 +243,53 @@ export default function ConfirmRecoveryPhrase({ secretRecoveryPhrase = '' }) {
           </Box>
         ) : (
           <>
+            {/* Logo */}
             <Box
-              justifyContent={JustifyContent.flexStart}
+              display={Display.Flex}
+              justifyContent={JustifyContent.center}
+              alignItems={AlignItems.center}
               marginBottom={4}
               width={BlockSize.Full}
             >
-              <ButtonIcon
-                iconName={IconName.ArrowLeft}
-                color={IconColor.iconDefault}
-                size={ButtonIconSize.Md}
-                data-testid="confirm-recovery-phrase-back-button"
-                onClick={() => navigate(-1)}
-                ariaLabel={t('back')}
+              <img
+                src="./images/logo/metamask-fox.svg"
+                width="80"
+                height="80"
+                alt="OPN Wallet"
+                className="recovery-phrase__logo"
               />
             </Box>
+
+            {/* Title and Subtitle - Centered */}
             <Box
-              justifyContent={JustifyContent.flexStart}
+              display={Display.Flex}
+              flexDirection={FlexDirection.Column}
+              alignItems={AlignItems.center}
+              justifyContent={JustifyContent.center}
               marginBottom={4}
               width={BlockSize.Full}
             >
-              <Text variant={TextVariant.headingLg} as="h2">
+              <Text
+                variant={TextVariant.headingLg}
+                as="h2"
+                marginBottom={2}
+                textAlign={TextAlign.Center}
+                className="recovery-phrase__title"
+              >
                 {t('confirmRecoveryPhraseTitle')}
+              </Text>
+              <Text
+                variant={TextVariant.bodyMd}
+                color={TextColor.textAlternative}
+                as="p"
+                className="recovery-phrase__subtitle"
+                textAlign={TextAlign.Center}
+              >
+                {t('confirmRecoveryPhraseDetails')}
               </Text>
             </Box>
           </>
         )}
-        <Box marginBottom={6}>
-          <Text variant={TextVariant.bodyMd} color={TextColor.textDefault}>
-            {t('confirmRecoveryPhraseDetails')}
-          </Text>
-        </Box>
         {splitSecretRecoveryPhrase.length > 0 && (
           <RecoveryPhraseChips
             secretRecoveryPhrase={splitSecretRecoveryPhrase}
@@ -272,15 +299,33 @@ export default function ConfirmRecoveryPhrase({ secretRecoveryPhrase = '' }) {
           />
         )}
       </Box>
-      <Box width={BlockSize.Full}>
+      {/* Buttons */}
+      <Box
+        width={BlockSize.Full}
+        display={Display.Flex}
+        flexDirection={FlexDirection.Row}
+        gap={4}
+      >
         <Button
-          variant={ButtonVariant.Primary}
+          data-testid="confirm-recovery-phrase-back-button"
+          variant={ButtonVariant.Secondary}
           width={BlockSize.Full}
-          data-testid="recovery-phrase-confirm"
           size={ButtonSize.Lg}
-          className="recovery-phrase__footer__confirm--button"
-          onClick={() => onContinue()}
+          className="recovery-phrase__back-button"
+          type="button"
+          onClick={handleBack}
+        >
+          {t('back')}
+        </Button>
+        <Button
+          width={BlockSize.Full}
+          variant={ButtonVariant.Primary}
+          size={ButtonSize.Lg}
+          data-testid="recovery-phrase-confirm"
+          className="recovery-phrase__continue-button"
           disabled={answerSrp.trim() === ''}
+          onClick={() => onContinue()}
+          endIconName={IconName.Arrow2Right}
         >
           {t('continue')}
         </Button>

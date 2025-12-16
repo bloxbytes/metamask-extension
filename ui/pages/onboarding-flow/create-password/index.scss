@@ -23,16 +23,16 @@
 
     &--top-left {
       top: 25%; // top-1/4
-      left: -57%; // left-1/4
+      left: -58%; // left-1/4
       background: linear-gradient(135deg, #4105b6 0%, #6305b6 100%);
-      opacity: 0.6;
+      opacity: 0.5;
     }
 
     &--bottom-right {
       bottom: 25%; // bottom-1/4
-      right: -57%; // right-1/4
+      right: -58%; // right-1/4
       background: linear-gradient(45deg, #2280cd 0%, #b0efff 100%);
-      opacity: 0.6;
+      opacity: 0.5;
     }
   }
   &__weak {
