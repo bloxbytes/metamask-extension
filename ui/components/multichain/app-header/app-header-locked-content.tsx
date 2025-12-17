@@ -15,9 +15,9 @@ type AppHeaderLockedContentProps = {
 };
 
 export const AppHeaderLockedContent = ({
-  currentNetwork,
-  networkOpenCallback,
-}: AppHeaderLockedContentProps) => {
+                                         currentNetwork,
+                                         networkOpenCallback,
+                                       }: AppHeaderLockedContentProps) => {
   const t = useI18nContext();
   const history = useHistory();
 
@@ -55,3 +55,4 @@ export const AppHeaderLockedContent = ({
     </>
   );
 };
+

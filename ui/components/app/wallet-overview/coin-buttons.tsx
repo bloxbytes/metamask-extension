@@ -80,14 +80,14 @@ type CoinButtonsProps = {
 };
 
 const CoinButtons = ({
-  account,
-  chainId,
-  trackingLocation,
-  isSwapsChain,
-  isSigningEnabled,
-  isBuyableChain,
-  classPrefix = 'coin',
-}: CoinButtonsProps) => {
+                       account,
+                       chainId,
+                       trackingLocation,
+                       isSwapsChain,
+                       isSigningEnabled,
+                       isBuyableChain,
+                       classPrefix = 'coin',
+                     }: CoinButtonsProps) => {
   const t = useContext(I18nContext);
   const dispatch = useDispatch();
 
@@ -372,8 +372,8 @@ const CoinButtons = ({
 
   return (
     <Box
-      display={Display.Flex}
-      justifyContent={JustifyContent.spaceBetween}
+      // display={Display.Flex}
+      // justifyContent={JustifyContent.spaceBetween}
       width={BlockSize.Full}
       gap={3}
     >
@@ -381,19 +381,20 @@ const CoinButtons = ({
         <IconButton
           className={`${classPrefix}-overview__button`}
           Icon={
-            displayNewIconButtons ? (
-              <Icon
-                name={IconName.Dollar}
-                color={IconColor.iconAlternative}
-                size={IconSize.Md}
-              />
-            ) : (
-              <Icon
-                name={IconName.PlusAndMinus}
-                color={IconColor.iconDefault}
-                size={IconSize.Sm}
-              />
-            )
+            // displayNewIconButtons ? (
+            //   <Icon
+            //     name={IconName.Dollar}
+            //     color={IconColor.iconAlternative}
+            //     size={IconSize.Md}
+            //   />
+            // ) : (
+            //   <Icon
+            //     name={IconName.PlusAndMinus}
+            //     color={IconColor.iconDefault}
+            //     size={IconSize.Sm}
+            //   />
+            // )
+            <></>
           }
           disabled={!isBuyableChain}
           data-testid={`${classPrefix}-overview-buy`}
@@ -409,19 +410,20 @@ const CoinButtons = ({
         className={`${classPrefix}-overview__button`}
         disabled={!isSigningEnabled || !isExternalServicesEnabled}
         Icon={
-          displayNewIconButtons ? (
-            <Icon
-              name={IconName.SwapVertical}
-              color={IconColor.iconAlternative}
-              size={IconSize.Md}
-            />
-          ) : (
-            <Icon
-              name={IconName.SwapVertical}
-              color={IconColor.iconDefault}
-              size={IconSize.Sm}
-            />
-          )
+          // displayNewIconButtons ? (
+          //   <Icon
+          //     name={IconName.SwapVertical}
+          //     color={IconColor.iconAlternative}
+          //     size={IconSize.Md}
+          //   />
+          // ) : (
+          //   <Icon
+          //     name={IconName.SwapVertical}
+          //     color={IconColor.iconDefault}
+          //     size={IconSize.Sm}
+          //   />
+          // )
+          <></>
         }
         // onClick={handleSwapOnClick}
         onClick={() =>
@@ -440,19 +442,20 @@ const CoinButtons = ({
         className={`${classPrefix}-overview__button`}
         data-testid={`${classPrefix}-overview-send`}
         Icon={
-          displayNewIconButtons ? (
-            <Icon
-              name={IconName.Send}
-              color={IconColor.iconAlternative}
-              size={IconSize.Md}
-            />
-          ) : (
-            <Icon
-              name={IconName.Arrow2UpRight}
-              color={IconColor.iconDefault}
-              size={IconSize.Sm}
-            />
-          )
+          // displayNewIconButtons ? (
+          //   <Icon
+          //     name={IconName.Send}
+          //     color={IconColor.iconAlternative}
+          //     size={IconSize.Md}
+          //   />
+          // ) : (
+          //   <Icon
+          //     name={IconName.Arrow2UpRight}
+          //     color={IconColor.iconDefault}
+          //     size={IconSize.Sm}
+          //   />
+          // )
+          <></>
         }
         disabled={!isSigningEnabled || isNonEvmAccountWithoutExternalServices}
         label={t('send')}
@@ -474,19 +477,20 @@ const CoinButtons = ({
             className={`${classPrefix}-overview__button`}
             data-testid={`${classPrefix}-overview-receive`}
             Icon={
-              displayNewIconButtons ? (
-                <Icon
-                  name={IconName.Received}
-                  color={IconColor.iconAlternative}
-                  size={IconSize.Md}
-                />
-              ) : (
-                <Icon
-                  name={IconName.ScanBarcode}
-                  color={IconColor.iconDefault}
-                  size={IconSize.Sm}
-                />
-              )
+              // displayNewIconButtons ? (
+              //   <Icon
+              //     name={IconName.Received}
+              //     color={IconColor.iconAlternative}
+              //     size={IconSize.Md}
+              //   />
+              // ) : (
+              //   <Icon
+              //     name={IconName.ScanBarcode}
+              //     color={IconColor.iconDefault}
+              //     size={IconSize.Sm}
+              //   />
+              // )
+              <></>
             }
             label={t('receive')}
             width={BlockSize.Full}
