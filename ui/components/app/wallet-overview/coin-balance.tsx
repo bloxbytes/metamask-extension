@@ -34,7 +34,9 @@ import {
   selectAnyEnabledNetworksAreAvailable,
 } from '../../../selectors';
 
-import { PercentageAndAmountChange } from '../../multichain/token-list-item/price/percentage-and-amount-change/percentage-and-amount-change';
+import {
+  PercentageAndAmountChange,
+} from '../../multichain/token-list-item/price/percentage-and-amount-change/percentage-and-amount-change';
 import { AccountGroupBalance } from '../assets/account-group-balance/account-group-balance';
 import { AccountGroupBalanceChange } from '../assets/account-group-balance-change/account-group-balance-change';
 
@@ -66,12 +68,12 @@ export type CoinBalanceProps = {
 };
 
 export const CoinBalance = ({
-  account,
-  balance,
-  balanceIsCached,
-  classPrefix = 'coin',
-  chainId,
-}: CoinBalanceProps) => {
+                              account,
+                              balance,
+                              balanceIsCached,
+                              classPrefix = 'coin',
+                              chainId,
+                            }: CoinBalanceProps) => {
   const enabledNetworks = useSelector(getEnabledNetworksByNamespace);
 
   const t: ReturnType<typeof useI18nContext> = useContext(I18nContext);
@@ -147,17 +149,17 @@ export const CoinBalance = ({
 
   const renderPercentageAndAmountChange = () => {
     const renderPortfolioButton = () => {
-      return (
-        <ButtonLink
-          endIconName={IconName.Export}
-          onClick={handlePortfolioOnClick}
-          as="a"
-          data-testid="portfolio-link"
-          textProps={{ variant: TextVariant.bodyMdMedium }}
-        >
-          {t('discover')}
-        </ButtonLink>
-      );
+      // return (
+      //   <ButtonLink
+      //     endIconName={IconName.Export}
+      //     onClick={handlePortfolioOnClick}
+      //     as="a"
+      //     data-testid="portfolio-link"
+      //     textProps={{ variant: TextVariant.bodyMdMedium }}
+      //   >
+      //     {t('discover')}
+      //   </ButtonLink>
+      // );
       return null;
     };
 
@@ -171,7 +173,7 @@ export const CoinBalance = ({
         >
           <Box className="wallet-overview__currency-wrapper">
             <PercentageAndAmountChange value={value} />
-            {renderPortfolioButton()}
+            {/*{renderPortfolioButton()}*/}
           </Box>
         </Skeleton>
       );
@@ -217,7 +219,7 @@ export const CoinBalance = ({
     }
 
     return showNativeTokenAsMainBalance &&
-      Object.keys(enabledNetworks).length === 1
+    Object.keys(enabledNetworks).length === 1
       ? renderNativeTokenView()
       : renderAggregatedView();
   };

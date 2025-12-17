@@ -7498,6 +7498,9 @@
   "total": {
     "message": "Total"
   },
+  "totalBalance": {
+    "message": "Total Balance"
+  },
   "totalVolume": {
     "message": "Total volume"
   },
