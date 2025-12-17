@@ -74,6 +74,20 @@ body{
         width: 100% !important;
       }
     }
+
+    // Max-width 640px for metametrics and completion screens
+    &--metametrics-completion {
+      max-width: 640px;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+
+      // Override Box component inline styles
+      &.mm-box {
+        max-width: 40rem;
+        width: 100%;
+      }
+    }
   }
 
   // Background blur effects for recovery phrase screens
@@ -108,4 +122,12 @@ body{
   &__x-button__icon {
     margin-bottom: -6px;
   }
+}
+.mm-modal-content__dialog{
+  background: linear-gradient(to bottom right, rgba(26, 29, 58, 0.8), rgba(26, 29, 58, 0.6));
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: 1rem;
+  border: 1px solid rgba(65, 5, 182, 0.4);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }

@@ -125,6 +125,13 @@ export default function OnboardingFlow() {
     [pathname],
   );
 
+  const isMetametricsCompletionPage = useMemo(
+    () =>
+      pathname === ONBOARDING_METAMETRICS ||
+      pathname === ONBOARDING_COMPLETION_ROUTE,
+    [pathname],
+  );
+
   useEffect(() => {
     setOnboardingDate();
   }, []);
@@ -269,13 +276,10 @@ export default function OnboardingFlow() {
           'onboarding-flow__container--popup': isPopup,
           'onboarding-flow__container--glass': !isWelcomePage, // Glass effect for all screens except welcome
           'onboarding-flow__container--recovery-phrase': isRecoveryPhrasePage, // Wider width for recovery phrase screens
+          'onboarding-flow__container--metametrics-completion':
+            isMetametricsCompletionPage, // Max-width 640px for metametrics and completion screens
         })}
-        width={
-          pathname === ONBOARDING_REVIEW_SRP_ROUTE ||
-          pathname === ONBOARDING_CONFIRM_SRP_ROUTE
-            ? BlockSize.Full
-            : BlockSize.Full
-        }
+        width={BlockSize.Full}
         borderStyle={
           isFullPage || isPopup ? BorderStyle.none : BorderStyle.solid
         }

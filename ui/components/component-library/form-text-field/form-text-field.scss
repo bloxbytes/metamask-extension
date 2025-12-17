@@ -1,3 +1,5 @@
+@use "design-system";
+
 .mm-form-text-field {
   --text-opacity-disabled: 0.5;
 
@@ -6,6 +8,108 @@
     .mm-form-text-field__help-text {
       opacity: var(--text-opacity-disabled);
       cursor: default;
+    }
+  }
+
+  // Global input field styling - applied to all FormTextField components
+  // Label styling
+  .mm-form-text-field__label {
+    color: #b0efff !important; // Light blue/purple color
+    font-size: 0.875rem !important; // text-sm
+    margin-bottom: 0.5rem !important; // mb-2
+    font-weight: 400;
+  }
+
+  // TextField container styling
+  .mm-form-text-field__text-field {
+    background-color: rgba(26, 29, 58, 0.6) !important; // Dark background with transparency
+    border-color: rgba(65, 5, 182, 0.4) !important; // Purple border with 40% opacity
+    border-radius: 0.75rem !important; // rounded-xl (12px)
+    transition: all 0.3s ease;
+    position: relative !important; // For absolute positioning of eye icon
+
+    // Focus state
+    &.mm-text-field--focused {
+      border-color: rgba(65, 5, 182, 0.8) !important; // Brighter border on focus
+      box-shadow: 0 0 0 3px rgba(65, 5, 182, 0.2) !important; // Focus ring
+      outline: none !important;
+    }
+
+    // Input field itself (mm-input class)
+    .mm-text-field__input,
+    .mm-input {
+      background-color: transparent !important;
+      color: #f8fdf1 !important; // Light text color
+      font-size: 0.875rem !important; // text-sm
+
+      &::placeholder {
+        color: rgba(176, 239, 255, 0.5) !important; // Light gray placeholder
+      }
+
+      &:focus {
+        outline: none !important;
+      }
+    }
+
+    // Error state
+    &.mm-text-field--error {
+      border-color: rgba(255, 0, 0, 0.6) !important; // Red border on error
+    }
+
+    // Eye icon (password visibility toggle) styling
+    .mm-button-icon {
+      position: absolute !important;
+      right: 0.75rem !important; // right-3 (12px)
+      top: 50% !important; // top-1/2
+      transform: translateY(-50%) !important; // -translate-y-1/2
+      color: rgba(176, 239, 255, 0.7) !important; // text-[#b0efff]/70
+      transition: color 0.3s ease !important;
+
+      // Icon inside button
+      .mm-icon {
+        color: rgba(176, 239, 255, 0.7) !important;
+        transition: color 0.3s ease;
+      }
+
+      // hover:text-[#b0efff] (full opacity on hover)
+      &:hover {
+        color: #b0efff !important;
+        background-color: transparent !important;
+
+        .mm-icon {
+          color: #b0efff !important;
+        }
+      }
+    }
+  }
+
+  // Direct targeting for better specificity
+  .mm-form-text-field__text-field.mm-text-field {
+    background-color: rgba(26, 29, 58, 0.6) !important;
+    border-color: rgba(65, 5, 182, 0.4) !important;
+    border-radius: 0.75rem !important;
+
+    .mm-text-field__input,
+    .mm-input {
+      background-color: transparent !important;
+      color: #f8fdf1 !important;
+      font-size: 0.875rem !important;
+
+      &::placeholder {
+        color: rgba(176, 239, 255, 0.5) !important;
+      }
+    }
+
+    // Focus state
+    &.mm-text-field--focused {
+      border-color: rgba(65, 5, 182, 0.8) !important;
+      box-shadow: 0 0 0 3px rgba(65, 5, 182, 0.2) !important;
+      outline: none !important;
+    }
+
+    // Error state
+    &.mm-text-field--error {
+      border-color: rgba(255, 0, 0, 0.6) !important;
     }
   }
 }

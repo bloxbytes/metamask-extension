@@ -31,7 +31,7 @@
   &__security-alert {
     background-color: rgba(239, 68, 68, 0.1) !important;
     border: 1px solid rgba(248, 113, 113, 0.3) !important;
-    border-radius: 0.75rem !important; // rounded-xl
+    border-radius: 0.75rem !important;
     padding: 1rem !important;
     margin-bottom: 1.5rem !important;
 
@@ -45,7 +45,6 @@
       font-weight: 400 !important;
     }
 
-    // Title color override
     .recovery-phrase__security-alert-title {
       color: #ff6467 !important;
     }
@@ -68,7 +67,6 @@
 
   &__continue-button {
     flex: 1 1 0% !important;
-    // background: linear-gradient(to right, #4105b6, #6305b6) !important;
     color: #f8fdf1 !important;
     padding-top: 0.75rem !important;
     padding-bottom: 0.75rem !important;
@@ -106,40 +104,33 @@
   }
 
   &__chips {
-    grid-template-columns: 1fr 1fr !important; // 2 columns instead of 3
-    gap: 0.5rem !important; // gap-2 (8px)
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.5rem !important;
 
     &--hidden {
       filter: blur(8px);
       visibility: hidden;
     }
 
-    // Chip styling - rounded boxes with white text
     .recovery-phrase__text {
-      background-color: rgba(26, 29, 58, 0.6) !important; // bg-[#1a1d3a]/60
-      border-radius: 0.5rem !important; // rounded-lg
-      padding: 0.625rem !important; // p-2.5 (10px)
-      border: 1px solid rgba(65, 5, 182, 0.2) !important; // border border-[#4105b6]/20
-      color: #ffffff !important; // White text
+      background-color: rgba(26, 29, 58, 0.6) !important;
+      border-radius: 0.5rem !important;
+      padding: 0.625rem !important;
+      border: 1px solid rgba(65, 5, 182, 0.2) !important;
+      color: #ffffff !important;
       min-height: 40px !important;
       display: flex !important;
       align-items: center !important;
       gap: 0.5rem !important;
 
-      // Active/selected quiz word input field - make transparent
-      &[style*="background-color"] {
-        background-color: transparent !important;
-      }
-
       .mm-text {
-        color: #ffffff !important; // White text
-        font-size: 0.875rem !important; // text-sm
+        color: #ffffff !important;
+        font-size: 0.875rem !important;
       }
     }
 
-    // Word index styling
     .recovery-phrase__word-index {
-      color: rgba(255, 255, 255, 0.7) !important; // Lighter white for numbers
+      color: rgba(255, 255, 255, 0.7) !important;
       font-size: 0.875rem !important;
       min-width: 24px !important;
     }
@@ -234,10 +225,6 @@
     }
   }
 
-  // .mm-text{
-  //   font-weight: 400;
-  //   color: #ff6467;
-  // }
   .mm-icon {
     color: #ff6467;
   }
@@ -246,12 +233,10 @@
     color: rgba(176, 239, 255, 0.7) !important;
     font-size: 0.75rem !important;
 
-
     >*+* {
       margin-top: 0.25rem !important;
     }
   }
-
 
   .mm-box.mm-box--display-flex.mm-box--flex-direction-column {
     gap: 0 !important;
@@ -263,10 +248,10 @@
   }
 
   .mm-box--background-color-background-section {
-    background: linear-gradient(to bottom right, rgba(15, 17, 42, 0.7), rgba(15, 17, 42, 0.5)) !important; // bg-gradient-to-br from-[#0f112a]/70 to-[#0f112a]/50
-    border-radius: 0.75rem !important; // rounded-xl
-    padding: 1.5rem !important; // p-6 (24px)
-    border: 1px solid rgba(65, 5, 182, 0.3) !important; // border border-[#4105b6]/30
+    background: linear-gradient(to bottom right, rgba(15, 17, 42, 0.7), rgba(15, 17, 42, 0.5)) !important;
+    border-radius: 0.75rem !important;
+    padding: 1.5rem !important;
+    border: 1px solid rgba(65, 5, 182, 0.3) !important;
   }
 
   .recovery-phrase__secret-blocker-text {
@@ -285,8 +270,8 @@
 }
 
 .mm-text--body-md {
-  color: rgba(176, 239, 255, 0.7) !important;
-  font-size: 14px !important;
+  color: rgba(176, 239, 255, 0.7);
+  font-size: 14px;
   text-align: center;
   font-weight: 400;
 }
@@ -296,46 +281,19 @@
     color: #4f5262;
   }
 }
-
-// Quiz word buttons - make active/selected transparent
-.recovery-phrase__chips {
-  // Quiz word selection buttons at bottom (ButtonBase and Button)
-  .mm-button-base,
-  .mm-button-secondary {
-    background-color: transparent !important;
-    border: 1px solid rgba(65, 5, 182, 0.4) !important; // border-[#4105b6]/40
-    color: #b0efff !important; // text-[#b0efff]
-
-    &:hover {
-      background-color: rgba(65, 5, 182, 0.2) !important; // hover:bg-[#4105b6]/20
-      border-color: rgba(65, 5, 182, 0.6) !important;
-    }
-  }
-
-  // Active/selected quiz word button (white background -> transparent)
-  .mm-button-base[data-testid*="recovery-phrase-quiz-answered"],
-  .mm-button-secondary[data-testid*="recovery-phrase-quiz-answered"],
-  .mm-button-base[data-testid*="recovery-phrase-quiz-unanswered"],
-  .mm-button-secondary[data-testid*="recovery-phrase-quiz-unanswered"] {
-    background-color: transparent !important;
-    border: 1px solid rgba(65, 5, 182, 0.4) !important;
-    color: #b0efff !important; // text-[#b0efff]
-
-    &:hover {
-      background-color: rgba(65, 5, 182, 0.2) !important;
-      border-color: rgba(65, 5, 182, 0.6) !important;
-    }
-  }
+.onboarding-flow__container--recovery-phrase{
+  .mm-box--background-color-background-alternative {
+    background-color: transparent;
+    border: 1px solid #4459ff;
 }
-
-// Make active quiz word input field transparent
-.recovery-phrase__text {
-  &[style*="background-color"] {
-    background-color: transparent !important;
-  }
-
-  // Override backgroundDefault for quiz word inputs
-  &.mm-box--background-color-background-default {
-    background-color: transparent !important;
-  }
+}
+.mm-text--body-sm{
+  font-weight: 400;
+  font-size: 14px;
+}
+.mm-text--body-md {
+  color: rgb(248, 253, 241);
+  font-size: 14px;
+  text-align: center;
+  font-weight: 400;
 }
