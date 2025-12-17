@@ -977,36 +977,34 @@ export default class Home extends PureComponent {
         <HomeCoinBalance />
 
         {/*Start Custom*/}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6" style={{
-          display: 'flex',
-        }}>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
           <div
-            className="md:col-span-2 bg-gradient-to-br from-[#1a1d3a]/60 to-[#1a1d3a]/40 backdrop-blur-xl rounded-2xl border border-[#4105b6]/40 shadow-2xl p-6 relative overflow-hidden">
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#4105b6]/20 rounded-full blur-2xl"></div>
+            className="custom-card md:col-span-2">
+            <div className="bg-gradient-custom"></div>
             <div className="px-4 py-4 relative">
               <div className="flex justify-center mb-4 relative">
-                <div
-                  className="absolute inset-0 bg-gradient-to-r from-[#4105b6] to-[#6305b6] rounded-full blur-xl opacity-30"></div>
+                {/* <div
+                  className="absolute inset-0 bg-gradient-to-r from-[#4105b6] to-[#6305b6] rounded-full blur-xl opacity-30"></div> */}
                 <img src="./images/logo/metamask-fox.svg" alt="OPN Logo"
-                     className="w-20 h-20 rounded-full relative z-10 ring-2 ring-[#b0efff]/50" /></div>
+                     className="logo-image" /></div>
               <button
-                className="w-full flex items-center justify-between p-3 bg-gradient-to-br from-[#1a1d3a]/60 to-[#1a1d3a]/40 backdrop-blur-sm rounded-lg hover:bg-[#20245a]/60 transition-all mb-2 border border-[#4105b6]/30 relative overflow-hidden group">
-                <div
-                  className="absolute inset-0 bg-gradient-to-r from-[#4105b6]/0 via-[#4105b6]/10 to-[#4105b6]/0 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                className="custom-copy-section">
+                {/* <div
+                  className="absolute inset-0 bg-gradient-to-r from-[#4105b6]/0 via-[#4105b6]/10 to-[#4105b6]/0 opacity-0 group-hover:opacity-100 transition-opacity"></div> */}
                 <div className="flex items-center gap-2 relative z-10">
                   <AppHeaderOPN location={location} />
                 </div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                     className="lucide lucide-chevron-down w-4 h-4 text-[#b0efff] relative z-10">
+                     className="lucide lucide-chevron-down w-2 h-2 text-[#b0efff] relative z-10">
                   <path d="m6 9 6 6 6-6"></path>
                 </svg>
               </button>
 
               <button
-                className="w-full flex items-center justify-between bg-gradient-to-br from-[#1a1d3a]/60 to-[#1a1d3a]/40 backdrop-blur-sm px-3 py-2 rounded-lg hover:bg-[#20245a]/60 transition-all border border-[#4105b6]/30 relative overflow-hidden group">
-                <div
-                  className="absolute inset-0 bg-gradient-to-r from-[#2280cd]/0 via-[#2280cd]/10 to-[#2280cd]/0 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                className="assetList-section">
+                {/* <div
+                  className="absolute inset-0 bg-gradient-to-r from-[#2280cd]/0 via-[#2280cd]/10 to-[#2280cd]/0 opacity-0 group-hover:opacity-100 transition-opacity"></div> */}
 
                 <Box>
                   <AssetListControlBar />
@@ -1015,8 +1013,10 @@ export default class Home extends PureComponent {
               </button>
             </div>
           </div>
+
+
           <div
-            className="bg-gradient-to-br from-[#1a1d3a]/60 to-[#1a1d3a]/40 backdrop-blur-xl rounded-2xl border border-[#4105b6]/40 shadow-2xl p-6">
+            className="custom-card">
             <h3 className="text-[#f8fdf1] mb-4">Quick Actions</h3>
             <div className="space-y-2">
               <HomeCoinButtons />

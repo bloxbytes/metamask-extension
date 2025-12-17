@@ -175,7 +175,7 @@ exports[`SendPage render and initialization should render correctly even when a 
               class="tabs transform-gpu"
             >
               <div
-                class="flex flex-row gap-4 justify-start bg-default"
+                class="flex flex-row gap-4 justify-start"
                 role="tablist"
               >
                 <button
