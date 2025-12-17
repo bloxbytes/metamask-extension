@@ -217,9 +217,11 @@ export const GlobalMenu = ({
       padding={0}
       onClickOutside={closeMenu}
       onPressEscKey={closeMenu}
+      isPortal={true}
       style={{
         overflow: 'hidden',
         minWidth: 225,
+        zIndex: 99999,
       }}
       offset={[0, 8]}
       position={PopoverPosition.BottomEnd}

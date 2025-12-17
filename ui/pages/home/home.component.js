@@ -982,7 +982,7 @@ export default class Home extends PureComponent {
       !isSocialLoginFlow;
 
     return (
-      <div className="main-container main-container--has-shadow">
+      <div className="main-container main-container--has-shadow py-8">
         <Route path={CONNECTED_ROUTE} component={ConnectedSites} exact />
         <Route
           path={CONNECTED_ACCOUNTS_ROUTE}
@@ -1018,7 +1018,7 @@ export default class Home extends PureComponent {
                 {/* <div
                   className="absolute inset-0 bg-gradient-to-r from-[#2280cd]/0 via-[#2280cd]/10 to-[#2280cd]/0 opacity-0 group-hover:opacity-100 transition-opacity"></div> */}
 
-                <Box>
+                <Box className="w-full">
                   <AssetListControlBar />
                 </Box>
 
@@ -1039,7 +1039,7 @@ export default class Home extends PureComponent {
 
         {/* Main Content Area */}
         <div
-          className="bg-gradient-to-br from-[#1a1d3a]/60 to-[#1a1d3a]/40 backdrop-blur-xl rounded-2xl border border-[#4105b6]/40 shadow-2xl overflow-hidden">
+          className="bg-gradient-to-br from-[#1a1d3a]/60 to-[#1a1d3a]/40 backdrop-blur-xl rounded-2xl border-[#4105b6]/40 shadow-2xl overflow-hidden">
           {/* Navigation Tabs */}
           <div className="border-b border-[#4105b6]/30 px-2 py-3">
             <div className="grid grid-cols-4 gap-1.5">
