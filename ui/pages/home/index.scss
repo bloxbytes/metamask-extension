@@ -279,7 +279,25 @@
     }
   }
 }
+.home-overview__balance{
+  font-size: 32px;
+}
+.home__coin-balance{
+  margin-top: 1rem;
+  background-image: linear-gradient(135deg, rgba(26,29,58,0.6) 0%, rgba(26,29,58,0.4) 100%);
+  backdrop-filter: blur(20px);
+  border-radius: 1rem;
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(65,5,182,0.4);
+  box-shadow: 0 10px 32px 0 rgba(31,41,71,0.32), 0 0.5px 2px 0 rgba(65,5,182,0.2);
+  margin-inline: 20px;
 
+}
+.home__coin-buttons{
+  margin-inline: 20px;
+}
 .browser-wallet {
   position: relative;
   min-height: 100%;
