@@ -86,8 +86,6 @@ import { getSelectedMultichainNetworkConfiguration } from '../../selectors/multi
 import { getMultichainSelectedAccountCachedBalance } from '../../selectors/multichain';
 import { getIsNativeTokenBuyable } from '../../ducks/ramps';
 import { shortenAddress } from '../../helpers/utils/util';
-
-
 ///: BEGIN:ONLY_INCLUDE_IF(build-beta)
 import BetaHomeFooter from './beta/beta-home-footer.component';
 ///: END:ONLY_INCLUDE_IF
@@ -95,6 +93,7 @@ import BetaHomeFooter from './beta/beta-home-footer.component';
 import FlaskHomeFooter from './flask/flask-home-footer.component';
 
 ///: END:ONLY_INCLUDE_IF
+
 
 function shouldCloseNotificationPopup({
                                         isNotification,
@@ -111,7 +110,8 @@ function shouldCloseNotificationPopup({
   return shouldClose;
 }
 
-const HomeCoinButtons = () => {
+
+export const HomeCoinButtons = ({ iconView = false }) => {
   const account = useSelector(getSelectedInternalAccount);
   const evmChainId = useSelector(getCurrentChainId);
   const { chainId: multichainChainId } =
@@ -148,12 +148,13 @@ const HomeCoinButtons = () => {
         isSigningEnabled={isSigningEnabled}
         isBuyableChain={isBuyableChain}
         classPrefix="home"
+        iconView={iconView}
       />
     </div>
   );
 };
 
-const HomeCoinBalance = () => {
+export const HomeCoinBalance = () => {
   const account = useSelector(getSelectedInternalAccount);
   const evmChainId = useSelector(getCurrentChainId);
   const evmBalance = useSelector(getSelectedAccountCachedBalance);
@@ -187,13 +188,7 @@ const HomeCoinBalance = () => {
         classPrefix="home"
       />
       {displayAddress ? (
-        <Text
-          variant={TextVariant.bodySm}
-          color={TextColor.textAlternative}
-          className="home__coin-balance-address"
-        >
-          {displayAddress}
-        </Text>
+        displayAddress
       ) : null}
     </div>
   );
@@ -989,9 +984,6 @@ export default class Home extends PureComponent {
           component={ConnectedAccounts}
           exact
         />
-
-        <HomeCoinBalance />
-
         {/*Start Custom*/}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
           <div

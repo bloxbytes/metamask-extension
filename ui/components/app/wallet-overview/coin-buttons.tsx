@@ -2,14 +2,8 @@ import React, { useCallback, useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { toHex } from '@metamask/controller-utils';
-import {
-  isCaipChainId,
-  CaipChainId,
-  // isCaipAssetType,
-  // parseCaipAssetType,
-} from '@metamask/utils';
+import { CaipChainId, isCaipChainId } from '@metamask/utils';
 // import { getNativeAssetForChainId } from '@metamask/bridge-controller';
-
 ///: BEGIN:ONLY_INCLUDE_IF(multichain)
 import { isEvmAccountType } from '@metamask/keyring-api';
 import { InternalAccount } from '@metamask/keyring-internal-api';
@@ -24,38 +18,26 @@ import {
   AddressListSource,
 } from '../../../pages/multichain-accounts/multichain-account-address-list-page';
 import {
-  getUseExternalServices,
   getNetworkConfigurationIdByChainId,
-  isNonEvmAccount,
   getSwapsDefaultToken,
+  getUseExternalServices,
+  isNonEvmAccount,
 } from '../../../selectors';
 import { getIsMultichainAccountsState2Enabled } from '../../../selectors/multichain-accounts/feature-flags';
 import { getSelectedAccountGroup } from '../../../selectors/multichain-accounts/account-tree';
 import Tooltip from '../../ui/tooltip';
-import {
-  MetaMetricsEventCategory,
-  MetaMetricsEventName,
-  // MetaMetricsSwapsEventSource,
-} from '../../../../shared/constants/metametrics';
+import { MetaMetricsEventCategory, MetaMetricsEventName } from '../../../../shared/constants/metametrics';
 import { AssetType } from '../../../../shared/constants/transaction';
 import { MetaMetricsContext } from '../../../contexts/metametrics';
 import { startNewDraftTransaction } from '../../../ducks/send';
-import {
-  BlockSize,
-  Display,
-  IconColor,
-  JustifyContent,
-} from '../../../helpers/constants/design-system';
+import { BlockSize, Display, IconColor, JustifyContent } from '../../../helpers/constants/design-system';
 import { Box, Icon, IconName, IconSize } from '../../component-library';
 import IconButton from '../../ui/icon-button';
 import useRamps from '../../../hooks/ramps/useRamps/useRamps';
 // import useBridging from '../../../hooks/bridge/useBridging';
 import { ReceiveModal } from '../../multichain/receive-modal';
 import { setActiveNetworkWithError } from '../../../store/actions';
-import {
-  getMultichainNativeCurrency,
-  getMultichainNetwork,
-} from '../../../selectors/multichain';
+import { getMultichainNativeCurrency, getMultichainNetwork } from '../../../selectors/multichain';
 import { useMultichainSelector } from '../../../hooks/useMultichainSelector';
 import { getCurrentChainId } from '../../../../shared/modules/selectors/networks';
 // import { ALL_ALLOWED_BRIDGE_CHAIN_IDS } from '../../../../shared/constants/bridge';
@@ -77,6 +59,7 @@ type CoinButtonsProps = {
   isBuyableChain: boolean;
   classPrefix?: string;
   iconButtonClassName?: string;
+  iconView?: boolean
 };
 
 const CoinButtons = ({
@@ -87,6 +70,7 @@ const CoinButtons = ({
                        isSigningEnabled,
                        isBuyableChain,
                        classPrefix = 'coin',
+                       iconView = false,
                      }: CoinButtonsProps) => {
   const t = useContext(I18nContext);
   const dispatch = useDispatch();
@@ -372,90 +356,60 @@ const CoinButtons = ({
 
   return (
     <Box
-      // display={Display.Flex}
-      // justifyContent={JustifyContent.spaceBetween}
+      display={iconView ? Display.Flex : Display.Block}
+      justifyContent={JustifyContent.spaceBetween}
       width={BlockSize.Full}
       gap={3}
     >
-      {
-        <IconButton
-          className="custom-button"
-          Icon={
-            // displayNewIconButtons ? (
-            //   <Icon
-            //     name={IconName.Dollar}
-            //     color={IconColor.iconAlternative}
-            //     size={IconSize.Md}
-            //   />
-            // ) : (
-            //   <Icon
-            //     name={IconName.PlusAndMinus}
-            //     color={IconColor.iconDefault}
-            //     size={IconSize.Sm}
-            //   />
-            // )
-            <></>
-          }
-          disabled={!isBuyableChain}
-          data-testid={`${classPrefix}-overview-buy`}
-          label={t('buy')}
-          onClick={handleBuyAndSellOnClick}
-          width={BlockSize.Full}
-          tooltipRender={(contents: React.ReactElement) =>
-            generateTooltip('buyButton', contents)
-          }
-        />
-      }
-      <IconButton
-        className="custom-button"
-        disabled={!isSigningEnabled || !isExternalServicesEnabled}
-        Icon={
-          // displayNewIconButtons ? (
-          //   <Icon
-          //     name={IconName.SwapVertical}
-          //     color={IconColor.iconAlternative}
-          //     size={IconSize.Md}
-          //   />
-          // ) : (
-          //   <Icon
-          //     name={IconName.SwapVertical}
-          //     color={IconColor.iconDefault}
-          //     size={IconSize.Sm}
-          //   />
-          // )
-          <></>
-        }
-        // onClick={handleSwapOnClick}
-        onClick={() =>
-          global.platform.openTab({
-            url: 'https://swap.iopn.io',
-          })
-        }
-        label={t('swap')}
-        data-testid={`${classPrefix}-overview-swap`}
-        width={BlockSize.Full}
-        tooltipRender={(contents: React.ReactElement) =>
-          generateTooltip('swapButton', contents)
-        }
-      />
+
+      {/*{*/}
+      {/*  <IconButton*/}
+      {/*    className="custom-button"*/}
+      {/*    Icon={*/}
+
+      {/*      iconView ?*/}
+      {/*        <Icon*/}
+      {/*          name={IconName.Dollar}*/}
+      {/*          color={IconColor.iconAlternative}*/}
+      {/*          size={IconSize.Md}*/}
+      {/*        /> : null*/}
+
+      {/*      // displayNewIconButtons ? (*/}
+      {/*      //   <Icon*/}
+      {/*      //     name={IconName.Dollar}*/}
+      {/*      //     color={IconColor.iconAlternative}*/}
+      {/*      //     size={IconSize.Md}*/}
+      {/*      //   />*/}
+      {/*      // ) : (*/}
+      {/*      //   <Icon*/}
+      {/*      //     name={IconName.PlusAndMinus}*/}
+      {/*      //     color={IconColor.iconDefault}*/}
+      {/*      //     size={IconSize.Sm}*/}
+      {/*      //   />*/}
+      {/*      // )*/}
+      {/*    }*/}
+      {/*    disabled={!isBuyableChain}*/}
+      {/*    data-testid={`${classPrefix}-overview-buy`}*/}
+      {/*    label={t('buy')}*/}
+      {/*    onClick={handleBuyAndSellOnClick}*/}
+      {/*    width={BlockSize.Full}*/}
+      {/*    tooltipRender={(contents: React.ReactElement) =>*/}
+      {/*      generateTooltip('buyButton', contents)*/}
+      {/*    }*/}
+      {/*  />*/}
+      {/*}*/}
+
       <IconButton
         className="custom-button primary-button"
         data-testid={`${classPrefix}-overview-send`}
         Icon={
-          // displayNewIconButtons ? (
-          //   <Icon
-          //     name={IconName.Send}
-          //     color={IconColor.iconAlternative}
-          //     size={IconSize.Md}
-          //   />
-          // ) : (
-          //   <Icon
-          //     name={IconName.Arrow2UpRight}
-          //     color={IconColor.iconDefault}
-          //     size={IconSize.Sm}
-          //   />
-          // )
-          <></>
+          iconView ?
+            <Icon
+              name={IconName.Send}
+              color={IconColor.iconAlternative}
+              size={IconSize.Md}
+            /> : null
+
         }
         disabled={!isSigningEnabled || isNonEvmAccountWithoutExternalServices}
         label={t('send')}
@@ -477,20 +431,13 @@ const CoinButtons = ({
             className="custom-button"
             data-testid={`${classPrefix}-overview-receive`}
             Icon={
-              // displayNewIconButtons ? (
-              //   <Icon
-              //     name={IconName.Received}
-              //     color={IconColor.iconAlternative}
-              //     size={IconSize.Md}
-              //   />
-              // ) : (
-              //   <Icon
-              //     name={IconName.ScanBarcode}
-              //     color={IconColor.iconDefault}
-              //     size={IconSize.Sm}
-              //   />
-              // )
-              <></>
+              iconView ?
+                <Icon
+                  name={IconName.Received}
+                  color={IconColor.iconAlternative}
+                  size={IconSize.Md}
+                /> : null
+
             }
             label={t('receive')}
             width={BlockSize.Full}
@@ -498,6 +445,33 @@ const CoinButtons = ({
           />
         </>
       }
+
+
+      <IconButton
+        className="custom-button"
+        disabled={!isSigningEnabled || !isExternalServicesEnabled}
+        Icon={
+          iconView ?
+            <Icon
+              name={IconName.SwapVertical}
+              color={IconColor.iconAlternative}
+              size={IconSize.Md}
+            /> : null
+
+        }
+        // onClick={handleSwapOnClick}
+        onClick={() =>
+          global.platform.openTab({
+            url: 'https://swap.iopn.tech',
+          })
+        }
+        label={t('swap')}
+        data-testid={`${classPrefix}-overview-swap`}
+        width={BlockSize.Full}
+        tooltipRender={(contents: React.ReactElement) =>
+          generateTooltip('swapButton', contents)
+        }
+      />
     </Box>
   );
 };

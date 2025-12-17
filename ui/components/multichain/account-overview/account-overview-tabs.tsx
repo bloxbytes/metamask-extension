@@ -24,10 +24,13 @@ import { useAssetListTokenDetection } from '../../app/assets/hooks';
 import NftsTab from '../../app/assets/nfts/nfts-tab';
 import TransactionList from '../../app/transaction-list';
 import UnifiedTransactionList from '../../app/transaction-list/unified-transaction-list.component';
-import { Box } from '../../component-library';
+import { Box, Text } from '../../component-library';
+import { TextVariant } from '../../../helpers/constants/design-system';
 import { Tab, Tabs } from '../../ui/tabs';
 import { useTokenBalances } from '../../../hooks/useTokenBalances';
 import { AccountOverviewCommonProps } from './common';
+import { HomeCoinBalance, HomeCoinButtons } from '../../../pages/home/home.component';
+import AssetListControlBar from '../../app/assets/asset-list/asset-list-control-bar';
 
 export type AccountOverviewTabsProps = AccountOverviewCommonProps & {
   showTokens: boolean;
@@ -38,14 +41,14 @@ export type AccountOverviewTabsProps = AccountOverviewCommonProps & {
 };
 
 export const AccountOverviewTabs = ({
-  onTabClick,
-  defaultHomeActiveTabName,
-  showTokens,
-  showTokensLinks,
-  showNfts,
-  showActivity,
-  showDefi,
-}: AccountOverviewTabsProps) => {
+                                      onTabClick,
+                                      defaultHomeActiveTabName,
+                                      showTokens,
+                                      showTokensLinks,
+                                      showNfts,
+                                      showActivity,
+                                      showDefi,
+                                    }: AccountOverviewTabsProps) => {
   const history = useHistory();
   const t = useI18nContext();
   const trackEvent = useContext(MetaMetricsContext);
@@ -73,7 +76,7 @@ export const AccountOverviewTabs = ({
         endTrace({
           name: ACCOUNT_OVERVIEW_TAB_KEY_TO_TRACE_NAME_MAP[
             defaultHomeActiveTabName
-          ],
+            ],
         });
       }
       trace({
@@ -117,6 +120,16 @@ export const AccountOverviewTabs = ({
           tabKey={AccountOverviewTabKey.Tokens}
           data-testid="account-overview__asset-tab"
         >
+
+          <Box marginBottom={4}>
+            <HomeCoinBalance />
+          </Box>
+
+          <Box marginBottom={4} className={'account-overview-tab-asset-list-control-bar'}>
+            <HomeCoinButtons iconView={true} />
+          </Box>
+
+
           <Box marginBottom={2}>
             <AssetList
               showTokensLinks={showTokensLinks ?? true}
