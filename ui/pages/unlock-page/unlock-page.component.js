@@ -420,9 +420,9 @@ class UnlockPage extends Component {
         flexDirection={FlexDirection.Column}
         alignItems={AlignItems.center}
         justifyContent={JustifyContent.center}
-        backgroundColor={BackgroundColor.backgroundDefault}
         width={BlockSize.Full}
         paddingBottom={12} // offset header to center content
+        className="unlock-page__parent"
       >
         {showResetPasswordModal && (
           <ResetPasswordModal
