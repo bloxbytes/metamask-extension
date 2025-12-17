@@ -38,15 +38,12 @@ import {
 } from '../../../../shared/constants/metametrics';
 import { getHDEntropyIndex } from '../../../selectors/selectors';
 import {
-  ONBOARDING_COMPLETION_ROUTE,
-  ONBOARDING_METAMETRICS,
   ONBOARDING_REVEAL_SRP_ROUTE,
   ONBOARDING_REVIEW_SRP_ROUTE,
+  ONBOARDING_RECOVERY_CHECKLIST_ROUTE,
   REVEAL_SRP_LIST_ROUTE,
 } from '../../../helpers/constants/routes';
-import { PLATFORM_FIREFOX } from '../../../../shared/constants/app';
 import { TraceName } from '../../../../shared/lib/trace';
-import { getBrowserName } from '../../../../shared/modules/browser-runtime.utils';
 import ConfirmSrpModal from './confirm-srp-modal';
 import RecoveryPhraseChips from './recovery-phrase-chips';
 
@@ -159,13 +156,10 @@ export default function ConfirmRecoveryPhrase({ secretRecoveryPhrase = '' }) {
     bufferedEndTrace?.({ name: TraceName.OnboardingNewSrpCreateWallet });
     bufferedEndTrace?.({ name: TraceName.OnboardingJourneyOverall });
 
-    const nextRoute =
-      getBrowserName() === PLATFORM_FIREFOX || isFromReminder
-        ? ONBOARDING_COMPLETION_ROUTE
-        : ONBOARDING_METAMETRICS;
-
     navigate(
-      `${nextRoute}${nextRouteQueryString ? `?${nextRouteQueryString}` : ''}`,
+      `${ONBOARDING_RECOVERY_CHECKLIST_ROUTE}${
+        nextRouteQueryString ? `?${nextRouteQueryString}` : ''
+      }`,
       { replace: true },
     );
   }, [
@@ -173,7 +167,6 @@ export default function ConfirmRecoveryPhrase({ secretRecoveryPhrase = '' }) {
     hdEntropyIndex,
     navigate,
     trackEvent,
-    isFromReminder,
     nextRouteQueryString,
     bufferedEndTrace,
   ]);

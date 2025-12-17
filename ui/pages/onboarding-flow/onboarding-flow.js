@@ -20,6 +20,7 @@ import {
   DEFAULT_ROUTE,
   ONBOARDING_PRIVACY_SETTINGS_ROUTE,
   ONBOARDING_COMPLETION_ROUTE,
+  ONBOARDING_RECOVERY_CHECKLIST_ROUTE,
   ONBOARDING_IMPORT_WITH_SRP_ROUTE,
   ONBOARDING_PIN_EXTENSION_ROUTE,
   ONBOARDING_METAMETRICS,
@@ -74,6 +75,7 @@ import OnboardingFlowSwitch from './onboarding-flow-switch/onboarding-flow-switc
 import CreatePassword from './create-password/create-password';
 import ReviewRecoveryPhrase from './recovery-phrase/review-recovery-phrase';
 import ConfirmRecoveryPhrase from './recovery-phrase/confirm-recovery-phrase';
+import RecoveryChecklist from './recovery-phrase/recovery-checklist';
 import PrivacySettings from './privacy-settings/privacy-settings';
 import CreationSuccessful from './creation-successful/creation-successful';
 import OnboardingWelcome from './welcome/welcome';
@@ -121,7 +123,8 @@ export default function OnboardingFlow() {
   const isRecoveryPhrasePage = useMemo(
     () =>
       pathname === ONBOARDING_REVIEW_SRP_ROUTE ||
-      pathname === ONBOARDING_CONFIRM_SRP_ROUTE,
+      pathname === ONBOARDING_CONFIRM_SRP_ROUTE ||
+      pathname === ONBOARDING_RECOVERY_CHECKLIST_ROUTE,
     [pathname],
   );
 
@@ -332,6 +335,10 @@ export default function OnboardingFlow() {
                 secretRecoveryPhrase={secretRecoveryPhrase}
               />
             }
+          />
+          <Route
+            path={ONBOARDING_RECOVERY_CHECKLIST_ROUTE}
+            element={<RecoveryChecklist />}
           />
           <Route
             path={ONBOARDING_IMPORT_WITH_SRP_ROUTE}

@@ -10,6 +10,7 @@ import {
   FontWeight,
   TextAlign,
   TextColor,
+  BackgroundColor,
   BlockSize,
   AlignItems,
   JustifyContent,
@@ -76,6 +77,7 @@ export default function OnboardingMetametrics() {
 
   const participateCheckboxRef = useRef(null);
   const marketingCheckboxRef = useRef(null);
+  const hasAutoContinuedRef = useRef(false);
 
   useEffect(() => {
     if (participateInMetaMetricsSet) {
@@ -107,6 +109,24 @@ export default function OnboardingMetametrics() {
       nextRouteByBrowser = ONBOARDING_WELCOME_ROUTE;
     }
   }
+
+  useEffect(() => {
+    if (hasAutoContinuedRef.current) {
+      return;
+    }
+    hasAutoContinuedRef.current = true;
+
+    (async () => {
+      try {
+        await dispatch(setDataCollectionForMarketing(false));
+        await dispatch(setParticipateInMetaMetrics(false));
+      } catch (error) {
+        log.error('onboardingMetametrics::skip', error);
+      } finally {
+        navigate(nextRouteByBrowser);
+      }
+    })();
+  }, [dispatch, navigate, nextRouteByBrowser]);
 
   const handleContinue = async (e) => {
     e.preventDefault();

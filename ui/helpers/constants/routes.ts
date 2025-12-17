@@ -114,6 +114,8 @@ export const ONBOARDING_REVEAL_SRP_ROUTE = '/onboarding/reveal-recovery-phrase';
 export const ONBOARDING_REVIEW_SRP_ROUTE = '/onboarding/review-recovery-phrase';
 export const ONBOARDING_CONFIRM_SRP_ROUTE =
   '/onboarding/confirm-recovery-phrase';
+export const ONBOARDING_RECOVERY_CHECKLIST_ROUTE =
+  '/onboarding/recovery-checklist';
 export const ONBOARDING_CREATE_PASSWORD_ROUTE = '/onboarding/create-password';
 export const ONBOARDING_COMPLETION_ROUTE = '/onboarding/completion';
 export const ONBOARDING_UNLOCK_ROUTE = '/onboarding/unlock';
@@ -553,6 +555,11 @@ export const ROUTES = [
   {
     path: ONBOARDING_CONFIRM_SRP_ROUTE,
     label: 'Onboarding Confirm Recovery Phrase',
+    trackInAnalytics: false,
+  },
+  {
+    path: ONBOARDING_RECOVERY_CHECKLIST_ROUTE,
+    label: 'Onboarding Recovery Checklist',
     trackInAnalytics: false,
   },
   {

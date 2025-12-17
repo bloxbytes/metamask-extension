@@ -1414,6 +1414,45 @@
   "confirmSrpSuccessTitle": {
     "message": "Perfect"
   },
+  "recoveryChecklistTitle": {
+    "message": "Terms & Acknowledgements"
+  },
+  "recoveryChecklistSubtitle": {
+    "message": "Please review and accept the following before continuing."
+  },
+  "recoveryChecklistItemOne": {
+    "message": "Terms of Service"
+  },
+  "recoveryChecklistItemOneDescription": {
+    "message": "I have read and agree to the OPN Wallet Terms of Service and understand how the wallet operates."
+  },
+  "recoveryChecklistItemTwo": {
+    "message": "Privacy Policy"
+  },
+  "recoveryChecklistItemTwoDescription": {
+    "message": "I acknowledge OPN's Privacy Policy and understand how my data is handled and protected."
+  },
+  "recoveryChecklistItemThree": {
+    "message": "Risk Acknowledgement"
+  },
+  "recoveryChecklistItemThreeDescription": {
+    "message": "I understand the risks of using cryptocurrency and that blockchain transactions are irreversible."
+  },
+  "recoveryChecklistItemFour": {
+    "message": "Backup Responsibility"
+  },
+  "recoveryChecklistItemFourDescription": {
+    "message": "I am responsible for backing up my recovery phrase. OPN cannot recover my wallet if I lose it."
+  },
+  "recoveryChecklistImportantTitle": {
+    "message": "Important:"
+  },
+  "recoveryChecklistImportantDescription": {
+    "message": "OPN Wallet is non-custodial. You have full control and responsibility for your private keys and funds. OPN cannot access, recover, or reverse your transactions."
+  },
+  "recoveryChecklistComplete": {
+    "message": "Complete Setup"
+  },
   "confirmTitleAccountTypeSwitch": {
     "message": "Account update"
   },
@@ -1692,10 +1731,10 @@
     "message": "Create a new account"
   },
   "createPassword": {
-    "message": "OPN Wallet password"
+    "message": "createPasswordCreate"
   },
   "createPasswordCreate": {
-    "message": "Create password"
+    "message": "Continue"
   },
   "createPasswordDetails": {
     "message": "Unlocks OPN Wallet on this device only."
@@ -5574,7 +5613,7 @@
     "message": "Don’t share it with anyone, ever."
   },
   "seedPhraseReviewTitle": {
-    "message": "Save your Secret Recovery Phrase"
+    "message": "Secret Recovery Phrase"
   },
   "seedPhraseReviewTitleSettings": {
     "message": "Save Secret Recovery Phrase"

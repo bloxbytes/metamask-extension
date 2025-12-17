@@ -61,10 +61,10 @@ import { TraceName, TraceOperation } from '../../../../shared/lib/trace';
 const isFirefox = getBrowserName() === PLATFORM_FIREFOX;
 
 export default function CreatePassword({
-  createNewAccount,
-  importWithRecoveryPhrase,
-  secretRecoveryPhrase,
-}) {
+                                         createNewAccount,
+                                         importWithRecoveryPhrase,
+                                         secretRecoveryPhrase,
+                                       }) {
   const t = useI18nContext();
   const [password, setPassword] = useState('');
   const [termsChecked] = useState(false);
@@ -463,7 +463,7 @@ export default function CreatePassword({
             variant={ButtonVariant.Primary}
             width={BlockSize.Full}
             size={ButtonSize.Lg}
-            className="create-password__form--submit-button"
+            className={'create-password__form--submit-button ' + password ? '' : 'primary-button primary-button-white-color'}
             disabled={!password}
             endIconName={IconName.Arrow2Right}
           >
