@@ -9,6 +9,7 @@ export type AccountOverviewEthProps = AccountOverviewCommonProps;
 
 export const AccountOverviewEth = (props: AccountOverviewEthProps) => {
   const defiPositionsEnabled = useSelector(getIsDefiPositionsEnabled);
+  const { showBalance, showButtons } = props;
   return (
     <AccountOverviewLayout
       showTokens={true}
@@ -17,7 +18,7 @@ export const AccountOverviewEth = (props: AccountOverviewEthProps) => {
       showActivity={true}
       {...props}
     >
-      {<EthOverview />}
+      {<EthOverview showBalance={showBalance} showButtons={showButtons} />}
     </AccountOverviewLayout>
   );
 };

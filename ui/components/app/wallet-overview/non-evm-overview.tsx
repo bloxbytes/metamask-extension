@@ -13,9 +13,15 @@ import { CoinOverview } from './coin-overview';
 
 type NonEvmOverviewProps = {
   className?: string;
+  showBalance?: boolean;
+  showButtons?: boolean;
 };
 
-const NonEvmOverview = ({ className }: NonEvmOverviewProps) => {
+const NonEvmOverview = ({
+  className,
+  showBalance = true,
+  showButtons = true,
+}: NonEvmOverviewProps) => {
   const { chainId } = useSelector(getSelectedMultichainNetworkConfiguration);
   const balance = useSelector(getMultichainSelectedAccountCachedBalance);
   const account = useSelector(getSelectedInternalAccount);
@@ -38,6 +44,8 @@ const NonEvmOverview = ({ className }: NonEvmOverviewProps) => {
       isSwapsChain={isSwapsChain}
       isBridgeChain={isBridgeChain}
       isBuyableChain={isNativeTokenBuyable}
+      showBalance={showBalance}
+      showButtons={showButtons}
     />
   );
 };

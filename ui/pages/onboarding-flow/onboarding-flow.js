@@ -263,11 +263,13 @@ export default function OnboardingFlow() {
         'onboarding-flow--welcome-login': isWelcomePage,
       })}
     >
-      {!isPopup && <OnboardingAppHeader isWelcomePage={isWelcomePage} />}
+      {/*{!isPopup && <OnboardingAppHeader isWelcomePage={isWelcomePage} />}*/}
       {isRecoveryPhrasePage && (
         <Box className="onboarding-flow--recovery-phrase-background">
-          <Box className="onboarding-flow--recovery-phrase-background__blur-circle onboarding-flow--recovery-phrase-background__blur-circle--top-left" />
-          <Box className="onboarding-flow--recovery-phrase-background__blur-circle onboarding-flow--recovery-phrase-background__blur-circle--bottom-right" />
+          <Box
+            className="onboarding-flow--recovery-phrase-background__blur-circle onboarding-flow--recovery-phrase-background__blur-circle--top-left" />
+          <Box
+            className="onboarding-flow--recovery-phrase-background__blur-circle onboarding-flow--recovery-phrase-background__blur-circle--bottom-right" />
         </Box>
       )}
       <Box
@@ -277,7 +279,7 @@ export default function OnboardingFlow() {
           'onboarding-flow__container--glass': !isWelcomePage, // Glass effect for all screens except welcome
           'onboarding-flow__container--recovery-phrase': isRecoveryPhrasePage, // Wider width for recovery phrase screens
           'onboarding-flow__container--metametrics-completion':
-            isMetametricsCompletionPage, // Max-width 640px for metametrics and completion screens
+          isMetametricsCompletionPage, // Max-width 640px for metametrics and completion screens
         })}
         width={BlockSize.Full}
         borderStyle={

@@ -6,6 +6,8 @@ import { AccountOverviewCommonProps } from './common';
 export type AccountOverviewNonEvmProps = AccountOverviewCommonProps;
 
 export const AccountOverviewNonEvm = ({
+  showBalance,
+  showButtons,
   ...props
 }: AccountOverviewNonEvmProps) => {
   return (
@@ -16,7 +18,7 @@ export const AccountOverviewNonEvm = ({
       showActivity={true}
       {...props}
     >
-      <NonEvmOverview />
+      <NonEvmOverview showBalance={showBalance} showButtons={showButtons} />
     </AccountOverviewLayout>
   );
 };
