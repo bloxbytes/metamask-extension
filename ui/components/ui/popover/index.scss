@@ -2,6 +2,12 @@
 
 .popover {
   &-wrap {
+    background: linear-gradient(135deg, rgba(26,29,58,0.6) 0%, rgba(26,29,58,0.4) 100%) !important;
+    backdrop-filter: blur(24px);
+    border-radius: 16px;
+    border: 1px solid rgba(65,5,182,0.4);
+    box-shadow: 0 12px 40px 0 rgba(16, 7, 47, 0.22), 0 1.5px 5px 0 rgba(21, 8, 56, 0.09);
+    padding: 24px;
     ::-webkit-scrollbar {
       width: 6px;
     }
@@ -20,6 +26,13 @@
     box-shadow: var(--shadow-size-lg) var(--color-shadow-default);
     border-radius: 10px;
     background: var(--color-background-default);
+    .popover-header{
+      background: linear-gradient(135deg, rgba(26,29,58,0.6) 0%, rgba(26,29,58,0.4) 100%) !important;
+      padding: unset !important;
+    }
+    .edit-gas-item{
+      background: transparent !important;
+    }
   }
 
   &-header {
@@ -99,4 +112,5 @@
   &-container .page-container {
     width: auto;
   }
+
 }

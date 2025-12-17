@@ -97,8 +97,13 @@
   border: 1px solid rgba(65, 5, 182, 0.3);
   }
 }
-.confirm_header__wrapper{
+.confirm_header__wrapper, .confirm-footer_page-footer,.mm-box--background-color-background-section{
   background-color: #0f112af2;
+}
+.confirm_wrapper.multichain-page__inner-container{
+  border: 1px solid oklab(38.7948% .0500729 -.221303 / .3) !important;
+  border-radius: 12px !important;
+  overflow: hidden;
 }
 .mm-modal-content__dialog{
   background: #0f112af2;
@@ -216,4 +221,21 @@
   background: linear-gradient(to bottom right, #4105b6, #6305b6);
   color: #f8fdf1;
   box-shadow: 0 10px 20px 0 rgba(65, 5, 182, 0.5);
+}
+.mm-icon{
+  color: #f8fdf1;
+}
+.modal-container.customize-nonce-modal-container{
+  background-color: #1d2449!important;
+  border: 1px solid rgba(65, 5, 182, 0.3) !important;
+}
+.redesigned__send__wrapper{
+  width: 100% !important;
+  padding: 16px;
+}
+.settings-page{
+  background-color: #0f112a!important;
+}
+.main-container{
+  width: 100%!important;
 }
