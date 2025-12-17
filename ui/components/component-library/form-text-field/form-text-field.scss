@@ -84,7 +84,7 @@
   }
 
   // Direct targeting for better specificity
-  .mm-form-text-field__text-field.mm-text-field {
+  .mm-form-text-field__text-field.mm-text-field, .TextField-inputRoot-12, .mm-text-field-search {
     background-color: rgba(26, 29, 58, 0.6) !important;
     border-color: rgba(65, 5, 182, 0.4) !important;
     border-radius: 0.75rem !important;

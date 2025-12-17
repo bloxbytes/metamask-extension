@@ -932,3 +932,39 @@ font-weight: 400;
   background: transparent;
 }
 
+.mm-text-field-search {
+  background-color: rgba(26, 29, 58, 0.6) !important;
+  border-color: rgba(65, 5, 182, 0.4) !important;
+  border-radius: 0.75rem !important;
+}
+.mm-text-field,.mm-button-base {
+  background-color: rgba(26, 29, 58, 0.6) !important;
+  border-color: rgba(65, 5, 182, 0.4) !important;
+  border-radius: 0.75rem !important;
+}
+
+// Remove white background on focus for inputs and selects
+.mm-text-field:focus,
+.mm-text-field--focused,
+.mm-text-field__input:focus,
+.mm-input:focus,
+.mm-select-button:focus,
+.mm-select-button--focused,
+.mm-text-field-search:focus,
+.mm-text-field-search input:focus,
+.mm-box.mm-text-field:focus,
+.mm-box.mm-text-field--focused {
+  background-color: rgba(26, 29, 58, 0.6) !important;
+  outline: none !important;
+}
+
+.mm-text-field--focused,
+.mm-box.mm-text-field--focused {
+  background-color: rgba(26, 29, 58, 0.6) !important;
+}
+.mm-box.multichain-network-list-menu{
+  padding-top: 16px;
+}
+.dropdown-editor__item:hover{
+  background-color: oklab(24.4378% .00675559 -.0545587 / .8);
+}
