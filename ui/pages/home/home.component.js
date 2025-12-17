@@ -903,32 +903,84 @@ export default class Home extends PureComponent {
           {isPopup && !connectedStatusPopoverHasBeenShown
             ? this.renderPopover()
             : null}
-          <div className="home__main-view">
-            <AccountOverview
-              onTabClick={onTabClick}
-              ///: BEGIN:ONLY_INCLUDE_IF(build-main)
-              onSupportLinkClick={this.onSupportLinkClick}
-              ///: END:ONLY_INCLUDE_IF
-              defaultHomeActiveTabName={defaultHomeActiveTabName}
-              useExternalServices={useExternalServices}
-              setBasicFunctionalityModalOpen={setBasicFunctionalityModalOpen}
-            ></AccountOverview>
-            {
-              ///: BEGIN:ONLY_INCLUDE_IF(build-beta)
-              <div className="home__support">
-                <BetaHomeFooter />
-              </div>
-              ///: END:ONLY_INCLUDE_IF
-            }
-            {
-              ///: BEGIN:ONLY_INCLUDE_IF(build-flask)
-              <div className="home__support">
-                <FlaskHomeFooter />
-              </div>
-              ///: END:ONLY_INCLUDE_IF
-            }
-          </div>
-          {this.renderNotifications()}
+
+          <Box
+            display={Display.Flex}
+            flexDirection={FlexDirection.Column}
+            gap={4}
+            width={BlockSize.Full}
+          >
+            <Box
+              display={Display.Flex}
+              alignItems={AlignItems.center}
+              justifyContent={JustifyContent.spaceBetween}
+              paddingInline={4}
+              paddingBlock={3}
+            >
+              <Text variant={TextVariant.HeadingSm}>OPN Wallet</Text>
+              <Box display={Display.Flex} alignItems={AlignItems.center} gap={2}>
+                <Icon name={IconName.Sparkles} />
+                <Text variant={TextVariant.BodySm}>
+                  Connected
+                </Text>
+              </Box>
+            </Box>
+
+            <Box
+              display={Display.Flex}
+              flexWrap="wrap"
+              gap={4}
+              alignItems={AlignItems.stretch}
+            >
+              <Box
+                display={Display.Flex}
+                flexDirection={FlexDirection.Column}
+                gap={3}
+                style={{ flex: '1 1 65%', minWidth: '0' }}
+              >
+                <div className="home__main-view">
+                  <AccountOverview
+                    onTabClick={onTabClick}
+                    ///: BEGIN:ONLY_INCLUDE_IF(build-main)
+                    onSupportLinkClick={this.onSupportLinkClick}
+                    ///: END:ONLY_INCLUDE_IF
+                    defaultHomeActiveTabName={defaultHomeActiveTabName}
+                    useExternalServices={useExternalServices}
+                    setBasicFunctionalityModalOpen={
+                      setBasicFunctionalityModalOpen
+                    }
+                  ></AccountOverview>
+                  {
+                    ///: BEGIN:ONLY_INCLUDE_IF(build-beta)
+                    <div className="home__support">
+                      <BetaHomeFooter />
+                    </div>
+                    ///: END:ONLY_INCLUDE_IF
+                  }
+                  {
+                    ///: BEGIN:ONLY_INCLUDE_IF(build-flask)
+                    <div className="home__support">
+                      <FlaskHomeFooter />
+                    </div>
+                    ///: END:ONLY_INCLUDE_IF
+                  }
+                </div>
+              </Box>
+
+              <Box
+                display={Display.Flex}
+                flexDirection={FlexDirection.Column}
+                gap={3}
+                style={{
+                  flex: '0 0 320px',
+                  maxWidth: '360px',
+                  width: '100%',
+                }}
+              >
+                {this.renderNotifications()}
+              </Box>
+            </Box>
+          </Box>
         </div>
       </div>
     );
