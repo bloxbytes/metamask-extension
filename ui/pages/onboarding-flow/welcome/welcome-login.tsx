@@ -29,8 +29,8 @@ import { LOGIN_OPTION, LOGIN_TYPE, LoginOptionType, LoginType } from './types';
 // TODO: Fix in https://github.com/MetaMask/metamask-extension/issues/31860
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export default function WelcomeLogin({
-  onLogin,
-}: {
+                                       onLogin,
+                                     }: {
   onLogin: (loginType: LoginType, loginOption: string) => Promise<void>;
 }) {
   const t = useI18nContext();
@@ -40,6 +40,7 @@ export default function WelcomeLogin({
   const isSeedlessOnboardingFeatureEnabled =
     getIsSeedlessOnboardingFeatureEnabled();
   const dispatch = useDispatch();
+  const [showImportOption, setShowImportOption] = useState(true);
 
   const renderMascot = () => {
     return (
@@ -48,6 +49,10 @@ export default function WelcomeLogin({
         width="256"
         height="256"
         alt="OPN Wallet"
+        style={{
+          border: '5px solid',
+          borderColor: '#454e69',
+        }}
         // eslint-disable-next-line @metamask/design-tokens/color-no-hex
         className="welcome-login__mascotImg rounded-full relative"
       />
@@ -151,10 +156,13 @@ export default function WelcomeLogin({
               if (!isSeedlessOnboardingFeatureEnabled) {
                 await onLogin(LOGIN_TYPE.SRP, LOGIN_OPTION.NEW);
               }
+
             }}
           >
             {t('onboardingCreateWallet')}
           </Button>
+
+
           <Button
             data-testid="onboarding-import-wallet"
             variant={ButtonVariant.Secondary}
@@ -169,11 +177,27 @@ export default function WelcomeLogin({
               }
             }}
           >
-            {isSeedlessOnboardingFeatureEnabled
+            {showImportOption ? t('onboardingImportWallet') : (isSeedlessOnboardingFeatureEnabled
               ? t('onboardingImportWallet')
-              : t('onboardingSrpImport')}
+              : t('onboardingSrpImport'))}
           </Button>
+
+          <div className={'space-y-4 mb-16'}></div>
+          <div className="text-[#4f5262] text-sm">
+            <p>By continuing, I agree to OPN Wallet's
+              &nbsp;
+              <a href="https://iopn.io"
+                 className="text-[#2280cd] hover:text-[#b0efff] underline transition-colors">Terms of
+                Use</a>&nbsp;and&nbsp;
+              <a href="https://iopn.io"
+                 className="text-[#2280cd] hover:text-[#b0efff] underline transition-colors">Privacy
+                notice</a>.
+            </p>
+          </div>
+
         </Box>
+
+
         {isSeedlessOnboardingFeatureEnabled &&
           showLoginOptions &&
           loginOption && (

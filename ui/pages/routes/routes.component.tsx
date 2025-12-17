@@ -853,9 +853,9 @@ export default function Routes() {
       <QRHardwarePopover />
       <Modal />
       <Alert visible={alertOpen} msg={alertMessage} />
-      {process.env.REMOVE_GNS
-        ? showAppHeader({ location }) && <AppHeader location={location} />
-        : !hideAppHeader({ location }) && <AppHeader location={location} />}
+      {/*{process.env.REMOVE_GNS*/}
+      {/*  ? showAppHeader({ location }) && <AppHeader location={location} />*/}
+      {/*  : !hideAppHeader({ location }) && <AppHeader location={location} />}*/}
       {isConfirmTransactionRoute(location.pathname) && (
         <MultichainMetaFoxLogo />
       )}

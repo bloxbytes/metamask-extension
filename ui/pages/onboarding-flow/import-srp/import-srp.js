@@ -133,22 +133,50 @@ export default function ImportSRP({ submitSecretRecoveryPhrase }) {
         <SRPDetailsModal onClose={() => setShowSrpDetailsModal(false)} />
       )}
       <Box>
-        <Box marginBottom={4}>
+        <Box
+          display={Display.Flex}
+          alignItems={AlignItems.center}
+          marginBottom={4}>
           <ButtonIcon
-            iconName={IconName.ArrowLeft}
+            iconName={IconName.Arrow2Left}
             color={IconColor.iconDefault}
             size={ButtonIconSize.Md}
             data-testid="import-srp-back-button"
             onClick={onBack}
             ariaLabel={t('back')}
           />
+
+          <span>Back</span>
         </Box>
+
+        <div className="flex justify-center mb-8">
+          <div className="relative">
+            <div
+              className="absolute inset-0 bg-gradient-to-r from-[#4105b6] to-[#6305b6] rounded-full blur-2xl opacity-40"></div>
+            <img
+              src="./images/logo/metamask-fox.svg"
+              width="110"
+              alt="OPN Wallet"
+              style={{
+                border: '5px solid',
+                borderColor: '#454e69',
+              }}
+              // eslint-disable-next-line @metamask/design-tokens/color-no-hex
+              className="welcome-login__mascotImg rounded-full relative"
+            />
+          </div>
+        </div>
+
+
         <Box textAlign={TextAlign.Left} marginBottom={2}>
           <Text variant={TextVariant.headingLg}>{t('importAWallet')}</Text>
         </Box>
+
         <Box
           display={Display.Flex}
           alignItems={AlignItems.center}
+          justifyContent={JustifyContent.center}
+          width="100%"
           marginBottom={4}
         >
           <Text variant={TextVariant.bodyMd} color={TextColor.textAlternative}>
@@ -162,6 +190,8 @@ export default function ImportSRP({ submitSecretRecoveryPhrase }) {
             ariaLabel="info"
           />
         </Box>
+
+
         <Box width={BlockSize.Full}>
           <form onSubmit={(e) => e.preventDefault()}>
             <SrpInputImport onChange={setSecretRecoveryPhrase} />
@@ -179,6 +209,8 @@ export default function ImportSRP({ submitSecretRecoveryPhrase }) {
           </form>
         </Box>
       </Box>
+
+
       <Box
         display={Display.Flex}
         flexDirection={FlexDirection.Column}
@@ -187,6 +219,11 @@ export default function ImportSRP({ submitSecretRecoveryPhrase }) {
         width={BlockSize.Full}
         textAlign={TextAlign.Left}
       >
+
+        <div className="bg-[#2280cd]/20 border border-[#2280cd]/30 rounded-lg p-3 mb-6 w-100 full"
+        ><p
+          className="text-[#b0efff] text-sm text-center">💡 Tip: You can paste all 12 words at once</p></div>
+
         <Button
           width={BlockSize.Full}
           size={ButtonSize.Lg}
@@ -195,8 +232,13 @@ export default function ImportSRP({ submitSecretRecoveryPhrase }) {
           onClick={onContinue}
           disabled={!secretRecoveryPhrase.trim() || Boolean(srpError)}
         >
-          {t('continue')}
+          {t('importAWallet')}
         </Button>
+
+        <div className="mt-6 bg-[#4105b6]/20 border border-[#4105b6]/30 rounded-lg p-4"><p
+          className="text-[#b0efff]/70 text-sm text-center">⚠️ Never share your recovery phrase with anyone. OPN will
+          never ask for it.</p></div>
+
       </Box>
     </Box>
   );

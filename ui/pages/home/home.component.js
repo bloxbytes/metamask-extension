@@ -85,6 +85,7 @@ import {
 import { getSelectedMultichainNetworkConfiguration } from '../../selectors/multichain/networks';
 import { getMultichainSelectedAccountCachedBalance } from '../../selectors/multichain';
 import { getIsNativeTokenBuyable } from '../../ducks/ramps';
+import { shortenAddress } from '../../helpers/utils/util';
 
 
 ///: BEGIN:ONLY_INCLUDE_IF(build-beta)
@@ -167,19 +168,34 @@ const HomeCoinBalance = () => {
   const chainId = isEvm ? evmChainId : multichainChainId;
   const balance = isEvm ? evmBalance : nonEvmBalance;
   const balanceIsCached = isEvm ? evmBalanceIsCached : false;
+  const displayAddress =
+    account?.address && typeof account.address === 'string'
+      ? shortenAddress(account.address)
+      : '';
 
   if (!account || !chainId || balance === undefined) {
     return null;
   }
 
   return (
-    <CoinBalance
-      account={account}
-      balance={balance}
-      balanceIsCached={balanceIsCached}
-      chainId={chainId}
-      classPrefix="home"
-    />
+    <div className="home__coin-balance">
+      <CoinBalance
+        account={account}
+        balance={balance}
+        balanceIsCached={balanceIsCached}
+        chainId={chainId}
+        classPrefix="home"
+      />
+      {displayAddress ? (
+        <Text
+          variant={TextVariant.bodySm}
+          color={TextColor.textAlternative}
+          className="home__coin-balance-address"
+        >
+          {displayAddress}
+        </Text>
+      ) : null}
+    </div>
   );
 };
 
@@ -1089,6 +1105,8 @@ export default class Home extends PureComponent {
               defaultHomeActiveTabName={defaultHomeActiveTabName}
               useExternalServices={useExternalServices}
               setBasicFunctionalityModalOpen={setBasicFunctionalityModalOpen}
+              showBalance={false}
+              showButtons={false}
             ></AccountOverview>
 
 

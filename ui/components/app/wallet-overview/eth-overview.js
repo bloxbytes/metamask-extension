@@ -14,7 +14,7 @@ import {
 import { getIsNativeTokenBuyable } from '../../../ducks/ramps';
 import { CoinOverview } from './coin-overview';
 
-const EthOverview = ({ className }) => {
+const EthOverview = ({ className, showBalance = true, showButtons = true }) => {
   const isBridgeChain = useSelector(getIsBridgeChain);
   const isBuyableChain = useSelector(getIsNativeTokenBuyable);
   const balanceIsCached = useSelector(isBalanceCached);
@@ -40,12 +40,16 @@ const EthOverview = ({ className }) => {
       isSwapsChain={isSwapsChain}
       isBridgeChain={isBridgeChain}
       isBuyableChain={isBuyableChain}
+      showBalance={showBalance}
+      showButtons={showButtons}
     />
   );
 };
 
 EthOverview.propTypes = {
   className: PropTypes.string,
+  showBalance: PropTypes.bool,
+  showButtons: PropTypes.bool,
 };
 
 export default EthOverview;

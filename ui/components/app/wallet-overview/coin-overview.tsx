@@ -18,6 +18,8 @@ export type CoinOverviewProps = {
   isBuyableChain: boolean;
   isSwapsChain: boolean;
   isSigningEnabled: boolean;
+  showBalance?: boolean;
+  showButtons?: boolean;
 };
 
 export const CoinOverview = ({
@@ -31,31 +33,41 @@ export const CoinOverview = ({
   isBuyableChain,
   isSwapsChain,
   isSigningEnabled,
+  showBalance = true,
+  showButtons = true,
 }: CoinOverviewProps) => {
   return (
     <WalletOverview
       balance={
-        <CoinBalance
-          account={account}
-          balance={balance}
-          balanceIsCached={balanceIsCached}
-          chainId={chainId}
-          classPrefix={classPrefix}
-        />
+        showBalance ? (
+          <CoinBalance
+            account={account}
+            balance={balance}
+            balanceIsCached={balanceIsCached}
+            chainId={chainId}
+            classPrefix={classPrefix}
+          />
+        ) : (
+          <div />
+        )
       }
       buttons={
-        <CoinButtons
-          {...{
-            account,
-            trackingLocation: 'home',
-            chainId,
-            isSwapsChain,
-            isSigningEnabled,
-            isBridgeChain,
-            isBuyableChain,
-            classPrefix,
-          }}
-        />
+        showButtons ? (
+          <CoinButtons
+            {...{
+              account,
+              trackingLocation: 'home',
+              chainId,
+              isSwapsChain,
+              isSigningEnabled,
+              isBridgeChain,
+              isBuyableChain,
+              classPrefix,
+            }}
+          />
+        ) : (
+          <div />
+        )
       }
       className={className}
     />

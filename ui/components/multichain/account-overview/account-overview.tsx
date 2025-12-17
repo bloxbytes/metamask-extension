@@ -19,18 +19,31 @@ export type AccountOverviewProps = AccountOverviewCommonProps & {
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export function AccountOverview(props: AccountOverviewProps) {
   const account = useSelector(getSelectedInternalAccount);
+  const { showBalance, showButtons } = props;
 
   const renderAccountOverviewOption = () => {
     switch (account.type) {
       case EthAccountType.Eoa:
       case EthAccountType.Erc4337:
-        return <AccountOverviewEth {...props}></AccountOverviewEth>;
+        return (
+          <AccountOverviewEth
+            {...props}
+            showBalance={showBalance}
+            showButtons={showButtons}
+          ></AccountOverviewEth>
+        );
       case BtcAccountType.P2pkh:
       case BtcAccountType.P2sh:
       case BtcAccountType.P2wpkh:
       case BtcAccountType.P2tr:
       case SolAccountType.DataAccount:
-        return <AccountOverviewNonEvm {...props}></AccountOverviewNonEvm>;
+        return (
+          <AccountOverviewNonEvm
+            {...props}
+            showBalance={showBalance}
+            showButtons={showButtons}
+          ></AccountOverviewNonEvm>
+        );
       default:
         return <AccountOverviewUnknown {...props}></AccountOverviewUnknown>;
     }
