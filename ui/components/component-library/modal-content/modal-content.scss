@@ -79,6 +79,134 @@
     }
   }
 }
-.mm-modal-content__dialog{
+.multichain-page__inner-container{
+  background: #0f112af2;
+  opacity: 0.95;
   max-width: 100%;
+  .mm-box--background-color-background-default{
+    background-color: #0f112af2;
+  }
+  .confirm_wrapper.multichain-page__inner-container{
+    background: #0f112af2;
+  opacity: 0.95;
+  max-width: 100%;
+  border: 1px solid rgba(65, 5, 182, 0.3);
+  }
+}
+.mm-modal-content__dialog{
+  background: #0f112af2;
+  opacity: 0.95;
+  max-width: 100%;
+  height: 100vh;
+  .mm-text--body-md{
+    text-align: center;
+  }
+  &.mm-box--background-color-background-default{
+    background-color: #0f112af2 !important;
+}
+.bg-default{
+  background-color: transparent;
+}
+  // .mm-button-secondary{
+  //   background: linear-gradient(to right, #4105b6, #6305b6);
+  //   color: #f8fdf1;
+  //   box-shadow: 0 25px 50px -12px rgba(65, 5, 182, 0.5);
+  //   &:hover:not(&--disabled) {
+  //     background: linear-gradient(to right, #6305b6, #4105b6);
+  //     box-shadow: 0 25px 50px -12px rgba(65, 5, 182, 0.7);
+  //     // transform: scale(1.05);
+  //     color: #f8fdf1;
+  //   }
+  //   &:active:not(&--disabled) {
+  //     background: linear-gradient(to right, #4105b6, #6305b6);
+  //     // transform: scale(1.02);
+  //     color: #f8fdf1;
+  //   }
+  // }
+  .mm-icon{
+    color: #fff;
+  }
+.multichain-account-list-item__selected-indicator{
+  display: none;
+}
+}
+.mm-button-secondary{
+  background-color: #1d2449;
+  color:#f8fdf1;
+  :hover{
+    background-color: oklab(27.5218% .00363314 -.0686048 / .8);
+  }
+}
+.qr-code__address-segments {
+  background-color: #1d2449;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  border: 1px solid rgba(65, 5, 182, 0.3);
+  width: auto !important;
+}
+.qr-code__copy-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(to bottom right, #4105b6, #6305b6);
+  color: #f8fdf1;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-radius: 0.75rem;
+  transition: opacity 0.2s;
+  padding-inline: 12px;
+  &:hover {
+    opacity: 0.9;
+  }
+}
+.multichain-account-menu-popover__list{
+  padding-inline: 16px;
+}
+.multichain-account-list-item, .mm-banner-base{
+  background-color: #1d2449;
+  border-radius: 12px;
+  padding: 12px;
+  transition: all 0.2s;
+  border: 1px solid #4105b6;
+}
+.mm-popover{
+  background: linear-gradient(to bottom right, rgba(26, 29, 58, 0.6), rgba(26, 29, 58, 0.4));
+  backdrop-filter: blur(24px);
+  border-radius: 1rem;
+  border: 1px solid rgba(65, 5, 182, 0.4);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  padding: 2px;
+  .menu-item{
+    padding: 5px 12px;
+    &:hover{
+      background-color: #1d2449;
+    }
+  }
+}
+.custom-tab{
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+  font-size: 12px;
+  color: rgba(176, 239, 255, 0.7);
+  &:hover {
+    color: #f8fdf1;
+    background-color: rgba(26, 29, 58, 0.4);
+  }
+}
+.custom-tab-active{
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+  font-size: 12px;
+  background: linear-gradient(to bottom right, #4105b6, #6305b6);
+  color: #f8fdf1;
+  box-shadow: 0 10px 20px 0 rgba(65, 5, 182, 0.5);
 }
