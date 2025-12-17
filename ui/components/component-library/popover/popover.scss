@@ -1,6 +1,8 @@
 
 .mm-popover {
   box-shadow: var(--shadow-size-md) var(--color-shadow-default);
+  z-index: 99999 !important;
+  position: relative;
 
   /* Hide the popper when the reference is hidden */
   &--reference-hidden[data-popper-reference-hidden="true"] {
