@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect, Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { EthMethod, isEvmAccountType } from '@metamask/keyring-api';
 import { Text, TextVariant, TextColor } from '@metamask/design-system-react';
 import {
   ///: BEGIN:ONLY_INCLUDE_IF(build-main)
@@ -53,7 +55,7 @@ import {
   AWAITING_SWAP_ROUTE,
   PREPARE_SWAP_ROUTE,
   CROSS_CHAIN_SWAP_ROUTE,
-  ONBOARDING_REVIEW_SRP_ROUTE,
+  ONBOARDING_REVIEW_SRP_ROUTE, ACCOUNT_LIST_PAGE_ROUTE,
 } from '../../helpers/constants/routes';
 import ZENDESK_URLS from '../../helpers/constants/zendesk-url';
 import { METAMETRICS_SETTINGS_LINK } from '../../helpers/constants/common';
@@ -68,19 +70,37 @@ import { navigateToConfirmation } from '../confirmations/hooks/useConfirmationNa
 import PasswordOutdatedModal from '../../components/app/password-outdated-modal';
 import ConnectionsRemovedModal from '../../components/app/connections-removed-modal';
 import ShieldEntryModal from '../../components/app/shield-entry-modal';
+import { AppHeaderOPN } from '../../components/multichain';
+import AssetListControlBar from '../../components/app/assets/asset-list/asset-list-control-bar';
+import CoinButtons from '../../components/app/wallet-overview/coin-buttons';
+import { CoinBalance } from '../../components/app/wallet-overview/coin-balance';
+import { getCurrentChainId } from '../../../shared/modules/selectors/networks';
+import {
+  isBalanceCached,
+  getIsBridgeChain,
+  getIsSwapsChain,
+  getSelectedInternalAccount,
+  getSelectedAccountCachedBalance,
+} from '../../selectors';
+import { getSelectedMultichainNetworkConfiguration } from '../../selectors/multichain/networks';
+import { getMultichainSelectedAccountCachedBalance } from '../../selectors/multichain';
+import { getIsNativeTokenBuyable } from '../../ducks/ramps';
+
+
 ///: BEGIN:ONLY_INCLUDE_IF(build-beta)
 import BetaHomeFooter from './beta/beta-home-footer.component';
 ///: END:ONLY_INCLUDE_IF
 ///: BEGIN:ONLY_INCLUDE_IF(build-flask)
 import FlaskHomeFooter from './flask/flask-home-footer.component';
+
 ///: END:ONLY_INCLUDE_IF
 
 function shouldCloseNotificationPopup({
-  isNotification,
-  totalUnapprovedCount,
-  hasApprovalFlows,
-  isSigningQRHardwareTransaction,
-}) {
+                                        isNotification,
+                                        totalUnapprovedCount,
+                                        hasApprovalFlows,
+                                        isSigningQRHardwareTransaction,
+                                      }) {
   const shouldClose =
     isNotification &&
     totalUnapprovedCount === 0 &&
@@ -89,6 +109,79 @@ function shouldCloseNotificationPopup({
 
   return shouldClose;
 }
+
+const HomeCoinButtons = () => {
+  const account = useSelector(getSelectedInternalAccount);
+  const evmChainId = useSelector(getCurrentChainId);
+  const { chainId: multichainChainId } =
+  useSelector(getSelectedMultichainNetworkConfiguration) || {};
+  const isSwapsChainDefault = useSelector(getIsSwapsChain);
+  const isBridgeChainDefault = useSelector(getIsBridgeChain);
+  const isSwapsChainMultichain = useSelector((state) =>
+    multichainChainId ? getIsSwapsChain(state, multichainChainId) : false,
+  );
+  const isBridgeChainMultichain = useSelector((state) =>
+    multichainChainId ? getIsBridgeChain(state, multichainChainId) : false,
+  );
+  const isBuyableChain = useSelector(getIsNativeTokenBuyable);
+  const isEvm = isEvmAccountType(account?.type);
+
+  const chainId = isEvm ? evmChainId : multichainChainId;
+  if (!account || !chainId) {
+    return null;
+  }
+
+  const isSigningEnabled = isEvm
+    ? account.methods?.includes(EthMethod.SignTransaction) ||
+    account.methods?.includes(EthMethod.SignUserOperation)
+    : true;
+
+  return (
+    <div className="home__coin-buttons">
+      <CoinButtons
+        account={account}
+        chainId={chainId}
+        trackingLocation="home"
+        isSwapsChain={isEvm ? isSwapsChainDefault : isSwapsChainMultichain}
+        isBridgeChain={isEvm ? isBridgeChainDefault : isBridgeChainMultichain}
+        isSigningEnabled={isSigningEnabled}
+        isBuyableChain={isBuyableChain}
+        classPrefix="home"
+      />
+    </div>
+  );
+};
+
+const HomeCoinBalance = () => {
+  const account = useSelector(getSelectedInternalAccount);
+  const evmChainId = useSelector(getCurrentChainId);
+  const evmBalance = useSelector(getSelectedAccountCachedBalance);
+  const nonEvmBalance = useSelector(
+    getMultichainSelectedAccountCachedBalance,
+  );
+  const evmBalanceIsCached = useSelector(isBalanceCached);
+  const { chainId: multichainChainId } =
+  useSelector(getSelectedMultichainNetworkConfiguration) || {};
+  const isEvm = isEvmAccountType(account?.type);
+
+  const chainId = isEvm ? evmChainId : multichainChainId;
+  const balance = isEvm ? evmBalance : nonEvmBalance;
+  const balanceIsCached = isEvm ? evmBalanceIsCached : false;
+
+  if (!account || !chainId || balance === undefined) {
+    return null;
+  }
+
+  return (
+    <CoinBalance
+      account={account}
+      balance={balance}
+      balanceIsCached={balanceIsCached}
+      chainId={chainId}
+      classPrefix="home"
+    />
+  );
+};
 
 export default class Home extends PureComponent {
   static contextTypes = {
@@ -833,6 +926,7 @@ export default class Home extends PureComponent {
       showConnectionsRemovedModal,
       showShieldEntryModal,
       isSocialLoginFlow,
+      location,
     } = this.props;
 
     if (forgottenPassword) {
@@ -879,7 +973,92 @@ export default class Home extends PureComponent {
           component={ConnectedAccounts}
           exact
         />
+
+        <HomeCoinBalance />
+
+        {/*Start Custom*/}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6" style={{
+          display: 'flex',
+        }}>
+          <div
+            className="md:col-span-2 bg-gradient-to-br from-[#1a1d3a]/60 to-[#1a1d3a]/40 backdrop-blur-xl rounded-2xl border border-[#4105b6]/40 shadow-2xl p-6 relative overflow-hidden">
+            <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#4105b6]/20 rounded-full blur-2xl"></div>
+            <div className="px-4 py-4 relative">
+              <div className="flex justify-center mb-4 relative">
+                <div
+                  className="absolute inset-0 bg-gradient-to-r from-[#4105b6] to-[#6305b6] rounded-full blur-xl opacity-30"></div>
+                <img src="./images/logo/metamask-fox.svg" alt="OPN Logo"
+                     className="w-20 h-20 rounded-full relative z-10 ring-2 ring-[#b0efff]/50" /></div>
+              <button
+                className="w-full flex items-center justify-between p-3 bg-gradient-to-br from-[#1a1d3a]/60 to-[#1a1d3a]/40 backdrop-blur-sm rounded-lg hover:bg-[#20245a]/60 transition-all mb-2 border border-[#4105b6]/30 relative overflow-hidden group">
+                <div
+                  className="absolute inset-0 bg-gradient-to-r from-[#4105b6]/0 via-[#4105b6]/10 to-[#4105b6]/0 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div className="flex items-center gap-2 relative z-10">
+                  <AppHeaderOPN location={location} />
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                     className="lucide lucide-chevron-down w-4 h-4 text-[#b0efff] relative z-10">
+                  <path d="m6 9 6 6 6-6"></path>
+                </svg>
+              </button>
+
+              <button
+                className="w-full flex items-center justify-between bg-gradient-to-br from-[#1a1d3a]/60 to-[#1a1d3a]/40 backdrop-blur-sm px-3 py-2 rounded-lg hover:bg-[#20245a]/60 transition-all border border-[#4105b6]/30 relative overflow-hidden group">
+                <div
+                  className="absolute inset-0 bg-gradient-to-r from-[#2280cd]/0 via-[#2280cd]/10 to-[#2280cd]/0 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+
+                <Box>
+                  <AssetListControlBar />
+                </Box>
+
+              </button>
+            </div>
+          </div>
+          <div
+            className="bg-gradient-to-br from-[#1a1d3a]/60 to-[#1a1d3a]/40 backdrop-blur-xl rounded-2xl border border-[#4105b6]/40 shadow-2xl p-6">
+            <h3 className="text-[#f8fdf1] mb-4">Quick Actions</h3>
+            <div className="space-y-2">
+              <HomeCoinButtons />
+            </div>
+          </div>
+        </div>
+
+
+        {/* Main Content Area */}
+        <div
+          className="bg-gradient-to-br from-[#1a1d3a]/60 to-[#1a1d3a]/40 backdrop-blur-xl rounded-2xl border border-[#4105b6]/40 shadow-2xl overflow-hidden">
+          {/* Navigation Tabs */}
+          <div className="border-b border-[#4105b6]/30 px-2 py-3">
+            <div className="grid grid-cols-4 gap-1.5">
+              {[
+                { id: 'dashboard', label: 'Dashboard' },
+                { id: 'nfts', label: 'NFTs' },
+                { id: 'activity', label: 'Activity' },
+                { id: 'settings', label: 'Settings' },
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  className={`px-2 py-2 rounded-lg transition-all text-xs ${
+                    true
+                      ? 'bg-gradient-to-br from-[#4105b6] to-[#6305b6] text-[#f8fdf1] shadow-lg shadow-[#4105b6]/50'
+                      : 'text-[#b0efff]/70 hover:text-[#f8fdf1] hover:bg-[#1a1d3a]/40'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+        </div>
+
+
+        {/*END CUSTOM*/}
+
         <div className="home__container">
+
+
           {dataCollectionForMarketing === null &&
           participateInMetaMetrics === true
             ? this.renderOnboardingPopover()
@@ -903,7 +1082,9 @@ export default class Home extends PureComponent {
           {isPopup && !connectedStatusPopoverHasBeenShown
             ? this.renderPopover()
             : null}
+
           <div className="home__main-view">
+
             <AccountOverview
               onTabClick={onTabClick}
               ///: BEGIN:ONLY_INCLUDE_IF(build-main)
@@ -913,6 +1094,8 @@ export default class Home extends PureComponent {
               useExternalServices={useExternalServices}
               setBasicFunctionalityModalOpen={setBasicFunctionalityModalOpen}
             ></AccountOverview>
+
+
             {
               ///: BEGIN:ONLY_INCLUDE_IF(build-beta)
               <div className="home__support">
@@ -927,6 +1110,8 @@ export default class Home extends PureComponent {
               </div>
               ///: END:ONLY_INCLUDE_IF
             }
+
+
           </div>
           {this.renderNotifications()}
         </div>

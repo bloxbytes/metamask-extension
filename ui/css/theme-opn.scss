@@ -1,0 +1,111 @@
+:root {
+  --font-family-default: ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+    'Helvetica Neue', Arial, sans-serif;
+  --font-family-accent: var(--font-family-default);
+  --font-family-hero: var(--font-family-default);
+
+  --color-background-default: #ffffff;
+  --color-background-alternative: #f3f3f5;
+  --color-background-section: #e9ebef;
+  --color-background-subsection: #ececf0;
+  --color-background-muted: #ececf0;
+  --color-background-hover: #e9ebef;
+  --color-background-pressed: #cbced4;
+
+  --color-text-default: oklch(0.145 0 0);
+  --color-text-alternative: #030213;
+  --color-text-muted: #717182;
+
+  --color-icon-default: var(--color-text-default);
+  --color-icon-alternative: var(--primary);
+  --color-icon-muted: var(--color-text-muted);
+  --color-icon-inverse: #ffffff;
+
+  --color-border-default: rgba(0, 0, 0, 0.1);
+  --color-border-muted: rgba(0, 0, 0, 0.08);
+
+  --color-overlay-default: rgba(3, 2, 19, 0.6);
+  --color-overlay-alternative: rgba(3, 2, 19, 0.4);
+  --color-overlay-inverse: rgba(255, 255, 255, 0.8);
+
+  --color-primary-default: #030213;
+  --color-primary-alternative: oklch(0.95 0.0058 264.53);
+  --color-primary-muted: #e9ebef;
+  --color-primary-inverse: #ffffff;
+
+  --color-error-default: #d4183d;
+  --color-error-alternative: #d4183d;
+  --color-error-muted: #f4d4dd;
+  --color-error-inverse: #ffffff;
+
+  --color-warning-default: oklch(0.769 0.188 70.08);
+  --color-warning-muted: oklch(0.828 0.189 84.429);
+  --color-warning-inverse: #030213;
+
+  --color-success-default: oklch(0.6 0.118 184.704);
+  --color-success-muted: oklch(0.488 0.243 264.376);
+  --color-success-inverse: #ffffff;
+
+  --color-info-default: oklch(0.398 0.07 227.392);
+  --color-info-muted: oklch(0.646 0.222 41.116);
+  --color-info-inverse: #ffffff;
+
+  --border-radius-default: 10px;
+  --border-radius-lg: 14px;
+
+  --input-background: #f3f3f5;
+  --color-surface-card: #ffffff;
+  --color-surface-raise: #f7f7f9;
+}
+
+[data-theme='dark'] {
+  --color-background-default: oklch(0.145 0 0);
+  --color-background-alternative: oklch(0.205 0 0);
+  --color-background-section: oklch(0.269 0 0);
+  --color-background-subsection: oklch(0.269 0 0);
+  --color-background-muted: oklch(0.269 0 0);
+  --color-background-hover: oklch(0.205 0 0);
+  --color-background-pressed: oklch(0.269 0 0);
+
+  --color-text-default: oklch(0.985 0 0);
+  --color-text-alternative: oklch(0.985 0 0);
+  --color-text-muted: oklch(0.708 0 0);
+
+  --color-icon-default: var(--color-text-default);
+  --color-icon-alternative: oklch(0.488 0.243 264.376);
+  --color-icon-muted: var(--color-text-muted);
+  --color-icon-inverse: oklch(0.205 0 0);
+
+  --color-border-default: oklch(0.269 0 0);
+  --color-border-muted: oklch(0.205 0 0);
+
+  --color-overlay-default: rgba(0, 0, 0, 0.5);
+  --color-overlay-alternative: rgba(0, 0, 0, 0.35);
+  --color-overlay-inverse: rgba(255, 255, 255, 0.12);
+
+  --color-primary-default: oklch(0.985 0 0);
+  --color-primary-alternative: oklch(0.488 0.243 264.376);
+  --color-primary-muted: oklch(0.269 0 0);
+  --color-primary-inverse: oklch(0.205 0 0);
+
+  --color-error-default: oklch(0.396 0.141 25.723);
+  --color-error-alternative: oklch(0.637 0.237 25.331);
+  --color-error-muted: oklch(0.269 0 0);
+  --color-error-inverse: oklch(0.985 0 0);
+
+  --color-warning-default: oklch(0.645 0.246 16.439);
+  --color-warning-muted: oklch(0.627 0.265 303.9);
+  --color-warning-inverse: oklch(0.205 0 0);
+
+  --color-success-default: oklch(0.696 0.17 162.48);
+  --color-success-muted: oklch(0.488 0.243 264.376);
+  --color-success-inverse: oklch(0.205 0 0);
+
+  --color-info-default: oklch(0.488 0.243 264.376);
+  --color-info-muted: oklch(0.696 0.17 162.48);
+  --color-info-inverse: oklch(0.205 0 0);
+
+  --input-background: oklch(0.269 0 0);
+  --color-surface-card: oklch(0.205 0 0);
+  --color-surface-raise: oklch(0.269 0 0);
+}

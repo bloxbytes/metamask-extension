@@ -153,6 +153,122 @@ export const AppHeader = ({ location }) => {
     </>
   );
 };
+export const AppHeaderOPN = ({ location }) => {
+  const trackEvent = useContext(MetaMetricsContext);
+  const menuRef = useRef(null);
+  const isUnlocked = useSelector(getIsUnlocked);
+
+  const multichainNetwork = useSelector(
+    getSelectedMultichainNetworkConfiguration,
+  );
+
+  const { chainId, isEvm } = multichainNetwork;
+  const networkIconSrc = getNetworkIcon(chainId, isEvm);
+
+  const dispatch = useDispatch();
+
+  const popupStatus = getEnvironmentType() === ENVIRONMENT_TYPE_POPUP;
+
+  // Disable the network and account pickers if the user is in
+  // a critical flow
+  const sendStage = useSelector(getSendStage);
+  const isTransactionEditPage = [
+    SEND_STAGES.EDIT,
+    SEND_STAGES.DRAFT,
+    SEND_STAGES.ADD_RECIPIENT,
+  ].includes(sendStage);
+  const isConfirmationPage = Boolean(
+    matchPath(location.pathname, {
+      path: CONFIRM_TRANSACTION_ROUTE,
+      exact: false,
+    }),
+  );
+  const isSwapsPage = Boolean(
+    matchPath(location.pathname, { path: SWAPS_ROUTE, exact: false }),
+  );
+
+  const unapprovedTransactions = useSelector(getUnapprovedTransactions);
+
+  const hasUnapprovedTransactions =
+    Object.keys(unapprovedTransactions).length > 0;
+
+  const disableAccountPicker = isConfirmationPage || isSwapsPage;
+
+  const disableNetworkPicker =
+    isSwapsPage ||
+    isTransactionEditPage ||
+    isConfirmationPage ||
+    hasUnapprovedTransactions;
+
+  // Callback for network dropdown
+  const networkOpenCallback = useCallback(() => {
+    dispatch(toggleNetworkMenu());
+    trackEvent({
+      event: MetaMetricsEventName.NavNetworkMenuOpened,
+      category: MetaMetricsEventCategory.Navigation,
+      properties: {
+        location: 'App header',
+        chain_id: chainId,
+      },
+    });
+  }, [chainId, dispatch, trackEvent]);
+
+  const unlockedStyling = {
+    alignItems: AlignItems.center,
+    width: BlockSize.Full,
+    backgroundColor: BackgroundColor.backgroundDefault,
+    padding: 2,
+    paddingLeft: 2,
+    paddingRight: 4,
+    gap: 2,
+  };
+
+  const lockStyling = {
+    display: Display.Flex,
+    alignItems: AlignItems.center,
+    width: BlockSize.Full,
+    justifyContent: JustifyContent.spaceBetween,
+    backgroundColor: BackgroundColor.backgroundDefault,
+    padding: 2,
+    gap: 2,
+  };
+
+  return (
+    <>
+      {/*{isUnlocked && !popupStatus ? <MultichainMetaFoxLogo /> : null}*/}
+      <AppHeaderContainer isUnlocked={isUnlocked} popupStatus={popupStatus}>
+        <>
+          <Box
+            className={classnames(
+              isUnlocked
+                ? 'multichain-app-header__contents flex'
+                : 'multichain-app-header__lock-contents',
+            )}
+            {...(isUnlocked ? unlockedStyling : lockStyling)}
+          >
+            {isUnlocked ? (
+              <AppHeaderUnlockedContent
+                popupStatus={popupStatus}
+                currentNetwork={multichainNetwork}
+                networkIconSrc={networkIconSrc}
+                networkOpenCallback={networkOpenCallback}
+                disableNetworkPicker={disableNetworkPicker}
+                disableAccountPicker={disableAccountPicker}
+                menuRef={menuRef}
+              />
+            ) : (
+              <AppHeaderLockedContent
+                currentNetwork={multichainNetwork}
+                networkIconSrc={networkIconSrc}
+                networkOpenCallback={networkOpenCallback}
+              />
+            )}
+          </Box>
+        </>
+      </AppHeaderContainer>
+    </>
+  );
+};
 
 AppHeader.propTypes = {
   /**
