@@ -77,7 +77,7 @@ exports[`ConnectPage should render correctly 1`] = `
           class="tabs transform-gpu"
         >
           <div
-            class="flex flex-row gap-4 justify-start bg-default"
+            class="flex flex-row gap-4 justify-start"
             role="tablist"
           >
             <button
@@ -498,7 +498,7 @@ exports[`ConnectPage should render with defaults from the requested permissions 
           class="tabs transform-gpu"
         >
           <div
-            class="flex flex-row gap-4 justify-start bg-default"
+            class="flex flex-row gap-4 justify-start"
             role="tablist"
           >
             <button

@@ -77,7 +77,7 @@ exports[`MultichainConnectPage renders correctly 1`] = `
           class="tabs transform-gpu"
         >
           <div
-            class="flex flex-row gap-4 justify-start bg-default"
+            class="flex flex-row gap-4 justify-start"
             role="tablist"
           >
             <button
@@ -324,7 +324,7 @@ exports[`MultichainConnectPage renders with existing permissions correctly 1`] =
           class="tabs transform-gpu"
         >
           <div
-            class="flex flex-row gap-4 justify-start bg-default"
+            class="flex flex-row gap-4 justify-start"
             role="tablist"
           >
             <button
@@ -571,7 +571,7 @@ exports[`MultichainConnectPage renders with multichain origin request correctly 
           class="tabs transform-gpu"
         >
           <div
-            class="flex flex-row gap-4 justify-start bg-default"
+            class="flex flex-row gap-4 justify-start"
             role="tablist"
           >
             <button

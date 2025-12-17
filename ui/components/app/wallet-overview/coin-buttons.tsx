@@ -379,7 +379,7 @@ const CoinButtons = ({
     >
       {
         <IconButton
-          className={`${classPrefix}-overview__button`}
+          className="custom-button"
           Icon={
             // displayNewIconButtons ? (
             //   <Icon
@@ -407,7 +407,7 @@ const CoinButtons = ({
         />
       }
       <IconButton
-        className={`${classPrefix}-overview__button`}
+        className="custom-button"
         disabled={!isSigningEnabled || !isExternalServicesEnabled}
         Icon={
           // displayNewIconButtons ? (
@@ -439,7 +439,7 @@ const CoinButtons = ({
         }
       />
       <IconButton
-        className={`${classPrefix}-overview__button`}
+        className="custom-button primary-button"
         data-testid={`${classPrefix}-overview-send`}
         Icon={
           // displayNewIconButtons ? (
@@ -474,7 +474,7 @@ const CoinButtons = ({
             />
           )}
           <IconButton
-            className={`${classPrefix}-overview__button`}
+            className="custom-button"
             data-testid={`${classPrefix}-overview-receive`}
             Icon={
               // displayNewIconButtons ? (
