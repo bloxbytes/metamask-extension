@@ -5,8 +5,7 @@ import thunk from 'redux-thunk';
 import { renderWithProvider } from '../../../../test/lib/render-helpers-navigate';
 import { setSeedPhraseBackedUp } from '../../../store/actions';
 import {
-  ONBOARDING_COMPLETION_ROUTE,
-  ONBOARDING_METAMETRICS,
+  ONBOARDING_RECOVERY_CHECKLIST_ROUTE,
   REVEAL_SRP_LIST_ROUTE,
 } from '../../../helpers/constants/routes';
 import * as BrowserRuntimeUtils from '../../../../shared/modules/browser-runtime.utils';
@@ -203,12 +202,15 @@ describe('Confirm Recovery Phrase Component', () => {
     fireEvent.click(gotItButton);
 
     expect(setSeedPhraseBackedUp).toHaveBeenCalledWith(true);
-    expect(mockUseNavigate).toHaveBeenCalledWith(ONBOARDING_METAMETRICS, {
-      replace: true,
-    });
+    expect(mockUseNavigate).toHaveBeenCalledWith(
+      ONBOARDING_RECOVERY_CHECKLIST_ROUTE,
+      {
+        replace: true,
+      },
+    );
   });
 
-  it('should go to Onboarding Completion page as a next step in firefox', async () => {
+  it('should go to the recovery checklist as a next step in firefox', async () => {
     jest
       .spyOn(BrowserRuntimeUtils, 'getBrowserName')
       .mockReturnValue(PLATFORM_FIREFOX);
@@ -238,9 +240,50 @@ describe('Confirm Recovery Phrase Component', () => {
     fireEvent.click(getByText('Got it'));
 
     expect(setSeedPhraseBackedUp).toHaveBeenCalledWith(true);
-    expect(mockUseNavigate).toHaveBeenCalledWith(ONBOARDING_COMPLETION_ROUTE, {
-      replace: true,
+    expect(mockUseNavigate).toHaveBeenCalledWith(
+      ONBOARDING_RECOVERY_CHECKLIST_ROUTE,
+      {
+        replace: true,
+      },
+    );
+  });
+
+  it('should preserve reminder params when heading to the checklist', async () => {
+    mockUseLocation.mockReturnValue({
+      search: '?isFromReminder=true',
     });
+
+    const { queryByTestId, queryAllByTestId, getByText } = renderWithProvider(
+      <ConfirmRecoveryPhrase {...props} />,
+      mockStore,
+    );
+
+    const quizUnansweredChips = queryAllByTestId(
+      /recovery-phrase-quiz-unanswered-/u,
+    );
+
+    // click and answer the srp quiz
+    clickAndAnswerSrpQuiz(quizUnansweredChips);
+
+    const quizAnsweredChips = queryAllByTestId(
+      /recovery-phrase-quiz-answered-/u,
+    );
+    expect(quizAnsweredChips).toHaveLength(3);
+
+    const confirmRecoveryPhraseButton = queryByTestId(
+      'recovery-phrase-confirm',
+    );
+
+    fireEvent.click(confirmRecoveryPhraseButton);
+    fireEvent.click(getByText('Got it'));
+
+    expect(setSeedPhraseBackedUp).toHaveBeenCalledWith(true);
+    expect(mockUseNavigate).toHaveBeenCalledWith(
+      `${ONBOARDING_RECOVERY_CHECKLIST_ROUTE}?isFromReminder=true`,
+      {
+        replace: true,
+      },
+    );
   });
 
   it('onClose should navigate to reveal srp list route', () => {

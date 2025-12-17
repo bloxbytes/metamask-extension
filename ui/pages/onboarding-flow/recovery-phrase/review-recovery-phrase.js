@@ -288,7 +288,7 @@ export default function RecoveryPhrase({ secretRecoveryPhrase }) {
             trackEvent({
               category: MetaMetricsEventCategory.Onboarding,
               event:
-                MetaMetricsEventName.OnboardingWalletSecurityPhraseRevealed,
+              MetaMetricsEventName.OnboardingWalletSecurityPhraseRevealed,
               properties: {
                 hd_entropy_index: hdEntropyIndex,
               },
@@ -297,6 +297,27 @@ export default function RecoveryPhrase({ secretRecoveryPhrase }) {
           }}
         />
       </Box>
+
+      <Box
+        width={BlockSize.Full}
+        display={Display.Flex}
+        flexDirection={FlexDirection.Row}
+        gap={4}
+      >
+        <label
+          style={{
+            border: '1px solid #1f0f53',
+          }}
+          className="flex items-start gap-3 bg-[#0f112a]/50 rounded-lg p-4 border border-[#4105b6]/20 cursor-pointer hover:bg-[#0f112a]/70 transition-all mb-6"><input
+          type="checkbox"
+          className="mt-1 w-5 h-5 rounded border-[#4105b6] bg-[#1a1d3a] text-[#4105b6] focus:ring-[#4105b6] focus:ring-offset-0" />
+          <div className="text-sm">
+            <p className="text-[#f8fdf1] mb-1">I have saved my recovery phrase</p><p
+            className="text-[#b0efff]/60 text-xs">I understand that if I lose my recovery phrase, I will not be able to
+            access my wallet.</p></div>
+        </label>
+      </Box>
+
 
       {/* Buttons */}
       <Box
