@@ -14,7 +14,6 @@ import {
   AlignItems,
   JustifyContent,
   BorderRadius,
-  BackgroundColor,
 } from '../../../helpers/constants/design-system';
 import { useI18nContext } from '../../../hooks/useI18nContext';
 import {
@@ -190,12 +189,12 @@ export default function OnboardingMetametrics() {
 
       <Box
         display={Display.Flex}
-        flexDirection={FlexDirection.Column}
-        gap={2}
-        padding={3}
-        borderRadius={BorderRadius.LG}
-        backgroundColor={BackgroundColor.backgroundMuted}
-        className="onboarding-metametrics__checkbox"
+        flexDirection={FlexDirection.Row}
+        alignItems={AlignItems.flexStart}
+        gap={3}
+        padding={4}
+        borderRadius={BorderRadius.XL}
+        className="onboarding-metametrics__checkbox-card"
         role="button"
         tabIndex={0}
         onClick={() => {

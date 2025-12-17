@@ -1,35 +1,126 @@
 .mm-button-primary {
-  &:hover:not(&--disabled) {
-    color: var(--color-icon-inverse);
-    background-color: var(--color-icon-default-hover);
+  // Default styling - muted/disabled-like for onboarding screens (except welcome)
+  background-color: rgba(26, 29, 58, 0.4);
+  color: #4f5262;
+  padding-top: 0.75rem; // py-3 (12px)
+  padding-bottom: 0.75rem; // py-3
+  border-radius: 0.75rem; // rounded-xl (12px)
+  font-size: 1.125rem; // text-lg
+  font-weight: 400;
+  transition: all 0.3s ease;
+  box-shadow: none;
+
+  // Icon color - muted
+  .mm-icon {
+    color: #4f5262;
   }
 
-  &:active {
-    color: var(--color-icon-inverse);
-    background-color: var(--color-icon-default-pressed);
+  // Welcome screen - gradient primary button
+  .onboarding-flow--welcome-login & {
+    background: linear-gradient(to right, #4105b6, #6305b6);
+    color: #f8fdf1;
+    box-shadow: 0 25px 50px -12px rgba(65, 5, 182, 0.5);
+
+    .mm-icon {
+      color: #f8fdf1;
+    }
+
+    &:hover:not(&--disabled) {
+      background: linear-gradient(to right, #6305b6, #4105b6);
+      box-shadow: 0 25px 50px -12px rgba(65, 5, 182, 0.7);
+      transform: scale(1.05);
+      color: #f8fdf1;
+    }
+
+    &:active:not(&--disabled) {
+      background: linear-gradient(to right, #4105b6, #6305b6);
+      transform: scale(1.02);
+      color: #f8fdf1;
+    }
   }
 
-  // Danger type
+  // Other onboarding screens - muted style
+  .onboarding-flow__container--glass & {
+    background-color: rgba(26, 29, 58, 0.4);
+    color: #4f5262;
+    box-shadow: none;
+
+    .mm-icon {
+      color: #4f5262;
+    }
+
+    &:hover:not(&--disabled) {
+      background-color: rgba(26, 29, 58, 0.5);
+      transform: none;
+      color: #4f5262;
+    }
+
+    &:active:not(&--disabled) {
+      background-color: rgba(26, 29, 58, 0.4);
+      transform: none;
+      color: #4f5262;
+    }
+  }
+
+  // Default hover for non-onboarding screens
+  &:hover:not(&--disabled):not(.onboarding-flow__container--glass &) {
+    background-color: rgba(26, 29, 58, 0.5);
+  }
+
+  &:active:not(&--disabled):not(.onboarding-flow__container--glass &) {
+    background-color: rgba(26, 29, 58, 0.4);
+  }
+
+  // Danger type - keep original danger styles
   &--type-danger:not(&--disabled) {
+    background: var(--color-error-default);
+    box-shadow: none;
+
     &:hover {
       color: var(--color-error-inverse);
       background-color: var(--color-error-default-hover);
+      transform: scale(1.05);
     }
 
     &:active {
       color: var(--color-error-inverse);
       background-color: var(--color-error-default-pressed);
+      transform: scale(1.02);
     }
   }
 
-  // Disabled
-  &--disabled {
+  // Disabled state
+  &--disabled,
+  &:disabled {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: rgba(26, 29, 58, 0.4);
+    color: #4f5262;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    opacity: 1;
+
+    .mm-icon {
+      color: #4f5262;
+    }
+
     &:active {
-      background-color: var(--color-icon-default);
+      background-color: rgba(26, 29, 58, 0.4);
+      transform: none;
     }
   }
+
   // Disabled danger
-  &--type-danger#{&}--disabled:active {
-    background-color: var(--color-error-default);
+  &--type-danger#{&}--disabled:active,
+  &--type-danger:disabled:active {
+    background-color: rgba(26, 29, 58, 0.4);
+    transform: none;
   }
 }
