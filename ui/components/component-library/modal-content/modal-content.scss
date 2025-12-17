@@ -86,6 +86,12 @@
   .mm-box--background-color-background-default{
     background-color: #0f112af2;
   }
+  .confirm_wrapper.multichain-page__inner-container{
+    background: #0f112af2;
+  opacity: 0.95;
+  max-width: 100%;
+  border: 1px solid rgba(65, 5, 182, 0.3);
+  }
 }
 .mm-modal-content__dialog{
   background: #0f112af2;
