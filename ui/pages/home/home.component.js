@@ -991,14 +991,10 @@ export default class Home extends PureComponent {
                 className="custom-copy-section">
                 {/* <div
                   className="absolute inset-0 bg-gradient-to-r from-[#4105b6]/0 via-[#4105b6]/10 to-[#4105b6]/0 opacity-0 group-hover:opacity-100 transition-opacity"></div> */}
-                <div className="flex items-center gap-2 relative z-10">
+                <div className="flex items-center gap-2 relative z-10 w-full">
                   <AppHeaderOPN location={location} />
                 </div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                     className="lucide lucide-chevron-down w-2 h-2 text-[#b0efff] relative z-10">
-                  <path d="m6 9 6 6 6-6"></path>
-                </svg>
+
               </button>
 
               <button
@@ -1016,7 +1012,7 @@ export default class Home extends PureComponent {
 
 
           <div
-            className="custom-card">
+            className="custom-card ">
             <h3 className="text-[#f8fdf1] mb-4">Quick Actions</h3>
             <div className="space-y-2">
               <HomeCoinButtons />

@@ -30,6 +30,7 @@
     border: 1px solid rgba(65, 5, 182, 0.4);
     box-shadow: 0 10px 32px 0 rgba(31, 41, 71, 0.32), 0 0.5px 2px 0 rgba(65,5,182,0.2);
     overflow: hidden;
+    z-index: -1;
     .bg-default{
       background-color: transparent;
     display: grid;
@@ -784,7 +785,6 @@
   box-shadow: 0 8px 40px 0 rgba(16,30,54,0.25), 0 0.5px 2px 0 rgba(17,17,57,0.06);
   padding: 1.5rem;
   position: relative;
-  overflow: hidden;
   .mm-box--background-color-background-alternative,  .mm-box--background-color-background-default{
     background-color: transparent;
   }
@@ -864,10 +864,12 @@ font-weight: 400;
   margin-bottom: 0.5rem;
   border: 1px solid rgba(65,5,182,0.3);
   position: relative;
-  overflow: hidden;
 
   &:hover {
     background: #20245a99; /* #20245a with 60% opacity */
+  }
+  .multichain-app-header__contents {
+    width: 100% !important;
   }
   }
 .assetList-section{
@@ -886,9 +888,16 @@ font-weight: 400;
   border: 1px solid rgba(65,5,182,0.3);
   position: relative;
   overflow: hidden;
+  z-index: -1;
 
   &:hover {
     background: #20245a99; /* #20245a with 60% opacity */
+  }
+  .asset-list-control-bar__buttons{
+    display: none;
+  }
+  .mm-popover {
+    background: linear-gradient(to bottom right, rgba(26, 29, 58, 1), rgba(26, 29, 58, 1)) !important;
   }
 }
 .logo-image{
@@ -902,3 +911,4 @@ font-weight: 400;
 .multichain-network-list-item:not(.multichain-network-list-item--selected, .multichain-network-list-item--disabled, .multichain-network-list-item--not-selectable):hover {
   background: transparent;
 }
+
