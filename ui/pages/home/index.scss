@@ -1045,57 +1045,47 @@ font-weight: 400;
   }
 }
 
-// Transparent and slim scrollbar for home page
+// Hidden scrollbar for main container
 .main-container {
   // Webkit browsers (Chrome, Safari, Edge)
   &::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    display: none;
+    width: 0;
+    height: 0;
   }
 
   &::-webkit-scrollbar-track {
-    background: transparent;
+    display: none;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: transparent;
-    border-radius: 3px;
-    transition: background 0.3s ease;
-
-    &:hover {
-      background: rgba(176, 239, 255, 0.5);
-    }
+    display: none;
   }
 
   // Firefox
-  scrollbar-width: thin;
-  scrollbar-color: rgba(176, 239, 255, 0.3) transparent;
+  scrollbar-width: none;
+  scrollbar-color: transparent transparent;
 }
 
-// Global scrollbar styles for all scrollable elements
+// Global scrollbar styles - hidden for all scrollable elements
 * {
-  // Webkit browsers
+  // Webkit browsers (Chrome, Safari, Edge)
   &::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    display: none;
+    width: 0;
+    height: 0;
   }
 
   &::-webkit-scrollbar-track {
-    background: transparent;
+    display: none;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: rgba(176, 239, 255, 0.3);
-    border-radius: 3px;
-    transition: background 0.3s ease;
-
-    &:hover {
-      background: rgba(176, 239, 255, 0.5);
-    }
+    display: none;
   }
 
   // Firefox
-  scrollbar-width: thin;
-  scrollbar-color: rgba(176, 239, 255, 0.3) transparent;
+  scrollbar-width: none;
+  scrollbar-color: transparent transparent;
 }
 
