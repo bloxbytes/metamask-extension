@@ -146,12 +146,12 @@ export const AccountOverviewTabs = ({
 
       tabListProps={{
         // className: 'px-4 grid grid-cols-5 gap-4',
-        style: { gridTemplateColumns: 'repeat(5, minmax(0, 1fr))' },
+        style: { gridTemplateColumns: 'repeat(4, minmax(0, 1fr))' },
       }}
     >
       {showTokens && (
         <Tab
-          name={t('tokens')}
+          name={'Dashboard'}
           tabKey={AccountOverviewTabKey.Tokens}
           data-testid="account-overview__asset-tab"
         >
@@ -342,7 +342,7 @@ export const AccountOverviewTabs = ({
           </Box>
         </Tab>
       )}
-      {showDefi && (
+      {false && showDefi && (
         <Tab
           name={t('defi')}
           tabKey={AccountOverviewTabKey.DeFi}
@@ -368,19 +368,7 @@ export const AccountOverviewTabs = ({
         </Tab>
       )}
 
-      {showSettings && (
-        <Tab
-          name={'Settings'}
-          // Settings may not be present on the AccountOverviewTabKey enum in all branches;
-          // cast to satisfy the Tabs generic while keeping runtime key as 'settings'.
-          tabKey={AccountOverviewTabKey.Settings}
-          data-testid="account-overview__settings-tab"
-        >
-          <Box padding={4}>
-            <SettingsTab />
-          </Box>
-        </Tab>
-      )}
+
 
       {showActivity && (
         <Tab
@@ -395,20 +383,21 @@ export const AccountOverviewTabs = ({
           )}
         </Tab>
       )}
-
-      {/* {showActivity && (
+       {showSettings && (
         <Tab
-          name={t('activity')}
-          tabKey={AccountOverviewTabKey.Activity}
-          data-testid="account-overview__activity-tab"
+          name={'Settings'}
+          // Settings may not be present on the AccountOverviewTabKey enum in all branches;
+          // cast to satisfy the Tabs generic while keeping runtime key as 'settings'.
+          tabKey={AccountOverviewTabKey.Settings}
+          data-testid="account-overview__settings-tab"
         >
-          {showUnifiedTransactionList ? (
-            <UnifiedTransactionList />
-          ) : (
-            <TransactionList />
-          )}
+          <Box padding={4}>
+            <SettingsTab />
+          </Box>
         </Tab>
-      )} */}
+      )}
+
+
     </Tabs>
   );
 };
