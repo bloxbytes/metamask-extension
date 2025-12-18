@@ -42,7 +42,9 @@
     padding-bottom: 0.75rem;
     }
 
-
+.account-overview__balance-wrapper{
+  display: none;
+}
   }
 
   &__connect-status-text {
@@ -308,7 +310,11 @@
 
 }
 .home__coin-buttons{
-  margin-inline: 20px;
+  .mm-text{
+    font-size: 16px !important;
+    font-weight: 400;
+    margin-top: unset !important;
+  }
 }
 .browser-wallet {
   position: relative;
@@ -812,7 +818,7 @@
   border-radius: 1rem;
   border: 1px solid rgba(65,5,182,0.4);
   box-shadow: 0 8px 40px 0 rgba(16,30,54,0.25), 0 0.5px 2px 0 rgba(17,17,57,0.06);
-  padding: 1.5rem;
+  padding: 1rem 1.5rem;
   position: relative;
   z-index: 0;
   overflow: visible;
@@ -904,23 +910,31 @@ font-weight: 400;
   }
 .assetList-section{
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: linear-gradient(135deg, rgba(26,29,58,0.6), rgba(26,29,58,0.4));
-  backdrop-filter: blur(4px);
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  border-radius: 0.5rem;
-  transition: all 0.2s;
-  border: 1px solid rgba(65,5,182,0.3);
-  position: relative;
-  z-index: 1;
+  // display: flex;
+  // align-items: center;
+  // justify-content: space-between;
+  // background: linear-gradient(135deg, rgba(26,29,58,0.6), rgba(26,29,58,0.4));
+  // backdrop-filter: blur(4px);
+  // padding-left: 0.75rem;
+  // padding-right: 0.75rem;
+  // padding-top: 0.5rem;
+  // padding-bottom: 0.5rem;
+  // border-radius: 0.5rem;
+  // transition: all 0.2s;
+  // border: 1px solid rgba(65,5,182,0.3);
+  // position: relative;
+  // z-index: 1;
 
-  &:hover {
-    background: #20245a99; /* #20245a with 60% opacity */
+  // &:hover {
+  //   background: #20245a99;
+  // }
+  .asset-list-control-bar{
+    padding-top: 2px !important;
+  }
+  .asset-list-control-bar__button{
+    border-radius: 8px !important;
+    height: 38px !important;
+    margin: unset !important;
   }
   .asset-list-control-bar__buttons{
     display: none;
@@ -1000,4 +1014,87 @@ font-weight: 400;
 }
 .network-manager__additional-network-item:hover{
   background-color: var(--color-primary-muted);
+}
+
+// Background blur effects for home page
+.home__background-effects {
+  position: fixed;
+  inset: 0;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: 0;
+
+  &__blur-circle {
+    position: absolute;
+    width: 384px; // w-96 (96 * 4px = 384px)
+    height: 384px; // h-96
+    border-radius: 50%;
+    filter: blur(64px); // blur-3xl
+
+    &--top-left {
+      top: 25%; // top-1/4
+      left: 25%; // left-1/4
+      background: linear-gradient(135deg, #4105b6 0%, #6305b6 100%);
+    }
+
+    &--bottom-right {
+      bottom: 25%; // bottom-1/4
+      right: 25%; // right-1/4
+      background: linear-gradient(45deg, #2280cd 0%, #b0efff 100%);
+    }
+  }
+}
+
+// Transparent and slim scrollbar for home page
+.main-container {
+  // Webkit browsers (Chrome, Safari, Edge)
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 3px;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background: rgba(176, 239, 255, 0.5);
+    }
+  }
+
+  // Firefox
+  scrollbar-width: thin;
+  scrollbar-color: rgba(176, 239, 255, 0.3) transparent;
+}
+
+// Global scrollbar styles for all scrollable elements
+* {
+  // Webkit browsers
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(176, 239, 255, 0.3);
+    border-radius: 3px;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background: rgba(176, 239, 255, 0.5);
+    }
+  }
+
+  // Firefox
+  scrollbar-width: thin;
+  scrollbar-color: rgba(176, 239, 255, 0.3) transparent;
 }

@@ -978,6 +978,11 @@ export default class Home extends PureComponent {
 
     return (
       <div className="main-container main-container--has-shadow py-8">
+        {/* Background blur effects */}
+        <div className="home__background-effects">
+          <div className="home__background-effects__blur-circle home__background-effects__blur-circle--top-left"></div>
+          <div className="home__background-effects__blur-circle home__background-effects__blur-circle--bottom-right"></div>
+        </div>
         <Route path={CONNECTED_ROUTE} component={ConnectedSites} exact />
         <Route
           path={CONNECTED_ACCOUNTS_ROUTE}
@@ -989,7 +994,7 @@ export default class Home extends PureComponent {
           <div
             className="custom-card md:col-span-2">
             <div className="bg-gradient-custom"></div>
-            <div className="px-4 py-4 relative">
+            <div className="px-4 py-2 relative">
               <div className="flex justify-center mb-4 relative">
                 {/* <div
                   className="absolute inset-0 bg-gradient-to-r from-[#4105b6] to-[#6305b6] rounded-full blur-xl opacity-30"></div> */}
@@ -1020,7 +1025,7 @@ export default class Home extends PureComponent {
 
 
           <div
-            className="custom-card ">
+            className="custom-card">
             <h3 className="text-[#f8fdf1] mb-4">Quick Actions</h3>
             <div className="space-y-2">
               <HomeCoinButtons />

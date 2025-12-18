@@ -200,11 +200,11 @@
 .custom-tab{
   padding-left: 0.5rem;
   padding-right: 0.5rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding-top: 5px;
+  padding-bottom: 5px;
   border-radius: 0.5rem;
   transition: all 0.2s;
-  font-size: 12px;
+  font-size: 12px !important;
   color: rgba(176, 239, 255, 0.7);
   &:hover {
     color: #f8fdf1;
@@ -212,13 +212,7 @@
   }
 }
 .custom-tab-active{
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  border-radius: 0.5rem;
   transition: all 0.2s;
-  font-size: 12px;
   background: linear-gradient(to bottom right, #4105b6, #6305b6);
   color: #f8fdf1;
   box-shadow: 0 10px 20px 0 rgba(65, 5, 182, 0.5);

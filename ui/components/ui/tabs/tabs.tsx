@@ -96,7 +96,7 @@ export const Tabs = <TKey extends string = string>({
         {renderTabs()}
       </Box>
       {subHeader}
-      <Box role="tabpanel" {...tabContentProps}>
+      <Box role="tabpanel" className="p-6" {...tabContentProps}>
         {renderActiveTabContent()}
       </Box>
     </Box>
