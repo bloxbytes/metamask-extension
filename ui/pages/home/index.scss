@@ -1117,3 +1117,10 @@ font-weight: 400;
   width: 100%;
   border-bottom: unset !important;
 }
+.bridge__container{
+  max-width: 100%!important;
+  background-color: transparent!important;
+  .multichain-page-header, .multichain-page__inner-container{
+    background: linear-gradient(135deg, rgba(26, 29, 58, 0.6) 0%, rgba(26, 29, 58, 0.4) 100%);
+  }
+}
