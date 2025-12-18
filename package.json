@@ -421,6 +421,7 @@
     "lodash": "^4.17.21",
     "loglevel": "^1.8.1",
     "lottie-web": "^5.12.2",
+    "lucide-react": "^0.561.0",
     "luxon": "^3.2.1",
     "nanoid": "^3.3.8",
     "pify": "^5.0.0",
