@@ -971,6 +971,7 @@ export default class Home extends PureComponent {
       !showMultiRpcEditModal;
 
     const showTermsOfUse =
+      false &&
       completedOnboarding &&
       !onboardedInThisUISession &&
       showTermsOfUsePopup &&
