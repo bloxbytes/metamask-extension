@@ -1035,33 +1035,33 @@ export default class Home extends PureComponent {
         </div>
 
 
-        {/* Main Content Area */}
-        <div
-          className="bg-gradient-to-br from-[#1a1d3a]/60 to-[#1a1d3a]/40 backdrop-blur-xl rounded-2xl border-[#4105b6]/40 shadow-2xl overflow-hidden">
-          {/* Navigation Tabs */}
-          <div className="border-b border-[#4105b6]/30 px-2 py-3">
-            <div className="grid grid-cols-4 gap-1.5">
-              {[
-                { id: 'dashboard', label: 'Dashboard' },
-                { id: 'nfts', label: 'NFTs' },
-                { id: 'activity', label: 'Activity' },
-                { id: 'settings', label: 'Settings' },
-              ].map((tab) => (
-                <button
-                  key={tab.id}
-                  className={`px-2 py-2 rounded-lg transition-all text-xs ${
-                    true
-                      ? 'bg-gradient-to-br from-[#4105b6] to-[#6305b6] text-[#f8fdf1] shadow-lg shadow-[#4105b6]/50'
-                      : 'text-[#b0efff]/70 hover:text-[#f8fdf1] hover:bg-[#1a1d3a]/40'
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-          </div>
+        {/*/!* Main Content Area *!/*/}
+        {/*<div*/}
+        {/*  className="bg-gradient-to-br from-[#1a1d3a]/60 to-[#1a1d3a]/40 backdrop-blur-xl rounded-2xl border-[#4105b6]/40 shadow-2xl overflow-hidden">*/}
+        {/*  /!* Navigation Tabs *!/*/}
+        {/*  <div className="border-b border-[#4105b6]/30 px-2 py-3">*/}
+        {/*    <div className="grid grid-cols-4 gap-1.5">*/}
+        {/*      {[*/}
+        {/*        { id: 'dashboard', label: 'Dashboard' },*/}
+        {/*        { id: 'nfts', label: 'NFTs' },*/}
+        {/*        { id: 'activity', label: 'Activity' },*/}
+        {/*        { id: 'settings', label: 'Settings' },*/}
+        {/*      ].map((tab) => (*/}
+        {/*        <button*/}
+        {/*          key={tab.id}*/}
+        {/*          className={`px-2 py-2 rounded-lg transition-all text-xs ${*/}
+        {/*            true*/}
+        {/*              ? 'bg-gradient-to-br from-[#4105b6] to-[#6305b6] text-[#f8fdf1] shadow-lg shadow-[#4105b6]/50'*/}
+        {/*              : 'text-[#b0efff]/70 hover:text-[#f8fdf1] hover:bg-[#1a1d3a]/40'*/}
+        {/*          }`}*/}
+        {/*        >*/}
+        {/*          {tab.label}*/}
+        {/*        </button>*/}
+        {/*      ))}*/}
+        {/*    </div>*/}
+        {/*  </div>*/}
 
-        </div>
+        {/*</div>*/}
 
 
         {/*END CUSTOM*/}
@@ -1106,7 +1106,6 @@ export default class Home extends PureComponent {
               showBalance={false}
               showButtons={false}
             ></AccountOverview>
-
 
             {
               ///: BEGIN:ONLY_INCLUDE_IF(build-beta)
