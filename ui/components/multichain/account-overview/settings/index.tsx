@@ -61,10 +61,9 @@ export default function SettingsTab(): JSX.Element {
 
   return (
     <Box
-      padding={4}
       style={{ maxHeight: 'calc(100vh - 200px)', overflowY: 'auto' }}
     >
-      <div className="px-4 pb-4 pt-4 ">
+      <div className="fah-card">
 
         {/* Version Info */}
         <div className="mb-4">
@@ -292,7 +291,7 @@ export default function SettingsTab(): JSX.Element {
         <button
           type="button"
           onClick={handleLock}
-          className="w-full mt-6 flex items-center justify-center gap-2 py-3 rounded-xl transition-all shadow-lg bg-red-500/20 text-red-400 hover:bg-red-500/30 border border-red-400/30"
+          className="lock-wallet-button"
         >
           <LogOut className="w-5 h-5" />
           <span className="text-red-400">Lock Wallet</span>
