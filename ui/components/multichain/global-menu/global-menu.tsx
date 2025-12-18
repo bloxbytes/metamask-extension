@@ -310,7 +310,7 @@ export const GlobalMenu = ({
           {t('expandView')}
         </MenuItem>
       )}
-      <MenuItem
+      {/* <MenuItem
         data-testid="global-menu-networks"
         iconName={IconName.Hierarchy}
         onClick={() => {
@@ -319,16 +319,16 @@ export const GlobalMenu = ({
         }}
       >
         {t('networks')}
-      </MenuItem>
-      <MenuItem
+      </MenuItem> */}
+      {/* <MenuItem
         to={SNAPS_ROUTE}
         iconName={IconName.Snaps}
         onClick={closeMenu}
         showInfoDot={snapsUpdatesAvailable}
       >
         {t('snaps')}
-      </MenuItem>
-      <MenuItem
+      </MenuItem> */}
+      {/* <MenuItem
         iconName={IconName.MessageQuestion}
         onClick={() => {
           dispatch(setShowSupportDataConsentModal(true));
@@ -374,8 +374,8 @@ export const GlobalMenu = ({
             />
           )}
         </Box>
-      </MenuItem>
-      <MenuItem
+      </MenuItem> */}
+      {/* <MenuItem
         to={SETTINGS_ROUTE}
         iconName={IconName.Setting}
         disabled={hasUnapprovedTransactions}
@@ -392,8 +392,8 @@ export const GlobalMenu = ({
         data-testid="global-menu-settings"
       >
         {t('settings')}
-      </MenuItem>
-      <MenuItem
+      </MenuItem> */}
+      {/* <MenuItem
         to={DEFAULT_ROUTE}
         ref={lastItemRef} // ref for last item in GlobalMenu
         iconName={IconName.Lock}
@@ -411,7 +411,7 @@ export const GlobalMenu = ({
         data-testid="global-menu-lock"
       >
         {t('lockMetaMask')}
-      </MenuItem>
+      </MenuItem> */}
     </Popover>
   );
 };

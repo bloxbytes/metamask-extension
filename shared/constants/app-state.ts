@@ -8,6 +8,7 @@ export enum AccountOverviewTabKey {
   Nfts = 'nfts',
   Activity = 'activity',
   DeFi = 'defi',
+  Settings = 'settings',
 }
 
 export const ACCOUNT_OVERVIEW_TAB_KEY_TO_METAMETRICS_EVENT_NAME_MAP = {
@@ -15,6 +16,7 @@ export const ACCOUNT_OVERVIEW_TAB_KEY_TO_METAMETRICS_EVENT_NAME_MAP = {
   [AccountOverviewTabKey.DeFi]: MetaMetricsEventName.DeFiScreenOpened,
   [AccountOverviewTabKey.Nfts]: MetaMetricsEventName.NftScreenOpened,
   [AccountOverviewTabKey.Activity]: MetaMetricsEventName.ActivityScreenOpened,
+  [AccountOverviewTabKey.Settings]: MetaMetricsEventName.SettingsScreenOpened,
 } as const;
 
 export const ACCOUNT_OVERVIEW_TAB_KEY_TO_TRACE_NAME_MAP = {
@@ -22,6 +24,7 @@ export const ACCOUNT_OVERVIEW_TAB_KEY_TO_TRACE_NAME_MAP = {
   [AccountOverviewTabKey.Nfts]: TraceName.AccountOverviewNftsTab,
   [AccountOverviewTabKey.Activity]: TraceName.AccountOverviewActivityTab,
   [AccountOverviewTabKey.DeFi]: TraceName.AccountOverviewDeFiTab,
+  [AccountOverviewTabKey.Settings]: TraceName.AccountOverviewSettingsTab,
 } as const;
 
 export type CarouselSlide = {

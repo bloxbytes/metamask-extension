@@ -427,8 +427,6 @@ const AssetListControlBar = ({
   return (
     <Box
       className="asset-list-control-bar"
-      marginLeft={4}
-      marginRight={4}
       ref={popoverRef}
     >
       <Box display={Display.Flex} justifyContent={JustifyContent.spaceBetween}>
