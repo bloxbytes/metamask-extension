@@ -41,4 +41,28 @@ describe('Welcome login', () => {
       getByTestId('onboarding-import-with-srp-button'),
     ).toBeInTheDocument();
   });
+
+  it('opens the Terms modal when clicking Terms of Use', () => {
+    const store = configureStore({});
+    const { getByRole, getByTestId } = renderWithProvider(
+      <WelcomeLogin onLogin={jest.fn()} />,
+      store,
+    );
+
+    fireEvent.click(getByRole('button', { name: /terms of use/i }));
+
+    expect(getByTestId('terms-of-use-modal')).toBeInTheDocument();
+  });
+
+  it('opens the Privacy modal when clicking Privacy notice', () => {
+    const store = configureStore({});
+    const { getByRole, getByTestId } = renderWithProvider(
+      <WelcomeLogin onLogin={jest.fn()} />,
+      store,
+    );
+
+    fireEvent.click(getByRole('button', { name: /privacy notice/i }));
+
+    expect(getByTestId('privacy-notice-modal')).toBeInTheDocument();
+  });
 });

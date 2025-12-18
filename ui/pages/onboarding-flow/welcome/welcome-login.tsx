@@ -25,6 +25,8 @@ import { ThemeType } from '../../../../shared/constants/preferences';
 import { setTermsOfUseLastAgreed } from '../../../store/actions';
 import LoginOptions from './login-options';
 import { LOGIN_OPTION, LOGIN_TYPE, LoginOptionType, LoginType } from './types';
+import { TermsModal } from './terms-modal';
+import { PrivacyModal } from './privacy-modal';
 
 // TODO: Fix in https://github.com/MetaMask/metamask-extension/issues/31860
 // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -41,6 +43,8 @@ export default function WelcomeLogin({
     getIsSeedlessOnboardingFeatureEnabled();
   const dispatch = useDispatch();
   const [showImportOption, setShowImportOption] = useState(true);
+  const [showTermsModal, setShowTermsModal] = useState(false);
+  const [showPrivacyModal, setShowPrivacyModal] = useState(false);
 
   const renderMascot = () => {
     return (
@@ -184,14 +188,24 @@ export default function WelcomeLogin({
 
           <div className={'space-y-4 mb-12'}></div>
           <div className="text-[#4f5262] text-sm">
-            <p>By continuing, I agree to OPN Wallet's
-              &nbsp;
-              <a href="https://iopn.io"
-                 className="text-[#2280cd] hover:text-[#b0efff] underline transition-colors">Terms of
-                Use</a>&nbsp;and&nbsp;
-              <a href="https://iopn.io"
-                 className="text-[#2280cd] hover:text-[#b0efff] underline transition-colors">Privacy
-                notice</a>.
+            <p>
+              By continuing, I agree to OPN Wallet's{' '}
+              <button
+                type="button"
+                className="welcome-login__legal-link"
+                onClick={() => setShowTermsModal(true)}
+              >
+                Terms of Use
+              </button>{' '}
+              and{' '}
+              <button
+                type="button"
+                className="welcome-login__legal-link"
+                onClick={() => setShowPrivacyModal(true)}
+              >
+                Privacy notice
+              </button>
+              .
             </p>
           </div>
 
@@ -209,6 +223,18 @@ export default function WelcomeLogin({
               handleLogin={handleLogin}
             />
           )}
+        {showTermsModal && (
+          <TermsModal
+            isOpen={showTermsModal}
+            onClose={() => setShowTermsModal(false)}
+          />
+        )}
+        {showPrivacyModal && (
+          <PrivacyModal
+            isOpen={showPrivacyModal}
+            onClose={() => setShowPrivacyModal(false)}
+          />
+        )}
       </Box>
     </>
   );
