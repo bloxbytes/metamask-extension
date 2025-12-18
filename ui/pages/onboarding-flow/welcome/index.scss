@@ -247,6 +247,10 @@
     height: auto !important;
     max-height: 90vh;
     margin: auto;
+    .mm-modal-header{
+    border-bottom: 1px solid rgba(65, 5, 182, 0.4);
+
+    }
   }
 
   .welcome-legal-modal__body {
