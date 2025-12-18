@@ -145,4 +145,55 @@
     transform: none;
   }
 
+  // Terms of Use Modal - active gradient styles for agree button
+  .terms-of-use-popup & {
+    &[data-testid="terms-of-use-agree-button"]:not(:disabled):not(&--disabled) {
+      background: linear-gradient(to right, #4105b6, #6305b6) !important;
+      color: #f8fdf1 !important;
+      box-shadow: 0 25px 50px -12px rgba(65, 5, 182, 0.5) !important;
+
+      .mm-icon {
+        color: #f8fdf1 !important;
+      }
+
+      &:hover {
+        background: linear-gradient(to right, #6305b6, #4105b6) !important;
+        box-shadow: 0 25px 50px -12px rgba(65, 5, 182, 0.7) !important;
+        transform: scale(1.05);
+        color: #f8fdf1 !important;
+
+        .mm-icon {
+          color: #f8fdf1 !important;
+        }
+      }
+
+      &:active {
+        background: linear-gradient(to right, #4105b6, #6305b6) !important;
+        transform: scale(1.02);
+        color: #f8fdf1 !important;
+        box-shadow: 0 25px 50px -12px rgba(65, 5, 182, 0.5) !important;
+
+        .mm-icon {
+          color: #f8fdf1 !important;
+        }
+      }
+    }
+  }
+}
+// Confirm SRP Modal - active gradient styles for buttons
+.confirm-srp-modal--active {
+  padding-top: 50px;
+  .mm-button-primary{
+
+    background: linear-gradient(to right, #4105b6, #6305b6) !important;
+    color: #f8fdf1 !important;
+    box-shadow: 0 25px 50px -12px rgba(65, 5, 182, 0.5) !important;
+
+    &:hover {
+      background: linear-gradient(to right, #6305b6, #4105b6) !important;
+      box-shadow: 0 25px 50px -12px rgba(65, 5, 182, 0.7) !important;
+      transform: scale(1.05);
+      color: #f8fdf1 !important;
+    }
+  }
 }

@@ -132,3 +132,11 @@ body{
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   }
 }
+.recovery-checklist{
+  padding: unset !important;
+  .mm-box--background-color-background-default{
+    background-color: transparent !important;
+    border: unset;
+    padding: unset!important;
+  }
+}

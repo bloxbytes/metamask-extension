@@ -111,10 +111,7 @@ export default function RecoveryChecklist() {
       width={BlockSize.Full}
       height={BlockSize.Full}
       position="relative"
-      style={{
-        background:
-          'radial-gradient(circle at 25% 30%, rgba(65, 5, 182, 0.25), transparent 40%), radial-gradient(circle at 75% 70%, rgba(34, 128, 205, 0.2), transparent 35%), linear-gradient(180deg, #0b0c1a 0%, #0f112a 100%)',
-      }}
+
     >
       <Box
         position="absolute"
@@ -132,14 +129,7 @@ export default function RecoveryChecklist() {
         flexDirection={FlexDirection.Column}
         gap={6}
         width="100%"
-        style={{
-          maxWidth: '720px',
-          boxShadow: '0 16px 48px rgba(17, 24, 39, 0.4)',
-          background:
-            'linear-gradient(135deg, rgba(26, 29, 58, 0.8), rgba(26, 29, 58, 0.6))',
-          backdropFilter: 'blur(12px)',
-          border: '1px solid rgba(65, 5, 182, 0.4)',
-        }}
+
       >
         <Box
           display={Display.Flex}
@@ -166,7 +156,11 @@ export default function RecoveryChecklist() {
               }}
             />
           </Box>
-          <Text variant={TextVariant.headingLg} color={TextColor.textDefault}>
+          <Text
+            variant={TextVariant.headingLg}
+            color={TextColor.textDefault}
+            className="recovery-phrase__title"
+          >
             {t('recoveryChecklistTitle')}
           </Text>
           <Text
