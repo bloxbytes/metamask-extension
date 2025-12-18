@@ -7,7 +7,10 @@ import {
   ACCOUNT_OVERVIEW_TAB_KEY_TO_TRACE_NAME_MAP,
   AccountOverviewTabKey,
 } from '../../../../shared/constants/app-state';
-import { MetaMetricsEventCategory } from '../../../../shared/constants/metametrics';
+import {
+  MetaMetricsEventCategory,
+  MetaMetricsEventName,
+} from '../../../../shared/constants/metametrics';
 import { endTrace, trace } from '../../../../shared/lib/trace';
 import { MetaMetricsContext } from '../../../contexts/metametrics';
 import { ASSET_ROUTE, DEFI_ROUTE } from '../../../helpers/constants/routes';
@@ -17,21 +20,27 @@ import {
   getChainIdsToPoll,
   getIsMultichainAccountsState2Enabled,
 } from '../../../selectors';
-import { detectNfts } from '../../../store/actions';
+import { detectNfts, showImportTokensModal } from '../../../store/actions';
 import AssetList from '../../app/assets/asset-list';
 import DeFiTab from '../../app/assets/defi-list/defi-tab';
 import { useAssetListTokenDetection } from '../../app/assets/hooks';
 import NftsTab from '../../app/assets/nfts/nfts-tab';
 import TransactionList from '../../app/transaction-list';
 import UnifiedTransactionList from '../../app/transaction-list/unified-transaction-list.component';
-import { Box, Text } from '../../component-library';
-import { TextVariant } from '../../../helpers/constants/design-system';
+import { Box } from '../../component-library';
+import {
+  AlignItems,
+  Display,
+  JustifyContent,
+  TextVariant,
+} from '../../../helpers/constants/design-system';
 import { Tab, Tabs } from '../../ui/tabs';
 import { useTokenBalances } from '../../../hooks/useTokenBalances';
 import { AccountOverviewCommonProps } from './common';
 import { HomeCoinBalance, HomeCoinButtons } from '../../../pages/home/home.component';
-import AssetListControlBar from '../../app/assets/asset-list/asset-list-control-bar';
 import { Activity, Zap } from 'lucide-react';
+import { Button, ButtonSize, ButtonVariant } from '../../component-library';
+import { getMultichainIsEvm } from '../../../selectors/multichain';
 
 
 export type AccountOverviewTabsProps = AccountOverviewCommonProps & {
@@ -56,6 +65,8 @@ export const AccountOverviewTabs = ({
   const trackEvent = useContext(MetaMetricsContext);
   const dispatch = useDispatch();
   const selectedChainIds = useSelector(getChainIdsToPoll);
+  const isEvm = useSelector(getMultichainIsEvm);
+  const canManageTokens = showTokensLinks ?? isEvm;
 
   useAssetListTokenDetection();
 
@@ -101,6 +112,21 @@ export const AccountOverviewTabs = ({
     [history],
   );
 
+  const handleManageTokens = useCallback(() => {
+    if (!canManageTokens) {
+      return;
+    }
+
+    dispatch(showImportTokensModal());
+    trackEvent({
+      category: MetaMetricsEventCategory.Navigation,
+      event: MetaMetricsEventName.TokenImportButtonClicked,
+      properties: {
+        location: 'HOME',
+      },
+    });
+  }, [canManageTokens, dispatch, trackEvent]);
+
   const { safeChains } = useSafeChains();
 
   const isBIP44FeatureFlagEnabled = useSelector(
@@ -127,7 +153,13 @@ export const AccountOverviewTabs = ({
             <HomeCoinBalance />
           </Box>
 
-          <Box marginBottom={4} className={'account-overview-tab-asset-list-control-bar'}>
+          <Box
+            marginBottom={4}
+            className={'account-overview-tab-asset-list-control-bar'}
+            display={Display.Flex}
+            justifyContent={JustifyContent.spaceBetween}
+            alignItems={AlignItems.center}
+          >
             <HomeCoinButtons iconView={true} />
           </Box>
 
@@ -275,6 +307,18 @@ export const AccountOverviewTabs = ({
 
 
             <Box marginBottom={2}>
+
+              <Box>
+                <div>Tokens</div>
+                <Button
+                  size={ButtonSize.Sm}
+                  variant={ButtonVariant.Secondary}
+                  onClick={handleManageTokens}
+                  disabled={!canManageTokens}>
+                  Manage
+                </Button>
+              </Box>
+
               <AssetList
                 showTokensLinks={showTokensLinks ?? true}
                 onClickAsset={onClickAsset}

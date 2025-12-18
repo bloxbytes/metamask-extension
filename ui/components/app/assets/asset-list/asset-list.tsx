@@ -22,9 +22,9 @@ export type AssetListProps = {
 
 const TokenListContainer = React.memo(
   ({
-    onClickAsset,
-    safeChains,
-  }: Pick<AssetListProps, 'onClickAsset' | 'safeChains'>) => {
+     onClickAsset,
+     safeChains,
+   }: Pick<AssetListProps, 'onClickAsset' | 'safeChains'>) => {
     const trackEvent = useContext(MetaMetricsContext);
     const { primaryCurrencyProperties } = usePrimaryCurrencyProperties();
 
@@ -51,10 +51,10 @@ const TokenListContainer = React.memo(
 );
 
 const AssetList = ({
-  onClickAsset,
-  showTokensLinks,
-  safeChains,
-}: AssetListProps) => {
+                     onClickAsset,
+                     showTokensLinks,
+                     safeChains,
+                   }: AssetListProps) => {
   const [showDetectedTokens, setShowDetectedTokens] = useState(false);
   const isEvm = useSelector(getMultichainIsEvm);
   // NOTE: Since we can parametrize it now, we keep the original behavior
@@ -63,7 +63,7 @@ const AssetList = ({
 
   return (
     <>
-      <AssetListControlBar showTokensLinks={shouldShowTokensLinks} />
+      {/*<AssetListControlBar showTokensLinks={shouldShowTokensLinks} />*/}
       <TokenListContainer onClickAsset={onClickAsset} safeChains={safeChains} />
       {showDetectedTokens && (
         <DetectedToken setShowDetectedTokens={setShowDetectedTokens} />
