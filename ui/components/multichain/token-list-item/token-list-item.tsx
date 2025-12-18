@@ -175,7 +175,7 @@ export const TokenListItemComponent = ({
       title={tooltipText ? t(tooltipText) : undefined}
     >
       <Box
-        className={classnames('multichain-token-list-item__container-cell', {
+        className={classnames('multichain-token-list-item__container-cell custom-card', {
           'multichain-token-list-item__container-cell--clickable':
             onClick !== undefined,
         })}
