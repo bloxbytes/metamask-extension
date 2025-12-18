@@ -54,6 +54,7 @@ export default function RecoveryPhrase({ secretRecoveryPhrase }) {
   const hdEntropyIndex = useSelector(getHDEntropyIndex);
   const [phraseRevealed, setPhraseRevealed] = useState(false);
   const [showSrpDetailsModal, setShowSrpDetailsModal] = useState(false);
+  const [hasSavedRecoveryPhrase, setHasSavedRecoveryPhrase] = useState(false);
   const searchParams = new URLSearchParams(search);
   const isFromReminder = searchParams.get('isFromReminder');
   const isFromSettingsSecurity = searchParams.get('isFromSettingsSecurity');
@@ -310,7 +311,12 @@ export default function RecoveryPhrase({ secretRecoveryPhrase }) {
           }}
           className="flex items-start gap-3 bg-[#0f112a]/50 rounded-lg p-4 border border-[#4105b6]/20 cursor-pointer hover:bg-[#0f112a]/70 transition-all mb-6"><input
           type="checkbox"
-          className="mt-1 w-5 h-5 rounded border-[#4105b6] bg-[#1a1d3a] text-[#4105b6] focus:ring-[#4105b6] focus:ring-offset-0" />
+          data-testid="saved-recovery-phrase-checkbox"
+          className="mt-1 w-5 h-5 rounded border-[#4105b6] bg-[#1a1d3a] text-[#4105b6] focus:ring-[#4105b6] focus:ring-offset-0"
+          checked={hasSavedRecoveryPhrase}
+          onChange={(event) =>
+            setHasSavedRecoveryPhrase(event.target.checked)
+          } />
           <div className="text-sm">
             <p className="text-[#f8fdf1] mb-1">I have saved my recovery phrase</p><p
             className="text-[#b0efff]/60 text-xs">I understand that if I lose my recovery phrase, I will not be able to
@@ -343,7 +349,7 @@ export default function RecoveryPhrase({ secretRecoveryPhrase }) {
           size={ButtonSize.Lg}
           data-testid="recovery-phrase-continue"
           className="recovery-phrase__continue-button"
-          disabled={!phraseRevealed}
+          disabled={!phraseRevealed || !hasSavedRecoveryPhrase}
           onClick={handleContinue}
           endIconName={IconName.Arrow2Right}
         >

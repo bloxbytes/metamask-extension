@@ -220,7 +220,7 @@ export default function ImportSRP({ submitSecretRecoveryPhrase }) {
         textAlign={TextAlign.Left}
       >
 
-        <div className="bg-[#2280cd]/20 border border-[#2280cd]/30 rounded-lg p-3 mb-6 w-100 full"
+        <div className="bg-[#2280cd]/20 border border-[#2280cd]/30 rounded-lg p-3 mb-6 w-full"
         ><p
           className="text-[#b0efff] text-sm text-center">💡 Tip: You can paste all 12 words at once</p></div>
 

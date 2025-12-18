@@ -93,7 +93,7 @@ describe('Review Recovery Phrase Component', () => {
   });
 
   it('should click next after revealing seed phrase', () => {
-    const { queryByTestId } = renderWithProvider(
+    const { queryByTestId, getByTestId } = renderWithProvider(
       <RecoveryPhrase {...props} />,
       mockStore,
     );
@@ -101,6 +101,7 @@ describe('Review Recovery Phrase Component', () => {
     const revealRecoveryPhraseButton = queryByTestId('recovery-phrase-reveal');
 
     fireEvent.click(revealRecoveryPhraseButton);
+    fireEvent.click(getByTestId('saved-recovery-phrase-checkbox'));
 
     const nextButton = queryByTestId('recovery-phrase-continue');
 
@@ -118,7 +119,7 @@ describe('Review Recovery Phrase Component', () => {
     });
 
     const isReminderParam = '?isFromReminder=true';
-    const { queryByTestId } = renderWithProvider(
+    const { queryByTestId, getByTestId } = renderWithProvider(
       <RecoveryPhrase {...props} />,
       mockStore,
     );
@@ -126,6 +127,7 @@ describe('Review Recovery Phrase Component', () => {
     const revealRecoveryPhraseButton = queryByTestId('recovery-phrase-reveal');
 
     fireEvent.click(revealRecoveryPhraseButton);
+    fireEvent.click(getByTestId('saved-recovery-phrase-checkbox'));
 
     const nextButton = queryByTestId('recovery-phrase-continue');
 
