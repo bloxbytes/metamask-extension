@@ -59,7 +59,10 @@ export default function SettingsTab(): JSX.Element {
   };
 
   return (
-    <Box padding={4}>
+    <Box
+      padding={4}
+      style={{ maxHeight: 'calc(100vh - 120px)', overflowY: 'auto' }}
+    >
       <div className="px-4 pb-4 pt-4 ">
 
         {/* Version Info */}
