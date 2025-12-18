@@ -2,9 +2,16 @@
 
 .tippy-popper {
   .tippy-tooltip.tippy-tooltip--mm-custom-theme {
-    background: var(--color-background-section);
-    color: var(--color-text-default);
-    box-shadow: var(--shadow-size-md) var(--color-shadow-default);
+    background: linear-gradient(
+      135deg,
+      rgba(26, 29, 58, 0.95) 0%,
+      rgba(26, 29, 58, 0.9) 100%
+    );
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(65, 5, 182, 0.4);
+    color: #f8fdf1;
+    box-shadow: 0 10px 32px 0 rgba(31, 41, 71, 0.32),
+      0 0.5px 2px 0 rgba(65, 5, 182, 0.2);
     padding: 10px 14px;
     padding-bottom: 12px;
     border-radius: 8px;
@@ -13,14 +20,15 @@
       @include design-system.H6;
 
       text-align: left;
-      color: var(--color-text-default);
+      color: #f8fdf1;
 
       a {
-        color: var(--color-primary-default);
+        color: #b0efff;
       }
 
       p {
         margin-bottom: 16px;
+        color: #f8fdf1;
 
         &:last-child {
           margin-bottom: 0;
@@ -30,18 +38,18 @@
   }
 
   &[x-placement^='top'] .tippy-tooltip.tippy-tooltip--mm-custom-theme [x-arrow] {
-    border-top-color: var(--color-background-default);
+    border-top-color: rgba(26, 29, 58, 0.95);
   }
 
   &[x-placement^='right'] .tippy-tooltip.tippy-tooltip--mm-custom-theme [x-arrow] {
-    border-right-color: var(--color-background-default);
+    border-right-color: rgba(26, 29, 58, 0.95);
   }
 
   &[x-placement^='left'] .tippy-tooltip.tippy-tooltip--mm-custom-theme [x-arrow] {
-    border-left-color: var(--color-background-default);
+    border-left-color: rgba(26, 29, 58, 0.95);
   }
 
   &[x-placement^='bottom'] .tippy-tooltip.tippy-tooltip--mm-custom-theme [x-arrow] {
-    border-bottom-color: var(--color-background-default);
+    border-bottom-color: rgba(26, 29, 58, 0.95);
   }
 }

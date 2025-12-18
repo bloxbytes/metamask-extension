@@ -112,6 +112,7 @@
   height: 100vh;
   .mm-text--body-md{
     text-align: center;
+    width: 100%;
   }
   &.mm-box--background-color-background-default{
     background-color: #0f112af2 !important;
@@ -238,4 +239,10 @@
   .mm-box--background-color-background-default{
     background-color: transparent !important;
   }
+}
+.asset__container, .confirm_wrapper{
+  width: 100%;
+}
+.confirm_wrapper{
+  width: 100%!important;
 }

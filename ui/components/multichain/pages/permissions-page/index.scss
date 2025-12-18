@@ -4,13 +4,13 @@
 
 // Permissions page theme styling
 [data-testid="permissions-page"] {
+  width: 100% !important;
   background: linear-gradient(
     135deg,
     rgba(26, 29, 58, 0.6) 0%,
     rgba(26, 29, 58, 0.4) 100%
   );
   backdrop-filter: blur(20px);
-  border-radius: 1rem;
   border: 1px solid rgba(65, 5, 182, 0.4);
   box-shadow: 0 10px 32px 0 rgba(31, 41, 71, 0.32),
     0 0.5px 2px 0 rgba(65, 5, 182, 0.2);
@@ -23,6 +23,7 @@
   // Text colors
   .mm-text {
     color: #f8fdf1;
+    text-align: center;
   }
 
   .mm-text--body-md,
@@ -47,4 +48,7 @@
       color: #f8fdf1;
     }
   }
+}
+.multichain-page{
+  padding: unset !important;
 }

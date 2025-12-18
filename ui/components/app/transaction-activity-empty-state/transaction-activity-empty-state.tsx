@@ -74,7 +74,7 @@ export const TransactionActivityEmptyState: React.FC<
       }}
       onAction={handleSwapOnClick}
       data-testid="activity-tab-empty-state"
-      className={twMerge('max-w-48', className)}
+      className={twMerge('empty-state-card', className)}
     />
   );
 };

@@ -3,3 +3,68 @@
 .notifications-settings {
   display: block;
 }
+
+// Notifications page theme styling (same as permissions page)
+[data-testid="notifications-page"] {
+  width: 100% !important;
+  background: linear-gradient(
+    135deg,
+    rgba(26, 29, 58, 0.6) 0%,
+    rgba(26, 29, 58, 0.4) 100%
+  );
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(65, 5, 182, 0.4);
+  box-shadow: 0 10px 32px 0 rgba(31, 41, 71, 0.32),
+    0 0.5px 2px 0 rgba(65, 5, 182, 0.2);
+
+  // Header styling
+  .mm-box--background-color-background-default {
+    background-color: transparent !important;
+  }
+
+  // Text colors
+  .mm-text {
+    color: #f8fdf1;
+  }
+
+  .mm-text--body-md,
+  .mm-text--body-md-medium {
+    color: #f8fdf1;
+  }
+
+  .mm-text--body-sm,
+  .mm-text--body-sm-medium {
+    color: #b0efff;
+  }
+
+  .mm-text[class*="text-alternative"] {
+    color: #b0efff;
+  }
+
+  // Icon colors
+  .mm-icon {
+    color: #b0efff;
+  }
+
+  // Button icon colors
+  .mm-button-icon {
+    color: #b0efff;
+
+    &:hover {
+      color: #f8fdf1;
+    }
+  }
+
+  // Page content styling
+  .multichain-page {
+    padding: unset !important;
+  }
+
+  // Border divider styling
+  .mm-box[style*="border"] {
+    border-color: rgba(65, 5, 182, 0.2) !important;
+  }
+  .multichain-app-header-logo{
+    display: none;
+  }
+}
