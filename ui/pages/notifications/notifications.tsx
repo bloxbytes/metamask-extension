@@ -169,7 +169,7 @@ export default function Notifications() {
             iconName={IconName.ArrowLeft}
             size={ButtonIconSize.Md}
             onClick={() => {
-              navigate(DEFAULT_ROUTE);
+              navigate('/home');
             }}
             data-testid="back-button"
           />
