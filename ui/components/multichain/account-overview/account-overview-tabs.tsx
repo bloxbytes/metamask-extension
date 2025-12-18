@@ -308,13 +308,20 @@ export const AccountOverviewTabs = ({
 
             <Box marginBottom={2}>
 
-              <Box>
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                paddingTop={2}
+                alignItems="center"
+                marginBottom={2}
+              >
                 <div>Tokens</div>
                 <Button
                   size={ButtonSize.Sm}
                   variant={ButtonVariant.Secondary}
                   onClick={handleManageTokens}
-                  disabled={!canManageTokens}>
+                  disabled={!canManageTokens}
+                >
                   Manage
                 </Button>
               </Box>

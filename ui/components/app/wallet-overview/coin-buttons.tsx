@@ -360,6 +360,7 @@ const CoinButtons = ({
       justifyContent={JustifyContent.spaceBetween}
       width={BlockSize.Full}
       gap={3}
+      className={iconView ? "home_icon_buttons" : ""}
     >
 
       {/*{*/}
@@ -400,20 +401,16 @@ const CoinButtons = ({
       {/*}*/}
 
       <IconButton
-        className="custom-button primary-button"
+        className={iconView ? "custom-button primary-button inner_custom_button_icon" : "custom-button primary-button"}
         data-testid={`${classPrefix}-overview-send`}
         Icon={
           iconView ?
             <Box>
               <div className="relative">
-                <div className="absolute inset-0 rounded-full blur-md opacity-50"
-                     style={{
-                       backgroundColor: 'rgb(65, 5, 182)',
-                     }}></div>
-                <div className="w-10 h-10 rounded-full flex items-center justify-center relative z-10 shadow-lg"
-                     style={{
-                       background: 'linear-gradient(135deg, rgb(65, 5, 182), rgba(65, 5, 182, 0.867)); box-shadow: rgba(65, 5, 182, 0.25) 0px 4px 12px',
-                     }}>
+                <div className="absolute inset-0 rounded-full blur-md opacity-50 shine-bg-send"
+                     ></div>
+                <div className="w-10 h-10 rounded-full flex items-center justify-center relative z-10 shadow-lg custom-send-icon"
+                    >
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                        className="lucide lucide-arrow-up-right w-5 h-5 text-[#f8fdf1]">
@@ -442,20 +439,17 @@ const CoinButtons = ({
             />
           )}
           <IconButton
-            className="custom-button"
+            className={iconView ? "custom-button inner_custom_button_icon" : "custom-button"}
+
             data-testid={`${classPrefix}-overview-receive`}
             Icon={
               iconView ?
                 <Box>
                   <div className="relative">
-                    <div className="absolute inset-0 rounded-full blur-md opacity-50"
-                         style={{
-                           backgroundColor: 'rgb(34, 128, 205)',
-                         }}></div>
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center relative z-10 shadow-lg"
-                         style={{
-                           background: 'linear-gradient(135deg, rgb(34, 128, 205), rgba(34, 128, 205, 0.867)); box-shadow: rgba(34, 128, 205, 0.25) 0px 4px 12px',
-                         }}>
+                    <div className="absolute inset-0 rounded-full blur-md opacity-50 shine-bg-r"
+                        ></div>
+                    <div className="custom-receive-icon"
+                         >
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                            className="lucide lucide-arrow-down-left w-5 h-5 text-[#f8fdf1]">
@@ -476,20 +470,14 @@ const CoinButtons = ({
 
 
       <IconButton
-        className="custom-button"
+        className={iconView ? "custom-button inner_custom_button_icon" : "custom-button"}
         disabled={!isSigningEnabled || !isExternalServicesEnabled}
         Icon={
           iconView ?
             <Box>
               <div className="relative">
-                <div className="absolute inset-0 rounded-full blur-md opacity-50"
-                     style={{
-                       backgroundColor: 'rgb(34, 128, 205)',
-                     }}></div>
-                <div className="w-10 h-10 rounded-full flex items-center justify-center relative z-10 shadow-lg"
-                     style={{
-                       background: 'linear-gradient(135deg, rgb(34, 128, 205), rgba(34, 128, 205, 0.867)); box-shadow: rgba(34, 128, 205, 0.25) 0px 4px 12px',
-                     }}>
+                <div className="absolute inset-0 rounded-full blur-md opacity-50 shine-bg-sw"></div>
+                <div className="w-10 h-10 rounded-full flex items-center justify-center relative z-10 shadow-lg custom-swap-icon">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                        className="lucide lucide-repeat w-5 h-5 text-[#f8fdf1]">

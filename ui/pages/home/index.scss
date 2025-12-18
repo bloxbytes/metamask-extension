@@ -306,10 +306,10 @@
   overflow: hidden;
   border: 1px solid rgba(65,5,182,0.4);
   box-shadow: 0 10px 32px 0 rgba(31,41,71,0.32), 0 0.5px 2px 0 rgba(65,5,182,0.2);
-  margin-inline: 20px;
 
 }
 .home__coin-buttons{
+  width: 100%;
   .mm-text{
     font-size: 16px !important;
     font-weight: 400;
@@ -1098,3 +1098,4 @@ font-weight: 400;
   scrollbar-width: thin;
   scrollbar-color: rgba(176, 239, 255, 0.3) transparent;
 }
+
