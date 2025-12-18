@@ -404,11 +404,25 @@ const CoinButtons = ({
         data-testid={`${classPrefix}-overview-send`}
         Icon={
           iconView ?
-            <Icon
-              name={IconName.Send}
-              color={IconColor.iconAlternative}
-              size={IconSize.Md}
-            /> : null
+            <Box>
+              <div className="relative">
+                <div className="absolute inset-0 rounded-full blur-md opacity-50"
+                     style={{
+                       backgroundColor: 'rgb(65, 5, 182)',
+                     }}></div>
+                <div className="w-10 h-10 rounded-full flex items-center justify-center relative z-10 shadow-lg"
+                     style={{
+                       background: 'linear-gradient(135deg, rgb(65, 5, 182), rgba(65, 5, 182, 0.867)); box-shadow: rgba(65, 5, 182, 0.25) 0px 4px 12px',
+                     }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                       stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                       className="lucide lucide-arrow-up-right w-5 h-5 text-[#f8fdf1]">
+                    <path d="M7 7h10v10"></path>
+                    <path d="M7 17 17 7"></path>
+                  </svg>
+                </div>
+              </div>
+            </Box> : null
 
         }
         disabled={!isSigningEnabled || isNonEvmAccountWithoutExternalServices}
@@ -432,11 +446,25 @@ const CoinButtons = ({
             data-testid={`${classPrefix}-overview-receive`}
             Icon={
               iconView ?
-                <Icon
-                  name={IconName.Received}
-                  color={IconColor.iconAlternative}
-                  size={IconSize.Md}
-                /> : null
+                <Box>
+                  <div className="relative">
+                    <div className="absolute inset-0 rounded-full blur-md opacity-50"
+                         style={{
+                           backgroundColor: 'rgb(34, 128, 205)',
+                         }}></div>
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center relative z-10 shadow-lg"
+                         style={{
+                           background: 'linear-gradient(135deg, rgb(34, 128, 205), rgba(34, 128, 205, 0.867)); box-shadow: rgba(34, 128, 205, 0.25) 0px 4px 12px',
+                         }}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                           className="lucide lucide-arrow-down-left w-5 h-5 text-[#f8fdf1]">
+                        <path d="M17 7 7 17"></path>
+                        <path d="M17 17H7V7"></path>
+                      </svg>
+                    </div>
+                  </div>
+                </Box> : null
 
             }
             label={t('receive')}
@@ -452,11 +480,27 @@ const CoinButtons = ({
         disabled={!isSigningEnabled || !isExternalServicesEnabled}
         Icon={
           iconView ?
-            <Icon
-              name={IconName.SwapVertical}
-              color={IconColor.iconAlternative}
-              size={IconSize.Md}
-            /> : null
+            <Box>
+              <div className="relative">
+                <div className="absolute inset-0 rounded-full blur-md opacity-50"
+                     style={{
+                       backgroundColor: 'rgb(34, 128, 205)',
+                     }}></div>
+                <div className="w-10 h-10 rounded-full flex items-center justify-center relative z-10 shadow-lg"
+                     style={{
+                       background: 'linear-gradient(135deg, rgb(34, 128, 205), rgba(34, 128, 205, 0.867)); box-shadow: rgba(34, 128, 205, 0.25) 0px 4px 12px',
+                     }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                       stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                       className="lucide lucide-repeat w-5 h-5 text-[#f8fdf1]">
+                    <path d="m17 2 4 4-4 4"></path>
+                    <path d="M3 11v-1a4 4 0 0 1 4-4h14"></path>
+                    <path d="m7 22-4-4 4-4"></path>
+                    <path d="M21 13v1a4 4 0 0 1-4 4H3"></path>
+                  </svg>
+                </div>
+              </div>
+            </Box> : null
 
         }
         // onClick={handleSwapOnClick}
