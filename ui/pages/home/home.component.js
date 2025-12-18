@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { Redirect, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -152,6 +153,45 @@ export const HomeCoinButtons = ({ iconView = false }) => {
       />
     </div>
   );
+};
+
+export const BannerComponent = ({ isPopup = false }) => {
+  return <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+    <div
+      className="custom-card md:col-span-2">
+      <div className="bg-gradient-custom"></div>
+      <div className="px-4 py-2 relative">
+        <div className="flex justify-center mb-4 relative">
+          <img src="./images/logo/metamask-fox.svg" alt="OPN Logo"
+               className="logo-image" /></div>
+        <button
+          className="custom-copy-section">
+          <div className="flex items-center gap-2 relative z-10 w-full">
+            <AppHeaderOPN location={location} />
+          </div>
+
+        </button>
+
+        <button
+          className="assetList-section">
+          <Box className="w-full">
+            <AssetListControlBar />
+          </Box>
+
+        </button>
+      </div>
+    </div>
+
+    {
+      isPopup ? null : <div
+        className="custom-card">
+        <h3 className="text-[#f8fdf1] mb-4">Quick Actions</h3>
+        <div className="space-y-2">
+          <HomeCoinButtons />
+        </div>
+      </div>
+    }
+  </div>;
 };
 
 export const HomeCoinBalance = () => {
@@ -978,11 +1018,17 @@ export default class Home extends PureComponent {
       !isSocialLoginFlow;
 
     return (
-      <div className="main-container main-container--has-shadow py-8">
+      <div
+        className={classnames(
+          'main-container main-container--has-shadow py-8',
+          { 'main-container--popup': isPopup },
+        )}
+      >
         {/* Background blur effects */}
         <div className="home__background-effects">
           <div className="home__background-effects__blur-circle home__background-effects__blur-circle--top-left"></div>
-          <div className="home__background-effects__blur-circle home__background-effects__blur-circle--bottom-right"></div>
+          <div
+            className="home__background-effects__blur-circle home__background-effects__blur-circle--bottom-right"></div>
         </div>
         <Route path={CONNECTED_ROUTE} component={ConnectedSites} exact />
         <Route
@@ -991,83 +1037,48 @@ export default class Home extends PureComponent {
           exact
         />
         {/*Start Custom*/}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          <div
-            className="custom-card md:col-span-2">
-            <div className="bg-gradient-custom"></div>
-            <div className="px-4 py-2 relative">
-              <div className="flex justify-center mb-4 relative">
-                {/* <div
-                  className="absolute inset-0 bg-gradient-to-r from-[#4105b6] to-[#6305b6] rounded-full blur-xl opacity-30"></div> */}
-                <img src="./images/logo/metamask-fox.svg" alt="OPN Logo"
-                     className="logo-image" /></div>
-              <button
-                className="custom-copy-section">
-                {/* <div
-                  className="absolute inset-0 bg-gradient-to-r from-[#4105b6]/0 via-[#4105b6]/10 to-[#4105b6]/0 opacity-0 group-hover:opacity-100 transition-opacity"></div> */}
-                <div className="flex items-center gap-2 relative z-10 w-full">
-                  <AppHeaderOPN location={location} />
-                </div>
+        {/*<div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">*/}
+        {/*  <div*/}
+        {/*    className="custom-card md:col-span-2">*/}
+        {/*    <div className="bg-gradient-custom"></div>*/}
+        {/*    <div className="px-4 py-2 relative">*/}
+        {/*      <div className="flex justify-center mb-4 relative">*/}
+        {/*        <img src="./images/logo/metamask-fox.svg" alt="OPN Logo"*/}
+        {/*             className="logo-image" /></div>*/}
+        {/*      <button*/}
+        {/*        className="custom-copy-section">*/}
+        {/*        <div className="flex items-center gap-2 relative z-10 w-full">*/}
+        {/*          <AppHeaderOPN location={location} />*/}
+        {/*        </div>*/}
 
-              </button>
+        {/*      </button>*/}
 
-              <button
-                className="assetList-section">
-                {/* <div
-                  className="absolute inset-0 bg-gradient-to-r from-[#2280cd]/0 via-[#2280cd]/10 to-[#2280cd]/0 opacity-0 group-hover:opacity-100 transition-opacity"></div> */}
+        {/*      <button*/}
+        {/*        className="assetList-section">*/}
+        {/*        <Box className="w-full">*/}
+        {/*          <AssetListControlBar />*/}
+        {/*        </Box>*/}
 
-                <Box className="w-full">
-                  <AssetListControlBar />
-                </Box>
-
-              </button>
-            </div>
-          </div>
-
-
-          <div
-            className="custom-card">
-            <h3 className="text-[#f8fdf1] mb-4">Quick Actions</h3>
-            <div className="space-y-2">
-              <HomeCoinButtons />
-            </div>
-          </div>
-        </div>
-
-
-        {/*/!* Main Content Area *!/*/}
-        {/*<div*/}
-        {/*  className="bg-gradient-to-br from-[#1a1d3a]/60 to-[#1a1d3a]/40 backdrop-blur-xl rounded-2xl border-[#4105b6]/40 shadow-2xl overflow-hidden">*/}
-        {/*  /!* Navigation Tabs *!/*/}
-        {/*  <div className="border-b border-[#4105b6]/30 px-2 py-3">*/}
-        {/*    <div className="grid grid-cols-4 gap-1.5">*/}
-        {/*      {[*/}
-        {/*        { id: 'dashboard', label: 'Dashboard' },*/}
-        {/*        { id: 'nfts', label: 'NFTs' },*/}
-        {/*        { id: 'activity', label: 'Activity' },*/}
-        {/*        { id: 'settings', label: 'Settings' },*/}
-        {/*      ].map((tab) => (*/}
-        {/*        <button*/}
-        {/*          key={tab.id}*/}
-        {/*          className={`px-2 py-2 rounded-lg transition-all text-xs ${*/}
-        {/*            true*/}
-        {/*              ? 'bg-gradient-to-br from-[#4105b6] to-[#6305b6] text-[#f8fdf1] shadow-lg shadow-[#4105b6]/50'*/}
-        {/*              : 'text-[#b0efff]/70 hover:text-[#f8fdf1] hover:bg-[#1a1d3a]/40'*/}
-        {/*          }`}*/}
-        {/*        >*/}
-        {/*          {tab.label}*/}
-        {/*        </button>*/}
-        {/*      ))}*/}
+        {/*      </button>*/}
         {/*    </div>*/}
         {/*  </div>*/}
 
+        {/*  {*/}
+        {/*    isPopup ? null : <div*/}
+        {/*      className="custom-card">*/}
+        {/*      <h3 className="text-[#f8fdf1] mb-4">Quick Actions</h3>*/}
+        {/*      <div className="space-y-2">*/}
+        {/*        <HomeCoinButtons />*/}
+        {/*      </div>*/}
+        {/*    </div>*/}
+        {/*  }*/}
         {/*</div>*/}
+
+        <BannerComponent isPopup={isPopup} />
 
 
         {/*END CUSTOM*/}
-
         <div className="home__container">
-
 
           {dataCollectionForMarketing === null &&
           participateInMetaMetrics === true
@@ -1105,6 +1116,7 @@ export default class Home extends PureComponent {
               setBasicFunctionalityModalOpen={setBasicFunctionalityModalOpen}
               showBalance={false}
               showButtons={false}
+              isPopup={isPopup}
             ></AccountOverview>
 
             {
