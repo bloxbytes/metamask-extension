@@ -5,6 +5,7 @@ import IconEye from '../../../ui/icon/icon-eye';
 import SRPQuiz from '../../../app/srp-quiz-modal';
 import VisitSupportDataConsentModal from '../../../app/modals/visit-support-data-consent-modal/visit-support-data-consent-modal';
 import { openWindow } from '../../../../helpers/utils/window';
+import { Bell, CloudBackup, Contact, SettingsIcon } from 'lucide-react';
 
 type SettingsItem = {
   label: string;
@@ -82,6 +83,74 @@ export default function SettingsTab(): JSX.Element {
             </div>
           </div>
         </div>
+
+        <div>
+            <Text variant="label" className="mb-2 text-[#b0efff]/70">
+              Basic Settings
+            </Text>
+            <div className="backdrop-blur-sm rounded-xl overflow-hidden shadow-lg bg-gradient-to-br from-[#1a1d3a]/60 to-[#1a1d3a]/40 border border-[#4105b6]/30">
+              <button
+                type="button"
+                onClick={() => history.push('/settings/general')}
+                className="w-full flex items-center justify-between p-4 transition-all border-b border-[#4105b6]/20 last:border-0 group hover:border-l-2 hover:border-l-[#4105b6] hover:pl-3.5"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 group-hover:from-[#4105b6]/50 group-hover:to-[#6305b6]/50">
+                    <SettingsIcon className="w-4 h-4 text-[#b0efff]"/>
+                  </div>
+                  <div className="text-left">
+                    <span className="block text-[#f8fdf1]">General</span>
+                  </div>
+                </div>
+                <ChevronRight className="w-4 h-4 text-[#b0efff]/70" />
+              </button>
+               <button
+                type="button"
+                onClick={() => history.push('/settings/security-and-privacy/backup-and-sync')}
+                className="w-full flex items-center justify-between p-4 transition-all border-b border-[#4105b6]/20 last:border-0 group hover:border-l-2 hover:border-l-[#4105b6] hover:pl-3.5"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 group-hover:from-[#4105b6]/50 group-hover:to-[#6305b6]/50">
+                    <CloudBackup className="w-4 h-4 text-[#b0efff]"/>
+                  </div>
+                  <div className="text-left">
+                    <span className="block text-[#f8fdf1]">Backup & Sync</span>
+                  </div>
+                </div>
+                <ChevronRight className="w-4 h-4 text-[#b0efff]/70" />
+              </button>
+                <button
+                type="button"
+                onClick={() => history.push('/settings/contact-list')}
+                className="w-full flex items-center justify-between p-4 transition-all border-b border-[#4105b6]/20 last:border-0 group hover:border-l-2 hover:border-l-[#4105b6] hover:pl-3.5"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 group-hover:from-[#4105b6]/50 group-hover:to-[#6305b6]/50">
+                    <Contact className="w-4 h-4 text-[#b0efff]"/>
+                  </div>
+                  <div className="text-left">
+                    <span className="block text-[#f8fdf1]">Contacts</span>
+                  </div>
+                </div>
+                <ChevronRight className="w-4 h-4 text-[#b0efff]/70" />
+              </button>
+              <button
+                type="button"
+                onClick={() => history.push('/notifications/settings')}
+                className="w-full flex items-center justify-between p-4 transition-all border-b border-[#4105b6]/20 last:border-0 group hover:border-l-2 hover:border-l-[#4105b6] hover:pl-3.5"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 group-hover:from-[#4105b6]/50 group-hover:to-[#6305b6]/50">
+                    <Bell className="w-4 h-4 text-[#b0efff]"/>
+                  </div>
+                  <div className="text-left">
+                    <span className="block text-[#f8fdf1]">Notifications</span>
+                  </div>
+                </div>
+                <ChevronRight className="w-4 h-4 text-[#b0efff]/70" />
+              </button>
+            </div>
+          </div>
 
         {/* Settings Sections */}
         <div className="space-y-4">

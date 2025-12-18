@@ -209,9 +209,9 @@ class SettingsPage extends PureComponent {
                 )}
               </>
             )}
-            {this.renderTitle()}
-            {this.renderSearch()}
-            <ButtonIcon
+            {/* {this.renderTitle()} */}
+            {/* {this.renderSearch()} */}
+            {/* <ButtonIcon
               className="settings-page__header__title-container__close-button"
               iconName={IconName.Close}
               ariaLabel={t('close')}
@@ -224,14 +224,14 @@ class SettingsPage extends PureComponent {
               }}
               size={ButtonIconSize.Md}
               marginLeft="auto"
-            />
+            /> */}
           </div>
         </Box>
 
         <div className="settings-page__content">
-          <div className="settings-page__content__tabs">
+          {/* <div className="settings-page__content__tabs">
             {this.renderTabs()}
-          </div>
+          </div> */}
           <div className="settings-page__content__modules">
             {this.renderSubHeader()}
             {this.renderContent()}
@@ -342,17 +342,15 @@ class SettingsPage extends PureComponent {
           flexDirection={FlexDirection.Row}
           alignItems={AlignItems.center}
         >
-          <Text
-            className={classnames({
-              'settings-page__subheader--link': initialBreadCrumbRoute,
-            })}
-            variant={TextVariant.headingSm}
-            onClick={() =>
-              initialBreadCrumbRoute && navigate(initialBreadCrumbRoute)
-            }
-          >
-            {subheaderText}
-          </Text>
+          <ButtonIcon
+                     ariaLabel="Back"
+                     iconName={IconName.ArrowLeft}
+                     size={ButtonIconSize.Md}
+                     onClick={() => {
+                       navigate('/home');
+                     }}
+                     data-testid="back-button"
+                   />
           {breadCrumbTextKey && (
             <div className="settings-page__subheader--break">
               <span>{' > '}</span>

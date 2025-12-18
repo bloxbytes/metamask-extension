@@ -110,19 +110,19 @@ const mapStateToProps = (state, ownProps) => {
   if (isRevealSrpListPage && socialLoginEnabled) {
     pathnameI18nKey = 'securitySrpWalletRecovery';
   }
-
-  let backRoute = SETTINGS_ROUTE;
-  if (isEditContactPage) {
-    backRoute = `${CONTACT_VIEW_ROUTE}/${pathNameTail}`;
-  } else if (isAddressEntryPage || isAddContactPage) {
-    backRoute = CONTACT_LIST_ROUTE;
-  } else if (isNetworksFormPage) {
-    backRoute = NETWORKS_ROUTE;
-  } else if (isAddPopularCustomNetwork) {
-    backRoute = NETWORKS_ROUTE;
-  } else if (isRevealSrpListPage || isPasswordChangePage) {
-    backRoute = SECURITY_ROUTE;
-  }
+  let backRoute = '/home'
+  // let backRoute = SETTINGS_ROUTE;
+  // if (isEditContactPage) {
+  //   backRoute = `${CONTACT_VIEW_ROUTE}/${pathNameTail}`;
+  // } else if (isAddressEntryPage || isAddContactPage) {
+  //   backRoute = CONTACT_LIST_ROUTE;
+  // } else if (isNetworksFormPage) {
+  //   backRoute = NETWORKS_ROUTE;
+  // } else if (isAddPopularCustomNetwork) {
+  //   backRoute = NETWORKS_ROUTE;
+  // } else if (isRevealSrpListPage || isPasswordChangePage) {
+  //   backRoute = SECURITY_ROUTE;
+  // }
 
   let initialBreadCrumbRoute;
   let initialBreadCrumbKey;
