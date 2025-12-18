@@ -278,6 +278,18 @@
       line-height: 140.62%;
     }
   }
+  &__coin-balance-address{
+  background-color: rgba(15, 17, 42, 0.7);
+  backdrop-filter: blur(6px);
+  border-radius: 0.5rem;
+  padding: 0.2rem 0.75rem;
+  width: fit-content;
+  border: 1px solid rgba(65, 5, 182, 0.2);
+  color: #b0efff;
+  opacity: 0.7;
+  font-size: 12px;
+  margin-top: 6px;
+  }
 }
 .home-overview__balance{
   font-size: 32px;
@@ -985,4 +997,7 @@ font-weight: 400;
 }
 .dropdown-editor__item:hover{
   background-color: oklab(24.4378% .00675559 -.0545587 / .8);
+}
+.network-manager__additional-network-item:hover{
+  background-color: var(--color-primary-muted);
 }

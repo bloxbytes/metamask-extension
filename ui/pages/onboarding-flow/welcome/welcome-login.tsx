@@ -54,7 +54,7 @@ export default function WelcomeLogin({
           borderColor: '#454e69',
         }}
         // eslint-disable-next-line @metamask/design-tokens/color-no-hex
-        className="welcome-login__mascotImg rounded-full relative"
+        className="welcome-login__mascotImg rounded-full relative mb-4"
       />
     );
 
@@ -182,7 +182,7 @@ export default function WelcomeLogin({
               : t('onboardingSrpImport'))}
           </Button>
 
-          <div className={'space-y-4 mb-16'}></div>
+          <div className={'space-y-4 mb-12'}></div>
           <div className="text-[#4f5262] text-sm">
             <p>By continuing, I agree to OPN Wallet's
               &nbsp;

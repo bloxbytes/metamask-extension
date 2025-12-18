@@ -188,7 +188,7 @@ export const HomeCoinBalance = () => {
         classPrefix="home"
       />
       {displayAddress ? (
-        displayAddress
+        <div className="home__coin-balance-address"><p>{displayAddress}</p></div>
       ) : null}
     </div>
   );

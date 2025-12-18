@@ -7,8 +7,6 @@ import {
   IconName,
   InputType,
   Text,
-  Icon,
-  IconSize,
 } from '../../component-library';
 import { useI18nContext } from '../../../hooks/useI18nContext';
 import { PASSWORD_MIN_LENGTH } from '../../../helpers/constants/common';
@@ -18,7 +16,6 @@ import {
   FlexDirection,
   AlignItems,
   TextVariant,
-  IconColor,
 } from '../../../helpers/constants/design-system';
 
 type PasswordFormProps = {
@@ -213,24 +210,38 @@ export default function PasswordForm({
             alignItems={AlignItems.center}
             gap={2}
           >
-            <Icon
-              name={
-                passwordRequirements.hasMinLength
-                  ? IconName.CheckBold
-                  : IconName.FullCircle
-              }
-              size={IconSize.Sm}
-              color={
-                passwordRequirements.hasMinLength
-                  ? IconColor.primaryDefault
-                  : IconColor.iconMuted
-              }
-              className={
-                passwordRequirements.hasMinLength
-                  ? 'password-form__icon-checked'
-                  : 'password-form__icon-unchecked'
-              }
-            />
+            {passwordRequirements.hasMinLength ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="password-form__icon-checked"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path d="m9 12 2 2 4-4" />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="password-form__icon-unchecked"
+              >
+                <circle cx="12" cy="12" r="10" />
+              </svg>
+            )}
             <Text
               variant={TextVariant.bodySm}
               color={
@@ -253,24 +264,38 @@ export default function PasswordForm({
             alignItems={AlignItems.center}
             gap={2}
           >
-            <Icon
-              name={
-                passwordRequirements.hasUppercase
-                  ? IconName.CheckBold
-                  : IconName.FullCircle
-              }
-              size={IconSize.Sm}
-              color={
-                passwordRequirements.hasUppercase
-                  ? IconColor.primaryDefault
-                  : IconColor.iconMuted
-              }
-              className={
-                passwordRequirements.hasUppercase
-                  ? 'password-form__icon-checked'
-                  : 'password-form__icon-unchecked'
-              }
-            />
+            {passwordRequirements.hasUppercase ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="password-form__icon-checked"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path d="m9 12 2 2 4-4" />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="password-form__icon-unchecked"
+              >
+                <circle cx="12" cy="12" r="10" />
+              </svg>
+            )}
             <Text
               variant={TextVariant.bodySm}
               color={
@@ -293,24 +318,38 @@ export default function PasswordForm({
             alignItems={AlignItems.center}
             gap={2}
           >
-            <Icon
-              name={
-                passwordRequirements.hasLowercase
-                  ? IconName.CheckBold
-                  : IconName.FullCircle
-              }
-              size={IconSize.Sm}
-              color={
-                passwordRequirements.hasLowercase
-                  ? IconColor.primaryDefault
-                  : IconColor.iconMuted
-              }
-              className={
-                passwordRequirements.hasLowercase
-                  ? 'password-form__icon-checked'
-                  : 'password-form__icon-unchecked'
-              }
-            />
+            {passwordRequirements.hasLowercase ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="password-form__icon-checked"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path d="m9 12 2 2 4-4" />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="password-form__icon-unchecked"
+              >
+                <circle cx="12" cy="12" r="10" />
+              </svg>
+            )}
             <Text
               variant={TextVariant.bodySm}
               color={
@@ -333,24 +372,38 @@ export default function PasswordForm({
             alignItems={AlignItems.center}
             gap={2}
           >
-            <Icon
-              name={
-                passwordRequirements.hasNumber
-                  ? IconName.CheckBold
-                  : IconName.FullCircle
-              }
-              size={IconSize.Sm}
-              color={
-                passwordRequirements.hasNumber
-                  ? IconColor.primaryDefault
-                  : IconColor.iconMuted
-              }
-              className={
-                passwordRequirements.hasNumber
-                  ? 'password-form__icon-checked'
-                  : 'password-form__icon-unchecked'
-              }
-            />
+            {passwordRequirements.hasNumber ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="password-form__icon-checked"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path d="m9 12 2 2 4-4" />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="password-form__icon-unchecked"
+              >
+                <circle cx="12" cy="12" r="10" />
+              </svg>
+            )}
             <Text
               variant={TextVariant.bodySm}
               color={
@@ -373,24 +426,38 @@ export default function PasswordForm({
             alignItems={AlignItems.center}
             gap={2}
           >
-            <Icon
-              name={
-                passwordRequirements.hasSpecialChar
-                  ? IconName.CheckBold
-                  : IconName.FullCircle
-              }
-              size={IconSize.Sm}
-              color={
-                passwordRequirements.hasSpecialChar
-                  ? IconColor.primaryDefault
-                  : IconColor.iconMuted
-              }
-              className={
-                passwordRequirements.hasSpecialChar
-                  ? 'password-form__icon-checked'
-                  : 'password-form__icon-unchecked'
-              }
-            />
+            {passwordRequirements.hasSpecialChar ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="password-form__icon-checked"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path d="m9 12 2 2 4-4" />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="password-form__icon-unchecked"
+              >
+                <circle cx="12" cy="12" r="10" />
+              </svg>
+            )}
             <Text
               variant={TextVariant.bodySm}
               color={
