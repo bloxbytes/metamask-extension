@@ -46,7 +46,7 @@ export const NftEmptyState = ({ className }: NftEmptyStateProps) => {
       actionButtonText={t('importNFT')}
       onAction={handleImportNfts}
       data-testid="nft-tab-empty-state"
-      className={twMerge('max-w-64', className)}
+      className={twMerge('empty-state-card', className)}
     />
   );
 };

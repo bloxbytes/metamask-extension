@@ -5,6 +5,7 @@ import IconEye from '../../../ui/icon/icon-eye';
 import SRPQuiz from '../../../app/srp-quiz-modal';
 import VisitSupportDataConsentModal from '../../../app/modals/visit-support-data-consent-modal/visit-support-data-consent-modal';
 import { openWindow } from '../../../../helpers/utils/window';
+import { Bell, CloudBackup, Contact, SettingsIcon } from 'lucide-react';
 
 type SettingsItem = {
   label: string;
@@ -60,10 +61,9 @@ export default function SettingsTab(): JSX.Element {
 
   return (
     <Box
-      padding={4}
       style={{ maxHeight: 'calc(100vh - 200px)', overflowY: 'auto' }}
     >
-      <div className="px-4 pb-4 pt-4 ">
+      <div className="fah-card">
 
         {/* Version Info */}
         <div className="mb-4">
@@ -82,6 +82,74 @@ export default function SettingsTab(): JSX.Element {
             </div>
           </div>
         </div>
+
+        <div>
+            <Text variant="label" className="mb-2 text-[#b0efff]/70">
+              Basic Settings
+            </Text>
+            <div className="backdrop-blur-sm rounded-xl overflow-hidden shadow-lg bg-gradient-to-br from-[#1a1d3a]/60 to-[#1a1d3a]/40 border border-[#4105b6]/30">
+              <button
+                type="button"
+                onClick={() => history.push('/settings/general')}
+                className="w-full flex items-center justify-between p-4 transition-all border-b border-[#4105b6]/20 last:border-0 group hover:border-l-2 hover:border-l-[#4105b6] hover:pl-3.5"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 group-hover:from-[#4105b6]/50 group-hover:to-[#6305b6]/50">
+                    <SettingsIcon className="w-4 h-4 text-[#b0efff]"/>
+                  </div>
+                  <div className="text-left">
+                    <span className="block text-[#f8fdf1]">General</span>
+                  </div>
+                </div>
+                <ChevronRight className="w-4 h-4 text-[#b0efff]/70" />
+              </button>
+               <button
+                type="button"
+                onClick={() => history.push('/settings/security-and-privacy/backup-and-sync')}
+                className="w-full flex items-center justify-between p-4 transition-all border-b border-[#4105b6]/20 last:border-0 group hover:border-l-2 hover:border-l-[#4105b6] hover:pl-3.5"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 group-hover:from-[#4105b6]/50 group-hover:to-[#6305b6]/50">
+                    <CloudBackup className="w-4 h-4 text-[#b0efff]"/>
+                  </div>
+                  <div className="text-left">
+                    <span className="block text-[#f8fdf1]">Backup & Sync</span>
+                  </div>
+                </div>
+                <ChevronRight className="w-4 h-4 text-[#b0efff]/70" />
+              </button>
+                <button
+                type="button"
+                onClick={() => history.push('/settings/contact-list')}
+                className="w-full flex items-center justify-between p-4 transition-all border-b border-[#4105b6]/20 last:border-0 group hover:border-l-2 hover:border-l-[#4105b6] hover:pl-3.5"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 group-hover:from-[#4105b6]/50 group-hover:to-[#6305b6]/50">
+                    <Contact className="w-4 h-4 text-[#b0efff]"/>
+                  </div>
+                  <div className="text-left">
+                    <span className="block text-[#f8fdf1]">Contacts</span>
+                  </div>
+                </div>
+                <ChevronRight className="w-4 h-4 text-[#b0efff]/70" />
+              </button>
+              <button
+                type="button"
+                onClick={() => history.push('/notifications/settings')}
+                className="w-full flex items-center justify-between p-4 transition-all border-b border-[#4105b6]/20 last:border-0 group hover:border-l-2 hover:border-l-[#4105b6] hover:pl-3.5"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 group-hover:from-[#4105b6]/50 group-hover:to-[#6305b6]/50">
+                    <Bell className="w-4 h-4 text-[#b0efff]"/>
+                  </div>
+                  <div className="text-left">
+                    <span className="block text-[#f8fdf1]">Notifications</span>
+                  </div>
+                </div>
+                <ChevronRight className="w-4 h-4 text-[#b0efff]/70" />
+              </button>
+            </div>
+          </div>
 
         {/* Settings Sections */}
         <div className="space-y-4">
@@ -150,7 +218,7 @@ export default function SettingsTab(): JSX.Element {
                   >
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 group-hover:from-[#4105b6]/50 group-hover:to-[#6305b6]/50">
-                        <IconEye className="w-4 h-4 text-[#b0efff]/70"/>
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="24" height="24" className="lucide lucide-circle-help w-4 h-4 text-[#b0efff]"><path fill="#b0efff" d="M320 64C324.6 64 329.2 65 333.4 66.9L521.8 146.8C543.8 156.1 560.2 177.8 560.1 204C559.6 303.2 518.8 484.7 346.5 567.2C329.8 575.2 310.4 575.2 293.7 567.2C121.3 484.7 80.6 303.2 80.1 204C80 177.8 96.4 156.1 118.4 146.8L306.7 66.9C310.9 65 315.4 64 320 64zM320 130.8L320 508.9C458 442.1 495.1 294.1 496 205.5L320 130.9L320 130.9z"/></svg>
                       </div>
                       <div className="text-left">
                         <span className="block text-[#f8fdf1]">Security and Privacy Settings</span>
@@ -177,7 +245,7 @@ export default function SettingsTab(): JSX.Element {
               >
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 group-hover:from-[#4105b6]/50 group-hover:to-[#6305b6]/50">
-                    <span className="text-[#b0efff] text-sm">?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-circle-help w-4 h-4 text-[#b0efff]"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg>
                   </div>
                   <div className="text-left">
                     <span className="block text-[#f8fdf1]">Help &amp; Support</span>
@@ -192,7 +260,7 @@ export default function SettingsTab(): JSX.Element {
               >
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 group-hover:from-[#4105b6]/50 group-hover:to-[#6305b6]/50">
-                    <span className="text-[#b0efff] text-sm">ℹ</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-file-text w-4 h-4 text-[#b0efff]"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg>
                   </div>
                   <div className="text-left">
                     <span className="block text-[#f8fdf1]">Terms &amp; Privacy</span>
@@ -223,7 +291,7 @@ export default function SettingsTab(): JSX.Element {
         <button
           type="button"
           onClick={handleLock}
-          className="w-full mt-6 flex items-center justify-center gap-2 py-3 rounded-xl transition-all shadow-lg bg-red-500/20 text-red-400 hover:bg-red-500/30 border border-red-400/30"
+          className="lock-wallet-button"
         >
           <LogOut className="w-5 h-5" />
           <span className="text-red-400">Lock Wallet</span>
