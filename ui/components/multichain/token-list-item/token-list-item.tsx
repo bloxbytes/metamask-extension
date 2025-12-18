@@ -82,26 +82,26 @@ type TokenListItemProps = {
 };
 
 export const TokenListItemComponent = ({
-  className,
-  onClick,
-  tokenSymbol,
-  tokenImage,
-  primary,
-  secondary,
-  title,
-  tooltipText,
-  tokenChainImage,
-  chainId,
-  isNativeCurrency = false,
-  isStakeable = false,
-  isTitleNetworkName = false,
-  isTitleHidden = false,
-  address = null,
-  showPercentage = false,
-  privacyMode = false,
-  nativeCurrencySymbol,
-  isDestinationToken = false,
-}: TokenListItemProps) => {
+                                         className,
+                                         onClick,
+                                         tokenSymbol,
+                                         tokenImage,
+                                         primary,
+                                         secondary,
+                                         title,
+                                         tooltipText,
+                                         tokenChainImage,
+                                         chainId,
+                                         isNativeCurrency = false,
+                                         isStakeable = false,
+                                         isTitleNetworkName = false,
+                                         isTitleHidden = false,
+                                         address = null,
+                                         showPercentage = false,
+                                         privacyMode = false,
+                                         nativeCurrencySymbol,
+                                         isDestinationToken = false,
+                                       }: TokenListItemProps) => {
   const t = useI18nContext();
   const isEvm = useSelector(getMultichainIsEvm);
   const trackEvent = useContext(MetaMetricsContext);
@@ -126,7 +126,7 @@ export const TokenListItemComponent = ({
     if (isTitleNetworkName) {
       return NETWORK_TO_SHORT_NETWORK_NAME_MAP[
         chainId as keyof typeof NETWORK_TO_SHORT_NETWORK_NAME_MAP
-      ];
+        ];
     }
     if (isTitleHidden) {
       return undefined;
@@ -165,7 +165,11 @@ export const TokenListItemComponent = ({
     <Box
       // TODO: Fix in https://github.com/MetaMask/metamask-extension/issues/31880
       // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-      className={classnames('multichain-token-list-item', className || {})}
+      className={classnames(
+        'multichain-token-list-item',
+        'custom-card',
+        className || {},
+      )}
       display={Display.Flex}
       flexDirection={FlexDirection.Row}
       width={BlockSize.Full}
@@ -175,10 +179,13 @@ export const TokenListItemComponent = ({
       title={tooltipText ? t(tooltipText) : undefined}
     >
       <Box
-        className={classnames('multichain-token-list-item__container-cell custom-card', {
-          'multichain-token-list-item__container-cell--clickable':
-            onClick !== undefined,
-        })}
+        className={classnames(
+          'multichain-token-list-item__container-cell',
+          'custom-card',
+          {
+            'multichain-token-list-item__container-cell--clickable':
+              onClick !== undefined,
+          }, 'custom-card')}
         display={Display.Flex}
         flexDirection={FlexDirection.Row}
         paddingTop={2}
@@ -186,7 +193,6 @@ export const TokenListItemComponent = ({
         paddingLeft={4}
         paddingRight={4}
         width={BlockSize.Full}
-        style={{ height: 62 }}
         data-testid="multichain-token-list-button"
         {...(onClick && {
           as: 'a',
@@ -348,7 +354,7 @@ export const TokenListItemComponent = ({
                 value={
                   isNativeCurrency
                     ? multiChainMarketData?.[chainId]?.[
-                        getNativeTokenAddress(chainId as Hex)
+                      getNativeTokenAddress(chainId as Hex)
                       ]?.pricePercentChange1d
                     : tokenPercentageChange
                 }
@@ -408,7 +414,7 @@ export const TokenListItemComponent = ({
                 // TODO: Fix in https://github.com/MetaMask/metamask-extension/issues/31880
                 // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
                 nativeCurrencySymbol ||
-                  t('nativeTokenScamWarningDescriptionExpectedTokenFallback'), // never render "undefined" string value
+                t('nativeTokenScamWarningDescriptionExpectedTokenFallback'), // never render "undefined" string value
               ])}
             </ModalBody>
             <ModalFooter>

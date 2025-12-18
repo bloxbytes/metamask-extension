@@ -20,14 +20,14 @@ type GenericAssetCellLayoutProps = {
 // TODO: Fix in https://github.com/MetaMask/metamask-extension/issues/31860
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export default function GenericAssetCellLayout({
-  onClick,
-  disableHover = false,
-  badge,
-  headerLeftDisplay,
-  headerRightDisplay,
-  footerLeftDisplay,
-  footerRightDisplay,
-}: GenericAssetCellLayoutProps) {
+                                                 onClick,
+                                                 disableHover = false,
+                                                 badge,
+                                                 headerLeftDisplay,
+                                                 headerRightDisplay,
+                                                 footerLeftDisplay,
+                                                 footerRightDisplay,
+                                               }: GenericAssetCellLayoutProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -53,6 +53,7 @@ export default function GenericAssetCellLayout({
         paddingLeft={4}
         paddingRight={4}
         width={BlockSize.Full}
+        className={'custom-card'}
         style={{
           height: 62,
           cursor: onClick ? 'pointer' : 'auto',
