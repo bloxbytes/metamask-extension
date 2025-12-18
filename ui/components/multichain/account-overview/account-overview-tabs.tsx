@@ -42,6 +42,7 @@ import { Activity, Zap } from 'lucide-react';
 import { Button, ButtonSize, ButtonVariant } from '../../component-library';
 import { getMultichainIsEvm } from '../../../selectors/multichain';
 
+import SettingsTab from './settings';
 
 export type AccountOverviewTabsProps = AccountOverviewCommonProps & {
   showTokens: boolean;
@@ -49,6 +50,8 @@ export type AccountOverviewTabsProps = AccountOverviewCommonProps & {
   showNfts: boolean;
   showActivity: boolean;
   showDefi?: boolean;
+  showSettings?: boolean;
+
 };
 
 export const AccountOverviewTabs = ({
@@ -59,6 +62,7 @@ export const AccountOverviewTabs = ({
                                       showNfts,
                                       showActivity,
                                       showDefi,
+                                      showSettings,
                                     }: AccountOverviewTabsProps) => {
   const history = useHistory();
   const t = useI18nContext();
@@ -138,8 +142,11 @@ export const AccountOverviewTabs = ({
     <Tabs<AccountOverviewTabKey>
       defaultActiveTabKey={defaultHomeActiveTabName ?? undefined}
       onTabClick={handleTabClick}
+      // className='grid !grid-cols-5 gap-4'
+
       tabListProps={{
-        className: 'px-4',
+        // className: 'px-4 grid grid-cols-5 gap-4',
+        style: { gridTemplateColumns: 'repeat(5, minmax(0, 1fr))' },
       }}
     >
       {showTokens && (
@@ -354,6 +361,20 @@ export const AccountOverviewTabs = ({
         </Tab>
       )}
 
+      {showSettings && (
+        <Tab
+          name={'Settings'}
+          // Settings may not be present on the AccountOverviewTabKey enum in all branches;
+          // cast to satisfy the Tabs generic while keeping runtime key as 'settings'.
+          tabKey={AccountOverviewTabKey.Settings}
+          data-testid="account-overview__settings-tab"
+        >
+          <Box padding={4}>
+            <SettingsTab />
+          </Box>
+        </Tab>
+      )}
+
       {showActivity && (
         <Tab
           name={t('activity')}
@@ -367,6 +388,20 @@ export const AccountOverviewTabs = ({
           )}
         </Tab>
       )}
+
+      {/* {showActivity && (
+        <Tab
+          name={t('activity')}
+          tabKey={AccountOverviewTabKey.Activity}
+          data-testid="account-overview__activity-tab"
+        >
+          {showUnifiedTransactionList ? (
+            <UnifiedTransactionList />
+          ) : (
+            <TransactionList />
+          )}
+        </Tab>
+      )} */}
     </Tabs>
   );
 };
