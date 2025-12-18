@@ -15,6 +15,7 @@ export const AccountOverviewUnknown = (props: AccountOverviewUnknownProps) => {
       showNfts={false}
       showDefi={false}
       showActivity={true}
+      showSettings={true}
       {...props}
     >
       <Box className="account-overview-unknown__empty">
