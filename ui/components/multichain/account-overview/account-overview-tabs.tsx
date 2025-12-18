@@ -42,6 +42,7 @@ import { Activity, Zap } from 'lucide-react';
 import { Button, ButtonSize, ButtonVariant } from '../../component-library';
 import { getMultichainIsEvm } from '../../../selectors/multichain';
 
+import SettingsTab from './settings';
 
 export type AccountOverviewTabsProps = AccountOverviewCommonProps & {
   showTokens: boolean;
@@ -49,6 +50,8 @@ export type AccountOverviewTabsProps = AccountOverviewCommonProps & {
   showNfts: boolean;
   showActivity: boolean;
   showDefi?: boolean;
+  showSettings?: boolean;
+
 };
 
 export const AccountOverviewTabs = ({
@@ -59,6 +62,7 @@ export const AccountOverviewTabs = ({
                                       showNfts,
                                       showActivity,
                                       showDefi,
+                                      showSettings,
                                     }: AccountOverviewTabsProps) => {
   const history = useHistory();
   const t = useI18nContext();
@@ -138,13 +142,16 @@ export const AccountOverviewTabs = ({
     <Tabs<AccountOverviewTabKey>
       defaultActiveTabKey={defaultHomeActiveTabName ?? undefined}
       onTabClick={handleTabClick}
+      // className='grid !grid-cols-5 gap-4'
+
       tabListProps={{
-        className: 'px-4',
+        // className: 'px-4 grid grid-cols-5 gap-4',
+        style: { gridTemplateColumns: 'repeat(4, minmax(0, 1fr))' },
       }}
     >
       {showTokens && (
         <Tab
-          name={t('tokens')}
+          name={'Dashboard'}
           tabKey={AccountOverviewTabKey.Tokens}
           data-testid="account-overview__asset-tab"
         >
@@ -167,8 +174,7 @@ export const AccountOverviewTabs = ({
           <Box marginBottom={4}>
             <div
               className="mt-3 mb-3 bg-gradient-to-br from-[#1a1d3a]/60 to-[#1a1d3a]/40 backdrop-blur-xl rounded-xl p-4 border border-[#4105b6]/40 shadow-2xl relative overflow-hidden">
-              <div
-                className="absolute -top-20 -left-20 w-40 h-40 bg-gradient-to-r from-[#2280cd]/20 to-[#4105b6]/20 rounded-full blur-3xl animate-pulse"></div>
+
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
@@ -228,14 +234,7 @@ export const AccountOverviewTabs = ({
           <Box marginBottom={4}>
             <div
               className="mt-3 bg-gradient-to-br from-[#1a1d3a]/60 to-[#1a1d3a]/40 backdrop-blur-xl rounded-xl p-4 border border-[#4105b6]/40 shadow-2xl relative overflow-hidden">
-              {/* Animated background */}
-              <div className="absolute inset-0">
-                <div
-                  className="absolute top-0 left-1/4 w-32 h-32 bg-[#2280cd]/10 rounded-full blur-2xl animate-pulse"></div>
-                <div
-                  className="absolute bottom-0 right-1/4 w-32 h-32 bg-[#b0efff]/10 rounded-full blur-2xl animate-pulse"
-                  style={{ animationDelay: '1s' }}></div>
-              </div>
+
 
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-3">
@@ -316,13 +315,20 @@ export const AccountOverviewTabs = ({
 
             <Box marginBottom={2}>
 
-              <Box>
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                paddingTop={2}
+                alignItems="center"
+                marginBottom={2}
+              >
                 <div>Tokens</div>
                 <Button
                   size={ButtonSize.Sm}
                   variant={ButtonVariant.Secondary}
                   onClick={handleManageTokens}
-                  disabled={!canManageTokens}>
+                  disabled={!canManageTokens}
+                >
                   Manage
                 </Button>
               </Box>
@@ -336,7 +342,7 @@ export const AccountOverviewTabs = ({
           </Box>
         </Tab>
       )}
-      {showDefi && (
+      {false && showDefi && (
         <Tab
           name={t('defi')}
           tabKey={AccountOverviewTabKey.DeFi}
@@ -362,6 +368,8 @@ export const AccountOverviewTabs = ({
         </Tab>
       )}
 
+
+
       {showActivity && (
         <Tab
           name={t('activity')}
@@ -375,6 +383,21 @@ export const AccountOverviewTabs = ({
           )}
         </Tab>
       )}
+       {showSettings && (
+        <Tab
+          name={'Settings'}
+          // Settings may not be present on the AccountOverviewTabKey enum in all branches;
+          // cast to satisfy the Tabs generic while keeping runtime key as 'settings'.
+          tabKey={AccountOverviewTabKey.Settings}
+          data-testid="account-overview__settings-tab"
+        >
+          <Box padding={4}>
+            <SettingsTab />
+          </Box>
+        </Tab>
+      )}
+
+
     </Tabs>
   );
 };

@@ -16,6 +16,7 @@ export const AccountOverviewEth = (props: AccountOverviewEthProps) => {
       showNfts={true}
       showDefi={defiPositionsEnabled}
       showActivity={true}
+      showSettings={true}
       {...props}
     >
       {<EthOverview showBalance={showBalance} showButtons={showButtons} />}

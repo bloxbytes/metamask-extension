@@ -16,6 +16,7 @@ export const AccountOverviewNonEvm = ({
       showTokensLinks={false}
       showNfts={false}
       showActivity={true}
+      showSettings={true}
       {...props}
     >
       <NonEvmOverview showBalance={showBalance} showButtons={showButtons} />
