@@ -9,4 +9,5 @@ export type AccountOverviewCommonProps = {
   defaultHomeActiveTabName: AccountOverviewTabKey | null;
   showBalance?: boolean;
   showButtons?: boolean;
+  isPopup?: boolean;
 };

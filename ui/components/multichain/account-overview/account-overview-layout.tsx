@@ -23,15 +23,17 @@ import {
   AccountOverviewTabsProps,
   AccountOverviewTabs,
 } from './account-overview-tabs';
+import AssetListControlBar from '../../app/assets/asset-list/asset-list-control-bar';
+import { BannerComponent } from '../../../pages/home/home.component';
 
 export type AccountOverviewLayoutProps = AccountOverviewTabsProps & {
   children: React.ReactElement;
 };
 
 export const AccountOverviewLayout = ({
-  children,
-  ...tabsProps
-}: AccountOverviewLayoutProps) => {
+                                        children,
+                                        ...tabsProps
+                                      }: AccountOverviewLayoutProps) => {
   const dispatch = useDispatch();
   const isLoading = useSelector(getAppIsLoading);
   const remoteFeatureFlags = useSelector(getRemoteFeatureFlags);

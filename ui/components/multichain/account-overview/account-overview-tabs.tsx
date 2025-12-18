@@ -38,11 +38,12 @@ import { Tab, Tabs } from '../../ui/tabs';
 import { useTokenBalances } from '../../../hooks/useTokenBalances';
 import { AccountOverviewCommonProps } from './common';
 import { HomeCoinBalance, HomeCoinButtons } from '../../../pages/home/home.component';
-import { Activity, Zap } from 'lucide-react';
+import { Activity, Home, Image, Settings, Zap } from 'lucide-react';
 import { Button, ButtonSize, ButtonVariant } from '../../component-library';
 import { getMultichainIsEvm } from '../../../selectors/multichain';
 
 import SettingsTab from './settings';
+import AssetListControlBar from '../../app/assets/asset-list/asset-list-control-bar';
 
 export type AccountOverviewTabsProps = AccountOverviewCommonProps & {
   showTokens: boolean;
@@ -51,7 +52,7 @@ export type AccountOverviewTabsProps = AccountOverviewCommonProps & {
   showActivity: boolean;
   showDefi?: boolean;
   showSettings?: boolean;
-
+  isPopup?: boolean;
 };
 
 export const AccountOverviewTabs = ({
@@ -63,6 +64,7 @@ export const AccountOverviewTabs = ({
                                       showActivity,
                                       showDefi,
                                       showSettings,
+                                      isPopup = false,
                                     }: AccountOverviewTabsProps) => {
   const history = useHistory();
   const t = useI18nContext();
@@ -137,23 +139,54 @@ export const AccountOverviewTabs = ({
     getIsMultichainAccountsState2Enabled,
   );
   const showUnifiedTransactionList = isBIP44FeatureFlagEnabled;
+  const tabListClassName = isPopup
+    ? 'account-overview-tabs__tablist account-overview-tabs__tablist--popup'
+    : 'account-overview-tabs__tablist';
+  const tabContentClassName = isPopup
+    ? 'account-overview-tabs__content account-overview-tabs__content--popup'
+    : 'p-9 account-overview-tabs__content';
+  const renderTabLabel = (
+    label: React.ReactNode,
+    IconComponent?: React.ComponentType<{ className?: string }>,
+  ) => {
+    if (!isPopup) {
+      return label;
+    }
+
+    return (
+      <span className="account-overview-tabs__nav-label">
+        {IconComponent ? (
+          <IconComponent className="account-overview-tabs__nav-icon" />
+        ) : null}
+        <span className="account-overview-tabs__nav-text">{label}</span>
+      </span>
+    );
+  };
+
+  const popupTabClass = isPopup
+    ? 'account-overview-tabs__tab account-overview-tabs__tab--popup'
+    : undefined;
 
   return (
     <Tabs<AccountOverviewTabKey>
       defaultActiveTabKey={defaultHomeActiveTabName ?? undefined}
       onTabClick={handleTabClick}
-      // className='grid !grid-cols-5 gap-4'
-
+      className={isPopup ? 'account-overview-tabs account-overview-tabs--popup' : 'account-overview-tabs'}
       tabListProps={{
-        // className: 'px-4 grid grid-cols-5 gap-4',
-        style: { gridTemplateColumns: 'repeat(4, minmax(0, 1fr))' },
+        className: tabListClassName,
+        style: isPopup ? undefined : { gridTemplateColumns: 'repeat(4, minmax(0, 1fr))' },
+        display: isPopup ? Display.Grid : undefined,
+      }}
+      tabContentProps={{
+        className: tabContentClassName,
       }}
     >
       {showTokens && (
         <Tab
-          name={'Dashboard'}
+          name={renderTabLabel('Dashboard', Home)}
           tabKey={AccountOverviewTabKey.Tokens}
           data-testid="account-overview__asset-tab"
+          className={popupTabClass}
         >
 
           <Box marginBottom={4}>
@@ -360,21 +393,22 @@ export const AccountOverviewTabs = ({
 
       {showNfts && (
         <Tab
-          name={t('nfts')}
+          name={renderTabLabel(t('nfts'), Image)}
           tabKey={AccountOverviewTabKey.Nfts}
           data-testid="account-overview__nfts-tab"
+          className={popupTabClass}
         >
           <NftsTab />
         </Tab>
       )}
 
 
-
       {showActivity && (
         <Tab
-          name={t('activity')}
+          name={renderTabLabel(t('activity'), Activity)}
           tabKey={AccountOverviewTabKey.Activity}
           data-testid="account-overview__activity-tab"
+          className={popupTabClass}
         >
           {showUnifiedTransactionList ? (
             <UnifiedTransactionList />
@@ -383,13 +417,14 @@ export const AccountOverviewTabs = ({
           )}
         </Tab>
       )}
-       {showSettings && (
+      {showSettings && (
         <Tab
-          name={'Settings'}
+          name={renderTabLabel(t('settings'), Settings)}
           // Settings may not be present on the AccountOverviewTabKey enum in all branches;
           // cast to satisfy the Tabs generic while keeping runtime key as 'settings'.
           tabKey={AccountOverviewTabKey.Settings}
           data-testid="account-overview__settings-tab"
+          className={popupTabClass}
         >
           <Box padding={4}>
             <SettingsTab />
