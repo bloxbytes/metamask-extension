@@ -31,6 +31,7 @@ body{
     min-height: 627px;
     height: auto;
     background-color: var(--color-accent02-dark);
+    margin-top: 0 !important; // Ensure no top margin for vertical centering
 
     // Glassmorphism effect - only for specific screens (not welcome)
     &--glass {

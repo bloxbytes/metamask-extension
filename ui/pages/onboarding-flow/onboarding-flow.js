@@ -261,7 +261,7 @@ export default function OnboardingFlow() {
           ? AlignItems.flexStart
           : AlignItems.center
       }
-      justifyContent={JustifyContent.flexStart}
+      justifyContent={JustifyContent.center}
       className={classnames('onboarding-flow', {
         'onboarding-flow--welcome-login': isWelcomePage,
       })}
@@ -289,7 +289,7 @@ export default function OnboardingFlow() {
           isFullPage || isPopup ? BorderStyle.none : BorderStyle.solid
         }
         borderRadius={BorderRadius.LG}
-        marginTop={pathname === ONBOARDING_WELCOME_ROUTE || isPopup ? 0 : 3}
+        marginTop={0}
         ///: BEGIN:ONLY_INCLUDE_IF(build-flask)
         marginBottom={pathname === ONBOARDING_EXPERIMENTAL_AREA ? 6 : 0}
         ///: END:ONLY_INCLUDE_IF

@@ -39,7 +39,7 @@
     }
   }
 
-  // Other onboarding screens - muted style
+  // Other onboarding screens - muted style when disabled
   .onboarding-flow__container--glass & {
     background-color: rgba(26, 29, 58, 0.4);
     color: #4f5262;
@@ -49,16 +49,37 @@
       color: #4f5262;
     }
 
-    &:hover:not(&--disabled) {
-      background-color: rgba(26, 29, 58, 0.5);
-      transform: none;
-      color: #4f5262;
+    // Enabled state - active gradient styles
+    &:not(&--disabled):not(:disabled) {
+      background: linear-gradient(to right, #4105b6, #6305b6);
+      color: #f8fdf1;
+      box-shadow: 0 25px 50px -12px rgba(65, 5, 182, 0.5);
+
+      .mm-icon {
+        color: #f8fdf1;
+      }
     }
 
-    &:active:not(&--disabled) {
-      background-color: rgba(26, 29, 58, 0.4);
-      transform: none;
-      color: #4f5262;
+    &:hover:not(&--disabled):not(:disabled) {
+      background: linear-gradient(to right, #6305b6, #4105b6);
+      box-shadow: 0 25px 50px -12px rgba(65, 5, 182, 0.7);
+      transform: scale(1.05);
+      color: #f8fdf1;
+
+      .mm-icon {
+        color: #f8fdf1;
+      }
+    }
+
+    &:active:not(&--disabled):not(:disabled) {
+      background: linear-gradient(to right, #4105b6, #6305b6);
+      transform: scale(1.02);
+      color: #f8fdf1;
+      box-shadow: 0 25px 50px -12px rgba(65, 5, 182, 0.5);
+
+      .mm-icon {
+        color: #f8fdf1;
+      }
     }
   }
 
@@ -123,4 +144,5 @@
     background-color: rgba(26, 29, 58, 0.4);
     transform: none;
   }
+
 }

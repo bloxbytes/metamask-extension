@@ -38,6 +38,7 @@
   background-color: transparent;
   position: relative;
   z-index: 1;
+  margin-block: 4rem;
 
   // Background blur effects overlay
   &__background-effects {
@@ -69,7 +70,7 @@
     }
 
     &--center {
-      top: 50%;
+      top: 39%;
       left: 50%;
       transform: translate(-50%, -50%);
       background: radial-gradient(circle, rgba(99, 5, 182, 0.6) 0%, rgba(99, 5, 182, 0.3) 50%, transparent 100%);
@@ -200,4 +201,11 @@
       background-color: var(--color-background-pressed);
     }
   }
+}
+.srp-input-import__actions{
+  margin-top: 10px;
+}
+.mm-button-link{
+  padding-left: 12px !important;
+  padding-right: 12px !important;
 }
