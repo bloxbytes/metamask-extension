@@ -185,11 +185,7 @@ export default function RecoveryChecklist() {
               gap={3}
               padding={4}
               borderRadius={BorderRadius.LG}
-              style={{
-                background:
-                  'linear-gradient(135deg, rgba(26, 29, 58, 0.6), rgba(26, 29, 58, 0.4))',
-                border: '1px solid rgba(65, 5, 182, 0.3)',
-              }}
+              className="recovery-checklist__card"
               role="button"
               tabIndex={0}
               onClick={() => toggleItem(index)}
@@ -235,10 +231,7 @@ export default function RecoveryChecklist() {
         <Box
           padding={4}
           borderRadius={BorderRadius.LG}
-          style={{
-            background: 'rgba(15, 17, 42, 0.5)',
-            border: '1px solid rgba(65, 5, 182, 0.2)',
-          }}
+          className="recovery-checklist__important"
         >
           <Text variant={TextVariant.bodySm} color={TextColor.textAlternative}>
             <strong style={{ color: 'var(--color-text-default)' }}>

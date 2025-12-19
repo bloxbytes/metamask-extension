@@ -121,12 +121,13 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    background-color: rgba(26, 29, 58, 0.4);
+    background-color: var(--bg-btn-primary-disabled);
     color: #4f5262;
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
-    opacity: 1;
+    border: var(--border-width) solid #3d00b51c;
+    // opacity: 1;
 
     .mm-icon {
       color: #4f5262;
@@ -187,7 +188,7 @@
 
     background: linear-gradient(to right, #4105b6, #6305b6) !important;
     color: #f8fdf1 !important;
-    box-shadow: 0 25px 50px -12px rgba(65, 5, 182, 0.5) !important;
+    box-shadow: var(--theme-button-primary-shadow);
 
     &:hover {
       background: linear-gradient(to right, #6305b6, #4105b6) !important;

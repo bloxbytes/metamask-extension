@@ -115,7 +115,7 @@
     width: 100%;
   }
   &.mm-box--background-color-background-default{
-    background-color: #0f112af2 !important;
+    background-color: var(--modal-bg-color) !important;
 }
 .bg-default{
   background-color: transparent;
@@ -144,10 +144,11 @@
 }
 }
 .mm-button-secondary{
-  background-color: #1d2449;
-  color:#f8fdf1;
+  background-color: var(--color-background-default);
+  color: var(--color-text-white);
+  border: var(--border-width) solid var(--color-border-default);
   :hover{
-    background-color: oklab(27.5218% .00363314 -.0686048 / .8);
+    background-color: var(--btn-color-secondary);
   }
 }
 .qr-code__address-segments {

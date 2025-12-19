@@ -11,12 +11,12 @@
     padding: 0 8px !important;
     gap: 4px;
 
-    // Background gradient
-    background: linear-gradient(135deg, rgba(26, 29, 58, 0.6), rgba(26, 29, 58, 0.4));
+    // Background gradient - use theme variable
+    background: var(--theme-gradient-primary) !important;
     backdrop-filter: blur(4px);
 
-    // Border styling
-    border: 1px solid rgba(65, 5, 182, 0.3) !important;
+    // Border styling - use theme variable
+    border: 1px solid var(--theme-border-color-muted) !important;
     border-style: solid !important;
     border-width: 1px !important;
 
@@ -35,9 +35,9 @@
     // Transition
     transition: all 0.2s;
 
-    // Hover state
+    // Hover state - use theme variable
     &:hover {
-      background: rgba(32, 36, 90, 0.6) !important; // #20245a99 equivalent
+      background: var(--theme-background-glass-hover) !important;
     }
   }
 
@@ -51,9 +51,9 @@
       margin: 0;
       border-radius: 8px;
       padding: 0;
-      background-image: linear-gradient(135deg, rgba(26, 29, 58, 0.6) 0%, rgba(26, 29, 58, 0.4) 100%);
-      border: 1px solid rgba(65, 5, 182, 0.4);
-      box-shadow: 0 10px 32px 0 rgba(31, 41, 71, 0.32), 0 0.5px 2px 0 rgba(65, 5, 182, 0.2);
+      background-image: var(--theme-gradient-primary) !important;
+      border: 1px solid var(--theme-border-color) !important;
+      box-shadow: var(--theme-shadow) !important;
       margin-left: 4px;
     }
   }

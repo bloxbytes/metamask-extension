@@ -58,54 +58,332 @@
   --color-surface-raise: #f7f7f9;
 }
 
-[data-theme='dark'] {
-  --color-background-default: oklch(0.145 0 0);
-  --color-background-alternative: oklch(0.205 0 0);
-  --color-background-section: oklch(0.269 0 0);
+/* ============================================
+   DARK THEME VARIABLES
+   ============================================ */
+html[data-theme='dark'] {
+  --text-color-white: #fff;
+  /* Base Colors */
+  --color-accent02-dark: #000;
+  --color-accent02-light: #fff;
+
+  /* Background Colors */
+  --color-background-default: #1d2449;
+  --color-background-alternative: #1a1d3a;
+  --color-background-section: #0f112a;
   --color-background-subsection: oklch(0.269 0 0);
-  --color-background-muted: oklch(0.269 0 0);
+  --color-background-muted: rgba(26, 29, 58, 0.6);
   --color-background-hover: oklch(0.205 0 0);
-  --color-background-pressed: oklch(0.269 0 0);
+  --color-background-default-hover: #1d2449;
+  --color-background-pressed: rgba(26, 29, 58, 0.8);
 
-  --color-text-default: oklch(0.985 0 0);
-  --color-text-alternative: oklch(0.985 0 0);
-  --color-text-muted: oklch(0.708 0 0);
+  /* Text Colors */
+  --color-text-default: #f8fdf1;
+  --color-text-alternative: #b0efff;
+  --color-text-muted: #b0efff;
+  --color-text-sub:rgba(176, 239, 255, 0.7);
 
-  --color-icon-default: var(--color-text-default);
-  --color-icon-alternative: oklch(0.488 0.243 264.376);
-  --color-icon-muted: var(--color-text-muted);
+  /* Icon Colors */
+  --color-icon-default: #f8fdf1;
+  --color-icon-alternative: #b0efff;
+  --color-icon-muted: #b0efff;
   --color-icon-inverse: oklch(0.205 0 0);
 
-  --color-border-default: oklch(0.269 0 0);
-  --color-border-muted: oklch(0.205 0 0);
+  /* Border Colors */
+  --color-border-default: rgba(65, 5, 182, 0.4);
+  --color-border-muted: rgba(65, 5, 182, 0.3);
 
+  /* Primary Colors */
+  --color-primary-default: #f8fdf1;
+  --color-primary-alternative: #b0efff;
+  --color-primary-muted: oklch(0.269 0 0);
+  --color-primary-inverse: oklch(0.205 0 0);
+
+  /* Overlay Colors */
   --color-overlay-default: rgba(0, 0, 0, 0.5);
   --color-overlay-alternative: rgba(0, 0, 0, 0.35);
   --color-overlay-inverse: rgba(255, 255, 255, 0.12);
 
-  --color-primary-default: oklch(0.985 0 0);
-  --color-primary-alternative: oklch(0.488 0.243 264.376);
-  --color-primary-muted: oklch(0.269 0 0);
-  --color-primary-inverse: oklch(0.205 0 0);
-
+  /* Error Colors */
   --color-error-default: oklch(0.396 0.141 25.723);
   --color-error-alternative: oklch(0.637 0.237 25.331);
   --color-error-muted: oklch(0.269 0 0);
   --color-error-inverse: oklch(0.985 0 0);
 
+  /* Warning Colors */
   --color-warning-default: oklch(0.645 0.246 16.439);
   --color-warning-muted: oklch(0.627 0.265 303.9);
   --color-warning-inverse: oklch(0.205 0 0);
 
+  /* Success Colors */
   --color-success-default: oklch(0.696 0.17 162.48);
   --color-success-muted: oklch(0.488 0.243 264.376);
   --color-success-inverse: oklch(0.205 0 0);
 
+  /* Info Colors */
   --color-info-default: oklch(0.488 0.243 264.376);
   --color-info-muted: oklch(0.696 0.17 162.48);
   --color-info-inverse: oklch(0.205 0 0);
 
+  /* Input & Surface */
   --input-background: oklch(0.269 0 0);
   --color-surface-card: oklch(0.205 0 0);
   --color-surface-raise: oklch(0.269 0 0);
+
+  /* Custom Theme Colors - Purple/Blue Theme */
+  --theme-gradient-primary: linear-gradient(135deg, rgba(26, 29, 58, 0.6) 0%, rgba(26, 29, 58, 0.4) 100%);
+  --theme-gradient-secondary: linear-gradient(135deg, #1a1d3a 0%, #0f112a 100%);
+  --theme-gradient-card: linear-gradient(135deg, rgba(26, 29, 58, 0.7) 0%, rgba(20, 24, 46, 0.75) 100%);
+  --theme-border-color: #4105b6;
+  --theme-border-color-muted: rgba(65, 5, 182, 0.3);
+  --theme-border-color-light: rgba(65, 5, 182, 0.2);
+  --theme-shadow: 0 10px 32px 0 rgba(31, 41, 71, 0.32), 0 0.5px 2px 0 rgba(65, 5, 182, 0.2);
+  --theme-shadow-large: 0 20px 60px rgba(0, 0, 0, 0.45);
+  --theme-background-glass: rgba(26, 29, 58, 0.6);
+  --theme-background-glass-hover: rgba(26, 29, 58, 0.8);
+
+  /* Gradient Colors */
+  --theme-gradient-blue: linear-gradient(135deg, #2280cd, #b0efff);
+  --theme-gradient-purple: linear-gradient(135deg, #b0efff, #4105b6);
+
+  /* Blur Effects */
+  --theme-blur-bg: rgba(65, 5, 182, 0.2);
+
+  /* Button Colors */
+  --theme-button-bg: rgba(26, 29, 58, 0.6);
+  --theme-button-bg-hover: rgba(26, 29, 58, 0.8);
+  --theme-button-primary-shadow: 0 4px 16px 0 rgba(65, 5, 182, 0.3);
+
+  /* Additional Background Colors */
+  --theme-bg-dark: rgba(15, 17, 42, 0.7);
+
+  /* Background Blur Effects */
+  --theme-blur-gradient-top-left: linear-gradient(135deg, #4105b6 0%, #6305b6 100%);
+  --theme-blur-gradient-bottom-right: linear-gradient(45deg, #2280cd 0%, #b0efff 100%);
+  --theme-blur-gradient-center: radial-gradient(circle, rgba(99, 5, 182, 0.6) 0%, rgba(99, 5, 182, 0.3) 50%, transparent 100%);
+
+  /* Tab Active State */
+  --theme-tab-active-bg: linear-gradient(135deg, #4105b6, #6305b6);
+  --theme-tab-active-border: rgba(99, 5, 182, 0.6);
+  --theme-tab-active-shadow: 0 10px 30px rgba(99, 5, 182, 0.35);
+
+  /* Tab Colors - Dark theme */
+  --theme-tab-text: rgba(176, 239, 255, 0.8);
+  --theme-tab-text-hover: #f8fdf1;
+  --theme-tab-bg-hover: rgba(26, 29, 58, 0.4);
+
+  /* Welcome Login Title */
+  --theme-welcome-title-color-start: #f8fdf1;
+  --theme-welcome-title-color-middle: #b0efff;
+  --theme-welcome-title-color-end: #f8fdf1;
+  --theme-welcome-title-color: linear-gradient(to right, var(--theme-welcome-title-color-start) 0%, var(--theme-welcome-title-color-middle) 50%, var(--theme-welcome-title-color-end) 100%);
+
+  --box-shadow:var(--shadow-size-md) var(--color-shadow-default);
+  --theme-button-primary-shadow: 0 25px 50px -12px rgba(65, 5, 182, 0.5);
+  --theme-button-secondary-hover: linear-gradient(0deg, rgba(65, 5, 182, 0.14) 0%, rgba(65, 5, 182, 0.33) 100%), #000;
+  --logo-img-border:#454e69;
+  --link-color: #4105b6;
+  --link-hover: #b0efff;
+
+  --theme-gradient-bg:linear-gradient(to bottom right, rgba(26, 29, 58, 0.8), rgba(26, 29, 58, 0.6));
+
+  --theme-bg-card: rgba(15, 17, 42, 0.5);
+  --border-width: 1px;
+  --border-300: #4f5262;
+  --light-icon-color:#b0efff;
+  --bg-btn-primary-disabled: rgba(26, 29, 58, 0.4);
+
+  --primary-card-bg:linear-gradient(to bottom right, rgba(15, 17, 42, 0.7), rgba(15, 17, 42, 0.5));
+
+  --btn-color-secondary: oklab(27.5218% .00363314 -.0686048 / .8);
+
+  --modal-bg-color: #0f112af2;
+
+  /* Recovery Checklist Card */
+  --theme-checklist-card-bg: linear-gradient(135deg, rgba(26, 29, 58, 0.6), rgba(26, 29, 58, 0.4));
+  --theme-checklist-card-border: 1px solid rgba(65, 5, 182, 0.3);
+  --theme-checklist-card-border-hover: 1px solid rgba(65, 5, 182, 0.4);
+  --theme-checklist-important-bg: rgba(15, 17, 42, 0.5);
+  --theme-checklist-important-border: 1px solid rgba(65, 5, 182, 0.2);
+
+  /* Custom Card - Dark theme */
+  --theme-custom-card-bg: linear-gradient(to bottom right, rgba(26, 29, 58, 0.6), rgba(26, 29, 58, 0.4));
+  --theme-custom-card-border: 1px solid rgba(65, 5, 182, 0.4);
+  --theme-custom-card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --theme-custom-card-backdrop: blur(24px);
+  --theme-custom-card-radius: 1.25rem;
+  --theme-custom-card-padding: 1.5rem;
+
+  /* Coin Balance - Dark theme */
+  --theme-coin-balance-bg: linear-gradient(135deg, rgba(26, 29, 58, 0.6) 0%, rgba(26, 29, 58, 0.4) 100%);
+  --theme-coin-balance-border: 1px solid rgba(65, 5, 182, 0.4);
+  --theme-coin-balance-shadow: 0 10px 32px 0 rgba(31, 41, 71, 0.32), 0 0.5px 2px 0 rgba(65, 5, 182, 0.2);
+  --theme-coin-balance-backdrop: blur(24px);
+  --theme-coin-balance-radius: 1.25rem;
+  --theme-coin-balance-padding: 1rem;
+}
+
+/* ============================================
+   LIGHT THEME VARIABLES
+   ============================================ */
+html[data-theme='light'] {
+  --text-color-white: #000;
+  /* Base Colors */
+  --color-accent02-dark: #ffffff;
+  --color-accent02-light: #fff;
+
+  /* Background Colors */
+  --color-background-default: #ffffff;
+  --color-background-alternative: #f3f3f5;
+  --color-background-section: #e9ebef;
+  --color-background-subsection: #ececf0;
+  --color-background-muted: #ececf0;
+  --color-background-hover: #e9ebef;
+  --color-background-default-hover: #e9ebef;
+  --color-background-pressed: #cbced4;
+
+  /* Text Colors */
+  --color-text-default: #000;
+  --color-text-alternative: #000;
+  --color-text-muted: #717182;
+  --color-text-sub: #4b5563;
+
+  /* Icon Colors */
+  --color-icon-default: #030213;
+  --color-icon-alternative: #030213;
+  --color-icon-muted: #717182;
+  --color-icon-inverse: #ffffff;
+
+  /* Border Colors */
+  --color-border-default: #3d00b51c;
+  --color-border-muted: rgba(0, 0, 0, 0.08);
+
+  /* Primary Colors */
+  --color-primary-default: #030213;
+  --color-primary-alternative: #030213;
+  --color-primary-muted: #e9ebef;
+  --color-primary-inverse: #ffffff;
+
+  /* Overlay Colors */
+  --color-overlay-default: rgba(3, 2, 19, 0.6);
+  --color-overlay-alternative: rgba(3, 2, 19, 0.4);
+  --color-overlay-inverse: rgba(255, 255, 255, 0.12);
+
+  /* Error Colors */
+  --color-error-default: #d4183d;
+  --color-error-alternative: #d4183d;
+  --color-error-muted: #f4d4dd;
+  --color-error-inverse: #ffffff;
+
+  /* Warning Colors */
+  --color-warning-default: #ff6467;
+  --color-warning-muted: #ffd7da;
+  --color-warning-inverse: #030213;
+
+  /* Success Colors */
+  --color-success-default: #00b39f;
+  --color-success-muted: #d1f0ed;
+  --color-success-inverse: #030213;
+
+  /* Info Colors */
+  --color-info-default: oklch(0.488 0.243 264.376);
+  --color-info-muted: #d1f0ed;
+  --color-info-inverse: #030213;
+
+  /* Input & Surface */
+  --input-background: #f3f3f5;
+  --color-surface-card: #ffffff;
+  --color-surface-raise: #f7f7f9;
+
+  /* Custom Theme Colors */
+  --theme-gradient-primary: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(243, 243, 245, 0.9) 100%);
+  --theme-gradient-secondary: linear-gradient(135deg, #ffffff 0%, #f3f3f5 100%);
+  --theme-gradient-card: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(243, 243, 245, 0.9) 100%);
+  --theme-border-color: oklch(.872 .01 258.338);
+  --theme-border-color-muted: rgba(0, 0, 0, 0.08);
+  --theme-border-color-light: #3d00b51c;
+  --theme-shadow: 0 10px 32px 0 rgba(0, 0, 0, 0.1), 0 0.5px 2px 0 rgba(0, 0, 0, 0.05);
+  --theme-shadow-large: 0 20px 60px rgba(0, 0, 0, 0.1);
+  --theme-background-glass: rgba(255, 255, 255, 0.9);
+  --theme-background-glass-hover: rgba(255, 255, 255, 0.95);
+
+  /* Button Colors */
+  --theme-button-bg: rgba(255, 255, 255, 0.9);
+  --theme-button-bg-hover: rgba(255, 255, 255, 0.95);
+  --theme-button-primary-shadow: none;
+  --theme-button-secondary-hover: #f9fafb;
+
+  /* Blur Effects */
+  --theme-blur-bg: rgba(0, 0, 0, 0.05);
+
+  /* Gradient Colors - Light theme */
+  --theme-gradient-blue: linear-gradient(135deg, rgba(34, 128, 205, 0.3), rgba(176, 239, 255, 0.3));
+  --theme-gradient-purple: linear-gradient(135deg, rgba(176, 239, 255, 0.3), rgba(65, 5, 182, 0.3));
+
+  /* Background Blur Effects - Light theme */
+  --theme-blur-gradient-top-left: linear-gradient(135deg, rgba(65, 5, 182, 0.1) 0%, rgba(99, 5, 182, 0.1) 100%);
+  --theme-blur-gradient-bottom-right: linear-gradient(45deg, rgba(34, 128, 205, 0.1) 0%, rgba(176, 239, 255, 0.1) 100%);
+  --theme-blur-gradient-center: transparent;
+
+  /* Additional Background Colors */
+  --theme-bg-dark: rgba(255, 255, 255, 0.7);
+
+  /* Tab Active State - Light theme (same as dark) */
+  --theme-tab-active-bg: linear-gradient(135deg, #4105b6, #6305b6);
+  --theme-tab-active-border: rgba(99, 5, 182, 0.6);
+  --theme-tab-active-shadow: 0 10px 30px rgba(99, 5, 182, 0.35);
+
+  /* Tab Colors - Light theme */
+  --theme-tab-text: #4b5563;
+  --theme-tab-text-hover: #000;
+  --theme-tab-bg-hover: #f9fafb;
+
+  /* Welcome Login Title - Light theme */
+  --theme-welcome-title-color: #000;
+  --box-shadow: none;
+
+  /* Border and Link Colors */
+  --logo-img-border:#3d00b51c;
+  --link-color: #4105b6;
+  --link-hover: #2280cd;
+
+  /* Background Colors */
+  --theme-gradient-bg:#fff;
+  --theme-bg-card: #f9fafb;
+  --border-width: 2px;
+  --border-300: #d1d5db;
+  --light-icon-color:#d1d5dc;
+  --bg-btn-primary-disabled: #f6f3f4;
+  --primary-card-bg: #f9fafb;
+  --btn-color-secondary: rgba(255, 255, 255, 0.9);
+  --modal-bg-color: #fff;
+
+  /* Recovery Checklist Card - Light theme */
+  --theme-checklist-card-bg: #f9fafb;
+  --theme-checklist-card-border: 2px solid #3d00b51c;
+  --theme-checklist-card-border-hover: 2px solid #4105b6;
+  --theme-checklist-important-bg: #f9fafb;
+  --theme-checklist-important-border: 2px solid #3d00b51c;
+
+  /* Custom Card - Light theme */
+  --theme-custom-card-bg: #ffffff;
+  --theme-custom-card-border: 1px solid rgba(0, 0, 0, 0.1);
+  --theme-custom-card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --theme-custom-card-backdrop: blur(24px);
+  --theme-custom-card-radius: 1.25rem;
+  --theme-custom-card-padding: 1.5rem;
+
+  /* Coin Balance - Light theme */
+  --theme-coin-balance-bg: #fafbff;
+  --theme-coin-balance-border: 2px solid #3d00b51c;
+  --theme-coin-balance-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --theme-coin-balance-backdrop: blur(24px);
+  --theme-coin-balance-radius: 1.25rem;
+  --theme-coin-balance-padding: 1rem;
+}
+
+/* Background colors for app in light theme */
+html[data-theme='dark'],
+html[data-theme='light'] body {
+  background-color: #ffffff;
 }

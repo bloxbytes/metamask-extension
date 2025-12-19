@@ -1,29 +1,8 @@
 /*
-  Color Overrides
+  Color Overrides - DEPRECATED
 
-  This file allows you to override design token colors.
-  Import this file AFTER @metamask/design-tokens/dist/styles to override values.
+  All theme variables have been moved to ui/css/theme-opn.scss
+  This file is kept for reference but is no longer used.
 
-  Usage:
-  Define your color overrides here using CSS custom properties.
+  Please use theme-opn.scss for all theme-related color variables.
 */
-
-:root {
-  /* Override accent02-dark color */
-  --color-accent02-dark: #000;
-  --color-accent02-light: #fff;
-  --color-text-default: #f8fdf1;
-  --color-text-alternative: #b0efff;
-  --color-border-muted: oklab(38.7948% .0500729 -.221303 / .3);
-  --color-border-default: rgba(65, 5, 182, 0.4);
-  --color-background-default: #1d2449;
-  --color-background-default-hover: #1d2449;
-  --color-info-default: linear-gradient(135deg, rgba(26, 29, 58, 0.95) 0%, rgba(26, 29, 58, 0.9) 100%);
-
-  /* Add more color overrides below as needed */
-  /* Example:
-  --color-accent02-light: #your-light-color-value;
-  --color-accent03-dark: #your-color-value;
-  */
-}
-

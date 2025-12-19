@@ -53,12 +53,9 @@ export default function WelcomeLogin({
         width="256"
         height="256"
         alt="OPN Wallet"
-        style={{
-          border: '5px solid',
-          borderColor: '#454e69',
-        }}
+
         // eslint-disable-next-line @metamask/design-tokens/color-no-hex
-        className="welcome-login__mascotImg rounded-full relative mb-4"
+        className="welcome-login__mascotImg rounded-full relative mb-4 img-border"
       />
     );
 
@@ -142,7 +139,6 @@ export default function WelcomeLogin({
         </Box>
 
         <Box
-          data-theme={ThemeType.light}
           display={Display.Flex}
           flexDirection={FlexDirection.Column}
           gap={4}
@@ -186,7 +182,7 @@ export default function WelcomeLogin({
               : t('onboardingSrpImport'))}
           </Button>
 
-          <div className={'space-y-4 mb-12'}></div>
+          <div className={'mb-4'}></div>
           <div className="text-[#4f5262] text-sm">
             <p>
               By continuing, I agree to OPN Wallet's{' '}

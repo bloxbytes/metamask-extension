@@ -36,11 +36,11 @@ body{
     // Glassmorphism effect - only for specific screens (not welcome)
     &--glass {
 
-      background: linear-gradient(to bottom right, rgba(26, 29, 58, 0.8), rgba(26, 29, 58, 0.6));
+      background: var(--theme-gradient-bg);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       border-radius: 1rem;
-      border: 1px solid rgba(65, 5, 182, 0.4);
+      border: 1px solid var(--color-border-default);
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     }
 
@@ -139,4 +139,46 @@ body{
     border: unset;
     padding: unset!important;
   }
+
+  // Checklist card styling - theme-aware
+  &__card {
+    background: var(--theme-checklist-card-bg) !important;
+    border: var(--theme-checklist-card-border) !important;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 0.75rem; // rounded-xl
+    padding: 1rem; // p-4
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      border: var(--theme-checklist-card-border-hover) !important;
+    }
+  }
+
+  // Important notice box styling - theme-aware
+  &__important {
+    background: var(--theme-checklist-important-bg) !important;
+    border: var(--theme-checklist-important-border) !important;
+  }
 }
+.mm-text--heading-lg{
+  color: var(--color-text-default) !important;
+}
+.mm-box--color-text-alternative{
+  color: var(--color-text-sub) !important;
+}
+// .mm-box--background-color-background-muted{
+//   background-color: var(--bg-btn-primary-disabled) !important;
+//   color: var(--color-text-sub) !important;
+//   padding-top: 0.75rem !important;
+//   padding-bottom: 0.75rem !important;
+//   border-radius: 0.75rem !important;
+//   border: var(--border-width) solid var(--theme-border-color-light) !important;
+//   transition: all 0.3s ease !important;
+
+//   &:hover {
+//     background-color: var(--theme-background-glass-hover)!important;
+//     color: var(--color-text-sub) !important;
+//   }
+// }

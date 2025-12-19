@@ -14,9 +14,9 @@
   // Global input field styling - applied to all FormTextField components
   // Label styling
   .mm-form-text-field__label {
-    color: #b0efff !important; // Light blue/purple color
-    font-size: 0.875rem !important; // text-sm
-    margin-bottom: 0.5rem !important; // mb-2
+    color: var(--color-text-sub);
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
     font-weight: 400;
   }
 
@@ -39,7 +39,7 @@
     .mm-text-field__input,
     .mm-input {
       background-color: transparent !important;
-      color: #f8fdf1 !important; // Light text color
+      color: var(--light-icon-color) !important; // Light text color
       font-size: 0.875rem !important; // text-sm
 
       &::placeholder {
@@ -62,12 +62,12 @@
       right: 0.75rem !important; // right-3 (12px)
       top: 50% !important; // top-1/2
       transform: translateY(-50%) !important; // -translate-y-1/2
-      color: rgba(176, 239, 255, 0.7) !important; // text-[#b0efff]/70
+      color: var(--light-icon-color) !important; // text-[#b0efff]/70
       transition: color 0.3s ease !important;
 
       // Icon inside button
       .mm-icon {
-        color: rgba(176, 239, 255, 0.7) !important;
+        color: var(--light-icon-color) !important;
         transition: color 0.3s ease;
       }
 
@@ -77,7 +77,7 @@
         background-color: transparent !important;
 
         .mm-icon {
-          color: #b0efff !important;
+          color: var(--color-text-sub)!important;
         }
       }
     }
@@ -85,14 +85,15 @@
 
   // Direct targeting for better specificity
   .mm-form-text-field__text-field.mm-text-field, .TextField-inputRoot-12, .mm-text-field-search {
-    background-color: rgba(26, 29, 58, 0.6) !important;
-    border-color: rgba(65, 5, 182, 0.4) !important;
+    background-color: var(--theme-background-glass)!important;
+    border-color: var(--color-border-default)!important;
     border-radius: 0.75rem !important;
+    border-width: var(--border-width);
 
     .mm-text-field__input,
     .mm-input {
       background-color: transparent !important;
-      color: #f8fdf1 !important;
+      color: var(--color-text-sub)!important;
       font-size: 0.875rem !important;
 
       &::placeholder {

@@ -18,9 +18,12 @@
 
 .settings-page {
   position: relative;
-  background: linear-gradient(135deg, #1a1d3a 0%, #0f112a 100%) !important; // Theme background like Terms of Use modal
-  border: 1px solid rgba(65, 5, 182, 0.4) !important; // Theme border
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45) !important; // Theme box shadow
+
+  // Use theme variables
+  background: var(--theme-gradient-secondary) !important;
+  border: 1px solid var(--theme-border-color) !important;
+  box-shadow: var(--theme-shadow-large) !important;
+
   border-radius: 1rem; // Rounded corners
   display: flex;
   flex-flow: column nowrap;
@@ -35,22 +38,22 @@
     color: var(--color-error-default);
   }
 
-  // Text colors matching Terms of Use modal
+  // Text colors - use theme variables
   .mm-text {
-    color: #f8fdf1 !important;
+    color: var(--color-text-default) !important;
   }
 
   .mm-text[class*="text-alternative"] {
-    color: #b0efff !important;
+    color: var(--color-text-alternative) !important;
   }
 
-  // Icon colors
   .mm-icon {
-    color: #b0efff !important;
+    color: var(--color-icon-alternative) !important;
   }
 
   &__header {
-    border-bottom: 1px solid rgba(65, 5, 182, 0.4) !important; // Theme border like Terms of Use modal
+    // Use theme variable for border
+    border-bottom: 1px solid var(--theme-border-color) !important;
 
     &__title-container {
       display: grid;
@@ -214,7 +217,7 @@
 
   &__sub-header {
     height: 72px;
-    border-bottom: 1px solid rgba(65, 5, 182, 0.4) !important; // Theme border
+    border-bottom: 1px solid var(--theme-border-color) !important;
     display: flex;
     justify-content: space-between;
     align-items: center;

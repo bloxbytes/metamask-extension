@@ -34,10 +34,11 @@
 @import '@metamask/design-tokens/dist/styles';
 
 /*
-  Color Overrides
+  Theme Variables - OPN Wallet
   Import after design tokens to override color values
+  All theme variables (light and dark) are defined here
 */
-@import './utilities/color-overrides.scss';
+@import './theme-opn.scss';
 
 /*
   Font Overrides
