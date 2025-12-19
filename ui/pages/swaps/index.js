@@ -354,7 +354,7 @@ export default function Swap() {
   };
 
   return (
-    <div className="swaps">
+    <div className="swaps fah-swaps">
       <div className="swaps__container">
         <div className="swaps__header">
           <Box

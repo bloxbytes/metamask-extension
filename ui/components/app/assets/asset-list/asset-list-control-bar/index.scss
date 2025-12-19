@@ -3,12 +3,42 @@
   padding-bottom: 4px;
 
   &__network_control {
+    // Common styling extracted from inline classes
     justify-content: space-between;
     width: auto;
     min-width: auto;
     border-radius: 8px;
     padding: 0 8px !important;
     gap: 4px;
+
+    // Background gradient
+    background: linear-gradient(135deg, rgba(26, 29, 58, 0.6), rgba(26, 29, 58, 0.4));
+    backdrop-filter: blur(4px);
+
+    // Border styling
+    border: 1px solid rgba(65, 5, 182, 0.3) !important;
+    border-style: solid !important;
+    border-width: 1px !important;
+
+    // Display and alignment
+    display: inline-flex !important;
+    // justify-content: center !important;
+    align-items: center !important;
+
+    // Text and color
+    color: var(--color-text-default) !important;
+
+    // Position and overflow
+    position: relative;
+    overflow: hidden;
+
+    // Transition
+    transition: all 0.2s;
+
+    // Hover state
+    &:hover {
+      background: rgba(32, 36, 90, 0.6) !important; // #20245a99 equivalent
+    }
   }
 
   &__buttons {
