@@ -1,0 +1,255 @@
+@use "design-system";
+
+.wallet-overview {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  width: 100%;
+
+  &-fullscreen {
+    align-items: center;
+  }
+
+  &__balance {
+    flex: 1;
+    display: flex;
+    gap: 4px;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+
+    .wallet-overview-fullscreen > & {
+      align-items: center;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    margin-bottom: 12px;
+    padding: 0 16px;
+    width: 100%;
+    max-width: 420px;
+  }
+
+  &__currency-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+  }
+}
+
+%asset-buttons {
+  min-width: initial;
+  width: 100px;
+
+  &:not(:last-child) {
+    margin-right: 12px;
+  }
+
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+// Makes the tooltip wrapper take the full width of the flex container same as the button
+.tooltip-button-wrapper {
+  flex: 1;
+}
+
+.coin-overview,
+.eth-overview,
+.token-overview {
+  &__button {
+    flex: 1;
+  }
+
+  &__balance {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    position: relative;
+    align-items: start;
+    margin: 16px 0;
+    padding: 0 16px;
+    max-width: 326px;
+  }
+
+  &__primary-container {
+    display: flex;
+    max-width: inherit;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+
+  &__primary-balance {
+    @include design-system.H2;
+
+    color: var(--color-text-default);
+    font-weight: 500;
+  }
+
+  &__cached-star {
+    margin-left: 4px;
+  }
+
+  &__cached-balance,
+  &__cached-star {
+    color: var(--color-warning-default);
+  }
+
+  &__cached-secondary-balance {
+    @include design-system.Paragraph;
+
+    color: var(--color-warning-muted);
+  }
+
+  &__secondary-balance {
+    @include design-system.Paragraph;
+
+    color: var(--color-text-alternative);
+  }
+
+
+  &__button:last-of-type {
+    margin-right: 0;
+  }
+
+  &__circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 36px;
+    width: 36px;
+    background: var(--color-primary-default);
+    border-radius: 18px;
+    margin-top: 6px;
+  }
+}
+
+.token-overview {
+  &__balance {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    position: relative;
+    align-items: center;
+    margin: 16px 0;
+    padding: 0 16px;
+    max-width: 326px;
+  }
+
+  &__primary-container {
+    display: flex;
+    max-width: inherit;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+
+  &__primary-balance {
+    @include design-system.H2;
+
+    color: var(--color-text-default);
+    width: 100%;
+    justify-content: center;
+  }
+
+  &__secondary-balance {
+    @include design-system.H5;
+
+    color: var(--color-text-alternative);
+  }
+
+  &__button:last-of-type {
+    margin-right: 0;
+  }
+}
+.home_icon_buttons{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 2px;
+  .inner_custom_button_icon{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  background: linear-gradient(135deg, rgba(26,29,58,0.6) 0%, rgba(26,29,58,0.4) 100%);
+  backdrop-filter: blur(6px);
+  border-radius: 16px;
+  transition: all 0.2s;
+  border: 1px solid rgba(65,5,182,0.2);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 24px 0 rgba(22, 0, 56, 0.26);
+
+  &:hover {
+    background: linear-gradient(135deg, rgba(32,36,90,0.6) 0%, rgba(32,36,90,0.4) 100%);
+  }
+  .mm-text{
+    font-size: 12px !important;
+  }
+  .custom-send-icon{
+    background: linear-gradient(135deg, rgb(65, 5, 182), rgba(65, 5, 182, 0.867));
+    box-shadow: rgba(65, 5, 182, 0.25) 0px 4px 12px;
+    width: 2.5rem; /* w-10 */
+    height: 2.5rem; /* h-10 */
+    border-radius: 9999px; /* rounded-full */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 10px 32px 0 rgba(31,41,71,0.32), 0 0.5px 2px 0 rgba(65,5,182,0.2); /* shadow-lg */
+    margin-bottom: 2px;
+
+  }
+  .custom-receive-icon{
+    background: linear-gradient(135deg, rgb(34, 128, 205), rgba(34, 128, 205, 0.867));
+    box-shadow: rgba(34, 128, 205, 0.25) 0px 4px 12px;
+    width: 2.5rem; /* w-10 */
+    height: 2.5rem; /* h-10 */
+    border-radius: 9999px; /* rounded-full */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 10px 32px 0 rgba(31,41,71,0.32), 0 0.5px 2px 0 rgba(65,5,182,0.2); /* shadow-lg */
+    margin-bottom: 2px;
+
+  }
+  .custom-swap-icon{
+    background: linear-gradient(135deg, rgb(99, 5, 182), rgba(99, 5, 182, 0.867));
+    box-shadow: rgba(99, 5, 182, 0.25) 0px 4px 12px;
+    width: 2.5rem; /* w-10 */
+    height: 2.5rem; /* h-10 */
+    border-radius: 9999px; /* rounded-full */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 10px 32px 0 rgba(31,41,71,0.32), 0 0.5px 2px 0 rgba(65,5,182,0.2); /* shadow-lg */
+    margin-bottom: 2px;
+
+
+
+}
+  }
+}
+// .shine-bg-send{
+//   background-color: rgb(65, 5, 182);
+// }
+// .shine-bg-r{
+//   background-color: rgb(34, 128, 205);
+// }
+// .shine-bg-sw{
+//   background-color: rgb(99, 5, 182);
+// }

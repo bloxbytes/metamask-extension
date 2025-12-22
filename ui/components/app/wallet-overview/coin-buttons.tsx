@@ -1,0 +1,511 @@
+import React, { useCallback, useContext, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { toHex } from '@metamask/controller-utils';
+import { CaipChainId, isCaipChainId } from '@metamask/utils';
+// import { getNativeAssetForChainId } from '@metamask/bridge-controller';
+///: BEGIN:ONLY_INCLUDE_IF(multichain)
+import { isEvmAccountType } from '@metamask/keyring-api';
+import { InternalAccount } from '@metamask/keyring-internal-api';
+///: END:ONLY_INCLUDE_IF
+import { ChainId } from '../../../../shared/constants/network';
+
+import { I18nContext } from '../../../contexts/i18n';
+
+import { MULTICHAIN_ACCOUNT_ADDRESS_LIST_PAGE_ROUTE } from '../../../helpers/constants/routes';
+import {
+  AddressListQueryParams,
+  AddressListSource,
+} from '../../../pages/multichain-accounts/multichain-account-address-list-page';
+import {
+  getNetworkConfigurationIdByChainId,
+  getSwapsDefaultToken,
+  getUseExternalServices,
+  isNonEvmAccount,
+} from '../../../selectors';
+import { getIsMultichainAccountsState2Enabled } from '../../../selectors/multichain-accounts/feature-flags';
+import { getSelectedAccountGroup } from '../../../selectors/multichain-accounts/account-tree';
+import Tooltip from '../../ui/tooltip';
+import { MetaMetricsEventCategory, MetaMetricsEventName } from '../../../../shared/constants/metametrics';
+import { AssetType } from '../../../../shared/constants/transaction';
+import { MetaMetricsContext } from '../../../contexts/metametrics';
+import { startNewDraftTransaction } from '../../../ducks/send';
+import { BlockSize, Display, IconColor, JustifyContent } from '../../../helpers/constants/design-system';
+import { Box, Icon, IconName, IconSize } from '../../component-library';
+import IconButton from '../../ui/icon-button';
+import useRamps from '../../../hooks/ramps/useRamps/useRamps';
+// import useBridging from '../../../hooks/bridge/useBridging';
+import { ReceiveModal } from '../../multichain/receive-modal';
+import { setActiveNetworkWithError } from '../../../store/actions';
+import { getMultichainNativeCurrency, getMultichainNetwork } from '../../../selectors/multichain';
+import { useMultichainSelector } from '../../../hooks/useMultichainSelector';
+import { getCurrentChainId } from '../../../../shared/modules/selectors/networks';
+// import { ALL_ALLOWED_BRIDGE_CHAIN_IDS } from '../../../../shared/constants/bridge';
+import { trace, TraceName } from '../../../../shared/lib/trace';
+import { navigateToSendRoute } from '../../../pages/confirmations/utils/send';
+import { useRedesignedSendFlow } from '../../../pages/confirmations/hooks/useRedesignedSendFlow';
+///: BEGIN:ONLY_INCLUDE_IF(multichain)
+import { useHandleSendNonEvm } from './hooks/useHandleSendNonEvm';
+///: END:ONLY_INCLUDE_IF
+
+type CoinButtonsProps = {
+  account: InternalAccount;
+  chainId: `0x${string}` | CaipChainId | number;
+  trackingLocation: string;
+  isSwapsChain: boolean;
+  isSigningEnabled: boolean;
+  /** @deprecated use bridge chain constants instead*/
+  isBridgeChain: boolean;
+  isBuyableChain: boolean;
+  classPrefix?: string;
+  iconButtonClassName?: string;
+  iconView?: boolean
+};
+
+const CoinButtons = ({
+                       account,
+                       chainId,
+                       trackingLocation,
+                       isSwapsChain,
+                       isSigningEnabled,
+                       isBuyableChain,
+                       classPrefix = 'coin',
+                       iconView = false,
+                     }: CoinButtonsProps) => {
+  const t = useContext(I18nContext);
+  const dispatch = useDispatch();
+
+  const trackEvent = useContext(MetaMetricsContext);
+  const [showReceiveModal, setShowReceiveModal] = useState(false);
+
+  const { address: selectedAddress } = account;
+  const history = useHistory();
+  const networks = useSelector(getNetworkConfigurationIdByChainId) as Record<
+    string,
+    string
+  >;
+  const currentChainId = useSelector(getCurrentChainId);
+  const displayNewIconButtons = process.env.REMOVE_GNS;
+  const { enabled: isSendRedesignEnabled } = useRedesignedSendFlow();
+
+  // Multichain accounts feature flag and selected account group
+  const isMultichainAccountsState2Enabled = useSelector(
+    getIsMultichainAccountsState2Enabled,
+  );
+  const selectedAccountGroup = useSelector(getSelectedAccountGroup);
+
+  const defaultSwapsToken = useSelector((state) =>
+    getSwapsDefaultToken(state, chainId.toString()),
+  );
+
+  // Pre-conditions
+  if (isSwapsChain && defaultSwapsToken === undefined) {
+    throw new Error('defaultSwapsToken is required');
+  }
+
+  ///: BEGIN:ONLY_INCLUDE_IF(multichain)
+  const handleSendNonEvm = useHandleSendNonEvm();
+  ///: END:ONLY_INCLUDE_IF
+
+  // const location = useLocation();
+
+  // Initially, those events were using a "ETH" as `token_symbol`, so we keep this behavior
+  // for EVM, no matter the currently selected native token (e.g. SepoliaETH if you are on Sepolia
+  // network).
+  const { isEvmNetwork, chainId: multichainChainId } = useMultichainSelector(
+    getMultichainNetwork,
+    account,
+  );
+  const multichainNativeToken = useMultichainSelector(
+    getMultichainNativeCurrency,
+    account,
+  );
+  const nativeToken = isEvmNetwork ? 'ETH' : multichainNativeToken;
+
+  const isExternalServicesEnabled = useSelector(getUseExternalServices);
+
+  const isNonEvmAccountWithoutExternalServices =
+    !isExternalServicesEnabled && isNonEvmAccount(account);
+
+  const buttonTooltips = {
+    buyButton: [{ condition: !isBuyableChain, message: '' }],
+    sendButton: [
+      { condition: !isSigningEnabled, message: 'methodNotSupported' },
+    ],
+    swapButton: [
+      {
+        condition: !isExternalServicesEnabled,
+        message: 'currentlyUnavailable',
+      },
+      { condition: !isSigningEnabled, message: 'methodNotSupported' },
+    ],
+    bridgeButton: [
+      { condition: !isSigningEnabled, message: 'methodNotSupported' },
+    ],
+  };
+
+  const generateTooltip = (
+    buttonKey: keyof typeof buttonTooltips,
+    contents: React.ReactElement,
+  ) => {
+    const conditions = buttonTooltips[buttonKey];
+    const tooltipInfo = conditions.find(({ condition }) => condition);
+    if (tooltipInfo?.message) {
+      return (
+        <Tooltip
+          title={t(tooltipInfo.message)}
+          position="bottom"
+          wrapperClassName="tooltip-button-wrapper"
+        >
+          {contents}
+        </Tooltip>
+      );
+    }
+    return contents;
+  };
+
+  const getChainId = (): CaipChainId | ChainId => {
+    if (isCaipChainId(chainId)) {
+      return chainId as CaipChainId;
+    }
+    // Otherwise we assume that's an EVM chain ID, so use the usual 0x prefix
+    return toHex(chainId) as ChainId;
+  };
+
+  const getSnapAccountMetaMetricsPropertiesIfAny = (
+    internalAccount: InternalAccount,
+    // TODO: Fix in https://github.com/MetaMask/metamask-extension/issues/31860
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+  ): { snap_id?: string } => {
+    // Some accounts might be Snap accounts, in this case we add some extra properties
+    // to the metrics:
+    const snapId = internalAccount.metadata.snap?.id;
+    if (snapId) {
+      return {
+        // TODO: Fix in https://github.com/MetaMask/metamask-extension/issues/31860
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        snap_id: snapId,
+      };
+    }
+
+    // If the account is not a Snap account or that we could not get the Snap ID for
+    // some reason, we don't add any extra property.
+    return {};
+  };
+
+  const { openBuyCryptoInPdapp } = useRamps();
+
+  // const { openBridgeExperience } = useBridging();
+
+  const setCorrectChain = useCallback(async () => {
+    if (
+      currentChainId !== chainId &&
+      multichainChainId !== chainId &&
+      !isMultichainAccountsState2Enabled
+    ) {
+      try {
+        const networkConfigurationId = networks[chainId];
+        await dispatch(setActiveNetworkWithError(networkConfigurationId));
+      } catch (err) {
+        console.error(`Failed to switch chains.
+        Target chainId: ${chainId}, Current chainId: ${currentChainId}.
+        ${
+          // TODO: Fix in https://github.com/MetaMask/metamask-extension/issues/31893
+          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+          err
+        }`);
+        throw err;
+      }
+    }
+  }, [
+    isMultichainAccountsState2Enabled,
+    currentChainId,
+    multichainChainId,
+    chainId,
+    networks,
+    dispatch,
+  ]);
+
+  const handleSendOnClick = useCallback(async () => {
+    trackEvent(
+      {
+        event: MetaMetricsEventName.SendStarted,
+        category: MetaMetricsEventCategory.Navigation,
+        properties: {
+          // TODO: Fix in https://github.com/MetaMask/metamask-extension/issues/31860
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          account_type: account.type,
+          // TODO: Fix in https://github.com/MetaMask/metamask-extension/issues/31860
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          token_symbol: nativeToken,
+          location: 'Home',
+          text: 'Send',
+          // TODO: Fix in https://github.com/MetaMask/metamask-extension/issues/31860
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          chain_id: chainId,
+          ...getSnapAccountMetaMetricsPropertiesIfAny(account),
+        },
+      },
+      { excludeMetaMetricsId: false },
+    );
+
+    ///: BEGIN:ONLY_INCLUDE_IF(multichain)
+    if (!isEvmAccountType(account.type) && !isSendRedesignEnabled) {
+      await handleSendNonEvm();
+      // Early return, not to let the non-EVM flow slip into the native send flow.
+      return;
+    }
+    ///: END:ONLY_INCLUDE_IF
+
+    // Native Send flow
+    await setCorrectChain();
+    await dispatch(startNewDraftTransaction({ type: AssetType.native }));
+    let params;
+    if (trackingLocation !== 'home') {
+      params = { chainId: chainId.toString() };
+    }
+    navigateToSendRoute(history, isSendRedesignEnabled, params);
+  }, [
+    chainId,
+    account,
+    setCorrectChain,
+    isSendRedesignEnabled,
+    ///: BEGIN:ONLY_INCLUDE_IF(multichain)
+    handleSendNonEvm,
+    ///: END:ONLY_INCLUDE_IF
+    trackingLocation,
+  ]);
+
+  const handleBuyAndSellOnClick = useCallback(() => {
+    openBuyCryptoInPdapp(getChainId());
+    trackEvent({
+      event: MetaMetricsEventName.NavBuyButtonClicked,
+      category: MetaMetricsEventCategory.Navigation,
+      properties: {
+        // TODO: Fix in https://github.com/MetaMask/metamask-extension/issues/31860
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        account_type: account.type,
+        location: 'Home',
+        text: 'Buy',
+        // TODO: Fix in https://github.com/MetaMask/metamask-extension/issues/31860
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        chain_id: chainId,
+        // TODO: Fix in https://github.com/MetaMask/metamask-extension/issues/31860
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        token_symbol: defaultSwapsToken,
+        ...getSnapAccountMetaMetricsPropertiesIfAny(account),
+      },
+    });
+  }, [chainId, defaultSwapsToken]);
+
+  // const handleSwapOnClick = useCallback(async () => {
+  //   console.log('click on swap button', 'slmn-handle-swap-on-click');
+  //   return global.platform.openTab({
+  //     url: 'https://swap.iopn.io',
+  //   });
+  //
+  //   // Determine the chainId to use in the Swap experience using the url
+  //   // const urlSuffix = location.pathname.split('/').filter(Boolean).at(-1);
+  //   // const hexChainOrAssetId = urlSuffix
+  //   //   ? decodeURIComponent(urlSuffix)
+  //   //   : undefined;
+  //   // const chainIdToUse = isCaipAssetType(hexChainOrAssetId)
+  //   //   ? parseCaipAssetType(hexChainOrAssetId).chainId
+  //   //   : hexChainOrAssetId;
+  //   //
+  //   // // Handle clicking from the wallet or native asset overview page
+  //   // openBridgeExperience(
+  //   //   MetaMetricsSwapsEventSource.MainView,
+  //   //   chainIdToUse && ALL_ALLOWED_BRIDGE_CHAIN_IDS.includes(chainIdToUse)
+  //   //     ? getNativeAssetForChainId(chainIdToUse)
+  //   //     : undefined,
+  //   // );
+  // }, [location, openBridgeExperience]);
+
+  const handleReceiveOnClick = useCallback(() => {
+    trace({ name: TraceName.ReceiveModal });
+    trackEvent({
+      event: MetaMetricsEventName.NavReceiveButtonClicked,
+      category: MetaMetricsEventCategory.Navigation,
+      properties: {
+        text: 'Receive',
+        location: trackingLocation,
+        // TODO: Fix in https://github.com/MetaMask/metamask-extension/issues/31860
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        chain_id: chainId,
+      },
+    });
+
+    if (isMultichainAccountsState2Enabled && selectedAccountGroup) {
+      // Navigate to the multichain address list page with receive source
+      history.push(
+        `${MULTICHAIN_ACCOUNT_ADDRESS_LIST_PAGE_ROUTE}/${encodeURIComponent(selectedAccountGroup)}?${AddressListQueryParams.Source}=${AddressListSource.Receive}`,
+      );
+    } else {
+      // Show the traditional receive modal
+      setShowReceiveModal(true);
+    }
+  }, [
+    isMultichainAccountsState2Enabled,
+    selectedAccountGroup,
+    history,
+    trackEvent,
+    trackingLocation,
+    chainId,
+  ]);
+
+  return (
+    <Box
+      display={iconView ? Display.Flex : Display.Block}
+      justifyContent={JustifyContent.spaceBetween}
+      width={BlockSize.Full}
+      gap={3}
+      className={iconView ? "home_icon_buttons" : ""}
+    >
+
+      {/*{*/}
+      {/*  <IconButton*/}
+      {/*    className="custom-button"*/}
+      {/*    Icon={*/}
+
+      {/*      iconView ?*/}
+      {/*        <Icon*/}
+      {/*          name={IconName.Dollar}*/}
+      {/*          color={IconColor.iconAlternative}*/}
+      {/*          size={IconSize.Md}*/}
+      {/*        /> : null*/}
+
+      {/*      // displayNewIconButtons ? (*/}
+      {/*      //   <Icon*/}
+      {/*      //     name={IconName.Dollar}*/}
+      {/*      //     color={IconColor.iconAlternative}*/}
+      {/*      //     size={IconSize.Md}*/}
+      {/*      //   />*/}
+      {/*      // ) : (*/}
+      {/*      //   <Icon*/}
+      {/*      //     name={IconName.PlusAndMinus}*/}
+      {/*      //     color={IconColor.iconDefault}*/}
+      {/*      //     size={IconSize.Sm}*/}
+      {/*      //   />*/}
+      {/*      // )*/}
+      {/*    }*/}
+      {/*    disabled={!isBuyableChain}*/}
+      {/*    data-testid={`${classPrefix}-overview-buy`}*/}
+      {/*    label={t('buy')}*/}
+      {/*    onClick={handleBuyAndSellOnClick}*/}
+      {/*    width={BlockSize.Full}*/}
+      {/*    tooltipRender={(contents: React.ReactElement) =>*/}
+      {/*      generateTooltip('buyButton', contents)*/}
+      {/*    }*/}
+      {/*  />*/}
+      {/*}*/}
+
+      <IconButton
+        className={iconView ? "custom-button primary-button inner_custom_button_icon" : "custom-button primary-button"}
+        data-testid={`${classPrefix}-overview-send`}
+        Icon={
+          iconView ?
+            <Box>
+              <div className="relative">
+                <div className="absolute inset-0 rounded-full blur-md opacity-50 shine-bg-send"
+                     ></div>
+                <div className="w-10 h-10 rounded-full flex items-center justify-center relative z-10 shadow-lg custom-send-icon"
+                    >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                       stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                       className="lucide lucide-arrow-up-right w-5 h-5 text-[#f8fdf1]">
+                    <path d="M7 7h10v10"></path>
+                    <path d="M7 17 17 7"></path>
+                  </svg>
+                </div>
+              </div>
+            </Box> : null
+
+        }
+        disabled={!isSigningEnabled || isNonEvmAccountWithoutExternalServices}
+        label={t('send')}
+        onClick={handleSendOnClick}
+        width={BlockSize.Full}
+        tooltipRender={(contents: React.ReactElement) =>
+          generateTooltip('sendButton', contents)
+        }
+      />
+      {
+        <>
+          {showReceiveModal && (
+            <ReceiveModal
+              address={selectedAddress}
+              onClose={() => setShowReceiveModal(false)}
+            />
+          )}
+          <IconButton
+            className={iconView ? "custom-button inner_custom_button_icon" : "custom-button"}
+
+            data-testid={`${classPrefix}-overview-receive`}
+            Icon={
+              iconView ?
+                <Box>
+                  <div className="relative">
+                    <div className="absolute inset-0 rounded-full blur-md opacity-50 shine-bg-r"
+                        ></div>
+                    <div className="custom-receive-icon"
+                         >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                           className="lucide lucide-arrow-down-left w-5 h-5 text-[#f8fdf1]">
+                        <path d="M17 7 7 17"></path>
+                        <path d="M17 17H7V7"></path>
+                      </svg>
+                    </div>
+                  </div>
+                </Box> : null
+
+            }
+            label={t('receive')}
+            width={BlockSize.Full}
+            onClick={handleReceiveOnClick}
+          />
+        </>
+      }
+
+
+      <IconButton
+        className={iconView ? "custom-button inner_custom_button_icon" : "custom-button"}
+        disabled={!isSigningEnabled || !isExternalServicesEnabled}
+        Icon={
+          iconView ?
+            <Box>
+              <div className="relative">
+                <div className="absolute inset-0 rounded-full blur-md opacity-50 shine-bg-sw"></div>
+                <div className="w-10 h-10 rounded-full flex items-center justify-center relative z-10 shadow-lg custom-swap-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                       stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                       className="lucide lucide-repeat w-5 h-5 text-[#f8fdf1]">
+                    <path d="m17 2 4 4-4 4"></path>
+                    <path d="M3 11v-1a4 4 0 0 1 4-4h14"></path>
+                    <path d="m7 22-4-4 4-4"></path>
+                    <path d="M21 13v1a4 4 0 0 1-4 4H3"></path>
+                  </svg>
+                </div>
+              </div>
+            </Box> : null
+
+        }
+        // onClick={handleSwapOnClick}
+        onClick={() =>
+          global.platform.openTab({
+            url: 'https://swap.iopn.tech',
+          })
+        }
+        label={t('swap')}
+        data-testid={`${classPrefix}-overview-swap`}
+        width={BlockSize.Full}
+        tooltipRender={(contents: React.ReactElement) =>
+          generateTooltip('swapButton', contents)
+        }
+      />
+    </Box>
+  );
+};
+
+export default CoinButtons;

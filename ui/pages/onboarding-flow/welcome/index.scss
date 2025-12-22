@@ -1,0 +1,346 @@
+@use "design-system";
+// by using @use, and dropping the file extension, sass will inline the
+// stylesheet instead of creating generating an `import(carousel.css)`. This is
+// desirable because it reduces the number of render-blocking requests on app
+// startup.
+@use "react-responsive-carousel/lib/styles/carousel";
+
+.welcome-banner {
+  &__wrapper {
+    max-width: 1280px;
+    margin: 125px auto 0;
+  }
+
+  &__title {
+    font-family: var(--font-family-hero);
+    color: var(--color-accent03-dark);
+    font-size: 6.5rem;
+    line-height: 7.125rem;
+    word-wrap: break-word;
+  }
+
+  &__description {
+    color: var(--color-accent03-dark);
+    max-width: 548px;
+  }
+
+  &__button {
+    width: 240px;
+  }
+}
+
+.welcome-login {
+  height: calc(100% - 16px);
+  max-height: 728px;
+  width: 553px;
+  border-radius: 24px;
+  box-shadow: var(--shadow-size-md) var(--color-shadow-default);
+  background-color: transparent;
+  position: relative;
+  z-index: 1;
+  margin-block: 4rem;
+
+  // Background blur effects overlay
+  &__background-effects {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  // Blur circle base styles
+  &__blur-circle {
+    position: absolute;
+    width: 384px;
+    height: 384px;
+    border-radius: 50%;
+    filter: blur(64px);
+    opacity: 0.2;
+
+    &--top-left {
+      top: 25%;
+      left: -128px;
+      background: linear-gradient(135deg, #4105b6 0%, #6305b6 100%);
+    }
+
+    &--bottom-right {
+      bottom: 25%;
+      right: -128px;
+      background: linear-gradient(45deg, #2280cd 0%, #b0efff 100%);
+    }
+
+    &--center {
+      top: 39%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(99, 5, 182, 0.6) 0%, rgba(99, 5, 182, 0.3) 50%, transparent 100%);
+      opacity: 0.6;
+    }
+  }
+
+  &__content {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+    overflow: visible;
+    min-height: 0;
+  }
+
+  &__mascotImg {
+    border-radius: 9999px;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0 0 4px rgba(176, 239, 255, 0.3), 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    outline-color: color-mix( var(.708 0 0, #b0efff) 50%, transparent);
+    margin-top: 20px;
+  }
+
+  &__title {
+    font-family: var(--font-family-accent);
+    font-size: 2.25rem;
+    margin-block: 2rem;
+    background: linear-gradient(90deg, #f8fdf1 0%, #b0efff 50%, #f8fdf1 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    line-height: 1.2;
+    overflow: visible;
+
+  }
+
+  // Primary button with purple gradient
+  &__button-primary {
+    width: 100%;
+    border-radius: calc(.625rem + 4px);
+    background: linear-gradient(90deg, #4305B2 0%, #6304B2 100%);
+    border: none;
+    color: #f8fdf1;
+    padding-inline: 32px;
+    padding-block: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 25px 50px -12px rgba(65, 5, 182, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    height: auto;
+
+    &:hover {
+      background: linear-gradient(90deg, #6305b6 0%, #4105b6 100%);
+      box-shadow: 0 25px 50px -12px rgba(65, 5, 182, 0.7);
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(1.02);
+    }
+
+    // Icon color
+    .mm-icon {
+      color: #f8fdf1;
+    }
+  }
+
+  // Secondary button with black background and purple border
+  &__button-secondary {
+    width: 100%;
+    background-color: transparent;
+    color: #b0efff;
+    padding-inline: 32px;
+    padding-block: 16px;
+    border-radius: calc(.625rem + 4px);
+    font-size: 18px;
+    border-width: 2px;
+    border-color: #4105b6;
+    border-style: solid;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    font-weight: 400;
+    height: auto;
+
+    &:hover {
+      background: linear-gradient(0deg, rgba(65, 5, 182, 0.14) 0%, rgba(65, 5, 182, 0.33) 100%), #000;
+    }
+
+    &:active {
+      background-color: rgba(65, 5, 182, 0.3);
+    }
+  }
+
+  &__legal-link {
+    background: none;
+    border: none;
+    color: #2280cd;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #b0efff;
+    }
+  }
+}
+
+.options-modal {
+  &__social-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  &__or {
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 100%;
+      height: 1px;
+      background-color: var(--color-border-muted);
+    }
+  }
+
+  &__plain-button {
+    height: 48px;
+
+    &:hover {
+      background-color: var(--color-background-hover);
+    }
+
+    &:active {
+      background-color: var(--color-background-pressed);
+    }
+  }
+}
+.srp-input-import__actions{
+  margin-top: 10px;
+}
+.mm-button-link{
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+}
+
+.welcome-legal-modal {
+  // Center the modal vertically
+  max-width: 670px;
+  .mm-modal-content {
+    align-items: center !important;
+  }
+
+  // Overlay opacity set to 1
+  // .mm-modal-overlay {
+  //   opacity: 1 !important;
+  // }
+
+  .welcome-legal-modal__dialog {
+    background: linear-gradient(135deg, #1a1d3a 0%, #0f112a 100%);
+    border: 1px solid rgba(65, 5, 182, 0.4);
+    color: #f8fdf1;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+    max-width: 760px;
+    height: auto !important;
+    max-height: 90vh;
+    margin: auto;
+    .mm-modal-header{
+    border-bottom: 1px solid rgba(65, 5, 182, 0.4);
+
+    }
+  }
+
+  .welcome-legal-modal__body {
+    max-height: calc(90vh - 200px);
+    overflow-y: auto;
+    color: #f8fdf1;
+    padding-bottom: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 8px;
+    text-align: center;
+
+    .mm-text--body-sm {
+      font-size: 14px;
+      color: #b0efff;
+      opacity: 0.6;
+    }
+
+    .mm-text--body-md {
+      font-size: 13px;
+      color: #f8fdf1;
+      line-height: 1.6;
+      text-align: center;
+    }
+  }
+
+  .welcome-legal-modal__section {
+    margin-top: 16px;
+    text-align: center;
+
+    .welcome-legal-modal__section-title {
+      color: #b0efff !important;
+      margin-bottom: 8px !important;
+      font-size: 18px !important;
+      font-weight: 600 !important;
+      line-height: 1.5 !important;
+      text-align: center !important;
+    }
+  }
+
+  .welcome-legal-modal__muted {
+    color: rgba(176, 239, 255, 0.7);
+    opacity: 1;
+    display: block;
+    margin-bottom: 12px;
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .welcome-legal-modal__list {
+    list-style: disc;
+    padding-left: 0;
+    margin-top: 8px;
+    margin-bottom: 0;
+    text-align: center;
+    display: inline-block;
+    text-align: left;
+
+    li {
+      color: #f8fdf1;
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 4px;
+      text-align: left;
+      list-style-type: disc;
+      list-style-position: inside;
+      display: list-item;
+    }
+  }
+
+  .welcome-legal-modal__callout {
+    background: rgba(34, 128, 205, 0.18);
+    border: 1px solid rgba(34, 128, 205, 0.35);
+    border-radius: 12px;
+    padding: 12px 16px;
+  }
+
+  // Content text styling
+  .mm-text {
+    color: #f8fdf1 !important;
+    font-size: 13px !important;
+    line-height: 1.6 !important;
+  }
+
+  // Title styling
+  .mm-text--heading-md {
+    font-size: 24px !important;
+    font-weight: 400 !important;
+    color: #f8fdf1 !important;
+    line-height: 1.4 !important;
+  }
+}

@@ -1,0 +1,35 @@
+@use "design-system";
+
+.multichain-connection-list-item {
+  background: rgba(26, 29, 58, 0.4) !important;
+  border-bottom: 1px solid rgba(65, 5, 182, 0.2) !important;
+  transition: all 0.2s ease;
+
+  &:hover,
+  &:focus-within,
+  &:active {
+    background: rgba(26, 29, 58, 0.7) !important;
+    border-left: 2px solid rgba(65, 5, 182, 0.6) !important;
+    padding-left: calc(1rem - 2px) !important;
+  }
+
+  // Text colors
+  .mm-text {
+    color: #f8fdf1;
+  }
+
+  .mm-text[class*="text-alternative"] {
+    color: #b0efff;
+  }
+
+  // Icon colors
+  .mm-icon {
+    color: #b0efff;
+  }
+
+  // Avatar styling
+  .mm-avatar-favicon,
+  .connection-list-item__snap-avatar {
+    border: 1px solid rgba(65, 5, 182, 0.3);
+  }
+}

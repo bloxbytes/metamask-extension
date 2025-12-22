@@ -1,0 +1,75 @@
+.mm-button-base {
+  position: relative;
+  height: 40px;
+  cursor: pointer;
+  vertical-align: middle;
+  user-select: none;
+
+  // Focus styles from monorepo button
+  &:focus-visible {
+    outline: 2px solid var(--color-primary-default);
+    outline-offset: 2px;
+    box-shadow: none;
+  }
+
+  &--block {
+    width: 100%;
+  }
+
+  &--ellipsis {
+    max-width: 100%;
+  }
+
+  &--size-sm {
+    height: 32px;
+  }
+
+  &--size-md {
+    height: 40px;
+  }
+
+  &--size-lg {
+    height: 48px;
+  }
+
+  &--loading {
+    cursor: not-allowed;
+  }
+
+  &--disabled,
+  &:disabled {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: rgba(26, 29, 58, 0.4);
+    color: #4f5262;
+    opacity: var(--opacity-disabled);
+    cursor: not-allowed;
+    font-weight: 400;
+  }
+
+  &__icon-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: spinner 1.2s linear infinite;
+  }
+}
+
+a.mm-button-base:hover {
+  color: var(--color-text-default);
+}
+
+
+
+@keyframes spinner {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+

@@ -1,0 +1,71 @@
+@use "design-system";
+
+.onboarding-metametrics {
+  @include design-system.screen-sm-min {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+  }
+
+  &__checkbox-card {
+    background-color: rgba(15, 17, 42, 0.5); // bg-[#0f112a]/50
+    border-radius: 0.75rem; // rounded-xl
+    padding: 1rem; // p-4
+    border: 1px solid rgba(65, 5, 182, 0.2); // border border-[#4105b6]/20
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+      border-color: rgba(65, 5, 182, 0.4);
+      background-color: rgba(15, 17, 42, 0.6);
+    }
+
+    &--disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+
+      &:hover {
+        border-color: rgba(65, 5, 182, 0.2);
+        background-color: rgba(15, 17, 42, 0.5);
+      }
+    }
+  }
+
+  &__checkbox-label {
+    cursor: pointer;
+    width: 100%;
+  }
+
+  &__checkbox {
+    cursor: pointer;
+  }
+
+  &__checkbox-disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &__user-control {
+    height: 200px;
+    width: 200px;
+    margin: 0 auto;
+  }
+
+  p {
+    align-self: baseline;
+  }
+
+  ul {
+    margin: 16px 0 0 0;
+    width: 100%;
+  }
+
+  &__terms {
+    border-top: 1px solid var(--color-border-muted);
+
+    a {
+      color: var(--color-primary-default);
+    }
+  }
+}

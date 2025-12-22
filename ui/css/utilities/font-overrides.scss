@@ -1,0 +1,33 @@
+/*
+  Font Overrides
+
+  This file allows you to override global font-family and font-size.
+  Import this file AFTER @metamask/design-tokens/dist/styles to override values.
+
+  Usage:
+  Define your font overrides here using CSS custom properties and global selectors.
+*/
+
+:root {
+  /* Override default font-family */
+  --font-family-accent: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-family-default: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+/* Global font-family override */
+* {
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+/* Global font-size override */
+html,
+body {
+  font-size: 16px;
+}
+.mm-box--background-color-background-default {
+  background-color: var(--color-accent02-dark);
+}
+.mm-avatar-base--size-md {
+  --size: 50px;
+}

@@ -1,0 +1,221 @@
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+new file mode 100644
+index 0000000000000000000000000000000000000000..13566b81b018ad684f3a35fee301741b2734c8f4
+--- /dev/null
++++ b/.idea/.gitignore
+@@ -0,0 +1,8 @@
++# Default ignored files
++/shelf/
++/workspace.xml
++# Editor-based HTTP Client requests
++/httpRequests/
++# Datasource local storage ignored files
++/dataSources/
++/dataSources.local.xml
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+new file mode 100644
+index 0000000000000000000000000000000000000000..d9fb14e4d06a030cba3cd105982c4f196e0718a0
+--- /dev/null
++++ b/.idea/modules.xml
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/.idea/user.iml" filepath="$PROJECT_DIR$/.idea/user.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
+diff --git a/.idea/php.xml b/.idea/php.xml
+new file mode 100644
+index 0000000000000000000000000000000000000000..f324872a8ba94b4ec07a8aad82965487b3b15d57
+--- /dev/null
++++ b/.idea/php.xml
+@@ -0,0 +1,19 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="MessDetectorOptionsConfiguration">
++    <option name="transferred" value="true" />
++  </component>
++  <component name="PHPCSFixerOptionsConfiguration">
++    <option name="transferred" value="true" />
++  </component>
++  <component name="PHPCodeSnifferOptionsConfiguration">
++    <option name="highlightLevel" value="WARNING" />
++    <option name="transferred" value="true" />
++  </component>
++  <component name="PhpStanOptionsConfiguration">
++    <option name="transferred" value="true" />
++  </component>
++  <component name="PsalmOptionsConfiguration">
++    <option name="transferred" value="true" />
++  </component>
++</project>
+\ No newline at end of file
+diff --git a/.idea/user.iml b/.idea/user.iml
+new file mode 100644
+index 0000000000000000000000000000000000000000..c956989b29ad0767edc6cf3a202545927c3d1e76
+--- /dev/null
++++ b/.idea/user.iml
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="WEB_MODULE" version="4">
++  <component name="NewModuleRootManager">
++    <content url="file://$MODULE_DIR$" />
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
+\ No newline at end of file
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+new file mode 100644
+index 0000000000000000000000000000000000000000..a8ad21d414eda2dc862d58a70c2e44c4d82b5836
+--- /dev/null
++++ b/.idea/workspace.xml
+@@ -0,0 +1,61 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="AutoImportSettings">
++    <option name="autoReloadType" value="SELECTIVE" />
++  </component>
++  <component name="ChangeListManager">
++    <list default="true" id="11cfd46c-ba5a-4c2a-baa8-bed67e991407" name="Changes" comment="" />
++    <option name="SHOW_DIALOG" value="false" />
++    <option name="HIGHLIGHT_CONFLICTS" value="true" />
++    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
++    <option name="LAST_RESOLUTION" value="IGNORE" />
++  </component>
++  <component name="ComposerSettings">
++    <execution />
++  </component>
++  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="php" />
++  <component name="ProjectColorInfo">{
++  &quot;associatedIndex&quot;: 6
++}</component>
++  <component name="ProjectId" id="368sBhD2yW3czW2nD1OBdh0leZz" />
++  <component name="ProjectViewState">
++    <option name="hideEmptyMiddlePackages" value="true" />
++    <option name="showLibraryContents" value="true" />
++  </component>
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
++    &quot;ts.external.directory.path&quot;: &quot;/Applications/PhpStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;,
++    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
++  }
++}</component>
++  <component name="SharedIndexes">
++    <attachedChunks>
++      <set>
++        <option value="bundled-js-predefined-d6986cc7102b-f27c65a3e318-JavaScript-PS-251.23774.466" />
++        <option value="bundled-php-predefined-a98d8de5180a-aaeaa8632555-com.jetbrains.php.sharedIndexes-PS-251.23774.466" />
++      </set>
++    </attachedChunks>
++  </component>
++  <component name="TaskManager">
++    <task active="true" id="Default" summary="Default task">
++      <changelist id="11cfd46c-ba5a-4c2a-baa8-bed67e991407" name="Changes" comment="" />
++      <created>1764399398394</created>
++      <option name="number" value="Default" />
++      <option name="presentableId" value="Default" />
++      <updated>1764399398394</updated>
++      <workItem from="1764399399535" duration="2734000" />
++      <workItem from="1764403919494" duration="67000" />
++    </task>
++    <servers />
++  </component>
++  <component name="TypeScriptGeneratedFilesManager">
++    <option name="version" value="3" />
++  </component>
++</project>
+\ No newline at end of file
+diff --git a/dist/types.d.cts b/dist/types.d.cts
+index 505723df55635b3a2d426fd00813c7632df8e79a..0509e628b6feb68bf2e6374215a8feffe8c2bdb2 100644
+--- a/dist/types.d.cts
++++ b/dist/types.d.cts
+@@ -1,11 +1,13 @@
+-import type { InfuraNetworkType, ChainId } from "@metamask/controller-utils";
+-import type { BlockTracker as BaseBlockTracker } from "@metamask/eth-block-tracker";
+-import type { SafeEventEmitterProvider } from "@metamask/eth-json-rpc-provider";
+-import type { Hex } from "@metamask/utils";
++import type {InfuraNetworkType, ChainId} from "@metamask/controller-utils";
++import type {BlockTracker as BaseBlockTracker} from "@metamask/eth-block-tracker";
++import type {SafeEventEmitterProvider} from "@metamask/eth-json-rpc-provider";
++import type {Hex} from "@metamask/utils";
++
+ export type Provider = SafeEventEmitterProvider;
+ export type BlockTracker = BaseBlockTracker & {
+     checkForLatestBlock(): Promise<string>;
+ };
++
+ /**
+  * The type of network client that can be created.
+  */
+@@ -13,6 +15,7 @@ export declare enum NetworkClientType {
+     Custom = "custom",
+     Infura = "infura"
+ }
++
+ /**
+  * A configuration object that can be used to create a client for a network.
+  */
+@@ -45,6 +48,6 @@ export type NetworkClientConfiguration = CustomNetworkClientConfiguration | Infu
+ /**
+  * The Chain ID representing the additional networks to be included as default.
+  */
+-export type AdditionalDefaultNetwork = (typeof ChainId)['megaeth-testnet' | 'monad-testnet'];
++export type AdditionalDefaultNetwork = (typeof ChainId)[ 'opn' | 'opn-testnet' | 'megaeth-testnet' | 'monad-testnet'];
+ export {};
+ //# sourceMappingURL=types.d.cts.map
+\ No newline at end of file
+diff --git a/dist/types.d.mts b/dist/types.d.mts
+index a67d415cd34cb7654c2df2b167011854d4bc471d..22a1668173c575ab54826c3069d41e1ac1a9b793 100644
+--- a/dist/types.d.mts
++++ b/dist/types.d.mts
+@@ -1,11 +1,13 @@
+-import type { InfuraNetworkType, ChainId } from "@metamask/controller-utils";
+-import type { BlockTracker as BaseBlockTracker } from "@metamask/eth-block-tracker";
+-import type { SafeEventEmitterProvider } from "@metamask/eth-json-rpc-provider";
+-import type { Hex } from "@metamask/utils";
++import type {InfuraNetworkType, ChainId} from "@metamask/controller-utils";
++import type {BlockTracker as BaseBlockTracker} from "@metamask/eth-block-tracker";
++import type {SafeEventEmitterProvider} from "@metamask/eth-json-rpc-provider";
++import type {Hex} from "@metamask/utils";
++
+ export type Provider = SafeEventEmitterProvider;
+ export type BlockTracker = BaseBlockTracker & {
+     checkForLatestBlock(): Promise<string>;
+ };
++
+ /**
+  * The type of network client that can be created.
+  */
+@@ -13,6 +15,7 @@ export declare enum NetworkClientType {
+     Custom = "custom",
+     Infura = "infura"
+ }
++
+ /**
+  * A configuration object that can be used to create a client for a network.
+  */
+@@ -45,6 +48,11 @@ export type NetworkClientConfiguration = CustomNetworkClientConfiguration | Infu
+ /**
+  * The Chain ID representing the additional networks to be included as default.
+  */
+-export type AdditionalDefaultNetwork = (typeof ChainId)['megaeth-testnet' | 'monad-testnet'];
++// export type AdditionalDefaultNetwork = (typeof ChainId)['megaeth-testnet' | 'monad-testnet'];
++export type AdditionalDefaultNetwork =
++    | (typeof ChainId)['megaeth-testnet']
++    | (typeof ChainId)['monad-testnet']
++    | (typeof ChainId)['opn-testnet']
++    | (typeof ChainId)['opn'];
+ export {};
+ //# sourceMappingURL=types.d.mts.map
+\ No newline at end of file

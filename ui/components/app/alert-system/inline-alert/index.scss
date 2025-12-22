@@ -1,0 +1,21 @@
+.inline-alert {
+  padding: 2px;
+
+  &__danger {
+    color: var(--color-error-default);
+  }
+
+  &__info {
+    color: var(--color-info-default);
+    background-color: var(--color-info-muted);
+  }
+
+  &__warning {
+    color: var(--color-warning-default);
+  }
+
+  &__success {
+    color: var(--color-success-default);
+    background-color: var(--color-success-muted);
+  }
+}
