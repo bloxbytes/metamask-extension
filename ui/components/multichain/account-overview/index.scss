@@ -62,7 +62,7 @@
 
   &__tab {
     &--popup {
-      color: rgba(176, 239, 255, 0.8) !important;
+      color: var(--theme-tab-text) !important;
 
       button {
         width: 100%;
@@ -77,14 +77,20 @@
         gap: 6px;
         position: relative;
         overflow: hidden;
+        transition: all 0.2s ease;
+
+        &:hover {
+          color: var(--theme-tab-text-hover);
+          background-color: var(--theme-tab-bg-hover);
+        }
       }
 
       &.custom-tab-active {
-        color: #f8fdf1 !important;
+        color: #f8fdf1;
 
         button {
-          background: linear-gradient(to bottom right, #4105b6, #6305b6);
-          box-shadow: 0 10px 25px rgba(65, 5, 182, 0.45);
+          background: var(--theme-tab-active-bg) !important;
+          box-shadow: var(--theme-tab-active-shadow) !important;
         }
       }
     }

@@ -43,7 +43,7 @@
       font-size: 0.875rem !important; // text-sm
 
       &::placeholder {
-        color: rgba(176, 239, 255, 0.5) !important; // Light gray placeholder
+        color: var(--color-text-muted) !important; // Light gray placeholder
       }
 
       &:focus {
@@ -97,7 +97,7 @@
       font-size: 0.875rem !important;
 
       &::placeholder {
-        color: rgba(176, 239, 255, 0.5) !important;
+        color: var(--color-text-muted) !important;
       }
     }
 

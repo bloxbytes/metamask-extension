@@ -221,6 +221,24 @@ html[data-theme='dark'] {
   --theme-coin-balance-backdrop: blur(24px);
   --theme-coin-balance-radius: 1.25rem;
   --theme-coin-balance-padding: 1rem;
+
+  --level-card-bg: linear-gradient(
+    to bottom right,
+    rgba(26, 29, 58, 0.6),
+    rgba(26, 29, 58, 0.4)
+  );
+
+  /* Sub Level - Dark theme */
+  --sub-level-bg: rgba(15, 17, 42, 0.5);
+  --sub-level-border: 1px solid rgba(65, 5, 182, 0.4);
+
+  .custom-copy-section{
+    background: linear-gradient(135deg, rgba(26,29,58,0.6), rgba(26,29,58,0.4));
+    border: var(--border-width) solid rgba(65,5,182,0.3);
+  }
+
+  --theme-icon-color: #b0efff;
+  --recovery-color: #b0efff;
 }
 
 /* ============================================
@@ -380,6 +398,40 @@ html[data-theme='light'] {
   --theme-coin-balance-backdrop: blur(24px);
   --theme-coin-balance-radius: 1.25rem;
   --theme-coin-balance-padding: 1rem;
+
+
+  --level-card-bg: #fafbff;
+
+  /* Sub Level - Light theme */
+  --sub-level-bg: #f3f4f6;
+  --sub-level-border: 2px solid rgba(65, 5, 182, 0.2);
+  .custom-copy-section{
+    background: linear-gradient(135deg, rgba(26,29,58,0.6), rgba(26,29,58,0.4));
+    border: var(--border-width) solid rgba(65,5,182,0.3);
+
+  transition: all 0.2s;
+  background-color: #fff;
+  border: 2px solid #3d00b51c;
+
+  &:hover {
+    background-color: #f9fafb;
+  }
+  }
+
+  .create-password__blur-circle{
+    width: 215px;
+  }
+
+  --theme-icon-color: #4105b6;
+  --recovery-color: #4105b6;
+
+  .recovery-phrase .mm-box--background-color-background-section:hover{
+    border: 2px solid #4105b6;
+  }
+  .mm-checkbox__input{
+    border-color:#000!important;
+    background-color:#fff!important;
+  }
 }
 
 /* Background colors for app in light theme */

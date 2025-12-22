@@ -206,7 +206,7 @@ export const AccountOverviewTabs = ({
 
           <Box marginBottom={4}>
             <div
-              className="mt-3 mb-3 bg-gradient-to-br from-[#1a1d3a]/60 to-[#1a1d3a]/40 backdrop-blur-xl rounded-xl p-4 border border-[#4105b6]/40 shadow-2xl relative overflow-hidden">
+              className="level-card">
 
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-3">
@@ -266,7 +266,7 @@ export const AccountOverviewTabs = ({
 
           <Box marginBottom={4}>
             <div
-              className="mt-3 bg-gradient-to-br from-[#1a1d3a]/60 to-[#1a1d3a]/40 backdrop-blur-xl rounded-xl p-4 border border-[#4105b6]/40 shadow-2xl relative overflow-hidden">
+              className="level-card">
 
 
               <div className="relative z-10">
@@ -290,7 +290,7 @@ export const AccountOverviewTabs = ({
 
                 {/* Animated nodes visualization */}
                 <div
-                  className="relative h-16 mb-3 rounded-lg bg-[#0f112a]/50 border border-[#4105b6]/20 overflow-hidden">
+                  className="relative h-16 mb-3 rounded-lg sub-level overflow-hidden">
                   <svg className="w-full h-full">
                     {/* Animated connection lines */}
                     <line x1="10%" y1="50%" x2="30%" y2="50%" stroke="#4105b6" strokeWidth="2" opacity="0.6">
@@ -330,14 +330,14 @@ export const AccountOverviewTabs = ({
 
                 {/* Stats */}
                 <div className="grid grid-cols-2 gap-2">
-                  <div className="bg-[#0f112a]/50 backdrop-blur-sm rounded-lg p-2 border border-[#4105b6]/20">
+                  <div className="light-card-bg">
                     <div className="flex items-center gap-1 mb-1">
                       <Zap className="w-3 h-3 text-[#b0efff]" />
                       <span className="text-[#b0efff]/70 text-xs">TPS</span>
                     </div>
                     <div className="text-[#f8fdf1] font-light">15,847</div>
                   </div>
-                  <div className="bg-[#0f112a]/50 backdrop-blur-sm rounded-lg p-2 border border-[#4105b6]/20">
+                  <div className="light-card-bg">
                     <div className="text-[#b0efff]/70 text-xs mb-1">Validators</div>
                     <div className="text-[#f8fdf1] font-light">1,247</div>
                   </div>
