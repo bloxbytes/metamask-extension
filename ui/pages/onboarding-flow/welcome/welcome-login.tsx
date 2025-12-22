@@ -1,7 +1,7 @@
 import EventEmitter from 'events';
 import React, { useCallback, useRef, useState } from 'react';
 import classnames from 'classnames';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Mascot from '../../../components/ui/mascot';
 import {
   Box,
@@ -19,10 +19,14 @@ import {
   TextAlign,
 } from '../../../helpers/constants/design-system';
 import { useI18nContext } from '../../../hooks/useI18nContext';
+import { useTheme } from '../../../hooks/useTheme';
 import { isFlask, isBeta } from '../../../helpers/utils/build-types';
 import { getIsSeedlessOnboardingFeatureEnabled } from '../../../../shared/modules/environment';
 import { ThemeType } from '../../../../shared/constants/preferences';
-import { setTermsOfUseLastAgreed } from '../../../store/actions';
+import { setTermsOfUseLastAgreed, setTheme } from '../../../store/actions';
+import { setTheme as setDocumentTheme } from '../../routes/utils';
+import ToggleButton from '../../../components/ui/toggle-button';
+import { getTheme } from '../../../selectors';
 import LoginOptions from './login-options';
 import { LOGIN_OPTION, LOGIN_TYPE, LoginOptionType, LoginType } from './types';
 import { TermsModal } from './terms-modal';
@@ -45,6 +49,8 @@ export default function WelcomeLogin({
   const [showImportOption, setShowImportOption] = useState(true);
   const [showTermsModal, setShowTermsModal] = useState(false);
   const [showPrivacyModal, setShowPrivacyModal] = useState(false);
+  const themePreference = useSelector(getTheme);
+  const resolvedTheme = useTheme();
 
   const renderMascot = () => {
     return (
@@ -53,9 +59,12 @@ export default function WelcomeLogin({
         width="256"
         height="256"
         alt="OPN Wallet"
-
+        style={{
+          border: '5px solid',
+          borderColor: '#454e69',
+        }}
         // eslint-disable-next-line @metamask/design-tokens/color-no-hex
-        className="welcome-login__mascotImg rounded-full relative mb-4 img-border"
+        className="welcome-login__mascotImg rounded-full relative mb-4"
       />
     );
 
@@ -92,6 +101,15 @@ export default function WelcomeLogin({
     [dispatch, loginOption, onLogin],
   );
 
+  const handleThemeToggle = useCallback(
+    (isDarkMode: boolean) => {
+      const nextTheme = isDarkMode ? ThemeType.light : ThemeType.dark;
+      setDocumentTheme(nextTheme);
+      dispatch(setTheme(nextTheme));
+    },
+    [dispatch],
+  );
+
   return (
     <>
       {/* Background blur effects */}
@@ -111,6 +129,30 @@ export default function WelcomeLogin({
         className="welcome-login"
         data-testid="get-started"
       >
+        <Box
+          display={Display.Flex}
+          justifyContent={JustifyContent.flexEnd}
+          width="100%"
+          className="welcome-login__theme-toggle"
+        >
+          <Box
+            display={Display.Flex}
+            alignItems={AlignItems.center}
+            gap={2}
+          >
+            <Text as="span" className="welcome-login__theme-toggle-label">
+              {t('theme')}
+            </Text>
+            <ToggleButton
+              value={resolvedTheme === ThemeType.dark}
+              onToggle={handleThemeToggle}
+              offLabel={t('lightTheme')}
+              onLabel={t('darkTheme')}
+              dataTestId="welcome-theme-toggle"
+              className="welcome-login__theme-toggle-button"
+            />
+          </Box>
+        </Box>
         <Box
           display={Display.Flex}
           flexDirection={FlexDirection.Column}
@@ -139,6 +181,7 @@ export default function WelcomeLogin({
         </Box>
 
         <Box
+          data-theme={resolvedTheme}
           display={Display.Flex}
           flexDirection={FlexDirection.Column}
           gap={4}
@@ -182,7 +225,7 @@ export default function WelcomeLogin({
               : t('onboardingSrpImport'))}
           </Button>
 
-          <div className={'mb-4'}></div>
+          <div className={'space-y-4 mb-12'}></div>
           <div className="text-[#4f5262] text-sm">
             <p>
               By continuing, I agree to OPN Wallet's{' '}
