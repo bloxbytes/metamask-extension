@@ -16,15 +16,10 @@
     max-width: 200px;
     padding: 16px;
     padding-bottom: 16px;
-    background: linear-gradient(
-      135deg,
-      rgba(26, 29, 58, 0.95) 0%,
-      rgba(26, 29, 58, 0.9) 100%
-    ) !important;
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(65, 5, 182, 0.4) !important;
-    color: #f8fdf1 !important;
-    box-shadow: 0 10px 32px 0 rgba(31, 41, 71, 0.32),
-      0 0.5px 2px 0 rgba(65, 5, 182, 0.2) !important;
+    background: var(--theme-popover-bg) !important;
+    border: var(--theme-popover-border) !important;
+    color: var(--theme-popover-text) !important;
+    box-shadow: var(--theme-popover-shadow) !important;
   }
 }

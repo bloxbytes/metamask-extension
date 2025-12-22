@@ -197,7 +197,7 @@
   }
   .custom-send-icon{
     background: linear-gradient(135deg, rgb(65, 5, 182), rgba(65, 5, 182, 0.867));
-    box-shadow: rgba(65, 5, 182, 0.25) 0px 4px 12px;
+    box-shadow: var(--box-shadow-rounded);
     width: 2.5rem; /* w-10 */
     height: 2.5rem; /* h-10 */
     border-radius: 9999px; /* rounded-full */
@@ -206,13 +206,15 @@
     justify-content: center;
     position: relative;
     z-index: 10;
-    box-shadow: 0 10px 32px 0 rgba(31,41,71,0.32), 0 0.5px 2px 0 rgba(65,5,182,0.2); /* shadow-lg */
     margin-bottom: 2px;
+    .mm-box--color-text-default.mm-text--ellipsis{
+      color: var(--color-text-default)!important;
+    }
 
   }
   .custom-receive-icon{
     background: linear-gradient(135deg, rgb(34, 128, 205), rgba(34, 128, 205, 0.867));
-    box-shadow: rgba(34, 128, 205, 0.25) 0px 4px 12px;
+    box-shadow: var(--box-shadow-rounded);
     width: 2.5rem; /* w-10 */
     height: 2.5rem; /* h-10 */
     border-radius: 9999px; /* rounded-full */
@@ -221,13 +223,12 @@
     justify-content: center;
     position: relative;
     z-index: 10;
-    box-shadow: 0 10px 32px 0 rgba(31,41,71,0.32), 0 0.5px 2px 0 rgba(65,5,182,0.2); /* shadow-lg */
     margin-bottom: 2px;
 
   }
   .custom-swap-icon{
     background: linear-gradient(135deg, rgb(99, 5, 182), rgba(99, 5, 182, 0.867));
-    box-shadow: rgba(99, 5, 182, 0.25) 0px 4px 12px;
+    box-shadow: var(--box-shadow-rounded);
     width: 2.5rem; /* w-10 */
     height: 2.5rem; /* h-10 */
     border-radius: 9999px; /* rounded-full */
@@ -236,7 +237,6 @@
     justify-content: center;
     position: relative;
     z-index: 10;
-    box-shadow: 0 10px 32px 0 rgba(31,41,71,0.32), 0 0.5px 2px 0 rgba(65,5,182,0.2); /* shadow-lg */
     margin-bottom: 2px;
 
 

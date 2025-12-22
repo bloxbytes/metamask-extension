@@ -185,7 +185,7 @@ export const BannerComponent = ({ isPopup = false }) => {
     {
       isPopup ? null : <div
         className="custom-card">
-        <h3 className="text-[#f8fdf1] mb-4">Quick Actions</h3>
+        <h3 className="mb-4" style={{ color: 'var(--color-text-default)' }}>Quick Actions</h3>
         <div className="space-y-2">
           <HomeCoinButtons />
         </div>
@@ -1020,7 +1020,7 @@ export default class Home extends PureComponent {
     return (
       <div
         className={classnames(
-          'main-container main-container--has-shadow py-8',
+          'main-container py-8',
           { 'main-container--popup': isPopup },
         )}
       >

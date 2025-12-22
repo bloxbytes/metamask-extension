@@ -239,6 +239,26 @@ html[data-theme='dark'] {
 
   --theme-icon-color: #b0efff;
   --recovery-color: #b0efff;
+
+  /* Popover & Tooltip - Dark theme */
+  --theme-popover-bg: linear-gradient(135deg, rgba(26, 29, 58, 0.95) 0%, rgba(26, 29, 58, 0.9) 100%);
+  --theme-popover-border: 1px solid rgba(65, 5, 182, 0.4);
+  --theme-popover-shadow: 0 10px 32px 0 rgba(31, 41, 71, 0.32), 0 0.5px 2px 0 rgba(65, 5, 182, 0.2);
+  --theme-popover-text: #f8fdf1;
+  --theme-popover-link: #b0efff;
+  --theme-popover-arrow-color: rgba(26, 29, 58, 0.95);
+
+  --inner-content-heading: #b0efffb3;
+  --color-primary-cl: #b0efff;
+  --arrow-right-icon: #b0efffb3;
+
+  /* Notification Setting Card - Dark theme */
+  --notification-card-border-left-hover: #b0efff;
+  --notification-card-border-bottom: rgba(65, 5, 182, 0.3);
+  --notification-card-bg-hover: rgba(26, 29, 58, 0.4);
+--setting-card-bg:linear-gradient(to bottom right, rgba(26, 29, 58, 0.6), rgba(26, 29, 58, 0.4));
+--box-shadow-rounded:rgba(65, 5, 182, 0.25) 0px 4px 12px;
+--popover-wrap: linear-gradient(135deg, rgba(26,29,58,0.6) 0%, rgba(26,29,58,0.4) 100%);
 }
 
 /* ============================================
@@ -317,7 +337,7 @@ html[data-theme='light'] {
   --theme-gradient-primary: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(243, 243, 245, 0.9) 100%);
   --theme-gradient-secondary: linear-gradient(135deg, #ffffff 0%, #f3f3f5 100%);
   --theme-gradient-card: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(243, 243, 245, 0.9) 100%);
-  --theme-border-color: oklch(.872 .01 258.338);
+  --theme-border-color: #3d00b51c;
   --theme-border-color-muted: rgba(0, 0, 0, 0.08);
   --theme-border-color-light: #3d00b51c;
   --theme-shadow: 0 10px 32px 0 rgba(0, 0, 0, 0.1), 0 0.5px 2px 0 rgba(0, 0, 0, 0.05);
@@ -406,12 +426,13 @@ html[data-theme='light'] {
   --sub-level-bg: #f3f4f6;
   --sub-level-border: 2px solid rgba(65, 5, 182, 0.2);
   .custom-copy-section{
-    background: linear-gradient(135deg, rgba(26,29,58,0.6), rgba(26,29,58,0.4));
-    border: var(--border-width) solid rgba(65,5,182,0.3);
-
-  transition: all 0.2s;
-  background-color: #fff;
-  border: 2px solid #3d00b51c;
+    backdrop-filter: blur(4px);
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    border: 2px solid #3d00b51c;
 
   &:hover {
     background-color: #f9fafb;
@@ -425,6 +446,26 @@ html[data-theme='light'] {
   --theme-icon-color: #4105b6;
   --recovery-color: #4105b6;
 
+  /* Popover & Tooltip - Light theme */
+  --theme-popover-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(249, 250, 251, 0.98) 100%);
+  --theme-popover-border: 1px solid rgba(0, 0, 0, 0.1);
+  --theme-popover-shadow: 0 10px 32px 0 rgba(0, 0, 0, 0.12), 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+  --theme-popover-text: #030213;
+  --theme-popover-link: #4105b6;
+  --theme-popover-arrow-color: rgba(255, 255, 255, 0.98);
+  --inner-content-heading: #4b5563; // text-gray-600
+  --color-primary-cl: #4105b6;
+
+  /* Notification Setting Card - Light theme */
+  --notification-card-border-left-hover: #4105b6;
+  --notification-card-border-bottom: rgba(65, 5, 182, 0.2);
+  --notification-card-bg-hover: #f9fafb;
+  --setting-card-bg:#fff;
+  --arrow-right-icon: #9ca3af;
+  --modal-bg-color: rgba(255, 255, 255, 0.95);
+  --box-shadow-rounded:rgba(65, 5, 182, 0.2) 0px 2px 8px;
+  --popover-wrap: var(--modal-bg-color);
+
   .recovery-phrase .mm-box--background-color-background-section:hover{
     border: 2px solid #4105b6;
   }
@@ -432,6 +473,7 @@ html[data-theme='light'] {
     border-color:#000!important;
     background-color:#fff!important;
   }
+
 }
 
 /* Background colors for app in light theme */

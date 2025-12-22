@@ -837,7 +837,7 @@
     background: none;
 }
 .mm-text{
-  color: var(--color-text-default) !important;
+  // color: var(--color-text-default) !important;
   font-size: 14px;
   font-weight: 400;
 }
@@ -881,6 +881,28 @@
   &:hover {
     background: var(--theme-button-bg-hover) !important;
   }
+  &.primary-button{
+
+    width: 100%;
+    background-image: linear-gradient(to right, #4105b6, #6305b6)!important;
+
+    box-shadow: 0 4px 16px 0 rgba(65, 5, 182, 0.3);
+
+    &:hover {
+      background-image: linear-gradient(to right, #6305b6, #4105b6);
+    }
+    .mm-box--color-text-default{
+      color: #f8fdf1;
+    }
+&.inner_custom_button_icon{
+  background: var(--theme-button-bg) !important;
+  background: var(--theme-button-bg) !important;
+  border: 1px solid var(--theme-border-color-muted) !important;
+  color: var(--color-text-alternative);
+  box-shadow: 0 6px 24px 0 rgba(22, 0, 56, 0.26);
+}
+  }
+
 }
 .primary-button{
   width: 100%;
@@ -1024,10 +1046,11 @@
   padding-top: 16px;
 }
 .dropdown-editor__item:hover{
-  background-color: oklab(24.4378% .00675559 -.0545587 / .8);
+  background-color: var(--color-background-default);
 }
 .network-manager__additional-network-item:hover{
   background-color: var(--color-primary-muted);
+  border: 1px solid var(--theme-border-color);
 }
 
 // Background blur effects for home page
@@ -1160,4 +1183,7 @@
   border-radius: 0.5rem;
   padding: 0.5rem;
   border: var(--border-width) solid var(--theme-border-color-light);
+}
+.dropdown-editor__item-dropdown{
+  border: var(--border-width) solid var(--theme-border-color);
 }

@@ -407,8 +407,7 @@ const CoinButtons = ({
           iconView ?
             <Box>
               <div className="relative">
-                <div className="absolute inset-0 rounded-full blur-md opacity-50 shine-bg-send"
-                     ></div>
+                {/* <div className="absolute inset-0 rounded-full blur-md opacity-50 shine-bg-send"></div> */}
                 <div className="w-10 h-10 rounded-full flex items-center justify-center relative z-10 shadow-lg custom-send-icon"
                     >
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -446,8 +445,8 @@ const CoinButtons = ({
               iconView ?
                 <Box>
                   <div className="relative">
-                    <div className="absolute inset-0 rounded-full blur-md opacity-50 shine-bg-r"
-                        ></div>
+                    {/* <div className="absolute inset-0 rounded-full blur-md opacity-50 shine-bg-r"
+                        ></div> */}
                     <div className="custom-receive-icon"
                          >
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -476,7 +475,7 @@ const CoinButtons = ({
           iconView ?
             <Box>
               <div className="relative">
-                <div className="absolute inset-0 rounded-full blur-md opacity-50 shine-bg-sw"></div>
+                {/* <div className="absolute inset-0 rounded-full blur-md opacity-50 shine-bg-sw"></div> */}
                 <div className="w-10 h-10 rounded-full flex items-center justify-center relative z-10 shadow-lg custom-swap-icon">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"

@@ -240,8 +240,8 @@
   // }
 
   .welcome-legal-modal__dialog {
-    background: linear-gradient(135deg, #1a1d3a 0%, #0f112a 100%);
-    border: 1px solid rgba(65, 5, 182, 0.4);
+    background: var(--modal-bg-color);
+    border: 1px solid var(--color-border-default);
     color: #f8fdf1;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
     max-width: 760px;
@@ -249,7 +249,7 @@
     max-height: 90vh;
     margin: auto;
     .mm-modal-header{
-    border-bottom: 1px solid rgba(65, 5, 182, 0.4);
+    border-bottom: 1px solid var(--color-border-default);
 
     }
   }
@@ -283,7 +283,7 @@
     text-align: center;
 
     .welcome-legal-modal__section-title {
-      color: #b0efff !important;
+      color: var(--color-primary-cl) !important;
       margin-bottom: 8px !important;
       font-size: 18px !important;
       font-weight: 600 !important;
@@ -312,7 +312,7 @@
     text-align: left;
 
     li {
-      color: #f8fdf1;
+      color: var(--inner-content-heading);
       font-size: 13px;
       line-height: 1.6;
       margin-bottom: 4px;
@@ -332,7 +332,7 @@
 
   // Content text styling
   .mm-text {
-    color: #f8fdf1 !important;
+    color: var(--inner-content-heading) !important;
     font-size: 13px !important;
     line-height: 1.6 !important;
   }
@@ -341,7 +341,7 @@
   .mm-text--heading-md {
     font-size: 24px !important;
     font-weight: 400 !important;
-    color: #f8fdf1 !important;
+    color: var(--color-primary-cl) !important;
     line-height: 1.4 !important;
   }
 }

@@ -235,14 +235,16 @@ export const AccountOverviewTabs = ({
                       </div>
                     </div>
                     <div>
-                      <div className="text-[#b0efff]/70 text-xs">Level 12</div>
-                      <div className="text-[#f8fdf1] text-xl font-light">8,547</div>
-                      <div className="text-[#4f5262] text-xs">REP Score</div>
+                      <div className="inner-content-heading">Level 12</div>
+                      <div className="text-count">8,547</div>
+                      <div className="inner-content-heading">REP Score</div>
                     </div>
                   </div>
                   <button
-                    className="bg-gradient-to-r from-[#4105b6] to-[#6305b6] text-[#f8fdf1] px-3 py-1.5 rounded-lg text-xs hover:from-[#6305b6] hover:to-[#4105b6] transition-all shadow-lg shadow-[#4105b6]/30 hover:shadow-[#4105b6]/50 whitespace-nowrap">View
-                    Badges
+                    className="bg-gradient-to-r from-[#4105b6] to-[#6305b6] text-[#f8fdf1] px-3 py-1.5 rounded-lg hover:from-[#6305b6] hover:to-[#4105b6] transition-all shadow-lg shadow-[#4105b6]/30 hover:shadow-[#4105b6]/50 whitespace-nowrap"
+                    style={{ fontSize: '12px' }}
+                  >
+                    View Badges
                   </button>
                 </div>
                 <div className="flex items-center gap-1 text-[#2280cd] text-sm mb-2">
@@ -254,12 +256,12 @@ export const AccountOverviewTabs = ({
                   </svg>
                   <span>+247 this week</span></div>
                 <div
-                  className="w-full bg-[#0f112a]/70 backdrop-blur-sm rounded-full h-2 overflow-hidden border border-[#4105b6]/20">
+                  className="w-full bg-[#0f112a]/70 backdrop-blur-sm rounded-full h-2 overflow-hidden border theme-border-color">
                   <div
                     className="bg-gradient-to-r from-[#2280cd] to-[#b0efff] h-full shadow-lg shadow-[#2280cd]/50 transition-all duration-500"
                   ></div>
                 </div>
-                <div className="mt-1 text-[#b0efff]/60 text-xs">453 REP to Level 13</div>
+                <div className="mt-1 inner-content-heading">453 REP to Level 13</div>
               </div>
             </div>
           </Box>
@@ -277,14 +279,14 @@ export const AccountOverviewTabs = ({
                       <Activity className="w-4 h-4 text-[#f8fdf1]" />
                     </div>
                     <div>
-                      <div className="text-[#f8fdf1] text-sm">OPN Chain</div>
-                      <div className="text-[#b0efff]/60 text-xs">Live Network Status</div>
+                      <div className="inner-count">OPN Chain</div>
+                      <div className="inner-content-heading">Live Network Status</div>
                     </div>
                   </div>
                   <div
                     className="flex items-center gap-1 px-2 py-1 bg-[#2280cd]/20 rounded-full border border-[#2280cd]/40">
                     <div className="w-1.5 h-1.5 rounded-full bg-[#b0efff] animate-pulse"></div>
-                    <span className="text-[#b0efff] text-xs">Active</span>
+                    <span className="text-[#2280cd] text-xs">Active</span>
                   </div>
                 </div>
 
@@ -333,13 +335,13 @@ export const AccountOverviewTabs = ({
                   <div className="light-card-bg">
                     <div className="flex items-center gap-1 mb-1">
                       <Zap className="w-3 h-3 text-[#b0efff]" />
-                      <span className="text-[#b0efff]/70 text-xs">TPS</span>
+                      <span className="inner-content-heading">TPS</span>
                     </div>
-                    <div className="text-[#f8fdf1] font-light">15,847</div>
+                    <div className="text-count">15,847</div>
                   </div>
                   <div className="light-card-bg">
-                    <div className="text-[#b0efff]/70 text-xs mb-1">Validators</div>
-                    <div className="text-[#f8fdf1] font-light">1,247</div>
+                    <div className="inner-content-heading mb-1">Validators</div>
+                    <div className="text-count">1,247</div>
                   </div>
                 </div>
               </div>
@@ -351,7 +353,8 @@ export const AccountOverviewTabs = ({
               <Box
                 display="flex"
                 justifyContent="space-between"
-                paddingTop={2}
+                paddingTop={4}
+                paddingBottom={4}
                 alignItems="center"
                 marginBottom={2}
               >

@@ -218,7 +218,7 @@ export function TermsModal({ isOpen, onClose }: TermsModalProps) {
           </Box>
         </ModalBody>
 
-        <Box paddingLeft={4} paddingRight={4} paddingTop={2} paddingBottom={4}>
+        {/* <Box paddingLeft={4} paddingRight={4} paddingTop={2} paddingBottom={4}>
           <Button
             variant={ButtonVariant.Primary}
             size={ButtonSize.Lg}
@@ -227,7 +227,7 @@ export function TermsModal({ isOpen, onClose }: TermsModalProps) {
           >
             Close
           </Button>
-        </Box>
+        </Box> */}
       </ModalContent>
     </Modal>
   );

@@ -2,10 +2,10 @@
 
 .popover {
   &-wrap {
-    background: linear-gradient(135deg, rgba(26,29,58,0.6) 0%, rgba(26,29,58,0.4) 100%) !important;
+    background: var(--popover-wrap) !important;
     backdrop-filter: blur(24px);
     border-radius: 16px;
-    border: 1px solid rgba(65,5,182,0.4);
+    border: var(--border-width) solid var(--theme-custom-card-border);
     box-shadow: 0 12px 40px 0 rgba(16, 7, 47, 0.22), 0 1.5px 5px 0 rgba(21, 8, 56, 0.09);
     padding: 24px;
     ::-webkit-scrollbar {
@@ -27,7 +27,7 @@
     border-radius: 10px;
     background: var(--color-background-default);
     .popover-header{
-      background: linear-gradient(135deg, rgba(26,29,58,0.6) 0%, rgba(26,29,58,0.4) 100%) !important;
+      background: transparent !important;
       padding: unset !important;
     }
     .edit-gas-item{
@@ -37,6 +37,11 @@
 
   &-header {
     position: relative;
+    background: transparent !important;
+    &__title{
+      font-weight: 400;
+      font-size: 14px!important;
+    }
 
     &__title--center {
       flex: 1;
