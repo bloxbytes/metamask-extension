@@ -97,11 +97,11 @@ import FlaskHomeFooter from './flask/flask-home-footer.component';
 
 
 function shouldCloseNotificationPopup({
-  isNotification,
-  totalUnapprovedCount,
-  hasApprovalFlows,
-  isSigningQRHardwareTransaction,
-}) {
+                                        isNotification,
+                                        totalUnapprovedCount,
+                                        hasApprovalFlows,
+                                        isSigningQRHardwareTransaction,
+                                      }) {
   const shouldClose =
     isNotification &&
     totalUnapprovedCount === 0 &&
@@ -116,7 +116,7 @@ export const HomeCoinButtons = ({ iconView = false }) => {
   const account = useSelector(getSelectedInternalAccount);
   const evmChainId = useSelector(getCurrentChainId);
   const { chainId: multichainChainId } =
-    useSelector(getSelectedMultichainNetworkConfiguration) || {};
+  useSelector(getSelectedMultichainNetworkConfiguration) || {};
   const isSwapsChainDefault = useSelector(getIsSwapsChain);
   const isBridgeChainDefault = useSelector(getIsBridgeChain);
   const isSwapsChainMultichain = useSelector((state) =>
@@ -199,7 +199,7 @@ export const HomeCoinBalance = () => {
   );
   const evmBalanceIsCached = useSelector(isBalanceCached);
   const { chainId: multichainChainId } =
-    useSelector(getSelectedMultichainNetworkConfiguration) || {};
+  useSelector(getSelectedMultichainNetworkConfiguration) || {};
   const isEvm = isEvmAccountType(account?.type);
 
   const chainId = isEvm ? evmChainId : multichainChainId;
@@ -1016,7 +1016,8 @@ export default class Home extends PureComponent {
     return (
       <div
         className={classnames(
-          'main-container py-8',
+          'main-container',
+          { 'py-8': !isPopup },
           { 'main-container--popup': isPopup },
         )}
       >
@@ -1070,14 +1071,16 @@ export default class Home extends PureComponent {
         {/*  }*/}
         {/*</div>*/}
 
-        <BannerComponent isPopup={isPopup} />
+        {
+          !isPopup ? <BannerComponent /> : null
+        }
 
 
         {/*END CUSTOM*/}
         <div className="home__container">
 
           {dataCollectionForMarketing === null &&
-            participateInMetaMetrics === true
+          participateInMetaMetrics === true
             ? this.renderOnboardingPopover()
             : null}
           {isSeedlessPasswordOutdated && <PasswordOutdatedModal />}
@@ -1085,8 +1088,8 @@ export default class Home extends PureComponent {
           {displayUpdateModal && <UpdateModal />}
           {showWhatsNew ? <WhatsNewModal onClose={hideWhatsNewPopup} /> : null}
           {!showWhatsNew &&
-            showRecoveryPhraseReminder &&
-            !isPrimarySeedPhraseBackedUp ? (
+          showRecoveryPhraseReminder &&
+          !isPrimarySeedPhraseBackedUp ? (
             <RecoveryPhraseReminder
               onConfirm={this.onRecoveryPhraseReminderClose}
             />
