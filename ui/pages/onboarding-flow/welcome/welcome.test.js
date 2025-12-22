@@ -13,6 +13,7 @@ import {
   MetaMetricsEventName,
 } from '../../../../shared/constants/metametrics';
 import { PLATFORM_FIREFOX } from '../../../../shared/constants/app';
+import { ThemeType } from '../../../../shared/constants/preferences';
 import { ONBOARDING_CREATE_PASSWORD_ROUTE } from '../../../helpers/constants/routes';
 import Welcome from './welcome';
 
@@ -41,6 +42,7 @@ describe('Welcome Page', () => {
         selectedAccount: '',
       },
       metaMetricsId: '0x00000000',
+      theme: ThemeType.light,
     },
   };
   const mockStore = configureMockStore([thunk])(mockState);
@@ -285,6 +287,18 @@ describe('Welcome Page', () => {
       expect(mockUseNavigate).toHaveBeenCalledWith(
         ONBOARDING_CREATE_PASSWORD_ROUTE,
       );
+    });
+  });
+
+  it('should toggle between light and dark themes from welcome screen', async () => {
+    jest.spyOn(Actions, 'setTheme').mockReturnValue(jest.fn());
+
+    const { getByTestId } = renderWithProvider(<Welcome />, mockStore);
+
+    fireEvent.click(getByTestId('welcome-theme-toggle'));
+
+    await waitFor(() => {
+      expect(Actions.setTheme).toHaveBeenCalledWith(ThemeType.dark);
     });
   });
 });

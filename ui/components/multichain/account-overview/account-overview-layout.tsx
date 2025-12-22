@@ -123,16 +123,16 @@ export const AccountOverviewLayout = ({
         <NetworkConnectionBanner />
         {children}
       </div>
-      {isCarouselEnabled && (
-        <CarouselWithEmptyState
-          slides={slides}
-          isLoading={isLoading}
-          onSlideClick={handleCarouselClick}
-          onSlideClose={handleRemoveSlide}
-          onRenderSlides={handleRenderSlides}
-          className="mb-3 px-4"
-        />
-      )}
+        {isCarouselEnabled && (
+          <CarouselWithEmptyState
+            slides={slides}
+            isLoading={isLoading}
+            onSlideClick={handleCarouselClick}
+            onSlideClose={handleRemoveSlide}
+            onRenderSlides={handleRenderSlides}
+            className="mb-3 px-4"
+          />
+        )}
       <AccountOverviewTabs {...tabsProps}></AccountOverviewTabs>
       {showCreateSolanaAccountModal && (
         <CreateSolanaAccountModal

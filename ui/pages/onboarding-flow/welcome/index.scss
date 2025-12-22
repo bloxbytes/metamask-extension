@@ -40,6 +40,21 @@
   z-index: 1;
   margin-block: 4rem;
 
+  &__theme-toggle {
+    align-self: flex-end;
+    margin-bottom: 8px;
+
+    .toggle-button {
+      border-radius: 9999px;
+      box-shadow: var(--shadow-size-xs) var(--color-shadow-default);
+    }
+  }
+
+  &__theme-toggle-label {
+    color: var(--color-text-default);
+    font-weight: 600;
+  }
+
   // Background blur effects overlay
   &__background-effects {
     position: fixed;
