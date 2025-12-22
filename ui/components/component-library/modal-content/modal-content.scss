@@ -253,5 +253,8 @@
   width: 100%!important;
 }
 .mm-modal-overlay{
-  background-color: var(--text-color-white)!important;
+  background-color: var(--text-color-dark)!important;
+}
+.mm-modal-content__dialog{
+  border: var(--border-width) solid var(--color-border-default);
 }

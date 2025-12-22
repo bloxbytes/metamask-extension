@@ -1187,3 +1187,23 @@
 .dropdown-editor__item-dropdown{
   border: var(--border-width) solid var(--theme-border-color);
 }
+.custom-alert-info{
+  background-color: var(--alert-info-bg);
+  border: 1px solid var(--alert-info-border);
+  p{
+    color: var(--alert-info-text);
+    font-size: 14px;
+  }
+}
+.custom-alert-warning{
+  background-color: var(--alert-warning-bg);
+  border: var(--border-width) solid var(--alert-warning-border);
+  border-radius: 0.5rem; /* rounded-lg */
+  padding: 1rem; /* p-4 */
+  p{
+    color: var(--alert-warning-text);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  text-align: center;
+  }
+}
