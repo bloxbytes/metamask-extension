@@ -97,11 +97,11 @@ import FlaskHomeFooter from './flask/flask-home-footer.component';
 
 
 function shouldCloseNotificationPopup({
-                                        isNotification,
-                                        totalUnapprovedCount,
-                                        hasApprovalFlows,
-                                        isSigningQRHardwareTransaction,
-                                      }) {
+  isNotification,
+  totalUnapprovedCount,
+  hasApprovalFlows,
+  isSigningQRHardwareTransaction,
+}) {
   const shouldClose =
     isNotification &&
     totalUnapprovedCount === 0 &&
@@ -116,7 +116,7 @@ export const HomeCoinButtons = ({ iconView = false }) => {
   const account = useSelector(getSelectedInternalAccount);
   const evmChainId = useSelector(getCurrentChainId);
   const { chainId: multichainChainId } =
-  useSelector(getSelectedMultichainNetworkConfiguration) || {};
+    useSelector(getSelectedMultichainNetworkConfiguration) || {};
   const isSwapsChainDefault = useSelector(getIsSwapsChain);
   const isBridgeChainDefault = useSelector(getIsBridgeChain);
   const isSwapsChainMultichain = useSelector((state) =>
@@ -156,43 +156,39 @@ export const HomeCoinButtons = ({ iconView = false }) => {
 };
 
 export const BannerComponent = ({ isPopup = false }) => {
-  return <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-    <div
-      className="custom-card md:col-span-2">
-      <div className="bg-gradient-custom"></div>
-      <div className="px-4 py-2 relative">
-        <div className="flex justify-center mb-4 relative">
-          <img src="./images/logo/metamask-fox.svg" alt="OPN Logo"
-               className="logo-image" /></div>
-        <button
-          className="custom-copy-section">
-          <div className="flex items-center gap-2 relative z-10 w-full">
-            <AppHeaderOPN location={location} />
+  if (!isPopup) return null;
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+      <div className="custom-card md:col-span-2">
+        <div className="bg-gradient-custom"></div>
+
+        <div className="px-4 py-2 relative">
+          <div className="flex justify-center mb-4 relative">
+            <img
+              src="./images/logo/metamask-fox.svg"
+              alt="OPN Logo"
+              className="logo-image"
+            />
           </div>
 
-        </button>
+          <button className="custom-copy-section">
+            <div className="flex items-center gap-2 relative z-10 w-full">
+              <AppHeaderOPN location={location} />
+            </div>
+          </button>
 
-        <button
-          className="assetList-section">
-          <Box className="w-full">
-            <AssetListControlBar />
-          </Box>
-
-        </button>
-      </div>
-    </div>
-
-    {
-      isPopup ? null : <div
-        className="custom-card">
-        <h3 className="mb-4" style={{ color: 'var(--color-text-default)' }}>Quick Actions</h3>
-        <div className="space-y-2">
-          <HomeCoinButtons />
+          <button className="assetList-section">
+            <Box className="w-full">
+              <AssetListControlBar />
+            </Box>
+          </button>
         </div>
       </div>
-    }
-  </div>;
+    </div>
+  );
 };
+
 
 export const HomeCoinBalance = () => {
   const account = useSelector(getSelectedInternalAccount);
@@ -203,7 +199,7 @@ export const HomeCoinBalance = () => {
   );
   const evmBalanceIsCached = useSelector(isBalanceCached);
   const { chainId: multichainChainId } =
-  useSelector(getSelectedMultichainNetworkConfiguration) || {};
+    useSelector(getSelectedMultichainNetworkConfiguration) || {};
   const isEvm = isEvmAccountType(account?.type);
 
   const chainId = isEvm ? evmChainId : multichainChainId;
@@ -1081,7 +1077,7 @@ export default class Home extends PureComponent {
         <div className="home__container">
 
           {dataCollectionForMarketing === null &&
-          participateInMetaMetrics === true
+            participateInMetaMetrics === true
             ? this.renderOnboardingPopover()
             : null}
           {isSeedlessPasswordOutdated && <PasswordOutdatedModal />}
@@ -1089,8 +1085,8 @@ export default class Home extends PureComponent {
           {displayUpdateModal && <UpdateModal />}
           {showWhatsNew ? <WhatsNewModal onClose={hideWhatsNewPopup} /> : null}
           {!showWhatsNew &&
-          showRecoveryPhraseReminder &&
-          !isPrimarySeedPhraseBackedUp ? (
+            showRecoveryPhraseReminder &&
+            !isPrimarySeedPhraseBackedUp ? (
             <RecoveryPhraseReminder
               onConfirm={this.onRecoveryPhraseReminderClose}
             />
@@ -1118,6 +1114,7 @@ export default class Home extends PureComponent {
               showButtons={false}
               isPopup={isPopup}
             ></AccountOverview>
+
 
             {
               ///: BEGIN:ONLY_INCLUDE_IF(build-beta)
