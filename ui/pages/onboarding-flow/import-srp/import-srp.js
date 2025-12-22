@@ -220,9 +220,9 @@ export default function ImportSRP({ submitSecretRecoveryPhrase }) {
         textAlign={TextAlign.Left}
       >
 
-        <div className="bg-[#2280cd]/20 border border-[#2280cd]/30 rounded-lg p-3 mb-6 w-full"
+        <div className="rounded-lg p-3 mb-6 w-full custom-alert-info"
         ><p
-          className="text-[#b0efff] text-sm text-center">💡 Tip: You can paste all 12 words at once</p></div>
+          className="text-sm text-center">💡 Tip: You can paste all 12 words at once</p></div>
 
         <Button
           width={BlockSize.Full}
@@ -235,7 +235,8 @@ export default function ImportSRP({ submitSecretRecoveryPhrase }) {
           {t('importAWallet')}
         </Button>
 
-        <div className="mt-6 bg-[#4105b6]/20 border border-[#4105b6]/30 rounded-lg p-4"><p
+        <div className="mt-6 custom-alert-warning">
+        <p
           className="text-[#b0efff]/70 text-sm text-center">⚠️ Never share your recovery phrase with anyone. OPN will
           never ask for it.</p></div>
 
