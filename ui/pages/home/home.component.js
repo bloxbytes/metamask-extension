@@ -1,8 +1,8 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, useCallback, useEffect } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { Redirect, Route } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { EthMethod, isEvmAccountType } from '@metamask/keyring-api';
 import { Text, TextVariant, TextColor } from '@metamask/design-system-react';
 import {
@@ -32,12 +32,18 @@ import {
   BlockSize,
   AlignItems,
   JustifyContent,
+  BackgroundColor,
+  BorderRadius,
+  IconColor,
 } from '../../helpers/constants/design-system';
 import { SECOND } from '../../../shared/constants/time';
 import {
+  ButtonBase,
+  ButtonBaseSize,
   ButtonIcon,
   ButtonIconSize,
   IconName,
+  IconSize,
   Box,
   Icon,
   Modal,
@@ -87,6 +93,11 @@ import { getSelectedMultichainNetworkConfiguration } from '../../selectors/multi
 import { getMultichainSelectedAccountCachedBalance } from '../../selectors/multichain';
 import { getIsNativeTokenBuyable } from '../../ducks/ramps';
 import { shortenAddress } from '../../helpers/utils/util';
+import { useCopyToClipboard } from '../../hooks/useCopyToClipboard';
+import { setShowCopyAddressToast } from '../../ducks/app/app';
+// TODO: Remove restricted import
+// eslint-disable-next-line import/no-restricted-paths
+import { normalizeSafeAddress } from '../../../app/scripts/lib/multichain/address';
 ///: BEGIN:ONLY_INCLUDE_IF(build-beta)
 import BetaHomeFooter from './beta/beta-home-footer.component';
 ///: END:ONLY_INCLUDE_IF
@@ -226,6 +237,7 @@ export const BannerComponent = ({ isPopup = false }) => {
 
 
 export const HomeCoinBalance = () => {
+  const dispatch = useDispatch();
   const account = useSelector(getSelectedInternalAccount);
   const evmChainId = useSelector(getCurrentChainId);
   const evmBalance = useSelector(getSelectedAccountCachedBalance);
@@ -240,10 +252,32 @@ export const HomeCoinBalance = () => {
   const chainId = isEvm ? evmChainId : multichainChainId;
   const balance = isEvm ? evmBalance : nonEvmBalance;
   const balanceIsCached = isEvm ? evmBalanceIsCached : false;
-  const displayAddress =
+  const normalizedAddress =
     account?.address && typeof account.address === 'string'
-      ? shortenAddress(account.address)
+      ? normalizeSafeAddress(account.address)
       : '';
+  const displayAddress = normalizedAddress
+    ? shortenAddress(normalizedAddress)
+    : '';
+  const [copied, handleCopy, resetCopyState] = useCopyToClipboard(2000, {
+    expireClipboard: false,
+  });
+
+  useEffect(() => {
+    if (normalizedAddress) {
+      resetCopyState();
+    }
+  }, [normalizedAddress, resetCopyState]);
+
+  useEffect(() => {
+    dispatch(setShowCopyAddressToast(copied));
+  }, [copied, dispatch]);
+
+  const handleCopyClick = useCallback(() => {
+    if (normalizedAddress) {
+      handleCopy(normalizedAddress);
+    }
+  }, [handleCopy, normalizedAddress]);
 
   if (!account || !chainId || balance === undefined) {
     return null;
@@ -268,7 +302,24 @@ export const HomeCoinBalance = () => {
         classPrefix="home"
       />
       {displayAddress ? (
-        <div className="home__coin-balance-address"><p>{displayAddress}</p></div>
+        <ButtonBase
+          className="home__coin-balance-address"
+          onClick={handleCopyClick}
+          size={ButtonBaseSize.Sm}
+          backgroundColor={BackgroundColor.transparent}
+          borderRadius={BorderRadius.LG}
+          endIconName={copied ? IconName.CopySuccess : IconName.Copy}
+          endIconProps={{
+            color: IconColor.iconAlternative,
+            size: IconSize.Sm,
+          }}
+          paddingLeft={3}
+          paddingRight={3}
+          style={{ height: 'auto' }}
+          data-testid="home-copy-address-button"
+        >
+          {displayAddress}
+        </ButtonBase>
       ) : null}
     </div>
   );
