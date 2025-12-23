@@ -285,6 +285,7 @@ export const CreateAccount: CreateAccountComponent = React.memo(
               {t('cancel')}
             </ButtonSecondary>
             <ButtonPrimary
+              className={"custom-btn-primary"}
               data-testid="submit-add-account-with-name"
               type="submit"
               disabled={!isValidAccountName || loading}
