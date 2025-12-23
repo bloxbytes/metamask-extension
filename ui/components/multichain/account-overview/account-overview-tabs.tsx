@@ -13,7 +13,11 @@ import {
 } from '../../../../shared/constants/metametrics';
 import { endTrace, trace } from '../../../../shared/lib/trace';
 import { MetaMetricsContext } from '../../../contexts/metametrics';
-import { ASSET_ROUTE, DEFI_ROUTE } from '../../../helpers/constants/routes';
+import {
+  ASSET_ROUTE,
+  BADGES_ROUTE,
+  DEFI_ROUTE,
+} from '../../../helpers/constants/routes';
 import { useI18nContext } from '../../../hooks/useI18nContext';
 import { useSafeChains } from '../../../pages/settings/networks-tab/networks-form/use-safe-chains';
 import {
@@ -243,6 +247,8 @@ export const AccountOverviewTabs = ({
                         </div>
                       </div>
                       <button
+                        type="button"
+                        onClick={() => history.push(BADGES_ROUTE)}
                         className="Fsize-12 bg-gradient-to-r from-[#4105b6] to-[#6305b6] text-[#f8fdf1] px-3 py-1.5 rounded-lg hover:from-[#6305b6] hover:to-[#4105b6] transition-all shadow-lg shadow-[#4105b6]/30 hover:shadow-[#4105b6]/50 whitespace-nowrap">View
                         Badges
                       </button>
@@ -377,6 +383,7 @@ export const AccountOverviewTabs = ({
             </Box>
           </Tab>
         )}
+
         {false && showDefi && (
           <Tab
             name={t('defi')}
@@ -444,6 +451,7 @@ export const AccountOverviewTabs = ({
           </Tab>
         )}
       </Tabs>
+
     </div>
   );
 };

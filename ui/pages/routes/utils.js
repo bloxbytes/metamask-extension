@@ -32,6 +32,7 @@ import {
   GATOR_PERMISSIONS,
   TOKEN_TRANSFER_ROUTE,
   REVIEW_GATOR_PERMISSIONS_ROUTE,
+  BADGES_ROUTE,
 } from '../../helpers/constants/routes';
 
 export function isConfirmTransactionRoute(pathname) {
@@ -188,6 +189,16 @@ export function hideAppHeader(props) {
     }),
   );
   if (isMultichainSend) {
+    return true;
+  }
+
+  const isBadgesPage = Boolean(
+    matchPath(location.pathname, {
+      path: BADGES_ROUTE,
+      exact: false,
+    }),
+  );
+  if (isBadgesPage) {
     return true;
   }
 
