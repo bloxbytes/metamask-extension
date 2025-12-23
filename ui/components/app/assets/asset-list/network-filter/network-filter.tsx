@@ -148,6 +148,7 @@ const NetworkFilter = ({
               variant={TextVariant.bodyMdMedium}
               color={TextColor.textDefault}
             >
+          <div className="mb-5"></div>
               {t('popularNetworks')}
             </Text>
             {showTokenFiatBalance && (

@@ -9,13 +9,8 @@
   border-radius: 12px;
   background: var(--color-background-default);
   border: 2px solid transparent;
+  margin-bottom: 5px;
   transition: all 0.2s ease;
-
-  &:not(.multichain-network-list-item--selected, .multichain-network-list-item--disabled, .multichain-network-list-item--not-selectable) {
-    &:hover {
-      background: var(--color-background-default-hover);
-    }
-  }
 
   &--not-selectable {
     cursor: default;
