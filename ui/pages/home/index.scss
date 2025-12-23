@@ -329,8 +329,8 @@
   padding: 20px;
   border-radius: 18px;
   background: radial-gradient(120% 120% at 10% 20%, rgba(99, 5, 182, 0.18), transparent),
-  radial-gradient(120% 120% at 90% 80%, rgba(34, 128, 205, 0.16), transparent),
-  var(--color-background-section);
+    radial-gradient(120% 120% at 90% 80%, rgba(34, 128, 205, 0.16), transparent),
+    var(--color-background-section);
   color: var(--color-text-default) !important;
   overflow: hidden;
 
@@ -836,7 +836,8 @@
   overflow: visible;
   height: auto !important;
 
-  .mm-box--background-color-background-alternative, .mm-box--background-color-background-default {
+  .mm-box--background-color-background-alternative,
+  .mm-box--background-color-background-default {
     background-color: transparent;
   }
 
@@ -844,7 +845,10 @@
     border-bottom: none;
   }
 
-  .multichain-account-picker:hover, .multichain-account-picker:focus, .multichain-app-header__address-copy-button:not([disabled]):hover, .multichain-app-header__address-copy-button:not([disabled]):focus {
+  .multichain-account-picker:hover,
+  .multichain-account-picker:focus,
+  .multichain-app-header__address-copy-button:not([disabled]):hover,
+  .multichain-app-header__address-copy-button:not([disabled]):focus {
     background: none;
   }
 
@@ -954,7 +958,8 @@
   position: relative;
 
   &:hover {
-    background: #20245a99; /* #20245a with 60% opacity */
+    background: #20245a99;
+    /* #20245a with 60% opacity */
   }
 
   .multichain-app-header__contents {
@@ -1119,6 +1124,7 @@
 
 // Hidden scrollbar for main container
 .main-container {
+
   // Webkit browsers (Chrome, Safari, Edge)
   &::-webkit-scrollbar {
     display: none;
@@ -1141,6 +1147,7 @@
 
 // Global scrollbar styles - hidden for all scrollable elements
 * {
+
   // Webkit browsers (Chrome, Safari, Edge)
   &::-webkit-scrollbar {
     display: none;
@@ -1187,7 +1194,8 @@
   max-width: 100% !important;
   background-color: transparent !important;
 
-  .multichain-page-header, .multichain-page__inner-container {
+  .multichain-page-header,
+  .multichain-page__inner-container {
     background: var(--theme-gradient-primary) !important;
   }
 }
@@ -1198,7 +1206,8 @@
 
   background: var(--level-card-bg);
 
-  backdrop-filter: blur(24px); /* backdrop-blur-xl */
+  backdrop-filter: blur(24px);
+  /* backdrop-blur-xl */
   -webkit-backdrop-filter: blur(24px);
 
   border-radius: 0.75rem;
@@ -1243,12 +1252,30 @@
 .custom-alert-warning {
   background-color: var(--alert-warning-bg);
   border: var(--border-width) solid var(--alert-warning-border);
-  border-radius: 0.5rem; /* rounded-lg */
-  padding: 1rem; /* p-4 */
+  border-radius: 0.5rem;
+  /* rounded-lg */
+  padding: 1rem;
+
+  /* p-4 */
   p {
     color: var(--alert-warning-text);
     font-size: 0.875rem;
     line-height: 1.25rem;
     text-align: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .empty-state-card {
+    grid-template-columns: 1fr !important;
+    row-gap: 0.75rem !important;
+    justify-items: center;
+    /* ✅ horizontally center */
+    text-align: center;
+    white-space: normal;
+
+    img {
+      margin: auto;
+    }
   }
 }
