@@ -5,16 +5,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px;
+  padding: 8px;
   border-radius: 12px;
-  background: var(--color-background-default-hover);
+  background: var(--color-background-default);
   border: var(--border-width) solid var(--color-border-default);
   margin-bottom: 5px;
   transition: all 0.2s ease;
 
   &:hover {
     color: inherit;
-    border-color: var(--color-border-default);
+    border-color: #A081DB;
   }
 
   &--not-selectable {
@@ -65,5 +65,14 @@
 
   .mm-button-icon {
     --button-icon-size: 20px;
+  }
+
+  .mm-avatar-base {
+    border: none;
+  }
+
+  .mm-avatar-network__network-image {
+    border: none;
+    width: 35px;
   }
 }

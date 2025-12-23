@@ -225,11 +225,8 @@
       background: linear-gradient(135deg, rgb(34, 128, 205), rgba(34, 128, 205, 0.867));
       box-shadow: var(--box-shadow-rounded);
       width: 2.5rem;
-      /* w-10 */
       height: 2.5rem;
-      /* h-10 */
       border-radius: 9999px;
-      /* rounded-full */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -258,6 +255,10 @@
 
 
     }
+  }
+
+  .mm-box--color-text-default {
+    color: var(--color-text-alternative) !important;
   }
 }
 

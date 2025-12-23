@@ -33,15 +33,33 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px;
+  padding: 8px;
   border-radius: 12px;
   background: var(--color-background-default);
-  border: 2px solid transparent;
+  border: var(--border-width) solid var(--color-border-default);
   margin-bottom: 5px;
   transition: all 0.2s ease;
 
   .mm-button-icon {
     --button-icon-size: 20px;
+  }
+
+  .mm-avatar-base {
+    border: none;
+  }
+
+  .mm-avatar-network__network-image {
+    border: none;
+    width: 35px;
+  }
+
+  &:hover {
+    border-color: #A081DB;
+  }
+
+  .mm-text--body-md-medium {
+    font-size: 14px;
+    font-weight: 400;
   }
 }
 
