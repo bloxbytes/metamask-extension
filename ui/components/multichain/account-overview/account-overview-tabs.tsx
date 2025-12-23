@@ -297,7 +297,7 @@ export const AccountOverviewTabs = ({
 
                     {/* Animated nodes visualization */}
                     <div
-                      className="relative h-16 mb-3 rounded-lg bg-[#0f112a]/50 border border-[#4105b6]/20 overflow-hidden bg-sub-card">
+                      className="bg-sub-card">
                       <svg className="w-full h-full">
                         {/* Animated connection lines */}
                         <line x1="10%" y1="50%" x2="30%" y2="50%" stroke="#4105b6" strokeWidth="2" opacity="0.6">
