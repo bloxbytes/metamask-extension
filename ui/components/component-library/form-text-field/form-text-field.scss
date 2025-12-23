@@ -4,6 +4,7 @@
   --text-opacity-disabled: 0.5;
 
   &--disabled {
+
     .mm-form-text-field__label,
     .mm-form-text-field__help-text {
       opacity: var(--text-opacity-disabled);
@@ -77,24 +78,27 @@
         background-color: transparent !important;
 
         .mm-icon {
-          color: var(--color-text-sub)!important;
+          color: var(--color-text-sub) !important;
         }
       }
     }
   }
 
   // Direct targeting for better specificity
-  .mm-form-text-field__text-field.mm-text-field, .TextField-inputRoot-12, .mm-text-field-search {
-    background-color: var(--theme-background-glass)!important;
-    border-color: var(--color-border-default)!important;
+  .mm-form-text-field__text-field.mm-text-field,
+  .TextField-inputRoot-12,
+  .mm-text-field-search {
+    background-color: var(--theme-background-glass) !important;
+    border-color: var(--color-border-default) !important;
     border-radius: 0.75rem !important;
     border-width: var(--border-width);
 
     .mm-text-field__input,
     .mm-input {
       background-color: transparent !important;
-      color: var(--color-text-sub)!important;
+      color: var(--color-text-sub) !important;
       font-size: 0.875rem !important;
+      text-align: start;
 
       &::placeholder {
         color: var(--color-text-muted) !important;
@@ -113,4 +117,8 @@
       border-color: rgba(255, 0, 0, 0.6) !important;
     }
   }
+}
+
+textarea {
+  text-align: start !important;
 }

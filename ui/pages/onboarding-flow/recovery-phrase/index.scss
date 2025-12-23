@@ -63,7 +63,7 @@
     transition: all 0.3s ease !important;
 
     &:hover {
-      background-color: var(--theme-background-glass-hover)!important;
+      background-color: var(--theme-background-glass-hover) !important;
     }
   }
 
@@ -94,7 +94,7 @@
       justify-content: center !important;
       gap: 0.5rem !important;
       background-color: var(--bg-btn-primary-disabled) !important;
-      color: #4f5262 !important;
+      // color: #4f5262 !important;
       cursor: not-allowed !important;
       transform: none !important;
       box-shadow: none !important;
@@ -227,8 +227,8 @@
     }
   }
 
-  .mm-icon {
-    color: #f87171!important;
+  .mm-box--color-warning-default {
+    color: #f87171 !important;
   }
 
   .mm-box--color-text-alternative {
@@ -259,21 +259,21 @@
 
   .recovery-phrase__secret-blocker-text {
     .mm-icon {
-      color: var( --theme-icon-color)!important;
+      color: var(--theme-icon-color) !important;
     }
   }
 
 
 
-  .mm-box.mm-box--margin-bottom-6{
-    background-color: var(--theme-bg-card)!important;
+  .mm-box.mm-box--margin-bottom-6 {
+    background-color: var(--theme-bg-card) !important;
     border: var(--border-width) solid var(--theme-border-color-light) !important;
     width: 100%;
   }
 
-  .recovery-phrase__secret-blocker-text{
-    .mm-text{
-      color:  var(--recovery-color) !important;
+  .recovery-phrase__secret-blocker-text {
+    .mm-text {
+      color: var(--recovery-color) !important;
     }
 
   }
@@ -290,7 +290,7 @@
 .mm-text--body-md {
   color: rgba(176, 239, 255, 0.7);
   font-size: 14px;
-  text-align: center;
+  text-align: start;
   font-weight: 400;
 }
 
@@ -299,19 +299,22 @@
     color: #4f5262;
   }
 }
-.onboarding-flow__container--recovery-phrase{
+
+.onboarding-flow__container--recovery-phrase {
   .mm-box--background-color-background-alternative {
     background-color: transparent;
     border: 1px solid #4459ff;
+  }
 }
-}
-.mm-text--body-sm{
+
+.mm-text--body-sm {
   font-weight: 400;
   font-size: 14px;
 }
+
 .mm-text--body-md {
   color: var(--color-text-white);
   font-size: 14px;
-  text-align: start;
+  // text-align: start;
   font-weight: 400;
 }
