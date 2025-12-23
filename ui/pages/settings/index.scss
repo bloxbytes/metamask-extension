@@ -461,3 +461,17 @@
   width: 30%;
   margin: auto;
 }
+
+.settings-tab-panel {
+  .settings-tab-container {
+    overflow-y: auto;
+  }
+}
+
+.account-overview-tabs__content--popup {
+  .settings-tab-panel {
+    .settings-tab-container {
+      overflow-y: hidden;
+    }
+  }
+}

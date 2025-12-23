@@ -8,6 +8,7 @@ $extraProperties: auto;
 $attributesToApplyExtraProperties: margin;
 
 .mm-box {
+
   // Padding, Margin, and Gap
   @each $attribute in $attributes {
     @each $size in design-system.$sizes-numeric {
@@ -15,6 +16,7 @@ $attributesToApplyExtraProperties: margin;
         #{$attribute}: utilities.get-spacing($size);
       }
     }
+
     // breakpoint classes
     @each $breakpoint, $min-width in design-system.$screen-sizes-map {
       @each $size in design-system.$sizes-numeric {
@@ -32,6 +34,7 @@ $attributesToApplyExtraProperties: margin;
           #{$attribute}-#{$direction}: utilities.get-spacing($size);
         }
       }
+
       // breakpoint classes
       @each $breakpoint, $min-width in design-system.$screen-sizes-map {
         @each $direction in design-system.$directions {
@@ -86,6 +89,7 @@ $attributesToApplyExtraProperties: margin;
       border-width: #{$size}px;
     }
   }
+
   // breakpoint classes
   @each $breakpoint, $min-width in design-system.$screen-sizes-map {
     @each $size in design-system.$sizes-numeric {
@@ -96,12 +100,14 @@ $attributesToApplyExtraProperties: margin;
       }
     }
   }
+
   // border-color
   @each $variant, $color in design-system.$color-map {
     &--border-color-#{$variant} {
       border-color: var($color);
     }
   }
+
   // breakpoint classes
   @each $breakpoint, $min-width in design-system.$screen-sizes-map {
     @each $variant, $color in design-system.$color-map {
@@ -112,12 +118,14 @@ $attributesToApplyExtraProperties: margin;
       }
     }
   }
+
   // border-style
   @each $border-style in design-system.$border-style {
     &--border-style-#{$border-style} {
       border-style: $border-style;
     }
   }
+
   // breakpoint classes
   @each $breakpoint, $min-width in design-system.$screen-sizes-map {
     @each $border-style in design-system.$border-style {
@@ -128,12 +136,14 @@ $attributesToApplyExtraProperties: margin;
       }
     }
   }
+
   // border-radius
   @each $radius, $value in design-system.$border-radius {
     &--rounded-#{$radius} {
       border-radius: $value;
     }
   }
+
   // breakpoint classes
   @each $breakpoint, $min-width in design-system.$screen-sizes-map {
     @each $radius, $value in design-system.$border-radius {
@@ -151,6 +161,7 @@ $attributesToApplyExtraProperties: margin;
       display: $display;
     }
   }
+
   // breakpoint classes
   @each $breakpoint, $min-width in design-system.$screen-sizes-map {
     @each $display in design-system.$display {
@@ -167,6 +178,7 @@ $attributesToApplyExtraProperties: margin;
       align-items: $alignment;
     }
   }
+
   // breakpoint classes
   @each $breakpoint, $min-width in design-system.$screen-sizes-map {
     @each $alignment in design-system.$align-items {
@@ -183,6 +195,7 @@ $attributesToApplyExtraProperties: margin;
       justify-content: $justification;
     }
   }
+
   // breakpoint classes
   @each $breakpoint, $min-width in design-system.$screen-sizes-map {
     @each $justification in design-system.$justify-content {
@@ -199,6 +212,7 @@ $attributesToApplyExtraProperties: margin;
       flex-direction: $direction;
     }
   }
+
   // breakpoint classes
   @each $breakpoint, $min-width in design-system.$screen-sizes-map {
     @each $direction in design-system.$flex-direction {
@@ -215,6 +229,7 @@ $attributesToApplyExtraProperties: margin;
       flex-wrap: $wrap;
     }
   }
+
   // breakpoint classes
   @each $breakpoint, $min-width in design-system.$screen-sizes-map {
     @each $wrap in design-system.$flex-wrap {
@@ -252,6 +267,7 @@ $attributesToApplyExtraProperties: margin;
       height: $value;
     }
   }
+
   // breakpoint classes
   @each $breakpoint, $min-width in design-system.$screen-sizes-map {
     @each $fraction, $value in design-system.$fractions {
@@ -259,6 +275,7 @@ $attributesToApplyExtraProperties: margin;
         &--#{$breakpoint}\:width-#{$fraction} {
           width: $value;
         }
+
         &--#{$breakpoint}\:min-width-#{$fraction} {
           min-width: $value;
         }
@@ -299,6 +316,7 @@ $attributesToApplyExtraProperties: margin;
   &--height-screen {
     height: 100vh;
   }
+
   // breakpoint classes
   @each $breakpoint, $min-width in design-system.$screen-sizes-map {
     @media screen and (min-width: $min-width) {
@@ -311,6 +329,7 @@ $attributesToApplyExtraProperties: margin;
   &--width-screen {
     width: 100vw;
   }
+
   // breakpoint classes
   @each $breakpoint, $min-width in design-system.$screen-sizes-map {
     @media screen and (min-width: $min-width) {
@@ -323,6 +342,7 @@ $attributesToApplyExtraProperties: margin;
   &--min-width-screen {
     min-width: 100vw;
   }
+
   // breakpoint classes
   @each $breakpoint, $min-width in design-system.$screen-sizes-map {
     @media screen and (min-width: $min-width) {
@@ -335,6 +355,7 @@ $attributesToApplyExtraProperties: margin;
   &--height-max {
     height: max-content;
   }
+
   // breakpoint classes
   @each $breakpoint, $min-width in design-system.$screen-sizes-map {
     @media screen and (min-width: $min-width) {
@@ -347,6 +368,7 @@ $attributesToApplyExtraProperties: margin;
   &--width-max {
     width: max-content;
   }
+
   // breakpoint classes
   @each $breakpoint, $min-width in design-system.$screen-sizes-map {
     @media screen and (min-width: $min-width) {
@@ -359,6 +381,7 @@ $attributesToApplyExtraProperties: margin;
   &--min-width-max {
     min-width: max-content;
   }
+
   // breakpoint classes
   @each $breakpoint, $min-width in design-system.$screen-sizes-map {
     @media screen and (min-width: $min-width) {
@@ -371,6 +394,7 @@ $attributesToApplyExtraProperties: margin;
   &--height-min {
     height: min-content;
   }
+
   // breakpoint classes
   @each $breakpoint, $min-width in design-system.$screen-sizes-map {
     @media screen and (min-width: $min-width) {
@@ -383,6 +407,7 @@ $attributesToApplyExtraProperties: margin;
   &--width-min {
     width: min-content;
   }
+
   // breakpoint classes
   @each $breakpoint, $min-width in design-system.$screen-sizes-map {
     @media screen and (min-width: $min-width) {
@@ -395,6 +420,7 @@ $attributesToApplyExtraProperties: margin;
   &--min-width-min {
     min-width: min-content;
   }
+
   // breakpoint classes
   @each $breakpoint, $min-width in design-system.$screen-sizes-map {
     @media screen and (min-width: $min-width) {
@@ -410,6 +436,7 @@ $attributesToApplyExtraProperties: margin;
       text-align: $alignment;
     }
   }
+
   // breakpoint classes
   @each $breakpoint, $min-width in design-system.$screen-sizes-map {
     @each $alignment in design-system.$text-align {
@@ -424,9 +451,10 @@ $attributesToApplyExtraProperties: margin;
   // background
   @each $variant, $color in design-system.$color-map {
     &--background-color-#{$variant} {
-      background-color: var($color);
+      background-color: transparent;
     }
   }
+
   // breakpoint classes
   @each $breakpoint, $min-width in design-system.$screen-sizes-map {
     @each $variant, $color in design-system.$color-map {
@@ -444,6 +472,7 @@ $attributesToApplyExtraProperties: margin;
       color: var($color);
     }
   }
+
   // breakpoint classes
   @each $breakpoint, $min-width in design-system.$screen-sizes-map {
     @each $variant, $color in design-system.$color-map {
