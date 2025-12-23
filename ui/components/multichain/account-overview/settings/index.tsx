@@ -61,7 +61,7 @@ export default function SettingsTab(): JSX.Element {
 
   return (
     <Box
-      style={{ maxHeight: 'calc(100vh - 200px)', overflowY: 'auto' }}
+      style={{ maxHeight: 'calc(100vh - 200px)'}}
     >
       <div className="fah-card">
 
