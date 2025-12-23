@@ -23,8 +23,10 @@ import {
   getEnabledNetworks,
 } from '../../../selectors';
 ///: BEGIN:ONLY_INCLUDE_IF(multichain)
-import MultichainBridgeTransactionListItem from '../multichain-bridge-transaction-list-item/multichain-bridge-transaction-list-item';
-import MultichainBridgeTransactionDetailsModal from '../multichain-bridge-transaction-details-modal/multichain-bridge-transaction-details-modal';
+import MultichainBridgeTransactionListItem
+  from '../multichain-bridge-transaction-list-item/multichain-bridge-transaction-list-item';
+import MultichainBridgeTransactionDetailsModal
+  from '../multichain-bridge-transaction-details-modal/multichain-bridge-transaction-details-modal';
 ///: END:ONLY_INCLUDE_IF
 import { useI18nContext } from '../../../hooks/useI18nContext';
 import TransactionListItem from '../transaction-list-item';
@@ -119,9 +121,9 @@ const getTransactionGroupRecipientAddressFilter = (
     return (
       isEqualCaseInsensitive(txParams?.to, recipientAddress) ||
       (chainIds.some(
-        (chainId) =>
-          txParams?.to === SWAPS_CHAINID_CONTRACT_ADDRESS_MAP[chainId],
-      ) &&
+          (chainId) =>
+            txParams?.to === SWAPS_CHAINID_CONTRACT_ADDRESS_MAP[chainId],
+        ) &&
         txParams.data.match(recipientAddress.slice(2)))
     );
   };
@@ -146,17 +148,17 @@ const getTransactionGroupRecipientAddressFilterAllChain = (
     return (
       isEqualCaseInsensitive(txParams?.to, recipientAddress) ||
       (chainIds.some(
-        (chainId) =>
-          txParams?.to === SWAPS_CHAINID_CONTRACT_ADDRESS_MAP[chainId],
-      ) &&
+          (chainId) =>
+            txParams?.to === SWAPS_CHAINID_CONTRACT_ADDRESS_MAP[chainId],
+        ) &&
         txParams.data.match(recipientAddress.slice(2)))
     );
   };
 };
 
 const tokenTransactionFilter = ({
-  initialTransaction: { type, destinationTokenSymbol, sourceTokenSymbol },
-}) => {
+                                  initialTransaction: { type, destinationTokenSymbol, sourceTokenSymbol },
+                                }) => {
   if (TOKEN_CATEGORY_HASH[type]) {
     return false;
   } else if (
@@ -292,6 +294,7 @@ function filterNonEvmTxByChainIds(nonEvmTransactions, chainIds) {
     transactions: transactionForChainIds,
   };
 }
+
 ///: END:ONLY_INCLUDE_IF
 
 export const buildUnifiedActivityItems = (
@@ -395,13 +398,14 @@ function getFilteredChainIds(enabledNetworks, tokenChainIdOverride) {
     nonEvmChainIds: filteredUniqueNonEvmChainIds,
   };
 }
+
 export default function UnifiedTransactionList({
-  hideTokenTransactions,
-  tokenAddress,
-  boxProps,
-  hideNetworkFilter,
-  tokenChainIdOverride,
-}) {
+                                                 hideTokenTransactions,
+                                                 tokenAddress,
+                                                 boxProps,
+                                                 hideNetworkFilter,
+                                                 tokenChainIdOverride,
+                                               }) {
   const [daysLimit, setDaysLimit] = useState(PAGE_DAYS_INCREMENT);
   const t = useI18nContext();
   const selectedAccount = useSelector(getSelectedAccount);
@@ -614,7 +618,7 @@ export default function UnifiedTransactionList({
       const isIncomingTxsButToAnotherAddress = (transaction) =>
         transaction.type === TransactionType.incoming &&
         transaction.txParams.to.toLowerCase() !==
-          selectedAccount.address.toLowerCase();
+        selectedAccount.address.toLowerCase();
 
       dateGroup.transactionGroups = dateGroup.transactionGroups.map((item) => {
         if (item?.kind !== TransactionKind.EVM) {
@@ -680,7 +684,7 @@ export default function UnifiedTransactionList({
           />
         ))}
 
-      <Box className="transaction-list" {...boxProps}>
+      <Box className="transaction-list transaction-list-v4" {...boxProps}>
         {!hideNetworkFilter && (
           <AssetListControlBar
             showSortControl={false}
@@ -745,10 +749,10 @@ export default function UnifiedTransactionList({
 
 // Regular transaction list item for non-bridge transactions
 const MultichainTransactionListItem = ({
-  transaction,
-  networkConfig,
-  toggleShowDetails,
-}) => {
+                                         transaction,
+                                         networkConfig,
+                                         toggleShowDetails,
+                                       }) => {
   const t = useI18nContext();
   const { from, to, type, timestamp, isRedeposit, title } =
     useMultichainTransactionDisplay(transaction, networkConfig);
@@ -759,6 +763,59 @@ const MultichainTransactionListItem = ({
   // Mainly used for consolidation transactions
   if (isRedeposit) {
     return (
+      <>
+        <ActivityListItem
+          className="custom-class"
+          data-testid="activity-list-item"
+          onClick={() => toggleShowDetails(transaction)}
+          icon={
+            <BadgeWrapper
+              display={Display.Block}
+              badge={
+                <AvatarNetwork
+                  className="activity-tx__network-badge"
+                  data-testid="activity-tx-network-badge"
+                  size={AvatarNetworkSize.Xs}
+                  name={transaction.chain}
+                  src={networkLogo}
+                  borderColor={BackgroundColor.backgroundDefault}
+                  borderWidth={2}
+                />
+              }
+            >
+              <TransactionIcon
+                category={TransactionGroupCategory.redeposit}
+                status={statusKey}
+              />
+            </BadgeWrapper>
+          }
+          title={t('redeposit')}
+          subtitle={
+            <TransactionStatusLabel
+              date={formatTimestamp(timestamp)}
+              error={{}}
+              status={statusKey}
+              statusOnly
+            />
+          }
+        />
+      </>
+    );
+  }
+
+  let { amount, unit } = to ?? {};
+  let category = type;
+  if (type === KeyringTransactionType.Swap) {
+    amount = from.amount;
+    unit = from.unit;
+  }
+
+  if (type === KeyringTransactionType.Unknown) {
+    category = TransactionGroupCategory.interaction;
+  }
+
+  return (
+    <>
       <ActivityListItem
         className="custom-class"
         data-testid="activity-list-item"
@@ -778,82 +835,33 @@ const MultichainTransactionListItem = ({
               />
             }
           >
-            <TransactionIcon
-              category={TransactionGroupCategory.redeposit}
-              status={statusKey}
-            />
+            <TransactionIcon category={category} status={statusKey} />
           </BadgeWrapper>
         }
-        title={t('redeposit')}
+        rightContent={
+          <Text
+            className="activity-list-item__primary-currency"
+            data-testid="transaction-list-item-primary-currency"
+            color={TextColor.textDefault}
+            variant={TextVariant.bodyMdMedium}
+            ellipsis
+            textAlign="right"
+            title="Primary Currency"
+          >
+            {amount} {unit}
+          </Text>
+        }
+        title={title}
         subtitle={
           <TransactionStatusLabel
-            date={formatTimestamp(timestamp)}
+            date={formatTimestamp(transaction.timestamp)}
             error={{}}
             status={statusKey}
             statusOnly
           />
         }
       />
-    );
-  }
-
-  let { amount, unit } = to ?? {};
-  let category = type;
-  if (type === KeyringTransactionType.Swap) {
-    amount = from.amount;
-    unit = from.unit;
-  }
-
-  if (type === KeyringTransactionType.Unknown) {
-    category = TransactionGroupCategory.interaction;
-  }
-
-  return (
-    <ActivityListItem
-      className="custom-class"
-      data-testid="activity-list-item"
-      onClick={() => toggleShowDetails(transaction)}
-      icon={
-        <BadgeWrapper
-          display={Display.Block}
-          badge={
-            <AvatarNetwork
-              className="activity-tx__network-badge"
-              data-testid="activity-tx-network-badge"
-              size={AvatarNetworkSize.Xs}
-              name={transaction.chain}
-              src={networkLogo}
-              borderColor={BackgroundColor.backgroundDefault}
-              borderWidth={2}
-            />
-          }
-        >
-          <TransactionIcon category={category} status={statusKey} />
-        </BadgeWrapper>
-      }
-      rightContent={
-        <Text
-          className="activity-list-item__primary-currency"
-          data-testid="transaction-list-item-primary-currency"
-          color={TextColor.textDefault}
-          variant={TextVariant.bodyMdMedium}
-          ellipsis
-          textAlign="right"
-          title="Primary Currency"
-        >
-          {amount} {unit}
-        </Text>
-      }
-      title={title}
-      subtitle={
-        <TransactionStatusLabel
-          date={formatTimestamp(transaction.timestamp)}
-          error={{}}
-          status={statusKey}
-          statusOnly
-        />
-      }
-    />
+    </>
   );
 };
 
