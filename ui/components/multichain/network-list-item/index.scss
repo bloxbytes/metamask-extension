@@ -7,10 +7,15 @@
   justify-content: space-between;
   padding: 12px;
   border-radius: 12px;
-  background: var(--color-background-default);
-  border: 2px solid transparent;
+  background: var(--color-background-default-hover);
+  border: var(--border-width) solid var(--color-border-default);
   margin-bottom: 5px;
   transition: all 0.2s ease;
+
+  &:hover {
+    color: inherit;
+    border-color: var(--color-border-default);
+  }
 
   &--not-selectable {
     cursor: default;
@@ -27,9 +32,7 @@
   a:hover,
   a:focus {
     color: inherit;
-    border-color: var(--color-border-default);
-
-
+    border: var(--border-width) var(--color-border-default);
   }
 
   &:hover,

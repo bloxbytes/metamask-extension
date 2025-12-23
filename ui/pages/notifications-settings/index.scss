@@ -7,11 +7,9 @@
 // Notifications page theme styling (same as permissions page)
 [data-testid="notifications-page"] {
   width: 100% !important;
-  background: linear-gradient(
-    135deg,
-    rgba(26, 29, 58, 0.6) 0%,
-    rgba(26, 29, 58, 0.4) 100%
-  );
+  background: linear-gradient(135deg,
+      rgba(26, 29, 58, 0.6) 0%,
+      rgba(26, 29, 58, 0.4) 100%);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(65, 5, 182, 0.4);
   box-shadow: 0 10px 32px 0 rgba(31, 41, 71, 0.32),
@@ -19,17 +17,17 @@
 
   // Header styling
   .mm-box--background-color-background-default {
-    background-color: transparent !important;
+    background-color: var(--modal-bg-color);
   }
 
   // Text colors
   .mm-text {
-    color: #f8fdf1;
+    color: var(--color-icon-default);
   }
 
   .mm-text--body-md,
   .mm-text--body-md-medium {
-    color: #f8fdf1;
+    color: var(--color-icon-default);
   }
 
   .mm-text--body-sm,
@@ -43,7 +41,7 @@
 
   // Icon colors
   .mm-icon {
-    color: #b0efff;
+    color: var(--color-icon-default);
   }
 
   // Button icon colors
@@ -64,7 +62,8 @@
   .mm-box[style*="border"] {
     border-color: rgba(65, 5, 182, 0.2) !important;
   }
-  .multichain-app-header-logo{
+
+  .multichain-app-header-logo {
     display: none;
   }
 }

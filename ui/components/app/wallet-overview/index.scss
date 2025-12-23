@@ -192,7 +192,7 @@
     box-shadow: 0 6px 24px 0 rgba(22, 0, 56, 0.26);
 
     &:hover {
-      background: linear-gradient(135deg, rgba(32, 36, 90, 0.6) 0%, rgba(32, 36, 90, 0.4) 100%) !important;
+      background: var(--bg-hover-card) !important;
     }
 
     .mm-text {

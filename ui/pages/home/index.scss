@@ -1378,7 +1378,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background: linear-gradient(to right, #4105b6, #6305b6);
+  background: var(--bg-gradient-blur);
   border-radius: 9999px;
   filter: blur(24px);
   opacity: 0.3;
