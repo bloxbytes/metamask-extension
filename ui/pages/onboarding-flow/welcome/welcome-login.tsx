@@ -217,7 +217,7 @@ export default function WelcomeLogin({
           </Button>
 
           <div className={'space-y-4 mb-12'}></div>
-          <div className="text-[#4f5262] text-sm">
+          <div className="text-[#4f5262] Fsize-14 text-center">
             <p>
               By continuing, I agree to OPN Wallet's{' '}
               <button
