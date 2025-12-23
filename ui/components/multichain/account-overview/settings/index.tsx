@@ -1,17 +1,24 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Box, Text } from '../../../component-library';
 import IconEye from '../../../ui/icon/icon-eye';
 import SRPQuiz from '../../../app/srp-quiz-modal';
-import VisitSupportDataConsentModal from '../../../app/modals/visit-support-data-consent-modal/visit-support-data-consent-modal';
+import VisitSupportDataConsentModal
+  from '../../../app/modals/visit-support-data-consent-modal/visit-support-data-consent-modal';
 import { openWindow } from '../../../../helpers/utils/window';
 import { Bell, CloudBackup, Contact, SettingsIcon } from 'lucide-react';
+import { ThemeType } from '../../../../../shared/constants/preferences';
+import { setTheme } from '../../../../store/actions';
+import { setTheme as setDocumentTheme } from '../../../../pages/routes/utils';
+import { useTheme } from '../../../../hooks/useTheme';
 
 type SettingsItem = {
   label: string;
   value?: string;
   action?: string;
   icon?: React.FC<React.SVGProps<SVGSVGElement>>;
+  isThemeToggle?: boolean;
 };
 
 const ChevronRight: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
@@ -29,25 +36,69 @@ const LogOut: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 );
 
 const sampleIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-  <svg className="text-primary-cl" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" {...props}>
+  <svg className="text-primary-cl" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+       strokeWidth="2" {...props}>
     <circle cx="12" cy="12" r="9" strokeLinecap="round" strokeLinejoin="round" />
     <path d="M12 8v4l3 3" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
-const settingsSections: { title: string; items: SettingsItem[] }[] = [
-  {
-    title: 'Preferences',
-    items: [
-      { label: 'Network settings', action: '/settings/networks', icon: sampleIcon },
-    ],
-  },
-];
+
+const themeIconDark: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="lucide lucide-sun w-5 h-5"
+  >
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2v2" />
+    <path d="M12 20v2" />
+    <path d="m4.93 4.93 1.41 1.41" />
+    <path d="m17.66 17.66 1.41 1.41" />
+    <path d="M2 12h2" />
+    <path d="M20 12h2" />
+    <path d="m6.34 17.66-1.41 1.41" />
+    <path d="m19.07 4.93-1.41 1.41" />
+  </svg>
+);
+
+const themeIconLight: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="lucide lucide-moon w-5 h-5"
+  >
+    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+  </svg>
+);
 
 export default function SettingsTab(): JSX.Element {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const resolvedTheme = useTheme();
+  const isDarkMode = resolvedTheme === ThemeType.dark;
   const [srpQuizModalVisible, setSrpQuizModalVisible] = useState(false);
   const [supportModalVisible, setSupportModalVisible] = useState(false);
+
+  const handleThemeToggle = useCallback(() => {
+    const nextTheme = isDarkMode ? ThemeType.light : ThemeType.dark;
+    setDocumentTheme(nextTheme);
+    dispatch(setTheme(nextTheme));
+  }, [dispatch, isDarkMode]);
 
   const handleItemClick = (action?: string) => {
     if (!action) return;
@@ -59,9 +110,28 @@ export default function SettingsTab(): JSX.Element {
     history.push('/unlock'); // placeholder navigation
   };
 
+  const settingsSections: { title: string; items: SettingsItem[] }[] = [
+    {
+      title: 'Preferences',
+      items: [
+        {
+          label: 'Network settings',
+          action: '/settings/networks',
+          icon: sampleIcon,
+        },
+        {
+          label: 'Theme',
+          value: isDarkMode ? 'Dark' : 'Light',
+          icon: isDarkMode ? themeIconDark :themeIconLight ,
+          isThemeToggle: true,
+        },
+      ],
+    },
+  ];
+
   return (
-    <Box className='settings-tab-container'
-      style={{ maxHeight: 'calc(100vh - 200px)'}}
+    <Box className="settings-tab-container"
+         style={{ maxHeight: 'calc(100vh - 200px)' }}
     >
       <div className="fah-card">
 
@@ -72,7 +142,8 @@ export default function SettingsTab(): JSX.Element {
           </Text>
           <div className="settings-card">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 flex items-center justify-center shadow-lg">
+              <div
+                className="w-12 h-12 rounded-full bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 flex items-center justify-center shadow-lg">
                 <span className="text-xl text-primary-cl">O</span>
               </div>
               <div>
@@ -84,73 +155,77 @@ export default function SettingsTab(): JSX.Element {
         </div>
 
         <div>
-            <Text variant="label" className="mb-2 text-primary-cl">
-              Basic Settings
-            </Text>
-            <div className="basic-setting-card">
-              <button
-                type="button"
-                onClick={() => history.push('/settings/general')}
-                className="w-full flex items-center justify-between p-4 transition-all border-b border-[#4105b6]/20 last:border-0 group hover:border-l-2 hover:border-l-[#4105b6] hover:pl-3.5"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 group-hover:from-[#4105b6]/50 group-hover:to-[#6305b6]/50">
-                    <SettingsIcon className="w-4 h-4 text-[#b0efff]"/>
-                  </div>
-                  <div className="text-left">
-                    <span className="block text-color-white">General</span>
-                  </div>
+          <Text variant="label" className="mb-2 text-primary-cl">
+            Basic Settings
+          </Text>
+          <div className="basic-setting-card">
+            <button
+              type="button"
+              onClick={() => history.push('/settings/general')}
+              className="w-full flex items-center justify-between p-4 transition-all border-b border-[#4105b6]/20 last:border-0 group hover:border-l-2 hover:border-l-[#4105b6] hover:pl-3.5"
+            >
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 group-hover:from-[#4105b6]/50 group-hover:to-[#6305b6]/50">
+                  <SettingsIcon className="w-4 h-4 text-[#b0efff]" />
                 </div>
-                <ChevronRight className="w-4 h-4 icon-right-arrow" />
-              </button>
-               <button
-                type="button"
-                onClick={() => history.push('/settings/security-and-privacy/backup-and-sync')}
-                className="w-full flex items-center justify-between p-4 transition-all border-b border-[#4105b6]/20 last:border-0 group hover:border-l-2 hover:border-l-[#4105b6] hover:pl-3.5"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 group-hover:from-[#4105b6]/50 group-hover:to-[#6305b6]/50">
-                    <CloudBackup className="w-4 h-4 text-[#b0efff]"/>
-                  </div>
-                  <div className="text-left">
-                    <span className="block text-color-white">Backup & Sync</span>
-                  </div>
+                <div className="text-left">
+                  <span className="block text-color-white">General</span>
                 </div>
-                <ChevronRight className="w-4 h-4 icon-right-arrow" />
-              </button>
-                <button
-                type="button"
-                onClick={() => history.push('/settings/contact-list')}
-                className="w-full flex items-center justify-between p-4 transition-all border-b border-[#4105b6]/20 last:border-0 group hover:border-l-2 hover:border-l-[#4105b6] hover:pl-3.5"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 group-hover:from-[#4105b6]/50 group-hover:to-[#6305b6]/50">
-                    <Contact className="w-4 h-4 text-[#b0efff]"/>
-                  </div>
-                  <div className="text-left">
-                    <span className="block text-color-white">Contacts</span>
-                  </div>
+              </div>
+              <ChevronRight className="w-4 h-4 icon-right-arrow" />
+            </button>
+            <button
+              type="button"
+              onClick={() => history.push('/settings/security-and-privacy/backup-and-sync')}
+              className="w-full flex items-center justify-between p-4 transition-all border-b border-[#4105b6]/20 last:border-0 group hover:border-l-2 hover:border-l-[#4105b6] hover:pl-3.5"
+            >
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 group-hover:from-[#4105b6]/50 group-hover:to-[#6305b6]/50">
+                  <CloudBackup className="w-4 h-4 text-[#b0efff]" />
                 </div>
-                <ChevronRight className="w-4 h-4 icon-right-arrow" />
-              </button>
-              <button
-                type="button"
-                onClick={() => history.push('/notifications/settings')}
-                className="w-full flex items-center justify-between p-4 transition-all border-b border-[#4105b6]/20 last:border-0 group hover:border-l-2 hover:border-l-[#4105b6] hover:pl-3.5"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 group-hover:from-[#4105b6]/50 group-hover:to-[#6305b6]/50">
-                    <Bell className="w-4 h-4 text-[#b0efff]"/>
-                  </div>
-                  <div className="text-left">
-                    <span className="block text-color-white">Notifications</span>
-                  </div>
+                <div className="text-left">
+                  <span className="block text-color-white">Backup & Sync</span>
                 </div>
-                <ChevronRight className="w-4 h-4 icon-right-arrow" />
-              </button>
-            </div>
+              </div>
+              <ChevronRight className="w-4 h-4 icon-right-arrow" />
+            </button>
+            <button
+              type="button"
+              onClick={() => history.push('/settings/contact-list')}
+              className="w-full flex items-center justify-between p-4 transition-all border-b border-[#4105b6]/20 last:border-0 group hover:border-l-2 hover:border-l-[#4105b6] hover:pl-3.5"
+            >
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 group-hover:from-[#4105b6]/50 group-hover:to-[#6305b6]/50">
+                  <Contact className="w-4 h-4 text-[#b0efff]" />
+                </div>
+                <div className="text-left">
+                  <span className="block text-color-white">Contacts</span>
+                </div>
+              </div>
+              <ChevronRight className="w-4 h-4 icon-right-arrow" />
+            </button>
+            <button
+              type="button"
+              onClick={() => history.push('/notifications/settings')}
+              className="w-full flex items-center justify-between p-4 transition-all border-b border-[#4105b6]/20 last:border-0 group hover:border-l-2 hover:border-l-[#4105b6] hover:pl-3.5"
+            >
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 group-hover:from-[#4105b6]/50 group-hover:to-[#6305b6]/50">
+                  <Bell className="w-4 h-4 text-[#b0efff]" />
+                </div>
+                <div className="text-left">
+                  <span className="block text-color-white">Notifications</span>
+                </div>
+              </div>
+              <ChevronRight className="w-4 h-4 icon-right-arrow" />
+            </button>
           </div>
-<div className="mt-4"></div>
+        </div>
+        <div className="mt-4"></div>
         {/* Settings Sections */}
         <div className="space-y-4">
           {settingsSections.map((section, idx) => (
@@ -159,79 +234,172 @@ export default function SettingsTab(): JSX.Element {
                 {section.title}
               </Text>
               <div className="setting-card-bg">
-                {section.items.map((item, itemIdx) => (
-                  <button
-                    key={itemIdx}
-                    onClick={() => handleItemClick(item.action)}
-                    className="w-full flex items-center justify-between p-4 transition-all last:border-0 group hover:border-l-2 hover:border-l-[#4105b6] hover:pl-3.5 border-b border-[#4105b6]/20"
-                    type="button"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 group-hover:from-[#4105b6]/50 group-hover:to-[#6305b6]/50">
-                        {item.icon ? <item.icon className="w-4 h-4 text-primary-cl" /> : null}
+                {section.items.map((item, itemIdx) =>
+                  item.isThemeToggle ? (
+                    <div
+                      key={itemIdx}
+                      className="w-full flex items-center justify-between p-4 transition-all last:border-0 group border-b border-[#4105b6]/20"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div
+                          className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 group-hover:from-[#4105b6]/50 group-hover:to-[#6305b6]/50">
+                          {item.icon ? (
+                            <item.icon className="w-4 h-4 text-primary-cl" />
+                          ) : null}
+                        </div>
+                        <div className="text-left">
+                          <span className="block text-color-white">
+                            {item.label}
+                          </span>
+                        </div>
                       </div>
-                      <div className="text-left">
-                        <span className="block text-color-white">{item.label}</span>
+                      <div className="flex items-center gap-2">
+                        {isDarkMode ? (
+                          <button
+                            type="button"
+                            className="p-2.5 rounded-xl transition-all bg-[#1d2449] hover:bg-[#4105b6] text-[#b0efff]"
+                            onClick={handleThemeToggle}
+                            aria-label="Use light theme"
+                            aria-pressed
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              className="lucide lucide-sun w-5 h-5"
+                            >
+                              <circle cx="12" cy="12" r="4" />
+                              <path d="M12 2v2" />
+                              <path d="M12 20v2" />
+                              <path d="m4.93 4.93 1.41 1.41" />
+                              <path d="m17.66 17.66 1.41 1.41" />
+                              <path d="M2 12h2" />
+                              <path d="M20 12h2" />
+                              <path d="m6.34 17.66-1.41 1.41" />
+                              <path d="m19.07 4.93-1.41 1.41" />
+                            </svg>
+                          </button>
+                        ) : (
+                          <button
+                            type="button"
+                            className="p-2.5 rounded-xl transition-all bg-white hover:bg-gray-100 text-gray-700 border-2 border-[#3d00b51c]"
+                            onClick={handleThemeToggle}
+                            aria-label="Use dark theme"
+                            aria-pressed={false}
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              className="lucide lucide-moon w-5 h-5"
+                            >
+                              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+                            </svg>
+                          </button>
+                        )}
                       </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      {item.value && <span className="text-sm text-[#b0efff]/70">{item.value}</span>}
-                      <ChevronRight className="w-4 h-4 icon-right-arrow" />
-                    </div>
-                  </button>
-                ))}
+                  ) : (
+                    <button
+                      key={itemIdx}
+                      onClick={() => handleItemClick(item.action)}
+                      className="w-full flex items-center justify-between p-4 transition-all last:border-0 group hover:border-l-2 hover:border-l-[#4105b6] hover:pl-3.5 border-b border-[#4105b6]/20"
+                      type="button"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div
+                          className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 group-hover:from-[#4105b6]/50 group-hover:to-[#6305b6]/50">
+                          {item.icon ? (
+                            <item.icon className="w-4 h-4 text-primary-cl" />
+                          ) : null}
+                        </div>
+                        <div className="text-left">
+                          <span className="block text-color-white">
+                            {item.label}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        {item.value ? (
+                          <span className="text-sm text-[#b0efff]/70">
+                            {item.value}
+                          </span>
+                        ) : null}
+                        <ChevronRight className="w-4 h-4 icon-right-arrow" />
+                      </div>
+                    </button>
+                  ),
+                )}
               </div>
             </div>
           ))}
 
           <div key={'SnP'}>
-              <Text variant="label" className="mb-2 text-[#b0efff]/70">
-                Security & Privacy
-              </Text>
-              <div className="setting-card-bg">
+            <Text variant="label" className="mb-2 text-[#b0efff]/70">
+              Security & Privacy
+            </Text>
+            <div className="setting-card-bg">
 
-                  <button
-                    key={'reveal-secret-phrase'}
-                    onClick={() => setSrpQuizModalVisible(true)}
-                    className="w-full flex items-center justify-between p-4 transition-all last:border-0 group hover:border-l-2 hover:border-l-[#4105b6] hover:pl-3.5 border-b border-[#4105b6]/20"
-                    type="button"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 group-hover:from-[#4105b6]/50 group-hover:to-[#6305b6]/50">
-                        <IconEye className="w-4 h-4 text-primary-cl"/>
-                      </div>
-                      <div className="text-left">
-                        <span className="block text-color-white">Reveal Secrete Phrase</span>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                     <span className="text-sm text-[#b0efff]/70"></span>
-                      <ChevronRight className="w-4 h-4 icon-right-arrow" />
-                    </div>
-                  </button>
+              <button
+                key={'reveal-secret-phrase'}
+                onClick={() => setSrpQuizModalVisible(true)}
+                className="w-full flex items-center justify-between p-4 transition-all last:border-0 group hover:border-l-2 hover:border-l-[#4105b6] hover:pl-3.5 border-b border-[#4105b6]/20"
+                type="button"
+              >
+                <div className="flex items-center gap-3">
+                  <div
+                    className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 group-hover:from-[#4105b6]/50 group-hover:to-[#6305b6]/50">
+                    <IconEye className="w-4 h-4 text-primary-cl" />
+                  </div>
+                  <div className="text-left">
+                    <span className="block text-color-white">Reveal Secrete Phrase</span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-[#b0efff]/70"></span>
+                  <ChevronRight className="w-4 h-4 icon-right-arrow" />
+                </div>
+              </button>
 
-                   <button
-                    key={'reveal-secret-phrase'}
-                    onClick={() => history.push('/settings/security')}
-                    className="w-full flex items-center justify-between p-4 transition-all last:border-0 group hover:border-l-2 hover:border-l-[#4105b6] hover:pl-3.5 border-b border-[#4105b6]/20"
-                    type="button"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 group-hover:from-[#4105b6]/50 group-hover:to-[#6305b6]/50">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="24" height="24" className="lucide lucide-circle-help w-4 h-4 text-primary-cl"><path d="M320 64C324.6 64 329.2 65 333.4 66.9L521.8 146.8C543.8 156.1 560.2 177.8 560.1 204C559.6 303.2 518.8 484.7 346.5 567.2C329.8 575.2 310.4 575.2 293.7 567.2C121.3 484.7 80.6 303.2 80.1 204C80 177.8 96.4 156.1 118.4 146.8L306.7 66.9C310.9 65 315.4 64 320 64zM320 130.8L320 508.9C458 442.1 495.1 294.1 496 205.5L320 130.9L320 130.9z"/></svg>
-                      </div>
-                      <div className="text-left">
-                        <span className="block text-color-white">Security and Privacy Settings</span>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                     <span className="text-sm text-[#b0efff]/70"></span>
-                      <ChevronRight className="w-4 h-4 icon-right-arrow" />
-                    </div>
-                  </button>
+              <button
+                key={'reveal-secret-phrase'}
+                onClick={() => history.push('/settings/security')}
+                className="w-full flex items-center justify-between p-4 transition-all last:border-0 group hover:border-l-2 hover:border-l-[#4105b6] hover:pl-3.5 border-b border-[#4105b6]/20"
+                type="button"
+              >
+                <div className="flex items-center gap-3">
+                  <div
+                    className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 group-hover:from-[#4105b6]/50 group-hover:to-[#6305b6]/50">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="24" height="24"
+                         className="lucide lucide-circle-help w-4 h-4 text-primary-cl">
+                      <path
+                        d="M320 64C324.6 64 329.2 65 333.4 66.9L521.8 146.8C543.8 156.1 560.2 177.8 560.1 204C559.6 303.2 518.8 484.7 346.5 567.2C329.8 575.2 310.4 575.2 293.7 567.2C121.3 484.7 80.6 303.2 80.1 204C80 177.8 96.4 156.1 118.4 146.8L306.7 66.9C310.9 65 315.4 64 320 64zM320 130.8L320 508.9C458 442.1 495.1 294.1 496 205.5L320 130.9L320 130.9z" />
+                    </svg>
+                  </div>
+                  <div className="text-left">
+                    <span className="block text-color-white">Security and Privacy Settings</span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-[#b0efff]/70"></span>
+                  <ChevronRight className="w-4 h-4 icon-right-arrow" />
+                </div>
+              </button>
 
-              </div>
             </div>
+          </div>
 
           <div>
             <Text variant="label" className="mb-2 text-[#b0efff]/70">
@@ -244,8 +412,15 @@ export default function SettingsTab(): JSX.Element {
                 className="w-full flex items-center justify-between p-4 transition-all border-b border-[#4105b6]/20 last:border-0 group hover:border-l-2 hover:border-l-[#4105b6] hover:pl-3.5"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 group-hover:from-[#4105b6]/50 group-hover:to-[#6305b6]/50">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-circle-help w-4 h-4 text-primary-cl"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg>
+                  <div
+                    className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 group-hover:from-[#4105b6]/50 group-hover:to-[#6305b6]/50">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         className="lucide lucide-circle-help w-4 h-4 text-primary-cl">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                      <path d="M12 17h.01"></path>
+                    </svg>
                   </div>
                   <div className="text-left">
                     <span className="block text-color-white">Help &amp; Support</span>
@@ -259,8 +434,17 @@ export default function SettingsTab(): JSX.Element {
                 className="w-full flex items-center justify-between p-4 transition-all border-b border-[#4105b6]/20 last:border-0 group hover:border-l-2 hover:border-l-[#4105b6] hover:pl-3.5"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 group-hover:from-[#4105b6]/50 group-hover:to-[#6305b6]/50">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-file-text w-4 h-4 text-primary-cl"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg>
+                  <div
+                    className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-br from-[#4105b6]/30 to-[#6305b6]/30 group-hover:from-[#4105b6]/50 group-hover:to-[#6305b6]/50">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         className="lucide lucide-file-text w-4 h-4 text-primary-cl">
+                      <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                      <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                      <path d="M10 9H8"></path>
+                      <path d="M16 13H8"></path>
+                      <path d="M16 17H8"></path>
+                    </svg>
                   </div>
                   <div className="text-left">
                     <span className="block text-color-white">Terms &amp; Privacy</span>

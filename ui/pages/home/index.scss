@@ -329,8 +329,8 @@
   padding: 20px;
   border-radius: 18px;
   background: radial-gradient(120% 120% at 10% 20%, rgba(99, 5, 182, 0.18), transparent),
-    radial-gradient(120% 120% at 90% 80%, rgba(34, 128, 205, 0.16), transparent),
-    var(--color-background-section);
+  radial-gradient(120% 120% at 90% 80%, rgba(34, 128, 205, 0.16), transparent),
+  var(--color-background-section);
   color: var(--color-text-default) !important;
   overflow: hidden;
 
@@ -1385,8 +1385,6 @@
 }
 
 .home-card-2 {
-  margin-top: 0.75rem;
-  margin-bottom: 0.75rem;
   padding: 1rem;
   background: var(--theme-coin-balance-bg);
   backdrop-filter: blur(24px);
@@ -1400,4 +1398,20 @@
   .lucide-eye {
     color: var(--color-icon-default);
   }
+}
+
+.transaction-status-label--confirmed {
+  color: #2280cd;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  background-color: rgba(34, 128, 205, 0.1);
+  border: 1px solid #2280cd;
+  font-size: 12px;
+}
+
+.account-overview-tabs .mm-icon {
+  color: var(--text-color-dark);
 }
