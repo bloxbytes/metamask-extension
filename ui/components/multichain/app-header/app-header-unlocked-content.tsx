@@ -85,9 +85,9 @@ type AppHeaderUnlockedContentProps = {
 };
 
 export const AppHeaderUnlockedContent = ({
-  disableAccountPicker,
-  menuRef,
-}: AppHeaderUnlockedContentProps) => {
+                                           disableAccountPicker,
+                                           menuRef,
+                                         }: AppHeaderUnlockedContentProps) => {
   const trackEvent = useContext(MetaMetricsContext);
   const t = useI18nContext();
   const history = useHistory();
@@ -173,7 +173,7 @@ export const AppHeaderUnlockedContent = ({
     handleCopy(normalizedCurrentAddress);
   }, [handleCopy, normalizedCurrentAddress]);
 
-  const CopyButton = useMemo(
+   const CopyButton = useMemo(
     () => (
       <ButtonBase
         className="multichain-app-header__address-copy-button"
