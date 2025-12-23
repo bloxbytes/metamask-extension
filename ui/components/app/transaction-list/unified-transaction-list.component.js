@@ -711,6 +711,7 @@ export default function UnifiedTransactionList({
                     paddingInline={4}
                     variant={TextVariant.bodyMdMedium}
                     color={TextColor.textAlternative}
+                    className="transaction-list__date-stamp"
                   >
                     {dateGroup.date}
                   </Text>

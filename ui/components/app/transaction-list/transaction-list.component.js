@@ -466,6 +466,7 @@ export default function TransactionList({
         paddingInline={4}
         variant={TextVariant.bodyMd}
         color={TextColor.textAlternative}
+        className="transaction-list__date-stamp"
         key={dateGroup.dateMillis}
       >
         {dateGroup.date}
@@ -877,8 +878,6 @@ const MultichainTransactionListItem = ({
   if (isRedeposit) {
     return (
       <>
-        <h1>ACITY 05</h1>
-
         <ActivityListItem
           className="custom-class"
           data-testid="activity-list-item"
@@ -930,7 +929,6 @@ const MultichainTransactionListItem = ({
 
   return (
     <>
-      <h1>Acitviyt list 03</h1>
       <ActivityListItem
         className="custom-class"
         data-testid="activity-list-item"
