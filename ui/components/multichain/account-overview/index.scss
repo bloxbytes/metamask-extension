@@ -40,7 +40,7 @@
     width: 100vw;
     height: var(--account-overview-nav-height);
     justify-content: space-between;
-    padding: 8px 12px 12px;
+    padding: 10px 0;
     gap: 8px;
     background: linear-gradient(to bottom right,
         rgba(26, 29, 58, 0.9),
@@ -48,6 +48,8 @@
     border-top: 1px solid rgba(65, 5, 182, 0.3);
     backdrop-filter: blur(16px);
     z-index: 1000;
+    padding-top: 7px !important;
+    padding-bottom: 7px !important;
   }
 
   &__content {
@@ -55,7 +57,7 @@
   }
 
   &__content--popup {
-    padding: 12px 12px calc(var(--account-overview-nav-height) + 24px);
+    // padding: 12px 12px calc(var(--account-overview-nav-height) + 24px);
     overflow-y: auto;
     max-height: calc(100vh - var(--account-overview-nav-height) - 16px);
   }
@@ -130,5 +132,25 @@
 
   &:hover {
     background-color: rgba(239, 68, 68, 0.3);
+  }
+}
+
+.account-overview-tabs__content--popup {
+  .custom-card {
+    box-shadow: none;
+    padding: unset;
+    border: none !important;
+    border-radius: revert;
+  }
+
+  .mm-box {
+    padding-inline: 1rem;
+  }
+}
+
+.main-container--popup {
+  .home__main-view {
+    border: none !important;
+    border-radius: revert !important;
   }
 }
