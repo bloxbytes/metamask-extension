@@ -29,10 +29,16 @@
 
 .network-manager__additional-network-item {
   cursor: pointer;
-
-  &:hover {
-    background: var(--color-background-default-hover);
-  }
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--color-background-default);
+  border: 2px solid transparent;
+  margin-bottom: 5px;
+  transition: all 0.2s ease;
 
   .mm-button-icon {
     --button-icon-size: 20px;

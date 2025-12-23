@@ -42,10 +42,8 @@
     justify-content: space-between;
     padding: 10px 0;
     gap: 8px;
-    background: linear-gradient(to bottom right,
-        rgba(26, 29, 58, 0.9),
-        rgba(26, 29, 58, 0.8));
-    border-top: 1px solid rgba(65, 5, 182, 0.3);
+    background: var(--bg-popupview);
+    border-top: 1px solid var(--color-border-default);
     backdrop-filter: blur(16px);
     z-index: 1000;
     padding-top: 7px !important;
