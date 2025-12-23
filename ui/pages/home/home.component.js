@@ -251,6 +251,15 @@ export const HomeCoinBalance = () => {
 
   return (
     <div className="home__coin-balance">
+      <div className={'total-balance-div'}>
+        <Text variant={TextVariant.bodyMdMedium}>
+          Total Balance
+        </Text>
+
+        <img src="./images/logo/metamask-fox.svg" alt="OPN Logo"
+             className="logo-image" />
+      </div>
+
       <CoinBalance
         account={account}
         balance={balance}

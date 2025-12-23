@@ -35,8 +35,10 @@ import {
   getSelectedMultichainNetworkChainId,
 } from '../../../selectors';
 ///: BEGIN:ONLY_INCLUDE_IF(multichain)
-import MultichainBridgeTransactionListItem from '../multichain-bridge-transaction-list-item/multichain-bridge-transaction-list-item';
-import MultichainBridgeTransactionDetailsModal from '../multichain-bridge-transaction-details-modal/multichain-bridge-transaction-details-modal';
+import MultichainBridgeTransactionListItem
+  from '../multichain-bridge-transaction-list-item/multichain-bridge-transaction-list-item';
+import MultichainBridgeTransactionDetailsModal
+  from '../multichain-bridge-transaction-details-modal/multichain-bridge-transaction-details-modal';
 ///: END:ONLY_INCLUDE_IF
 import { useI18nContext } from '../../../hooks/useI18nContext';
 import TransactionListItem from '../transaction-list-item';
@@ -79,7 +81,7 @@ import { formatTimestamp } from '../multichain-transaction-details-modal/helpers
 ///: END:ONLY_INCLUDE_IF
 import {
   ///: BEGIN:ONLY_INCLUDE_IF(multichain)
-  BackgroundColor,
+  BackgroundColor, BlockSize,
   Display,
   ///: END:ONLY_INCLUDE_IF
   TextColor,
@@ -163,8 +165,8 @@ const getTransactionGroupRecipientAddressFilterAllChain = (
 };
 
 const tokenTransactionFilter = ({
-  initialTransaction: { type, destinationTokenSymbol, sourceTokenSymbol },
-}) => {
+                                  initialTransaction: { type, destinationTokenSymbol, sourceTokenSymbol },
+                                }) => {
   if (TOKEN_CATEGORY_HASH[type]) {
     return false;
   } else if (
@@ -309,12 +311,12 @@ const removeTxGroupsWithNoTx = (dateGroup) => {
 };
 
 export default function TransactionList({
-  hideTokenTransactions,
-  tokenAddress,
-  boxProps,
-  hideNetworkFilter,
-  overrideFilterForCurrentChain = false,
-}) {
+                                          hideTokenTransactions,
+                                          tokenAddress,
+                                          boxProps,
+                                          hideNetworkFilter,
+                                          overrideFilterForCurrentChain = false,
+                                        }) {
   const [limit, setLimit] = useState(PAGE_INCREMENT);
   const t = useI18nContext();
   const currentNetworkConfig = useSelector(getCurrentNetwork);
@@ -346,7 +348,7 @@ export default function TransactionList({
 
   const unfilteredPendingTransactions = useMemo(() => {
     return isTokenNetworkFilterEqualCurrentNetwork ||
-      overrideFilterForCurrentChain
+    overrideFilterForCurrentChain
       ? unfilteredPendingTransactionsCurrentChain
       : unfilteredPendingTransactionsAllChains;
   }, [
@@ -379,7 +381,7 @@ export default function TransactionList({
 
   const unfilteredCompletedTransactions = useMemo(() => {
     return isTokenNetworkFilterEqualCurrentNetwork ||
-      overrideFilterForCurrentChain
+    overrideFilterForCurrentChain
       ? unfilteredCompletedTransactionsCurrentChain
       : unfilteredCompletedTransactionsAllChains;
   }, [
@@ -464,6 +466,7 @@ export default function TransactionList({
         paddingInline={4}
         variant={TextVariant.bodyMd}
         color={TextColor.textAlternative}
+        className="transaction-list__date-stamp"
         key={dateGroup.dateMillis}
       >
         {dateGroup.date}
@@ -527,7 +530,7 @@ export default function TransactionList({
     const isIncomingTxsButToAnotherAddress = (transaction) =>
       transaction.type === TransactionType.incoming &&
       transaction.txParams.to.toLowerCase() !==
-        selectedAccount.address.toLowerCase();
+      selectedAccount.address.toLowerCase();
 
     dateGroup.transactionGroups = dateGroup.transactionGroups.map(
       (transactionGroup) => {
@@ -644,7 +647,7 @@ export default function TransactionList({
             />
           ))}
 
-        <Box className="transaction-list" {...boxProps}>
+        <Box className="transaction-list transaction-list-v2" {...boxProps}>
           {/* TODO: Non-EVM transactions are not paginated for now. */}
           <Box className="transaction-list__transactions">
             {nonEvmTransactions?.transactions?.length > 0 ? (
@@ -731,8 +734,18 @@ export default function TransactionList({
 
   return (
     <>
-      <Box className="transaction-list" {...boxProps}>
-        {renderFilterButton()}
+      <Text
+        variant={TextVariant.bodyMdMedium}
+        color={TextColor.textDefault}
+        display={Display.Flex}
+        width={BlockSize.Full}
+      >
+        Activity
+      </Text>
+
+      <Box className="transaction-list transaction-list-v3" {...boxProps}>
+        {/*{renderFilterButton()}*/}
+
         {showRampsCard ? (
           <RampsCard variant={RAMPS_CARD_VARIANT_TYPES.ACTIVITY} />
         ) : null}
@@ -788,46 +801,46 @@ export default function TransactionList({
             <Box className="transaction-list__completed-transactions">
               {completedTransactions.length > 0
                 ? completedTransactions
-                    .map(removeIncomingTxsButToAnotherAddress)
-                    .map(removeTxGroupsWithNoTx)
-                    .filter(dateGroupsWithTransactionGroups)
-                    .slice(0, limit)
-                    .map((dateGroup) => {
-                      return dateGroup.transactionGroups.map(
-                        (transactionGroup, index) => {
-                          return (
-                            <Fragment
-                              key={`${transactionGroup.nonce}:${
-                                transactionGroup.initialTransaction
-                                  ? index
-                                  : limit + index - 10
-                              }`}
-                            >
-                              {renderDateStamp(index, dateGroup)}
-                              {transactionGroup.initialTransaction
-                                ?.isSmartTransaction ? (
-                                <SmartTransactionListItem
-                                  transactionGroup={transactionGroup}
-                                  smartTransaction={
-                                    transactionGroup.initialTransaction
-                                  }
-                                  chainId={
-                                    transactionGroup.initialTransaction.chainId
-                                  }
-                                />
-                              ) : (
-                                <TransactionListItem
-                                  transactionGroup={transactionGroup}
-                                  chainId={
-                                    transactionGroup.initialTransaction.chainId
-                                  }
-                                />
-                              )}
-                            </Fragment>
-                          );
-                        },
-                      );
-                    })
+                  .map(removeIncomingTxsButToAnotherAddress)
+                  .map(removeTxGroupsWithNoTx)
+                  .filter(dateGroupsWithTransactionGroups)
+                  .slice(0, limit)
+                  .map((dateGroup) => {
+                    return dateGroup.transactionGroups.map(
+                      (transactionGroup, index) => {
+                        return (
+                          <Fragment
+                            key={`${transactionGroup.nonce}:${
+                              transactionGroup.initialTransaction
+                                ? index
+                                : limit + index - 10
+                            }`}
+                          >
+                            {renderDateStamp(index, dateGroup)}
+                            {transactionGroup.initialTransaction
+                              ?.isSmartTransaction ? (
+                              <SmartTransactionListItem
+                                transactionGroup={transactionGroup}
+                                smartTransaction={
+                                  transactionGroup.initialTransaction
+                                }
+                                chainId={
+                                  transactionGroup.initialTransaction.chainId
+                                }
+                              />
+                            ) : (
+                              <TransactionListItem
+                                transactionGroup={transactionGroup}
+                                chainId={
+                                  transactionGroup.initialTransaction.chainId
+                                }
+                              />
+                            )}
+                          </Fragment>
+                        );
+                      },
+                    );
+                  })
                 : null}
               {completedTransactions.length > limit && (
                 <Button
@@ -850,10 +863,10 @@ export default function TransactionList({
 
 // Regular transaction list item for non-bridge transactions
 const MultichainTransactionListItem = ({
-  transaction,
-  networkConfig,
-  toggleShowDetails,
-}) => {
+                                         transaction,
+                                         networkConfig,
+                                         toggleShowDetails,
+                                       }) => {
   const t = useI18nContext();
   const { from, to, type, timestamp, isRedeposit, title } =
     useMultichainTransactionDisplay(transaction, networkConfig);
@@ -864,40 +877,42 @@ const MultichainTransactionListItem = ({
   // Mainly used for consolidation transactions
   if (isRedeposit) {
     return (
-      <ActivityListItem
-        className="custom-class"
-        data-testid="activity-list-item"
-        onClick={() => toggleShowDetails(transaction)}
-        icon={
-          <BadgeWrapper
-            display={Display.Block}
-            badge={
-              <AvatarNetwork
-                className="activity-tx__network-badge"
-                data-testid="activity-tx-network-badge"
-                size={AvatarNetworkSize.Xs}
-                name={transaction.chain}
-                src={networkLogo}
-                borderColor={BackgroundColor.backgroundDefault}
+      <>
+        <ActivityListItem
+          className="custom-class"
+          data-testid="activity-list-item"
+          onClick={() => toggleShowDetails(transaction)}
+          icon={
+            <BadgeWrapper
+              display={Display.Block}
+              badge={
+                <AvatarNetwork
+                  className="activity-tx__network-badge"
+                  data-testid="activity-tx-network-badge"
+                  size={AvatarNetworkSize.Xs}
+                  name={transaction.chain}
+                  src={networkLogo}
+                  borderColor={BackgroundColor.backgroundDefault}
+                />
+              }
+            >
+              <TransactionIcon
+                category={TransactionGroupCategory.redeposit}
+                status={statusKey}
               />
-            }
-          >
-            <TransactionIcon
-              category={TransactionGroupCategory.redeposit}
+            </BadgeWrapper>
+          }
+          title={t('redeposit')}
+          subtitle={
+            <TransactionStatusLabel
+              date={formatTimestamp(timestamp)}
+              error={{}}
               status={statusKey}
+              statusOnly
             />
-          </BadgeWrapper>
-        }
-        title={t('redeposit')}
-        subtitle={
-          <TransactionStatusLabel
-            date={formatTimestamp(timestamp)}
-            error={{}}
-            status={statusKey}
-            statusOnly
-          />
-        }
-      />
+          }
+        />
+      </>
     );
   }
 
@@ -913,51 +928,53 @@ const MultichainTransactionListItem = ({
   }
 
   return (
-    <ActivityListItem
-      className="custom-class"
-      data-testid="activity-list-item"
-      onClick={() => toggleShowDetails(transaction)}
-      icon={
-        <BadgeWrapper
-          display={Display.Block}
-          badge={
-            <AvatarNetwork
-              className="activity-tx__network-badge"
-              data-testid="activity-tx-network-badge"
-              size={AvatarNetworkSize.Xs}
-              name={transaction.chain}
-              src={networkLogo}
-              borderWidth={2}
-              borderColor={BackgroundColor.backgroundDefault}
-            />
-          }
-        >
-          <TransactionIcon category={category} status={statusKey} />
-        </BadgeWrapper>
-      }
-      rightContent={
-        <Text
-          className="activity-list-item__primary-currency"
-          data-testid="transaction-list-item-primary-currency"
-          color={TextColor.textDefault}
-          variant={TextVariant.bodyMdMedium}
-          ellipsis
-          textAlign="right"
-          title="Primary Currency"
-        >
-          {amount} {unit}
-        </Text>
-      }
-      title={title}
-      subtitle={
-        <TransactionStatusLabel
-          date={formatTimestamp(transaction.timestamp)}
-          error={{}}
-          status={statusKey}
-          statusOnly
-        />
-      }
-    />
+    <>
+      <ActivityListItem
+        className="custom-class"
+        data-testid="activity-list-item"
+        onClick={() => toggleShowDetails(transaction)}
+        icon={
+          <BadgeWrapper
+            display={Display.Block}
+            badge={
+              <AvatarNetwork
+                className="activity-tx__network-badge"
+                data-testid="activity-tx-network-badge"
+                size={AvatarNetworkSize.Xs}
+                name={transaction.chain}
+                src={networkLogo}
+                borderWidth={2}
+                borderColor={BackgroundColor.backgroundDefault}
+              />
+            }
+          >
+            <TransactionIcon category={category} status={statusKey} />
+          </BadgeWrapper>
+        }
+        rightContent={
+          <Text
+            className="activity-list-item__primary-currency"
+            data-testid="transaction-list-item-primary-currency"
+            color={TextColor.textDefault}
+            variant={TextVariant.bodyMdMedium}
+            ellipsis
+            textAlign="right"
+            title="Primary Currency"
+          >
+            {amount} {unit}
+          </Text>
+        }
+        title={title}
+        subtitle={
+          <TransactionStatusLabel
+            date={formatTimestamp(transaction.timestamp)}
+            error={{}}
+            status={statusKey}
+            statusOnly
+          />
+        }
+      />
+    </>
   );
 };
 
