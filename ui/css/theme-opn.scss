@@ -270,7 +270,8 @@ html[data-theme='dark'] {
 
   --primary-icon-color: #b0efff;
   --bg-popupview: linear-gradient(to bottom right, rgba(26, 29, 58, 0.9), rgba(26, 29, 58, 0.8));
-
+  --bg-hover-card: linear-gradient(135deg, rgba(32, 36, 90, 0.6) 0%, rgba(32, 36, 90, 0.4) 100%);
+  --bg-gradient-blur: linear-gradient(to right, #4105b6, #6305b6);
 }
 
 /* ============================================
@@ -487,7 +488,7 @@ html[data-theme='light'] {
   --alert-warning-bg: #FAF5FF;
   --alert-warning-border: #ddd6fe;
   --alert-warning-text: #7E22CE;
-
+  --bg-hover-card: #fff;
 
 
   --primary-icon-color: #4105b6;
@@ -502,7 +503,6 @@ html[data-theme='light'] {
   //   border-color:#000!important;
   //   background-color:#fff!important;
   // }
-
 }
 
 /* Background colors for app in light theme */

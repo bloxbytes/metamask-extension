@@ -86,16 +86,16 @@
 }
 
 .multichain-page__inner-container {
-  background: #0f112af2;
+  background: var(--modal-bg-color);
   opacity: 0.95;
   max-width: 100%;
 
   .mm-box--background-color-background-default {
-    background-color: #0f112af2;
+    background-color: var(--modal-bg-color);
   }
 
   .confirm_wrapper.multichain-page__inner-container {
-    background: #0f112af2;
+    background: var(--modal-bg-color);
     opacity: 0.95;
     max-width: 100%;
     border: 1px solid rgba(65, 5, 182, 0.3);

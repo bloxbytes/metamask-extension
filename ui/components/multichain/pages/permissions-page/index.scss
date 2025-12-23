@@ -18,13 +18,13 @@
 
   // Text colors
   .mm-text {
-    color: #f8fdf1;
+    color: var(--color-text-default);
     text-align: center;
   }
 
   .mm-text--body-md,
   .mm-text--body-md-medium {
-    color: #f8fdf1;
+    color: var(--color-text-default);
   }
 
   .mm-text--body-md[class*="text-alternative"] {
@@ -33,7 +33,7 @@
 
   // Icon colors
   .mm-icon {
-    color: #b0efff;
+    color: var(--color-icon-default);
   }
 
   // Button icon colors
@@ -45,6 +45,7 @@
     }
   }
 }
-.multichain-page{
+
+.multichain-page {
   padding: unset !important;
 }

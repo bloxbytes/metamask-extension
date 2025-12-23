@@ -85,14 +85,25 @@
         }
       }
 
+      .account-overview-tabs__nav-icon {
+        color: var(--color-text-muted);
+      }
+
       &.custom-tab-active {
-        color: #f8fdf1;
+        color: #f8fdf1 !important;
 
         button {
           background: var(--theme-tab-active-bg) !important;
           box-shadow: var(--theme-tab-active-shadow) !important;
         }
+
+        .account-overview-tabs__nav-text,
+        .account-overview-tabs__nav-icon {
+          color: #f8fdf1 !important;
+        }
       }
+
+
     }
   }
 
@@ -136,7 +147,8 @@
 .account-overview-tabs__content--popup {
   .custom-card {
     box-shadow: none;
-    padding: unset;
+    padding-block: unset;
+    padding-inline: 7px;
     border: none !important;
     border-radius: revert;
   }
@@ -185,5 +197,23 @@
   .nfts-tab-panel,
   .activity-tab-panel {
     padding-inline: 1rem;
+  }
+}
+
+.account-overview-tabs__content--popup {
+  .mm-popover[role=tooltip] {
+    backdrop-filter: blur(20px);
+    background: var(--theme-popover-bg) !important;
+    border: var(--theme-popover-border) !important;
+    box-shadow: var(--theme-popover-shadow) !important;
+    color: var(--theme-popover-text) !important;
+    z-index: 99999 !important;
+  }
+
+}
+
+.account-overview-tabs__content--popup {
+  .multichain-connected-site-menu {
+    display: none;
   }
 }
