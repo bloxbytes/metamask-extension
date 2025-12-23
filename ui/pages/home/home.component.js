@@ -176,6 +176,7 @@ export const BannerComponentSubHeader = () => {
 
         <div className="px-4 py-2 relative">
           <div className="flex justify-center mb-4 relative">
+            <div className="custom-gradient"></div>
             <img
               src="./images/logo/metamask-fox.svg"
               alt="OPN Logo"

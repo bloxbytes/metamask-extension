@@ -471,7 +471,7 @@
 .account-overview-tabs__content--popup {
   .settings-tab-panel {
     .settings-tab-container {
-      overflow-y: hidden;
+      overflow-y: unset;
     }
   }
 }
