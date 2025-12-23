@@ -272,9 +272,7 @@ export default function SrpInputImport({ onChange }: SrpInputImportProps) {
           backgroundColor={BackgroundColor.backgroundSection}
           borderRadius={BorderRadius.LG}
           className="srp-input-import__container"
-          style={{
-            backgroundColor: '#0c0e1b'
-          }}
+
         >
           {draftSrp.length > 0 ? (
             <Box padding={4} style={{ flex: 1 }}>

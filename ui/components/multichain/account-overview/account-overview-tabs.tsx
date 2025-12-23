@@ -207,7 +207,7 @@ export const AccountOverviewTabs = ({
               </Box>
               <Box marginBottom={4}>
                 <div
-                  className="mt-3 mb-3 bg-gradient-to-br from-[#1a1d3a]/60 to-[#1a1d3a]/40 backdrop-blur-xl rounded-xl p-4 border border-[#4105b6]/40 shadow-2xl relative overflow-hidden">
+                  className="home-card">
 
                   <div className="relative z-10">
                     <div className="flex items-center justify-between mb-3">
@@ -237,9 +237,9 @@ export const AccountOverviewTabs = ({
                           </div>
                         </div>
                         <div>
-                          <div className="text-[#b0efff]/70 text-xs">Level 12</div>
-                          <div className="text-[#f8fdf1] text-xl font-light">8,547</div>
-                          <div className="text-[#4f5262] text-xs">REP Score</div>
+                          <div className="inner-content-heading">Level 12</div>
+                          <div className="level-heading">8,547</div>
+                          <div className="rep-score">REP Score</div>
                         </div>
                       </div>
                       <button
@@ -254,20 +254,20 @@ export const AccountOverviewTabs = ({
                         <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
                         <polyline points="16 7 22 7 22 13"></polyline>
                       </svg>
-                      <span>+247 this week</span></div>
+                      <span className="color-primary-cl">+247 this week</span></div>
                     <div
                       className="w-full bg-[#0f112a]/70 backdrop-blur-sm rounded-full h-2 overflow-hidden border border-[#4105b6]/20">
                       <div
                         className="bg-gradient-to-r from-[#2280cd] to-[#b0efff] h-full shadow-lg shadow-[#2280cd]/50 transition-all duration-500"
                       ></div>
                     </div>
-                    <div className="mt-1 text-[#b0efff]/60 text-xs">453 REP to Level 13</div>
+                    <div className="mt-1 rep-score">453 REP to Level 13</div>
                   </div>
                 </div>
               </Box>
               <Box marginBottom={4}>
                 <div
-                  className="mt-3 bg-gradient-to-br from-[#1a1d3a]/60 to-[#1a1d3a]/40 backdrop-blur-xl rounded-xl p-4 border border-[#4105b6]/40 shadow-2xl relative overflow-hidden">
+                  className="home-card">
 
 
                   <div className="relative z-10">
@@ -278,20 +278,20 @@ export const AccountOverviewTabs = ({
                           <Activity className="w-4 h-4 text-[#f8fdf1]" />
                         </div>
                         <div>
-                          <div className="text-[#f8fdf1] text-sm">OPN Chain</div>
-                          <div className="text-[#b0efff]/60 text-xs">Live Network Status</div>
+                          <div className="level-heading Fsize-14">OPN Chain</div>
+                          <div className="rep-score">Live Network Status</div>
                         </div>
                       </div>
                       <div
-                        className="flex items-center gap-1 px-2 py-1 bg-[#2280cd]/20 rounded-full border border-[#2280cd]/40">
+                        className="flex items-center gap-1 px-2 py-1 bg-[#2280cd]/20 rounded-full cc-active">
                         <div className="w-1.5 h-1.5 rounded-full bg-[#b0efff] animate-pulse"></div>
-                        <span className="text-[#b0efff] text-xs">Active</span>
+                        <span className="Fsize-12">Active</span>
                       </div>
                     </div>
 
                     {/* Animated nodes visualization */}
                     <div
-                      className="relative h-16 mb-3 rounded-lg bg-[#0f112a]/50 border border-[#4105b6]/20 overflow-hidden">
+                      className="relative h-16 mb-3 rounded-lg bg-[#0f112a]/50 border border-[#4105b6]/20 overflow-hidden bg-sub-card">
                       <svg className="w-full h-full">
                         {/* Animated connection lines */}
                         <line x1="10%" y1="50%" x2="30%" y2="50%" stroke="#4105b6" strokeWidth="2" opacity="0.6">
@@ -331,16 +331,16 @@ export const AccountOverviewTabs = ({
 
                     {/* Stats */}
                     <div className="grid grid-cols-2 gap-2">
-                      <div className="bg-[#0f112a]/50 backdrop-blur-sm rounded-lg p-2 border border-[#4105b6]/20">
+                      <div className="network-card">
                         <div className="flex items-center gap-1 mb-1">
                           <Zap className="w-3 h-3 text-[#b0efff]" />
-                          <span className="text-[#b0efff]/70 text-xs">TPS</span>
+                          <span className="rep-score Fsize-12">TPS</span>
                         </div>
-                        <div className="text-[#f8fdf1] font-light">15,847</div>
+                        <div className="count-text">15,847</div>
                       </div>
-                      <div className="bg-[#0f112a]/50 backdrop-blur-sm rounded-lg p-2 border border-[#4105b6]/20">
-                        <div className="text-[#b0efff]/70 text-xs mb-1">Validators</div>
-                        <div className="text-[#f8fdf1] font-light">1,247</div>
+                      <div className="network-card">
+                        <div className="rep-score mb-1 Fsize-12">Validators</div>
+                        <div className="count-text">1,247</div>
                       </div>
                     </div>
                   </div>
