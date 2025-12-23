@@ -31,6 +31,7 @@ export default function SmartTransactionListItem({
   transactionGroup,
   isEarliestNonce = false,
   chainId,
+  topContent,
 }) {
   const dispatch = useDispatch();
   const [cancelSwapLinkClicked, setCancelSwapLinkClicked] = useState(false);
@@ -65,6 +66,7 @@ export default function SmartTransactionListItem({
         className={className}
         title={title}
         onClick={toggleShowDetails}
+        topContent={topContent}
         icon={
           <BadgeWrapper
             display={Display.Block}
@@ -139,4 +141,5 @@ SmartTransactionListItem.propTypes = {
   isEarliestNonce: PropTypes.bool,
   transactionGroup: PropTypes.object,
   chainId: PropTypes.string,
+  topContent: PropTypes.node,
 };

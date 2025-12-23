@@ -76,6 +76,7 @@ function TransactionListItemInner({
   setEditGasMode,
   isEarliestNonce = false,
   chainId,
+  topContent,
 }) {
   const t = useI18nContext();
   const history = useHistory();
@@ -299,6 +300,7 @@ function TransactionListItemInner({
         }
         className={className}
         title={title}
+        topContent={topContent}
         icon={
           <BadgeWrapper
             display={Display.Block}
@@ -439,6 +441,7 @@ TransactionListItemInner.propTypes = {
   isEarliestNonce: PropTypes.bool,
   setEditGasMode: PropTypes.func,
   chainId: PropTypes.string,
+  topContent: PropTypes.node,
 };
 
 const TransactionListItem = (props) => {
@@ -471,6 +474,7 @@ const TransactionListItem = (props) => {
 
 TransactionListItem.propTypes = {
   transactionGroup: PropTypes.object.isRequired,
+  topContent: PropTypes.node,
 };
 
 export default TransactionListItem;

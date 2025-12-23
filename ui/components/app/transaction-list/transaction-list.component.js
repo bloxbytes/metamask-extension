@@ -459,21 +459,6 @@ export default function TransactionList({
     selectedAccount,
   ]);
 
-  const renderDateStamp = (index, dateGroup) => {
-    return index === 0 ? (
-      <Text
-        paddingTop={2}
-        paddingInline={4}
-        variant={TextVariant.bodyMd}
-        color={TextColor.textAlternative}
-        className="transaction-list__date-stamp"
-        key={dateGroup.dateMillis}
-      >
-        {dateGroup.date}
-      </Text>
-    ) : null;
-  };
-
   const pendingTransactions = useMemo(
     () =>
       groupEvmTransactionsByDate(
@@ -655,15 +640,7 @@ export default function TransactionList({
                 {groupNonEvmTransactionsByDate(nonEvmTransactionsForToken).map(
                   (dateGroup) => (
                     <Fragment key={dateGroup.date}>
-                      <Text
-                        paddingTop={3}
-                        paddingInline={4}
-                        variant={TextVariant.bodyMdMedium}
-                        color={TextColor.textAlternative}
-                      >
-                        {dateGroup.date}
-                      </Text>
-                      {dateGroup.transactionGroups.map((transaction) => {
+                      {dateGroup.transactionGroups.map((transaction, index) => {
                         // Show the Bridge transaction list item component when a multichain cross chain transaction matches a txHistory item.
                         const matchedBridgeHistoryItem =
                           bridgeHistoryItems[transaction.id];
@@ -681,6 +658,7 @@ export default function TransactionList({
                               transaction={transaction}
                               bridgeHistoryItem={matchedBridgeHistoryItem}
                               toggleShowDetails={toggleShowDetails}
+                              topContent={dateGroup.date}
                             />
                           );
                         }
@@ -692,6 +670,7 @@ export default function TransactionList({
                             transaction={transaction}
                             networkConfig={multichainNetworkConfig}
                             toggleShowDetails={toggleShowDetails}
+                            topContent={dateGroup.date}
                           />
                         );
                       })}
@@ -739,6 +718,7 @@ export default function TransactionList({
         color={TextColor.textDefault}
         display={Display.Flex}
         width={BlockSize.Full}
+        className={'mb-4'}
       >
         Activity
       </Text>
@@ -767,7 +747,6 @@ export default function TransactionList({
                       ) {
                         return (
                           <Fragment key={`${transactionGroup.nonce}:${index}`}>
-                            {renderDateStamp(index, dateGroup)}
                             <SmartTransactionListItem
                               isEarliestNonce={index === 0}
                               smartTransaction={
@@ -777,19 +756,20 @@ export default function TransactionList({
                               chainId={
                                 transactionGroup.initialTransaction.chainId
                               }
+                              topContent={dateGroup.date}
                             />
                           </Fragment>
                         );
                       }
                       return (
                         <Fragment key={`${transactionGroup.nonce}:${index}`}>
-                          {renderDateStamp(index, dateGroup)}
                           <TransactionListItem
                             isEarliestNonce={index === 0}
                             transactionGroup={transactionGroup}
                             chainId={
                               transactionGroup.initialTransaction.chainId
                             }
+                            topContent={dateGroup.date}
                           />
                         </Fragment>
                       );
@@ -816,7 +796,6 @@ export default function TransactionList({
                                 : limit + index - 10
                             }`}
                           >
-                            {renderDateStamp(index, dateGroup)}
                             {transactionGroup.initialTransaction
                               ?.isSmartTransaction ? (
                               <SmartTransactionListItem
@@ -827,6 +806,7 @@ export default function TransactionList({
                                 chainId={
                                   transactionGroup.initialTransaction.chainId
                                 }
+                                topContent={dateGroup.date}
                               />
                             ) : (
                               <TransactionListItem
@@ -834,6 +814,7 @@ export default function TransactionList({
                                 chainId={
                                   transactionGroup.initialTransaction.chainId
                                 }
+                                topContent={dateGroup.date}
                               />
                             )}
                           </Fragment>
@@ -866,6 +847,7 @@ const MultichainTransactionListItem = ({
                                          transaction,
                                          networkConfig,
                                          toggleShowDetails,
+                                         topContent,
                                        }) => {
   const t = useI18nContext();
   const { from, to, type, timestamp, isRedeposit, title } =
@@ -882,6 +864,7 @@ const MultichainTransactionListItem = ({
           className="custom-class"
           data-testid="activity-list-item"
           onClick={() => toggleShowDetails(transaction)}
+          topContent={topContent}
           icon={
             <BadgeWrapper
               display={Display.Block}
@@ -933,6 +916,7 @@ const MultichainTransactionListItem = ({
         className="custom-class"
         data-testid="activity-list-item"
         onClick={() => toggleShowDetails(transaction)}
+        topContent={topContent}
         icon={
           <BadgeWrapper
             display={Display.Block}

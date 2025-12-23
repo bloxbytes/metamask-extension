@@ -329,8 +329,8 @@
   padding: 20px;
   border-radius: 18px;
   background: radial-gradient(120% 120% at 10% 20%, rgba(99, 5, 182, 0.18), transparent),
-    radial-gradient(120% 120% at 90% 80%, rgba(34, 128, 205, 0.16), transparent),
-    var(--color-background-section);
+  radial-gradient(120% 120% at 90% 80%, rgba(34, 128, 205, 0.16), transparent),
+  var(--color-background-section);
   color: var(--color-text-default) !important;
   overflow: hidden;
 
@@ -1278,4 +1278,17 @@
       margin: auto;
     }
   }
+}
+
+
+.Sent-activity-block .mm-avatar-base {
+  background: #4105b6;
+}
+
+.Receive-activity-block .mm-avatar-base {
+  background: #2280cd;
+}
+
+.Swap-activity-block .mm-avatar-base {
+  background: #6305b6;
 }

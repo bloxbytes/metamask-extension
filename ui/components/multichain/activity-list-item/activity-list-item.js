@@ -129,13 +129,24 @@ export const ActivityListItem = ({
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div>
-            <div className="text-[#f8fdf1] capitalize receive-label">{title}</div>
-            {typeof subtitle === 'string' && subtitle.toLowerCase() === 'confirmed' ?
-              <div
-                className="flex items-center gap-1 px-2 py-1 bg-[#b0efff]/10 rounded-full border border-[#b0efff]/30">
+            <div className="text-[#f8fdf1] capitalize receive-label activity-item-label">{title}</div>
+
+            {topContent ? (
+              <div className="text-[#8aa0bf] text-xs mb-1 activity-date-time">
+                <Text variant={TextVariant.bodySm}>{topContent}</Text>
+              </div>
+            ) : null}
+
+            <div className={'activity-item-status'}>
+              {typeof subtitle === 'string' && subtitle.toLowerCase() === 'confirmed' ?
+                <div
+                  className="flex items-center gap-1 px-2 py-1 bg-[#b0efff]/10 rounded-full border border-[#b0efff]/30">
             <span
               className="w-1.5 h-1.5 rounded-full bg-[#b0efff] shadow-sm shadow-[#b0efff]/50 animate-pulse"></span><span
-                className="text-[#b0efff]">Confirmed</span></div> : subtitle}
+                  className="text-[#b0efff]">Confirmed</span></div> : subtitle}
+
+            </div>
+
           </div>
         </div>
         <div className="text-right">
