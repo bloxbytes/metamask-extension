@@ -135,9 +135,9 @@ export default function TurnOnMetamaskNotifications() {
           <Box
             as="img"
             src="./images/turn-on-metamask-notifications.png"
-            width={BlockSize.Full}
             borderRadius={BorderRadius.MD}
             marginBottom={4}
+className='notifications-img'
           />
           <Text as="p">{t('turnOnMetamaskNotificationsMessageFirst')}</Text>
           <Text as="p" paddingTop={4}>

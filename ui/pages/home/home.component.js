@@ -108,11 +108,11 @@ import FlaskHomeFooter from './flask/flask-home-footer.component';
 
 
 function shouldCloseNotificationPopup({
-                                        isNotification,
-                                        totalUnapprovedCount,
-                                        hasApprovalFlows,
-                                        isSigningQRHardwareTransaction,
-                                      }) {
+  isNotification,
+  totalUnapprovedCount,
+  hasApprovalFlows,
+  isSigningQRHardwareTransaction,
+}) {
   const shouldClose =
     isNotification &&
     totalUnapprovedCount === 0 &&
@@ -127,7 +127,7 @@ export const HomeCoinButtons = ({ iconView = false }) => {
   const account = useSelector(getSelectedInternalAccount);
   const evmChainId = useSelector(getCurrentChainId);
   const { chainId: multichainChainId } =
-  useSelector(getSelectedMultichainNetworkConfiguration) || {};
+    useSelector(getSelectedMultichainNetworkConfiguration) || {};
   const isSwapsChainDefault = useSelector(getIsSwapsChain);
   const isBridgeChainDefault = useSelector(getIsBridgeChain);
   const isSwapsChainMultichain = useSelector((state) =>
@@ -209,6 +209,19 @@ export const BannerComponent = ({ isPopup = false }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
       <div className="custom-card md:col-span-2">
+        {/* toggle button */}
+        <div class="fixed top-6 right-6 z-50">
+          <button class="p-2.5 rounded-xl transition-all bg-[#1d2449] hover:bg-[#4105b6] text-[#b0efff]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun w-5 h-5">
+              <circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path>
+            </svg>
+          </button>
+          <button class="p-2.5 rounded-xl transition-all bg-white hover:bg-gray-100 text-gray-700 border-2 border-[#3d00b51c]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon w-5 h-5">
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+            </svg>
+          </button>
+        </div>
         <div className="bg-gradient-custom"></div>
 
         <div className="px-4 py-2 relative">
@@ -231,6 +244,7 @@ export const BannerComponent = ({ isPopup = false }) => {
           </button>
         </div>
       </div>
+
     </div>
   );
 };
@@ -246,7 +260,7 @@ export const HomeCoinBalance = () => {
   );
   const evmBalanceIsCached = useSelector(isBalanceCached);
   const { chainId: multichainChainId } =
-  useSelector(getSelectedMultichainNetworkConfiguration) || {};
+    useSelector(getSelectedMultichainNetworkConfiguration) || {};
   const isEvm = isEvmAccountType(account?.type);
 
   const chainId = isEvm ? evmChainId : multichainChainId;
@@ -285,13 +299,16 @@ export const HomeCoinBalance = () => {
 
   return (
     <div className="home__coin-balance">
-      <div className={'total-balance-div'}>
+      <div className={'total-balance-div flex justify-between items-center mb-2'}>
         <Text variant={TextVariant.bodyMdMedium}>
           Total Balance
         </Text>
 
-        <img src="./images/logo/metamask-fox.svg" alt="OPN Logo"
-             className="logo-image" />
+        {/* <img src="./images/logo/metamask-fox.svg" alt="OPN Logo"
+          className="logo-image" /> */}
+        <button class="transition-colors text-[#b0efff] hover:text-[#f8fdf1]">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye w-4 h-4"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        </button>
       </div>
 
       <CoinBalance
@@ -302,6 +319,7 @@ export const HomeCoinBalance = () => {
         classPrefix="home"
       />
       {displayAddress ? (
+
         <ButtonBase
           className="home__coin-balance-address"
           onClick={handleCopyClick}
@@ -1175,7 +1193,7 @@ export default class Home extends PureComponent {
         <div className="home__container">
 
           {dataCollectionForMarketing === null &&
-          participateInMetaMetrics === true
+            participateInMetaMetrics === true
             ? this.renderOnboardingPopover()
             : null}
           {isSeedlessPasswordOutdated && <PasswordOutdatedModal />}
@@ -1183,8 +1201,8 @@ export default class Home extends PureComponent {
           {displayUpdateModal && <UpdateModal />}
           {showWhatsNew ? <WhatsNewModal onClose={hideWhatsNewPopup} /> : null}
           {!showWhatsNew &&
-          showRecoveryPhraseReminder &&
-          !isPrimarySeedPhraseBackedUp ? (
+            showRecoveryPhraseReminder &&
+            !isPrimarySeedPhraseBackedUp ? (
             <RecoveryPhraseReminder
               onConfirm={this.onRecoveryPhraseReminderClose}
             />
