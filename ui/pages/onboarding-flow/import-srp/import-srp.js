@@ -37,6 +37,7 @@ import {
   ButtonSize,
 } from '../../../components/component-library';
 import SRPDetailsModal from '../../../components/app/srp-details-modal';
+import ThemeToggleButtons from '../../../components/app/theme-toggle-buttons/theme-toggle-buttons';
 import {
   forceUpdateMetamaskState,
   resetOnboarding,
@@ -129,6 +130,7 @@ export default function ImportSRP({ submitSecretRecoveryPhrase }) {
       className="import-srp"
       data-testid="import-srp"
     >
+      <ThemeToggleButtons />
       {showSrpDetailsModal && (
         <SRPDetailsModal onClose={() => setShowSrpDetailsModal(false)} />
       )}

@@ -46,6 +46,7 @@ import {
   IconName,
   Text,
 } from '../../../components/component-library';
+import ThemeToggleButtons from '../../../components/app/theme-toggle-buttons/theme-toggle-buttons';
 import { FirstTimeFlowType } from '../../../../shared/constants/onboarding';
 import PasswordForm from '../../../components/app/password-form/password-form';
 import { PLATFORM_FIREFOX } from '../../../../shared/constants/app';
@@ -352,6 +353,7 @@ export default function CreatePassword({
         <Box className="create-password__blur-circle create-password__blur-circle--top-left" />
         <Box className="create-password__blur-circle create-password__blur-circle--bottom-right" />
       </Box>
+      <ThemeToggleButtons />
       <Box
         display={Display.Flex}
         flexDirection={FlexDirection.Column}

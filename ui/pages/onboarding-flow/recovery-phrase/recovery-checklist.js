@@ -27,6 +27,7 @@ import {
   Box,
 } from '../../../components/component-library';
 import { useI18nContext } from '../../../hooks/useI18nContext';
+import ThemeToggleButtons from '../../../components/app/theme-toggle-buttons/theme-toggle-buttons';
 import {
   ONBOARDING_CONFIRM_SRP_ROUTE,
   ONBOARDING_COMPLETION_ROUTE,
@@ -113,6 +114,7 @@ export default function RecoveryChecklist() {
       position="relative"
 
     >
+      <ThemeToggleButtons />
       <Box
         position="absolute"
         inset={0}
