@@ -1731,7 +1731,7 @@
     "message": "Create a new account"
   },
   "createPassword": {
-    "message": "createPasswordCreate"
+    "message": "Create Password"
   },
   "createPasswordCreate": {
     "message": "Continue"
@@ -8055,7 +8055,7 @@
     "message": "Your accounts"
   },
   "yourActivity": {
-    "message": "Your activity"
+    "message": "Activity"
   },
   "yourBalance": {
     "message": "Your balance"

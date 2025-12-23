@@ -146,7 +146,7 @@ export const NetworkListItem = ({
       backgroundColor={
         selected ? BackgroundColor.primaryMuted : BackgroundColor.transparent
       }
-      className={classnames('multichain-network-list-item', {
+      className={classnames('multichain-network-list-item', 'mb-5', {
         'multichain-network-list-item--selected': selected,
         'multichain-network-list-item--deselected': !selected,
         'multichain-network-list-item--disabled': disabled,

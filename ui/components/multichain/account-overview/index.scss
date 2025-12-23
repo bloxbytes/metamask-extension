@@ -178,3 +178,12 @@
     margin-left: 40px;
   }
 }
+
+.account-overview-tabs__content--popup {
+
+  .tokens-tab-panel,
+  .nfts-tab-panel,
+  .activity-tab-panel {
+    padding-inline: 1rem;
+  }
+}
