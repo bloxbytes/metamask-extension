@@ -113,7 +113,7 @@ export const ActivityListItem = ({
           onClick();
         }
       }}
-      className={`${title}-activity-block mb-4 bg-gradient-to-br from-[#1a1d3a]/60 to-[#1a1d3a]/40 backdrop-blur-sm rounded-xl p-3 hover:from-[#20245a]/60 hover:to-[#20245a]/40 transition-all cursor-pointer border border-[#4105b6]/30 shadow-lg relative ml-10 group`}>
+      className={`${title}-activity-block mb-4 home-card-2`}>
       <div
         className="absolute -left-[49px] top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-gradient-to-br flex items-center justify-center shadow-lg relative z-10"
         style={{
@@ -129,10 +129,10 @@ export const ActivityListItem = ({
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div>
-            <div className="text-[#f8fdf1] capitalize receive-label activity-item-label">{title}</div>
+            <div className="level-heading">{title}</div>
 
             {topContent ? (
-              <div className="text-[#8aa0bf] text-xs mb-1 activity-date-time">
+              <div className="rep-score">
                 <Text variant={TextVariant.bodySm}>{topContent}</Text>
               </div>
             ) : null}
