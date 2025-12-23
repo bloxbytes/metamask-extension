@@ -11,8 +11,9 @@
 // Override main-container width when combined with settings-page
 .main-container.settings-page {
   width: 100% !important;
-  max-width: 760px !important; // Similar to Terms of Use modal max-width
-  margin: auto !important; // Center the page
+  margin: auto !important;
+  height: 100vh;
+  border-radius: unset;
 }
 
 
@@ -121,7 +122,7 @@
         width: 330px;
         z-index: 10;
 
-        > div {
+        >div {
           &:hover {
             background: var(--color-background-default-hover);
           }
@@ -417,7 +418,7 @@
     padding: 0;
   }
 
-  &__address-book-button + &__address-book-button {
+  &__address-book-button+&__address-book-button {
     margin-left: 1.875rem;
   }
 
@@ -452,6 +453,25 @@
 
     [dir='rtl'] & {
       justify-content: flex-end;
+    }
+  }
+}
+
+.notifications-img {
+  width: 30%;
+  margin: auto;
+}
+
+.settings-tab-panel {
+  .settings-tab-container {
+    overflow-y: auto;
+  }
+}
+
+.account-overview-tabs__content--popup {
+  .settings-tab-panel {
+    .settings-tab-container {
+      overflow-y: hidden;
     }
   }
 }
