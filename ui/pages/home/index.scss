@@ -329,8 +329,8 @@
   padding: 20px;
   border-radius: 18px;
   background: radial-gradient(120% 120% at 10% 20%, rgba(99, 5, 182, 0.18), transparent),
-  radial-gradient(120% 120% at 90% 80%, rgba(34, 128, 205, 0.16), transparent),
-  var(--color-background-section);
+    radial-gradient(120% 120% at 90% 80%, rgba(34, 128, 205, 0.16), transparent),
+    var(--color-background-section);
   color: var(--color-text-default) !important;
   overflow: hidden;
 
@@ -1336,7 +1336,7 @@
   border: 1px solid rgba(34, 128, 205, 0.4);
 
   span {
-    color: #b0efff;
+    color: var(--link-hover);
   }
 }
 
@@ -1346,7 +1346,7 @@
   height: 4rem;
   margin-bottom: 0.75rem;
   border-radius: 0.5rem;
-  border: 1px solid var(--sub-level-border);
+  border: 1px solid var(--color-border-default);
   overflow: hidden;
 }
 
@@ -1356,7 +1356,7 @@
   -webkit-backdrop-filter: blur(4px);
   border-radius: 0.5rem;
   padding: 0.5rem;
-  border: 1px solid var(--sub-level-border);
+  border: 1px solid var(--color-border-default);
 }
 
 .count-text {
@@ -1365,3 +1365,21 @@
   font-weight: 300;
 }
 
+.multichain-product-tour-menu {
+  .mm-text--heading-sm {
+    font-size: 20px;
+    color: var(--text-color-white);
+  }
+}
+
+.custom-gradient {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(to right, #4105b6, #6305b6);
+  border-radius: 9999px;
+  filter: blur(24px);
+  opacity: 0.3;
+}
