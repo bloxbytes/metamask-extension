@@ -155,6 +155,43 @@ export const HomeCoinButtons = ({ iconView = false }) => {
   );
 };
 
+export const BannerComponentSubHeader = () => {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+      <div className="custom-card md:col-span-2">
+        <div className="bg-gradient-custom"></div>
+
+        <div className="px-4 py-2 relative">
+          <div className="flex justify-center mb-4 relative">
+            <img
+              src="./images/logo/metamask-fox.svg"
+              alt="OPN Logo"
+              className="logo-image"
+            />
+          </div>
+          <button className="custom-copy-section">
+            <div className="flex items-center gap-2 relative z-10 w-full">
+              <AppHeaderOPN location={location} />
+            </div>
+          </button>
+          <button className="assetList-section">
+            <Box className="w-full">
+              <AssetListControlBar />
+            </Box>
+          </button>
+        </div>
+      </div>
+
+      <div
+        className="custom-card">
+        <h3 className="text-[#f8fdf1] mb-4">Quick Actions</h3>
+        <div className="space-y-2">
+          <HomeCoinButtons />
+        </div>
+      </div>
+    </div>
+  );
+};
 export const BannerComponent = ({ isPopup = false }) => {
   if (!isPopup) return null;
 
@@ -171,13 +208,11 @@ export const BannerComponent = ({ isPopup = false }) => {
               className="logo-image"
             />
           </div>
-
           <button className="custom-copy-section">
             <div className="flex items-center gap-2 relative z-10 w-full">
               <AppHeaderOPN location={location} />
             </div>
           </button>
-
           <button className="assetList-section">
             <Box className="w-full">
               <AssetListControlBar />
@@ -1072,7 +1107,7 @@ export default class Home extends PureComponent {
         {/*</div>*/}
 
         {
-          !isPopup ? <BannerComponent /> : null
+          !isPopup ? <BannerComponentSubHeader /> : null
         }
 
 
