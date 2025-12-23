@@ -116,9 +116,9 @@ export default function NftsTab() {
 
   return (
     <>
-      <Box>
-        <AssetListControlBar />
-      </Box>
+      {/*<Box>*/}
+      {/*  <AssetListControlBar />*/}
+      {/*</Box>*/}
 
       <Box className="nfts-tab">
         {isMainnet && !useNftDetection ? (

@@ -557,7 +557,8 @@ export default function UnifiedTransactionList({
 
   // Unified item renderer (handles both EVM and non‑EVM unified items)
   const renderTransaction = useCallback(
-    (item, index) => {
+    (item, index, date) => {
+      const topContent = date;
       if (item.kind === TransactionKind.NON_EVM) {
         const matchedBridgeHistoryItem = bridgeHistoryItems[item.id];
         if (
@@ -573,6 +574,7 @@ export default function UnifiedTransactionList({
               transaction={item.transaction}
               bridgeHistoryItem={matchedBridgeHistoryItem}
               toggleShowDetails={toggleShowDetails}
+              topContent={topContent}
             />
           );
         }
@@ -582,6 +584,7 @@ export default function UnifiedTransactionList({
             transaction={item.transaction}
             networkConfig={multichainNetworkConfig}
             toggleShowDetails={toggleShowDetails}
+            topContent={topContent}
           />
         );
       }
@@ -596,6 +599,7 @@ export default function UnifiedTransactionList({
             smartTransaction={transactionGroup.initialTransaction}
             transactionGroup={transactionGroup}
             chainId={transactionGroup.initialTransaction.chainId}
+            topContent={topContent}
           />
         );
       }
@@ -605,6 +609,7 @@ export default function UnifiedTransactionList({
           isEarliestNonce={index === 0}
           transactionGroup={transactionGroup}
           chainId={transactionGroup.initialTransaction.chainId}
+          topContent={topContent}
         />
       );
     },
@@ -706,18 +711,9 @@ export default function UnifiedTransactionList({
               .slice(0, daysLimit)
               .map((dateGroup) => (
                 <Fragment key={dateGroup.date}>
-                  <Text
-                    paddingTop={3}
-                    paddingInline={4}
-                    variant={TextVariant.bodyMdMedium}
-                    color={TextColor.textAlternative}
-                    className="transaction-list__date-stamp"
-                  >
-                    {dateGroup.date}
-                  </Text>
                   {dateGroup.transactionGroups.map((item, index) => (
                     <Fragment key={item.id ?? index}>
-                      {renderTransaction(item, index)}
+                      {renderTransaction(item, index, dateGroup.date)}
                     </Fragment>
                   ))}
                 </Fragment>
@@ -753,6 +749,7 @@ const MultichainTransactionListItem = ({
                                          transaction,
                                          networkConfig,
                                          toggleShowDetails,
+                                         topContent,
                                        }) => {
   const t = useI18nContext();
   const { from, to, type, timestamp, isRedeposit, title } =
@@ -769,6 +766,7 @@ const MultichainTransactionListItem = ({
           className="custom-class"
           data-testid="activity-list-item"
           onClick={() => toggleShowDetails(transaction)}
+          topContent={topContent}
           icon={
             <BadgeWrapper
               display={Display.Block}
@@ -821,6 +819,7 @@ const MultichainTransactionListItem = ({
         className="custom-class"
         data-testid="activity-list-item"
         onClick={() => toggleShowDetails(transaction)}
+        topContent={topContent}
         icon={
           <BadgeWrapper
             display={Display.Block}

@@ -48,6 +48,7 @@ type MultichainBridgeTransactionListItemProps = {
   transaction: Transaction;
   bridgeHistoryItem: BridgeHistoryItem;
   toggleShowDetails: (transaction: Transaction) => void;
+  topContent?: React.ReactNode;
 };
 
 /**
@@ -61,7 +62,7 @@ type MultichainBridgeTransactionListItemProps = {
  */
 const MultichainBridgeTransactionListItem: React.FC<
   MultichainBridgeTransactionListItemProps
-> = ({ transaction, bridgeHistoryItem, toggleShowDetails }) => {
+> = ({ transaction, bridgeHistoryItem, toggleShowDetails, topContent }) => {
   const t = useI18nContext();
   const locale = useSelector(getIntlLocale);
 
@@ -118,6 +119,7 @@ const MultichainBridgeTransactionListItem: React.FC<
       className="multichain-bridge-transaction-list-item"
       data-testid="multichain-bridge-activity-item"
       onClick={() => toggleShowDetails(transaction)}
+      topContent={topContent}
       icon={
         <BadgeWrapper
           anchorElementShape={BadgeWrapperAnchorElementShape.circular}

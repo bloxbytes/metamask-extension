@@ -31,6 +31,7 @@ import LoginOptions from './login-options';
 import { LOGIN_OPTION, LOGIN_TYPE, LoginOptionType, LoginType } from './types';
 import { TermsModal } from './terms-modal';
 import { PrivacyModal } from './privacy-modal';
+import ThemeToggleButtons from '../../../components/app/theme-toggle-buttons/theme-toggle-buttons.tsx';
 
 // TODO: Fix in https://github.com/MetaMask/metamask-extension/issues/31860
 // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -140,17 +141,7 @@ export default function WelcomeLogin({
             alignItems={AlignItems.center}
             gap={2}
           >
-            <Text as="span" className="welcome-login__theme-toggle-label">
-              {t('theme')}
-            </Text>
-            <ToggleButton
-              value={resolvedTheme === ThemeType.dark}
-              onToggle={handleThemeToggle}
-              offLabel={t('lightTheme')}
-              onLabel={t('darkTheme')}
-              dataTestId="welcome-theme-toggle"
-              className="welcome-login__theme-toggle-button"
-            />
+            <ThemeToggleButtons />
           </Box>
         </Box>
         <Box
@@ -235,7 +226,8 @@ export default function WelcomeLogin({
                 onClick={() => setShowTermsModal(true)}
               >
                 Terms of Use
-              </button>{' '}
+              </button>
+              {' '}
               and{' '}
               <button
                 type="button"

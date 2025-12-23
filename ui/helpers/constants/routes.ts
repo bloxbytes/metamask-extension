@@ -61,6 +61,7 @@ export const ACCOUNT_DETAILS_QR_CODE_ROUTE = '/account-details/qr-code';
 export const CONFIRM_ADD_SUGGESTED_NFT_ROUTE = '/confirm-add-suggested-nft';
 export const CONNECT_HARDWARE_ROUTE = '/new-account/connect';
 export const SEND_ROUTE = '/send';
+export const BADGES_ROUTE = '/badges';
 export const REMOTE_ROUTE = '/remote';
 export const REMOTE_ROUTE_SETUP_SWAPS = '/remote/setup-swaps';
 export const REMOTE_ROUTE_SETUP_DAILY_ALLOWANCE =
@@ -340,6 +341,7 @@ export const ROUTES = [
     trackInAnalytics: true,
   },
   { path: SEND_ROUTE, label: 'Send Page', trackInAnalytics: true },
+  { path: BADGES_ROUTE, label: 'Badges Page', trackInAnalytics: true },
   { path: REMOTE_ROUTE, label: 'Remote Mode Page', trackInAnalytics: true },
   {
     path: REMOTE_ROUTE_SETUP_SWAPS,
