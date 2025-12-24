@@ -339,7 +339,7 @@ export const HomeCoinBalance = () => {
       {displayAddress ? (
 
         <ButtonBase
-          className="home__coin-balance-address"
+          className="home__coin-balance-address home-copy-address-button"
           onClick={handleCopyClick}
           size={ButtonBaseSize.Sm}
           backgroundColor={BackgroundColor.transparent}

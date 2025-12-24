@@ -181,11 +181,11 @@ export const TokenListItemComponent = ({
       <Box
         className={classnames(
           'multichain-token-list-item__container-cell',
-          'custom-card',
+          'custom-card custom-token-list',
           {
             'multichain-token-list-item__container-cell--clickable':
               onClick !== undefined,
-          }, 'custom-card')}
+          }, 'custom-card custom-token-list')}
         display={Display.Flex}
         flexDirection={FlexDirection.Row}
         paddingTop={2}
