@@ -140,10 +140,10 @@ export const Badges = () => {
           height={BlockSize.Full}
           width={BlockSize.Full}
         >
-          <div className="flex flex-col h-full bg-[#0f112a]/95">
+          <div className="flex flex-col h-full">
             <div className="p-4 flex items-center justify-between border-b border-[#4105b6]/20">
               <div>
-                <h2 className="text-[#f8fdf1]">Badges & Achievements</h2>
+                <h2 className="modal-title">Badges & Achievements</h2>
                 <p className="text-[#4f5262] text-sm">
                   {unlockedBadges.length} of {badges.length} unlocked
                 </p>
@@ -151,7 +151,7 @@ export const Badges = () => {
               <button
                 type="button"
                 onClick={handleClose}
-                className="text-[#4f5262] hover:text-[#f8fdf1]"
+                className="badge-x"
                 aria-label="Close badges"
               >
                 <X className="w-5 h-5" />
@@ -160,28 +160,28 @@ export const Badges = () => {
 
             <div className="flex-1 overflow-y-auto p-4">
               <div className="mb-6">
-                <h3 className="text-[#b0efff] mb-3">Unlocked</h3>
+                <h3 className="color-primary-cl mb-3 Fsize-18">Unlocked</h3>
                 <div className="grid grid-cols-2 gap-3">
                   {unlockedBadges.map((badge) => (
                     <div
                       key={badge.id}
-                      className="custom-card"
+                      className="custom-card badge-box-shadow"
                     >
                       <div
                         className="w-12 h-12 rounded-full flex items-center justify-center mb-3"
                         style={{ backgroundColor: badge.color }}
                       >
-                        <badge.icon className="w-6 h-6 text-[#0f112a]" />
+                        <badge.icon className="w-6 h-6 text-[#fff]" />
                       </div>
-                      <div className="text-[#f8fdf1] text-sm mb-1">
+                      <div className="modal-title text-sm mb-1">
                         {badge.name}
                       </div>
                       <div className="text-[#4f5262] text-xs mb-2">
                         {badge.description}
                       </div>
                       <div className="flex items-center gap-1">
-                        <Award className="w-3 h-3 text-[#b0efff]" />
-                        <span className="text-[#b0efff] text-xs">
+                        <Award className="w-3 h-3 color-primary-cl" />
+                        <span className="color-primary-cl text-xs">
                           +{badge.rep} REP
                         </span>
                       </div>
@@ -191,25 +191,25 @@ export const Badges = () => {
               </div>
 
               <div>
-                <h3 className="text-[#4f5262] mb-3">Locked</h3>
+                <h3 className="color-primary-cl mb-3 Fsize-18">Locked</h3>
                 <div className="grid grid-cols-2 gap-3">
                   {lockedBadges.map((badge) => (
                     <div
                       key={badge.id}
-                      className="bg-[#1d2449] rounded-xl p-4 border border-[#4105b6]/20 opacity-60"
+                      className="custom-card badge-box-shadow"
                     >
-                      <div className="w-12 h-12 rounded-full bg-[#0f112a] flex items-center justify-center mb-3">
-                        <Lock className="w-6 h-6 text-[#4f5262]" />
+                      <div className="w-12 h-12 rounded-full lock-section flex items-center justify-center mb-3">
+                        <Lock className="w-6 h-6 color-primary-cl" />
                       </div>
-                      <div className="text-[#4f5262] text-sm mb-1">
+                      <div className="modal-title text-sm mb-1">
                         {badge.name}
                       </div>
                       <div className="text-[#4f5262] text-xs mb-2">
                         {badge.description}
                       </div>
                       <div className="flex items-center gap-1">
-                        <Award className="w-3 h-3 text-[#4f5262]" />
-                        <span className="text-[#4f5262] text-xs">
+                        <Award className="w-3 h-3 color-primary-cl" />
+                        <span className="color-primary-cl text-xs">
                           +{badge.rep} REP
                         </span>
                       </div>

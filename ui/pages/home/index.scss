@@ -1400,6 +1400,38 @@
   }
 }
 
+
+.modal-title {
+  color: var(--color-text-default);
+}
+
+.badge-x {
+  color: var(--inner-content-heading);
+
+  &:hover {
+    color: var(--text-color-white);
+  }
+}
+
+.Fsize-18 {
+  font-size: 18px;
+}
+
+.color-primary-cl {
+  color: var(--color-primary-cl);
+}
+
+.lock-section {
+  background-color: var(--lock-bg);
+}
+
+.badge-box-shadow {
+  box-shadow: none !important;
+}
+
+.home_icon_buttons .custom-button.primary-button.inner_custom_button_icon:hover {
+  background: var(--bg-hover-card) !important;
+
 .transaction-status-label--confirmed {
   color: #2280cd;
   display: flex;
@@ -1414,4 +1446,5 @@
 
 .account-overview-tabs .mm-icon {
   color: var(--text-color-dark);
+
 }

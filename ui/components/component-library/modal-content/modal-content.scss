@@ -210,10 +210,10 @@
 }
 
 .mm-popover {
-  background: linear-gradient(to bottom right, rgba(26, 29, 58, 0.6), rgba(26, 29, 58, 0.4));
+  background: var(--theme-custom-card-bg);
   backdrop-filter: blur(24px);
-  border-radius: 1rem;
-  border: 1px solid rgba(65, 5, 182, 0.4);
+  border-radius: 8px;
+  border: var(--border-width) solid var(--color-border-default);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   padding: 2px;
   overflow: hidden;
@@ -223,6 +223,10 @@
 
     &:hover {
       background-color: var(--color-background-default);
+    }
+
+    &:focus {
+      outline: none;
     }
   }
 }
