@@ -174,7 +174,7 @@ export const BannerComponentSubHeader = () => {
       <div className="custom-card md:col-span-2">
         <div className="bg-gradient-custom"></div>
 
-        <div className="px-4 py-2 relative">
+        <div className="px-4 py-2 relative popup-header">
           <div className="flex justify-center mb-4 relative">
             <div className="custom-gradient"></div>
             <img

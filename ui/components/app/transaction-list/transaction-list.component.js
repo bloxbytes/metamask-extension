@@ -165,8 +165,8 @@ const getTransactionGroupRecipientAddressFilterAllChain = (
 };
 
 const tokenTransactionFilter = ({
-                                  initialTransaction: { type, destinationTokenSymbol, sourceTokenSymbol },
-                                }) => {
+  initialTransaction: { type, destinationTokenSymbol, sourceTokenSymbol },
+}) => {
   if (TOKEN_CATEGORY_HASH[type]) {
     return false;
   } else if (
@@ -311,12 +311,12 @@ const removeTxGroupsWithNoTx = (dateGroup) => {
 };
 
 export default function TransactionList({
-                                          hideTokenTransactions,
-                                          tokenAddress,
-                                          boxProps,
-                                          hideNetworkFilter,
-                                          overrideFilterForCurrentChain = false,
-                                        }) {
+  hideTokenTransactions,
+  tokenAddress,
+  boxProps,
+  hideNetworkFilter,
+  overrideFilterForCurrentChain = false,
+}) {
   const [limit, setLimit] = useState(PAGE_INCREMENT);
   const t = useI18nContext();
   const currentNetworkConfig = useSelector(getCurrentNetwork);
@@ -348,7 +348,7 @@ export default function TransactionList({
 
   const unfilteredPendingTransactions = useMemo(() => {
     return isTokenNetworkFilterEqualCurrentNetwork ||
-    overrideFilterForCurrentChain
+      overrideFilterForCurrentChain
       ? unfilteredPendingTransactionsCurrentChain
       : unfilteredPendingTransactionsAllChains;
   }, [
@@ -381,7 +381,7 @@ export default function TransactionList({
 
   const unfilteredCompletedTransactions = useMemo(() => {
     return isTokenNetworkFilterEqualCurrentNetwork ||
-    overrideFilterForCurrentChain
+      overrideFilterForCurrentChain
       ? unfilteredCompletedTransactionsCurrentChain
       : unfilteredCompletedTransactionsAllChains;
   }, [
@@ -614,10 +614,10 @@ export default function TransactionList({
       <>
         {selectedTransaction &&
           (selectedBridgeHistoryItem &&
-          isCrossChain(
-            selectedBridgeHistoryItem.quote.srcChainId,
-            selectedBridgeHistoryItem.quote.destChainId,
-          ) ? (
+            isCrossChain(
+              selectedBridgeHistoryItem.quote.srcChainId,
+              selectedBridgeHistoryItem.quote.destChainId,
+            ) ? (
             <MultichainBridgeTransactionDetailsModal
               transaction={selectedTransaction}
               bridgeHistoryItem={selectedBridgeHistoryItem}
@@ -718,19 +718,19 @@ export default function TransactionList({
         color={TextColor.textDefault}
         display={Display.Flex}
         width={BlockSize.Full}
-        className={'mb-4'}
+        className={'mb-4 activity-label'}
       >
         Activity
       </Text>
 
-      <Box className="transaction-list transaction-list-v3" {...boxProps}>
+      <Box className="transaction-list transaction-list-v3 transaction-list-activity" {...boxProps}>
         {/*{renderFilterButton()}*/}
 
         {showRampsCard ? (
           <RampsCard variant={RAMPS_CARD_VARIANT_TYPES.ACTIVITY} />
         ) : null}
         {pendingTransactions.length === 0 &&
-        completedTransactions.length === 0 ? (
+          completedTransactions.length === 0 ? (
           <TransactionActivityEmptyState
             className="mx-auto mt-5 mb-6"
             account={selectedAccount}
@@ -790,11 +790,10 @@ export default function TransactionList({
                       (transactionGroup, index) => {
                         return (
                           <Fragment
-                            key={`${transactionGroup.nonce}:${
-                              transactionGroup.initialTransaction
-                                ? index
-                                : limit + index - 10
-                            }`}
+                            key={`${transactionGroup.nonce}:${transactionGroup.initialTransaction
+                              ? index
+                              : limit + index - 10
+                              }`}
                           >
                             {transactionGroup.initialTransaction
                               ?.isSmartTransaction ? (
@@ -844,11 +843,11 @@ export default function TransactionList({
 
 // Regular transaction list item for non-bridge transactions
 const MultichainTransactionListItem = ({
-                                         transaction,
-                                         networkConfig,
-                                         toggleShowDetails,
-                                         topContent,
-                                       }) => {
+  transaction,
+  networkConfig,
+  toggleShowDetails,
+  topContent,
+}) => {
   const t = useI18nContext();
   const { from, to, type, timestamp, isRedeposit, title } =
     useMultichainTransactionDisplay(transaction, networkConfig);

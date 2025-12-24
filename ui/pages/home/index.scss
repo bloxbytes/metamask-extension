@@ -1455,3 +1455,15 @@
     color: var(--color-primary-cl) !important;
   }
 }
+
+.asset__content {
+  .activity-label {
+    padding-inline: 22px;
+  }
+}
+
+.account-overview-tabs__content--popup {
+  .popup-header {
+    padding-inline: unset;
+  }
+}
