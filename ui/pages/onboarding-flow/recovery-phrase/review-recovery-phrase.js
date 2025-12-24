@@ -44,6 +44,7 @@ import SRPDetailsModal from '../../../components/app/srp-details-modal';
 import { setSeedPhraseBackedUp } from '../../../store/actions';
 import { TraceName } from '../../../../shared/lib/trace';
 import RecoveryPhraseChips from './recovery-phrase-chips';
+import ThemeToggleButtons from '../../../components/app/theme-toggle-buttons/theme-toggle-buttons';
 
 export default function RecoveryPhrase({ secretRecoveryPhrase }) {
   const navigate = useNavigate();
@@ -153,6 +154,7 @@ export default function RecoveryPhrase({ secretRecoveryPhrase }) {
       className={classnames('recovery-phrase', 'recovery-phrase--glass')}
       data-testid="recovery-phrase"
     >
+      <ThemeToggleButtons />
       <Box width={BlockSize.Full}>
         {showSrpDetailsModal && (
           <SRPDetailsModal onClose={() => setShowSrpDetailsModal(false)} />

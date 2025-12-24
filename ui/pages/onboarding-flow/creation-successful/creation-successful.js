@@ -51,6 +51,7 @@ import {
   setCompletedOnboarding,
 } from '../../../store/actions';
 import { LottieAnimation } from '../../../components/component-library/lottie-animation';
+import ThemeToggleButtons from '../../../components/app/theme-toggle-buttons/theme-toggle-buttons';
 
 export default function CreationSuccessful() {
   const navigate = useNavigate();
@@ -188,6 +189,7 @@ export default function CreationSuccessful() {
       className="creation-successful"
       data-testid="wallet-ready"
     >
+      <ThemeToggleButtons />
       <Box>
         <Box
           display={Display.Flex}

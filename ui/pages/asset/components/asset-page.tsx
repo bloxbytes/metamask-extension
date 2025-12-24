@@ -85,9 +85,9 @@ import TokenButtons from './token-buttons';
 // TODO BIP44 Refactor: This page needs a significant refactor after BIP44 is enabled to remove confusing branching logic
 // A page representing a native or token asset
 const AssetPage = ({
-  asset,
-  optionsButton,
-}: {
+                     asset,
+                     optionsButton,
+                   }: {
   asset: Asset;
   optionsButton: React.ReactNode;
 }) => {
@@ -276,22 +276,22 @@ const AssetPage = ({
   const tokenWithFiatAmount =
     isEvm || isMultichainAccountsState2Enabled
       ? {
-          address: isEvm ? address : assetId,
-          chainId,
-          symbol,
-          image,
-          title: name ?? symbol,
-          tokenFiatAmount: showFiat ? tokenFiatAmount : null,
-          string: balance ? balance.toString() : '',
-          decimals: asset.decimals,
-          aggregators:
-            type === AssetType.token && asset.aggregators
-              ? asset.aggregators
-              : [],
-          isNative: type === AssetType.native,
-          balance,
-          secondary: balance ? Number(balance) : 0,
-        }
+        address: isEvm ? address : assetId,
+        chainId,
+        symbol,
+        image,
+        title: name ?? symbol,
+        tokenFiatAmount: showFiat ? tokenFiatAmount : null,
+        string: balance ? balance.toString() : '',
+        decimals: asset.decimals,
+        aggregators:
+          type === AssetType.token && asset.aggregators
+            ? asset.aggregators
+            : [],
+        isNative: type === AssetType.native,
+        balance,
+        secondary: balance ? Number(balance) : 0,
+      }
       : (mutichainTokenWithFiatAmount as TokenWithFiatAmount);
 
   const { safeChains } = useSafeChains();
@@ -490,9 +490,6 @@ const AssetPage = ({
             style={{ height: '1px', borderBottomWidth: 0 }}
           ></Box>
           <Box marginBottom={4}>
-            <Text paddingInline={4} variant={TextVariant.headingSm}>
-              {t('yourActivity')}
-            </Text>
             {showUnifiedTransactionList ? (
               <UnifiedTransactionList
                 tokenAddress={address}

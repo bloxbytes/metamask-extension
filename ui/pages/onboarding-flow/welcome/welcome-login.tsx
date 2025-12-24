@@ -12,7 +12,7 @@ import {
   IconName,
 } from '../../../components/component-library';
 import {
-  AlignItems,
+  AlignItems, BlockSize,
   Display,
   FlexDirection,
   JustifyContent,
@@ -133,7 +133,7 @@ export default function WelcomeLogin({
         <Box
           display={Display.Flex}
           justifyContent={JustifyContent.flexEnd}
-          width="100%"
+          width={BlockSize.Full}
           className="welcome-login__theme-toggle"
         >
           <Box

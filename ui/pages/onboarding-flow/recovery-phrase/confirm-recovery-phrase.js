@@ -46,6 +46,7 @@ import {
 import { TraceName } from '../../../../shared/lib/trace';
 import ConfirmSrpModal from './confirm-srp-modal';
 import RecoveryPhraseChips from './recovery-phrase-chips';
+import ThemeToggleButtons from '../../../components/app/theme-toggle-buttons/theme-toggle-buttons';
 
 const QUIZ_WORDS_COUNT = 3;
 
@@ -194,6 +195,7 @@ export default function ConfirmRecoveryPhrase({ secretRecoveryPhrase = '' }) {
       className="recovery-phrase recovery-phrase__confirm"
       data-testid="confirm-recovery-phrase"
     >
+      <ThemeToggleButtons />
       <Box>
         {showConfirmModal && (
           <ConfirmSrpModal
