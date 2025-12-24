@@ -892,7 +892,7 @@
   width: 100%;
   background: var(--theme-button-bg) !important;
   border: 1px solid var(--theme-border-color-muted) !important;
-  color: var(--color-text-alternative) !important;
+  color: var(--link-hover) !important;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   border-radius: 0.5rem;
@@ -1466,4 +1466,11 @@
   .popup-header {
     padding-inline: unset;
   }
+}
+
+.import-tokens-button {
+  background: transparent !important;
+  border: none !important;
+  color: var(--color-primary-cl) !important;
+  box-shadow: none !important;
 }

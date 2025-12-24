@@ -364,12 +364,12 @@ export const AccountOverviewTabs = ({
                   >
                     <div>Tokens</div>
                     <Button
+                      className="import-tokens-button"
                       size={ButtonSize.Sm}
-                      variant={ButtonVariant.Secondary}
                       onClick={handleManageTokens}
                       disabled={!canManageTokens}
                     >
-                      Manage
+                      Import
                     </Button>
                   </Box>
 

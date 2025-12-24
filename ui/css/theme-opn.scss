@@ -363,7 +363,7 @@ html[data-theme='light'] {
   /* Button Colors */
   --theme-button-bg: rgba(255, 255, 255, 0.9);
   --theme-button-bg-hover: rgba(255, 255, 255, 0.95);
-  --theme-button-primary-shadow: none;
+  --theme-button-primary-shadow: 0 25px 50px -12px rgba(65, 5, 182, 0.5);
   --theme-button-secondary-hover: #f9fafb;
 
   /* Blur Effects */

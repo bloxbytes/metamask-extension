@@ -9,9 +9,11 @@
 @import 'pin-extension/index';
 @import 'metametrics/index';
 
-body{
-  background-color: var(--color-accent02-dark);
+body {
+  // background-color: var(--color-accent02-dark);
+  background-color: #010D1D;
 }
+
 .onboarding-flow {
   &--welcome-banner {
     background: url('/images/welcome-banner.png') no-repeat calc(50% + 500px) 160px;
@@ -120,24 +122,27 @@ body{
       }
     }
   }
+
   &__x-button__icon {
     margin-bottom: -6px;
   }
 }
 
-.mm-box{
-  img{
+.mm-box {
+  img {
     border: 2px solid rgba(65, 5, 182, 0.4);
     border-radius: 50%;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   }
 }
-.recovery-checklist{
+
+.recovery-checklist {
   padding: unset !important;
-  .mm-box--background-color-background-default{
+
+  .mm-box--background-color-background-default {
     background-color: transparent !important;
     border: unset;
-    padding: unset!important;
+    padding: unset !important;
   }
 
   // Checklist card styling - theme-aware
@@ -162,12 +167,15 @@ body{
     border: var(--theme-checklist-important-border) !important;
   }
 }
-.mm-text--heading-lg{
+
+.mm-text--heading-lg {
   color: var(--color-text-default) !important;
 }
-.mm-box--color-text-alternative{
+
+.mm-box--color-text-alternative {
   color: var(--color-text-sub) !important;
 }
+
 // .mm-box--background-color-background-muted{
 //   background-color: var(--bg-btn-primary-disabled) !important;
 //   color: var(--color-text-sub) !important;

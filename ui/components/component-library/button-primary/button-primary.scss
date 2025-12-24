@@ -199,7 +199,7 @@
 
     background: linear-gradient(to right, #4105b6, #6305b6) !important;
     color: #f8fdf1 !important;
-    box-shadow: var(--theme-button-primary-shadow);
+    box-shadow: 0 25px 50px -12px rgba(65, 5, 182, 0.5);
 
     &:hover {
       background: linear-gradient(to right, #6305b6, #4105b6) !important;
