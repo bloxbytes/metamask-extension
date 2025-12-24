@@ -45,17 +45,17 @@ const getIconBg = (type = null) => {
 };
 
 export const ActivityListItem = ({
-                                   topContent,
-                                   icon,
-                                   title,
-                                   subtitle,
-                                   midContent,
-                                   children,
-                                   rightContent,
-                                   onClick,
-                                   className,
-                                   'data-testid': dataTestId,
-                                 }) => {
+  topContent,
+  icon,
+  title,
+  subtitle,
+  midContent,
+  children,
+  rightContent,
+  onClick,
+  className,
+  'data-testid': dataTestId,
+}) => {
   const primaryClassName = classnames('activity-list-item', className, {
     'activity-list-item--single-content-row': !(subtitle || children),
   });
@@ -113,16 +113,16 @@ export const ActivityListItem = ({
           onClick();
         }
       }}
-      className={`${title}-activity-block bg-gradient-to-br from-[#1a1d3a]/60 to-[#1a1d3a]/40 backdrop-blur-sm rounded-xl p-3 hover:from-[#20245a]/60 hover:to-[#20245a]/40 transition-all cursor-pointer border border-[#4105b6]/30 shadow-lg relative ml-10 group mb-4 home-card-2`}>
+      className={`${title}-activity-block bg-gradient-to-br backdrop-blur-sm rounded-xl p-3  transition-all cursor-pointer shadow-lg relative ml-10 group mb-4 home-card-2`}>
       <div
         className="absolute -left-[49px] top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-gradient-to-br flex items-center justify-center shadow-lg relative z-10"
         style={{
           background: 'linear-gradient(135deg, rgb(34, 128, 205), rgba(34, 128, 205, 0.867)); box-shadow: rgba(34, 128, 205, 0.25) 0px 4px 12px',
         }}>
         <div className="absolute inset-0 rounded-full blur-md opacity-50"
-             style={{
-               backgroundColor: 'rgb(34, 128, 205)',
-             }}></div>
+          style={{
+            backgroundColor: 'rgb(34, 128, 205)',
+          }}></div>
 
         {icon}
       </div>
@@ -141,9 +141,9 @@ export const ActivityListItem = ({
               {typeof subtitle === 'string' && subtitle.toLowerCase() === 'confirmed' ?
                 <div
                   className="flex items-center gap-1 px-2 py-1 bg-[#b0efff]/10 rounded-full border border-[#b0efff]/30">
-            <span
-              className="w-1.5 h-1.5 rounded-full bg-[#b0efff] shadow-sm shadow-[#b0efff]/50 animate-pulse"></span><span
-                  className="text-[#b0efff]">Confirmed</span></div> : subtitle}
+                  <span
+                    className="w-1.5 h-1.5 rounded-full bg-[#b0efff] shadow-sm shadow-[#b0efff]/50 animate-pulse"></span><span
+                      className="text-[#b0efff]">Confirmed</span></div> : subtitle}
 
             </div>
 
@@ -155,8 +155,8 @@ export const ActivityListItem = ({
       </div>
       <div className="mt-2 flex items-center gap-2 text-xs">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-             className="lucide lucide-external-link w-3 h-3 text-[#b0efff]/70 hover:text-[#b0efff] transition-colors ml-auto">
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          className="lucide lucide-external-link w-3 h-3 text-[#b0efff]/70 hover:text-[#b0efff] transition-colors ml-auto">
           <path d="M15 3h6v6"></path>
           <path d="M10 14 21 3"></path>
           <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
