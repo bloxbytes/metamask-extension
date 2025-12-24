@@ -147,10 +147,20 @@
 .account-overview-tabs__content--popup {
   .custom-card {
     box-shadow: none;
-    padding-block: unset;
-    padding-inline: 7px;
+    padding: unset;
     border: none !important;
     border-radius: revert;
+
+    &.custom-token-list {
+
+      padding: 12px;
+
+    }
+  }
+
+  [data-testid="multichain-token-list-button"] {
+    padding: 8px 12px;
+    border-radius: 6px;
   }
 }
 
@@ -180,9 +190,9 @@
       bottom: 10px;
       width: 2px;
       background: linear-gradient(to bottom,
-        rgba(65, 5, 182, 0.5),
-        rgba(34, 128, 205, 0.5),
-        rgba(65, 5, 182, 0.5));
+          rgba(65, 5, 182, 0.5),
+          rgba(34, 128, 205, 0.5),
+          rgba(65, 5, 182, 0.5));
     }
   }
 

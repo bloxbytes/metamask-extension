@@ -329,8 +329,8 @@
   padding: 20px;
   border-radius: 18px;
   background: radial-gradient(120% 120% at 10% 20%, rgba(99, 5, 182, 0.18), transparent),
-  radial-gradient(120% 120% at 90% 80%, rgba(34, 128, 205, 0.16), transparent),
-  var(--color-background-section);
+    radial-gradient(120% 120% at 90% 80%, rgba(34, 128, 205, 0.16), transparent),
+    var(--color-background-section);
   color: var(--color-text-default) !important;
   overflow: hidden;
 
@@ -1071,7 +1071,7 @@
 .mm-text-field-search input:focus,
 .mm-box.mm-text-field:focus,
 .mm-box.mm-text-field--focused {
-  background-color: var(--theme-background-glass) !important;
+  background-color: transparent;
   outline: none !important;
 }
 
@@ -1188,6 +1188,7 @@
   white-space: nowrap;
   width: 100%;
   border-bottom: unset !important;
+  padding-inline: 10px;
 }
 
 .bridge__container {
@@ -1431,6 +1432,7 @@
 
 .home_icon_buttons .custom-button.primary-button.inner_custom_button_icon:hover {
   background: var(--bg-hover-card) !important;
+}
 
 .transaction-status-label--confirmed {
   color: #2280cd;
@@ -1446,5 +1448,10 @@
 
 .account-overview-tabs .mm-icon {
   color: var(--text-color-dark);
+}
 
+.home-copy-address-button {
+  .mm-icon {
+    color: var(--color-primary-cl) !important;
+  }
 }
