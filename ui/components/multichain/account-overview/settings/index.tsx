@@ -9,9 +9,10 @@ import VisitSupportDataConsentModal
 import { openWindow } from '../../../../helpers/utils/window';
 import { Bell, CloudBackup, Contact, SettingsIcon } from 'lucide-react';
 import { ThemeType } from '../../../../../shared/constants/preferences';
-import { setTheme } from '../../../../store/actions';
+import { lockMetamask, setTheme } from '../../../../store/actions';
 import { setTheme as setDocumentTheme } from '../../../../pages/routes/utils';
 import { useTheme } from '../../../../hooks/useTheme';
+import { DEFAULT_ROUTE } from '../../../../helpers/constants/routes';
 
 type SettingsItem = {
   label: string;
@@ -105,10 +106,10 @@ export default function SettingsTab(): JSX.Element {
     history.push(action);
   };
 
-  const handleLock = () => {
-    // keep behavior minimal here; replace with real lock action in controller wiring
-    history.push('/unlock'); // placeholder navigation
-  };
+  const handleLock = useCallback(async () => {
+    await dispatch(lockMetamask());
+    history.push(DEFAULT_ROUTE);
+  }, [dispatch, history]);
 
   const settingsSections: { title: string; items: SettingsItem[] }[] = [
     {
